@@ -1,0 +1,14 @@
+{
+  "/(site)/about/page": "/about",
+  "/(site)/contact/page": "/contact",
+  "/(site)/page": "/",
+  "/(site)/projects/[slug]/page": "/projects/[slug]",
+  "/(site)/projects/page": "/projects",
+  "/(site)/services/page": "/services",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/draft/disable/route": "/api/draft/disable",
+  "/api/draft/route": "/api/draft",
+  "/api/revalidate/route": "/api/revalidate",
+  "/studio/[[...tool]]/page": "/studio/[[...tool]]"
+}
