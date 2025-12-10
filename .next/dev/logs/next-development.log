@@ -1,19 +1,1242 @@
-[00:00:01.291] Server  LOG      ✓ Ready in 898ms
-[00:00:09.072] Server  LOG      ○ Compiling / ...
-[00:00:11.532] Server  ERROR   (node:1284) Warning: `--localstorage-file` was provided without a valid path
+[00:00:01.312] Server  LOG      ✓ Ready in 896ms
+[00:07:10.734] Server  LOG      ○ Compiling / ...
+[00:07:27.604] Server  ERROR   (node:14728) Warning: `--localstorage-file` was provided without a valid path
 (Use `node --trace-warnings ...` to show where the warning was created)
-[00:00:14.968] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,181,1079,719&w=1200&h=800" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:00:15.319] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:16.591] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,181,1079,719&w=1200&h=800" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:00:55.025] Server  LOG      ○ Compiling /projects ...
-[00:01:08.801] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:01:18.036] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:01:20.135] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,181,1079,719&w=1200&h=800" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:02:50.736] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,237,1079,607&w=1920&h=1080" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:03:08.437] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:03:16.274] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,181,1079,719&w=1200&h=800" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:07:35.007] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:07:36.078] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,181,1079,719&w=1200&h=800" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:08:05.988] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:11:27.699] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.2.155\"]"
-[00:11:32.186] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,181,1079,719&w=1200&h=800" "resolved to private ip" "[\"198.18.2.155\"]"
+[00:07:38.596] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:38.596] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:38.596] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:38.898] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:39.197] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:39.197] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:39.197] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:39.554] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:39.554] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:39.595] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:39.595] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:39.595] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:39.853] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:39.879] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:39.879] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:39.879] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:40.074] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:40.074] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:40.168] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:40.168] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:40.168] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:40.201] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:40.201] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:40.201] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:40.630] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:40.630] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:40.630] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:41.283] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:41.283] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:41.283] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:41.621] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:41.621] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:41.621] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:42.423] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:42.423] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:42.423] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:42.701] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:42.701] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:42.701] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:42.717] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:42.717] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:42.717] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:43.482] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:43.482] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:07:43.482] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:07:52.162] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:01.952] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:08:03.130] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:08:03.572] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,237,1079,607&w=1920&h=1080" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:08:04.173] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:04.173] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:08:04.173] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:08:07.173] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:08:10.367] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:10.367] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:08:10.367] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:08:12.079] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:33.812] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:08:37.609] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:40.613] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:40.614] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:08:40.614] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:08:47.789] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:08:49.820] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:08:52.771] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:52.771] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:08:56.521] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:56.521] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:08:56.521] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:09:04.095] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:04.095] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:09:04.095] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:09:07.487] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,237,1079,607&w=1920&h=1080" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:09:11.350] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:11.350] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:09:11.350] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:09:22.548] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:09:23.148] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:23.148] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:09:23.148] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:09:25.610] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:25.610] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:09:25.610] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:09:33.993] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:37.949] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,237,1079,607&w=1920&h=1080" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:09:42.358] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:42.358] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:09:42.358] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:09:45.185] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:45.185] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:09:45.185] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:09:47.338] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:09:51.712] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:10:00.412] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:00.412] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:10:00.412] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:10:00.668] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:10:03.569] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:03.569] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:10:03.569] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:10:14.148] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:14.148] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:10:14.148] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:10:18.390] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,237,1079,607&w=1920&h=1080" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:10:19.313] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:10:28.027] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:28.027] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:10:28.027] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:10:47.236] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:47.236] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:10:47.236] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:11:00.592] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:00.592] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:11:00.592] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:11:07.775] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,237,1079,607&w=1920&h=1080" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:11:19.878] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:11:21.474] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:21.474] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:11:21.474] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:11:34.916] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:34.916] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:11:34.916] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:11:53.139] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:11:54.907] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:54.907] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:12:01.654] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:13:08.386] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:13:09.643] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:25:56.174] Server  LOG      ✓ Compiled in 270ms
+[00:27:06.812] Server  LOG      ✓ Compiled in 282ms
+[00:27:45.651] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:45.939] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:27:45.939] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:28:01.155] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:28:37.363] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:28:38.851] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:28:38.853] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:29:41.733] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:29:41.802] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:29:42.170] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:31:27.623] Server  LOG      ✓ Compiled in 56ms
+[00:31:52.174] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:31:52.214] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:52.466] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:36:59.490] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:36:59.493] Server  LOG      ✓ Compiled in 78ms
+[00:38:01.872] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:38:02.352] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:38:02.352] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:38:22.301] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:39:20.276] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:39:20.280] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:39:34.314] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:40:20.861] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:40:24.291] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:40:24.293] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:42:41.977] Server  LOG      ✓ Compiled in 97ms
+[00:43:03.020] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:43:03.023] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:43:03.171] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:43:03.490] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:46:12.307] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:46:12.308] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:46:12.342] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:46:12.563] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:46:29.674] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:46:29.674] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:46:51.591] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:46:51.803] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:46:51.803] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:46:53.762] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:46:53.956] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:46:53.956] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[00:46:56.660] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:48:47.015] Server  LOG      ○ Compiling /studio/[[...tool]] ...
+[00:48:59.367] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:01.826] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/studio" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/Documents...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" suppressHydrationWarning={true}>
+                          <body
++                           className="min-h-screen bg-background font-sans antialiased inter_b2991b2-module__9mH_6q__..."
+-                           className="min-h-screen bg-background font-sans antialiased inter_b2991b2-module__9mH_6q__..."
+-                           style={{margin-top:"0px",margin-right:"0px",margin-bottom:"0px",margin-left:"0px"}}
+                          >
+                            ...
+                              <SegmentViewNode type="layout" pagePath="/Documents...">
+                                <SegmentTrieNode>
+                                <StudioLayout>
+                                  <html
+                                    lang="en"
+-                                   data-jetski-tab-id="378663083"
+-                                   className="dark"
+-                                   style={{color-scheme:"dark"}}
+                                  >
+                                    <body
+                                      style={{margin:0}}
+-                                     className="min-h-screen bg-background font-sans antialiased inter_b2991b2-module..."
+                                    >
+                  ...
+
+[00:51:00.449] Server  LOG      ✓ Compiled in 1747ms
+[00:51:02.192] Browser ERROR   In HTML, %s cannot be a child of <%s>.%s
+This will cause a hydration error.%s <html> body  
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:"...", ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/studio" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/Documents...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" suppressHydrationWarning={true}>
+>                         <body
+>                           className="min-h-screen bg-background font-sans antialiased inter_b2991b2-module__9mH_6q__..."
+>                         >
+                            ...
+                              <SegmentViewNode type="layout" pagePath="/Documents...">
+                                <SegmentTrieNode>
+                                <StudioLayout>
+>                                 <html lang="en">
+                  ...
+
+[00:51:02.192] Browser ERROR   <%s> cannot contain a nested %s.
+See this log for the ancestor stack trace. body <html>
+[00:51:02.444] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:51:02.856] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:51:22.562] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:51:23.638] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:51:24.143] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[00:51:42.132] Server  LOG      ✓ Compiled in 76ms
+[00:52:06.884] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:52:08.504] Browser WARN    Because you set `withCredentials` to true, we will override your `useCdn` setting to be false since (cookie-based) credentials are never set on the CDN
+[00:52:52.381] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:53:15.001] Server  WARN     ⚠ Cross origin request detected from 10.10.10.184 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+[00:53:15.046] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:56:56.328] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:41.251] Server  LOG      ✓ Compiled in 198ms
+[01:02:41.356] Browser ERROR   ./Documents/GitHub/langley-portfolio/app/(site)/about/page.tsx:231:14
+Parsing ecmascript source code failed
+  229 |         </div>
+  230 |
+> 231 |             </div >
+      |              ^^^^^^
+  232 |         </div >
+  233 |     )
+  234 | }
+
+Unterminated regexp literal
+[01:02:41.361] Browser ERROR   ./Documents/GitHub/langley-portfolio/app/(site)/about/page.tsx:231:14
+Parsing ecmascript source code failed
+  229 |         </div>
+  230 |
+> 231 |             </div >
+      |              ^^^^^^
+  232 |         </div >
+  233 |     )
+  234 | }
+
+Unterminated regexp literal
+[01:02:41.367] Browser ERROR   ./Documents/GitHub/langley-portfolio/app/(site)/about/page.tsx:231:14
+Parsing ecmascript source code failed
+  229 |         </div>
+  230 |
+> 231 |             </div >
+      |              ^^^^^^
+  232 |         </div >
+  233 |     )
+  234 | }
+
+Unterminated regexp literal
+[01:03:06.686] Server  LOG      ✓ Compiled in 129ms
+[01:03:07.366] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:03:47.693] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:03:47.696] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:03:47.870] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:03:48.295] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:06:17.113] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:06:17.114] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:06:17.169] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:06:17.390] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:07:08.245] Server  LOG      ✓ Compiled in 302ms
+[01:07:09.124] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:07:09.137] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:07:09.142] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:07:09.437] Browser WARN    Image with src "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:07:10.067] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:07:10.081] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:07:36.162] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:07:36.269] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:07:42.796] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[01:07:42.796] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[01:07:42.839] Server  LOG      ✓ Compiled in 254ms
+[01:08:00.830] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=400&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:08:02.480] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=400&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:08:06.633] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:08:08.753] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:08:08.755] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:11:26.592] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[01:11:26.592] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[01:22:16.961] Server  LOG      ✓ Compiled in 63ms
+[01:22:19.420] Server  LOG      ✓ Compiled in 150ms
+[01:23:36.550] Server  LOG      ✓ Compiled in 130ms
+[01:24:08.034] Server  LOG      ✓ Compiled in 137ms
+[01:24:08.141] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:24:08.141] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:24:08.142] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:24:08.142] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:07.410] Server  ERROR    ⨯ ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+
+
+[01:28:07.531] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:07.561] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:07.561] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:07.561] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:08.554] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:08.557] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:08.557] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:08.557] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:08.959] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:08.961] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:08.961] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:08.962] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:09.916] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:09.916] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:09.916] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.024] Browser ERROR   uncaughtError: Error: ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+
+
+[01:28:10.200] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.201] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.201] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.216] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.216] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.216] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.216] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.216] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.216] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:10.216] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.117] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.117] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.117] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.118] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.118] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.118] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.118] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.118] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.118] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.118] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:28:45.118] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:29:05.208] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:29:07.708] Server  ERROR   C:\Users\Rhin\Documents\GitHub\langley-portfolio\.next\dev\server\chunks\ssr\[root-of-the-server]__85888e6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:07.712] Server  ERROR   C:\Users\Rhin\Documents\GitHub\langley-portfolio\.next\dev\server\chunks\ssr\[root-of-the-server]__2141c686._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:07.715] Server  ERROR    ⨯ Error: useCursor must be used within a CursorProvider
+[01:29:08.765] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:29:08.777] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:29:09.126] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[01:29:09.127] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[01:29:14.898] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:29:15.213] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+            <SegmentViewNode type="page" pagePath="/Documents...">
+              <SegmentTrieNode>
+              <HomePage>
+                <HomePage>
+                  <Hero siteSettings={{...}} profile={{...}}>
+                    <section ref={{current:null}} className="relative m...">
+                      <div className="sticky top...">
+                        <div>
+                        <div className="flex-1 rel...">
+                          <div>
+                          <svg>
+                          <div className="relative z...">
+                            <motion.h1 className="text-5xl m..." style={{opacity:1,scale:1, ...}}>
+                              <h1
+                                className="text-5xl md:text-8xl font-black tracking-tighter text-white select-none cur..."
+                                style={{
++                                 opacity: 1
+-                                 opacity: "1"
++                                 filter: "none"
+-                                 filter: "blur(0px)"
++                                 transform: "none"
+-                                 transform: "none"
+                                }}
+                                ref={function useMotionRef.useCallback}
+                              >
++                               VIDEO EDITOR
+                            <motion.div className="text-4xl m..." style={{opacity:1,scale:1, ...}}>
+                              <div
+                                className="text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-tex..."
+                                style={{
++                                 opacity: 1
+-                                 opacity: "0"
++                                 display: "block"
+-                                 display: "block"
++                                 transform: "none"
+-                                 transform: "scale(0.8)"
+                                }}
+                                ref={function useMotionRef.useCallback}
+                              >
++                               {"&"}
+                            <motion.div className="relative" style={{opacity:1,y:0}}>
+                              <div
+                                className="relative"
+                                style={{
++                                 opacity: 1
+-                                 opacity: "0"
++                                 transform: "none"
+-                                 transform: "translateY(100px)"
+                                }}
+                                ref={function useMotionRef.useCallback}
+                              >
+                        ...
+                ...
+            ...
+          ...
+
+[01:29:15.213] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[01:29:15.213] Browser WARN    value.onChange(callback) is deprecated. Switch to value.on("change", callback).
+[01:29:24.990] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,237,1079,607&w=1920&h=1080" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:29:30.067] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:29:56.675] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:30:01.905] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/01ae2116ca62e2f3c3cf8434af3d65d48eaa0dcb-512x499.png?rect=7,0,499,499&w=32&h=32" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:30:01.906] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/da4d67a3ce48e0a3d32c3d54e4fd14d0465a1009-100x100.jpg?w=300&h=300" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:30:22.192] Server  LOG      ✓ Compiled in 78ms
+[01:30:22.294] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:30:22.299] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:30:22.300] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:30:22.302] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:30:22.626] Browser ERROR   ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx:18:18
+Parsing ecmascript source code failed
+  16 |     return (
+  17 |         {/* Terminal-style Footer */ }
+> 18 |         < footer className = "w-full bg-[#1e1e1e] border-t border-[#333] pt-6 pb-20 md:pb-6 text-xs font-mono text-gray-400" >
+     |                  ^^^^^^^^^
+  19 |             <div className="container mx-auto px-4">
+  20 |                 <div className="flex flex-col gap-2 mb-4">
+  21 |                     <div className="flex items-center gap-2 text-blue-400">
+
+Expected ',', got 'className'
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/global/Footer.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+[01:30:23.771] Server  ERROR    ⨯ ./Documents/GitHub/langley-portfolio/components/shell/AppLayout.tsx:5:1
+Export Toolbar doesn't exist in target module
+  3 | import { ReactNode } from 'react'
+  4 | import { MenuBar } from './MenuBar'
+> 5 | import { Toolbar } from './Toolbar'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { StatusBar } from './StatusBar'
+  7 | import { useCursor } from '@/context/CursorContext'
+  8 | import Link from 'next/link'
+
+The export Toolbar was not found in module [project]/Documents/GitHub/langley-portfolio/components/shell/Toolbar.tsx [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/shell/AppLayout.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+
+
+
+./Documents/GitHub/langley-portfolio/components/shell/AppLayout.tsx:5:1
+Export Toolbar doesn't exist in target module
+  3 | import { ReactNode } from 'react'
+  4 | import { MenuBar } from './MenuBar'
+> 5 | import { Toolbar } from './Toolbar'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { StatusBar } from './StatusBar'
+  7 | import { useCursor } from '@/context/CursorContext'
+  8 | import Link from 'next/link'
+
+The export Toolbar was not found in module [project]/Documents/GitHub/langley-portfolio/components/shell/Toolbar.tsx [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./Documents/GitHub/langley-portfolio/components/shell/AppLayout.tsx
+    ./Documents/GitHub/langley-portfolio/app/(site)/layout.tsx
+
+
+[01:30:24.687] Server  LOG      ✓ Compiled in 970ms
+[01:30:24.727] Server  LOG      ✓ Compiled in 8ms
+[01:30:26.684] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:30:28.800] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:30:28.843] Server  ERROR    ⨯ "upstream image" "https://cdn.sanity.io/images/579t8o66/production/fe8ee38fe0adf0947d70003ec0f43aa7c306d33e-1079x1079.png?rect=0,136,1079,809&w=600&h=450" "resolved to private ip" "[\"198.18.0.201\"]"
+[01:30:28.994] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:06:23.485] Server  LOG      ✓ Compiled in 70ms
+[02:06:26.064] Server  LOG      ✓ Compiled in 63ms

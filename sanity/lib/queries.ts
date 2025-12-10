@@ -116,7 +116,7 @@ export const getFeaturedProjectsQuery = /* groq */ `
  * ```
  */
 export const getAllProjectsQuery = /* groq */ `
-  *[_type == "project" && ($type == null || projectType == $type)] | order(displayOrder asc, date desc) {
+  *[_type == "project" && (!defined($type) || $type == "" || projectType == $type)] | order(displayOrder asc, date desc) {
     _id,
     title,
     "slug": slug.current,

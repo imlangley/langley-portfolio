@@ -216,7 +216,8 @@ export async function getAllProjects(
   type: 'web' | 'video' | 'mixed' | null = null,
   preview = false
 ): Promise<ProjectCard[]> {
-  return sanityFetch<ProjectCard[]>(getAllProjectsQuery, { type }, preview)
+  // Pass empty string for null type to work with GROQ !defined() check
+  return sanityFetch<ProjectCard[]>(getAllProjectsQuery, { type: type ?? '' }, preview)
 }
 
 /**

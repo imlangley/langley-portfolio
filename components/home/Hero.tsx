@@ -1,144 +1,204 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown } from 'lucide-react'
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion'
+import { Play, Pause, ChevronRight, Clock, Diamond } from 'lucide-react'
+import type { SiteSettings, Profile } from '@/sanity/lib/fetch'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { urlFor } from '@/sanity/lib/image'
 
 interface HeroProps {
-    title?: string
-    subtitle?: string
-    image?: any
-    siteSettings?: any
+    siteSettings?: SiteSettings | null
+    profile?: Profile | null
 }
 
-export function Hero({ title, subtitle, image, siteSettings }: HeroProps) {
-    const { scrollY } = useScroll()
-    const yText = useTransform(scrollY, [0, 500], [0, 100])
-    const opacity = useTransform(scrollY, [0, 500], [1, 0])
+export function Hero({ siteSettings, profile }: HeroProps) {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    })
 
-    // Staggered Text Animation Variants
-    const containerVars = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.2
-            }
-        }
-    }
+    // Timeline Scrubbing Animation
+    const playheadX = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "100%"]), { stiffness: 100, damping: 30 })
+    const timeDisplay = useTransform(scrollYProgress, [0, 1], [0, 10]) // 0 to 10 seconds
 
-    const wordVars = {
-        hidden: { y: 100, rotateX: 90, opacity: 0 },
-        visible: {
-            y: 0,
-            rotateX: 0,
-            opacity: 1,
-            transition: { type: "spring", stiffness: 50, damping: 20 }
-        }
-    }
+    // Copy
+    const copyId = "Video Editor yang kebetulan bisa ngoding"
+    const copyEn = "Video Editor who happens to code"
 
-    const heroTitle = siteSettings?.heroTitle || "Cinematic Video Editor"
-    const heroSubtitle = siteSettings?.heroSubtitle || "Crafting visual narratives that captivate and inspire."
+    // Render Frame (Simulated 30fps)
+    const [currentTime, setCurrentTime] = useState("00:00:00:00")
+
+    useEffect(() => {
+        const unsubscribe = timeDisplay.onChange(v => {
+            const frames = Math.floor((v % 1) * 30).toString().padStart(2, '0') // 30fps standard
+            const seconds = Math.floor(v).toString().padStart(2, '0')
+            setCurrentTime(`00:00:${seconds}:${frames}`)
+        })
+        return () => unsubscribe()
+    }, [timeDisplay])
 
     return (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden snap-start bg-background perspective-1000">
+        <section ref={containerRef} className="relative h-[300vh] w-full bg-[#0d0d0d]">
 
-            {/* Cinematic Background Element - Placeholder for Video Loop */}
-            <div className="absolute inset-0 z-0 opacity-20">
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background" />
-                <div className="absolute inset-0 bg-radial-gradient from-accent/20 to-transparent blur-3xl opacity-40 animate-pulse duration-[5000ms]" />
+            {/* Sticky Viewport */}
+            <div className="sticky top-0 md:top-10 h-screen md:h-[calc(100vh-40px)] flex flex-col">
 
-                {/* Abstract Moving Shapes/Gradient */}
-                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen animate-blob" />
-                <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[150px] mix-blend-screen animate-blob animation-delay-2000" />
-            </div>
+                {/* Composition Toolbar (Desktop Only) */}
+                <div className="h-8 bg-[#1f1f1f] border-b border-[#333] hidden md:flex items-center justify-between px-4 text-xs select-none z-20">
+                    <div className="flex items-center gap-4 text-gray-400">
+                        <span className="text-white font-medium">Main_Comp</span>
+                        <span>1920 x 1080 (1.00)</span>
+                        <span>30 fps</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-blue-400 font-mono">
+                        <span className="flex items-center gap-2"><Clock className="w-3.5 h-3.5" /> {currentTime}</span>
+                        <span className="text-gray-500">Full</span>
+                        <span className="text-green-500">86%</span>
+                    </div>
+                </div>
 
-            <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center h-full">
+                {/* Main Viewport Area */}
+                <div className="flex-1 relative overflow-hidden flex items-center justify-center bg-[#0d0d0d]">
 
-                {/* Text Content */}
-                <motion.div
-                    className="lg:col-span-8 flex flex-col justify-center"
-                    style={{ y: yText, opacity }}
-                >
-                    <motion.div
-                        variants={containerVars}
-                        initial="hidden"
-                        animate="visible"
-                        className="space-y-6"
-                    >
-                        {/* Status Line */}
-                        <motion.div variants={wordVars} className="overflow-hidden">
-                            <span className="inline-block px-3 py-1 text-xs font-mono tracking-[0.2em] uppercase border border-white/20 text-white/70 backdrop-blur-md">
-                                Available for Booking
-                            </span>
+                    {/* Grid / Safe Margins */}
+                    <div className="absolute inset-0 pointer-events-none opacity-10"
+                        style={{
+                            backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)',
+                            backgroundSize: '100px 100px'
+                        }}
+                    />
+
+                    {/* Graph Editor Curve Background (Subtle) */}
+                    <svg className="absolute inset-0 w-full h-full opacity-5 pointer-events-none" preserveAspectRatio="none">
+                        <path d="M0,1080 C500,1080 500,0 1920,0" stroke="white" strokeWidth="2" fill="none" />
+                    </svg>
+
+                    {/* Content Layers */}
+                    <div className="relative z-10 text-center space-y-4 px-4">
+
+                        {/* Layer 1: Title */}
+                        <motion.h1
+                            className="text-5xl md:text-8xl font-black tracking-tighter text-white select-none cursor-default mix-blend-difference"
+                            style={{
+                                opacity: useTransform(scrollYProgress, [0, 0.15], [1, 0]),
+                                scale: useTransform(scrollYProgress, [0, 0.15], [1, 1.5]),
+                                filter: useTransform(scrollYProgress, [0, 0.15], ["blur(0px)", "blur(20px)"])
+                            }}
+                        >
+                            VIDEO EDITOR
+                        </motion.h1>
+
+                        {/* Layer 2: Transition / Transformation */}
+                        <motion.div
+                            className="text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500"
+                            style={{
+                                opacity: useTransform(scrollYProgress, [0.1, 0.2, 0.3], [0, 1, 0]),
+                                scale: useTransform(scrollYProgress, [0.1, 0.3], [0.8, 1.2])
+                            }}
+                        >
+                            &
                         </motion.div>
 
-                        {/* Staggered Giant Title */}
-                        <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white mix-blend-overlay">
-                            {/* Split title for animation (Demo logic) */}
-                            <span className="block overflow-hidden">
-                                <motion.span variants={wordVars} className="block">VISUAL</motion.span>
-                            </span>
-                            <span className="block overflow-hidden">
-                                <motion.span variants={wordVars} className="block text-stroke-sm text-transparent">STORYTELLING</motion.span>
-                            </span>
-                        </h1>
-
-                        <motion.div variants={wordVars} className="max-w-xl">
-                            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
-                                {heroSubtitle}
-                            </p>
-                        </motion.div>
-
-                        <motion.div variants={wordVars} className="pt-8 flex gap-6">
-                            <Link href="#projects" className="group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm hover:bg-gray-200 transition-colors">
-                                <span className="relative z-10">Select Work</span>
-                                {/* Hover Effect */}
-                                <span className="absolute inset-0 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 mix-blend-difference" />
-                            </Link>
-                        </motion.div>
-                    </motion.div>
-                </motion.div>
-
-                {/* Right Visual - Abstract/Video Placeholder */}
-                <div className="hidden lg:col-span-4 lg:flex items-center justify-center h-full relative">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
-                        className="relative w-full aspect-[9/16] max-h-[80vh] bg-black/50 border border-white/10 overflow-hidden"
-                    >
-                        {/* Placeholder for Showreel Preview */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-center space-y-2 opacity-50">
-                                <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center mx-auto">
-                                    <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[16px] border-l-white/80 border-b-[8px] border-b-transparent ml-1" />
-                                </div>
-                                <p className="text-xs font-mono uppercase tracking-widest text-white/60">Play Showreel</p>
+                        {/* Layer 3: Subtitle (The Hook) */}
+                        <motion.div
+                            className="relative"
+                            style={{
+                                opacity: useTransform(scrollYProgress, [0.25, 0.4], [0, 1]),
+                                y: useTransform(scrollYProgress, [0.25, 0.4], [100, 0])
+                            }}
+                        >
+                            <div className="text-2xl md:text-5xl font-bold text-white mb-2">
+                                <span className="opacity-50">yang kebetulan</span> <span className="text-blue-500 underline decoration-wavy decoration-blue-500/30">bisa ngoding</span>.
                             </div>
+                            <div className="text-sm md:text-xl text-gray-500 font-mono">
+                                (who happens to code.)
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Timeline Panel (Bottom - Desktop Only) */}
+                <div className="h-64 bg-[#1f1f1f] border-t border-[#333] hidden md:flex flex-col select-none relative z-30 shadow-2xl">
+
+                    {/* Timeline Tools */}
+                    <div className="h-8 bg-[#252526] border-b border-[#333] flex items-center px-2 gap-2 text-gray-400 text-xs">
+                        <span>Render Queue</span>
+                        <div className="h-4 w-px bg-[#444]" />
+                        <span className="text-white bg-gray-700 px-2 py-0.5 rounded-sm">Timeline: Main_Comp</span>
+                    </div>
+
+                    {/* Timeline Tracks */}
+                    <div className="flex-1 flex relative overflow-hidden">
+                        {/* Layer List (Left) */}
+                        <div className="w-80 bg-[#1f1f1f] border-r border-[#333] flex flex-col text-xs font-medium text-gray-300">
+
+                            {/* Track 1 */}
+                            <div className="h-8 flex items-center px-2 border-b border-[#333] bg-[#2a2a2a] gap-2 hover:bg-[#333] transition-colors">
+                                <div className="w-4 h-4 rounded text-center leading-4 text-[10px] bg-purple-600 text-white font-bold">T</div>
+                                <span className="flex-1 truncate">1. Video Editor Title</span>
+                                <Diamond className="w-3 h-3 text-purple-500 fill-purple-500" />
+                            </div>
+
+                            {/* Track 2 */}
+                            <div className="h-8 flex items-center px-2 border-b border-[#333] bg-[#2a2a2a] gap-2 hover:bg-[#333] transition-colors">
+                                <div className="w-4 h-4 rounded text-center leading-4 text-[10px] bg-red-600 text-white font-bold">S</div>
+                                <span className="flex-1 truncate">2. Transition Matte</span>
+                                <Diamond className="w-3 h-3 text-gray-600" />
+                            </div>
+
+                            {/* Track 3 */}
+                            <div className="h-8 flex items-center px-2 border-b border-[#333] bg-[#2a2a2a] gap-2 hover:bg-[#333] transition-colors">
+                                <div className="w-4 h-4 rounded text-center leading-4 text-[10px] bg-blue-600 text-white font-bold">T</div>
+                                <span className="flex-1 truncate">3. Subtitle (Bisa Ngoding)</span>
+                                <Diamond className="w-3 h-3 text-blue-500 fill-blue-500" />
+                            </div>
+
                         </div>
 
-                        {/* Grain/Scanline Overlay */}
-                        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
-                        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/80" />
-                    </motion.div>
-                </div>
-            </div>
+                        {/* Timeline Visualization (Right) */}
+                        <div className="flex-1 relative bg-[#181818]">
+                            {/* Ruler */}
+                            <div className="h-6 border-b border-[#333] bg-[#222] relative">
+                                <div className="absolute top-0 bottom-0 left-0 w-full flex justify-between px-2 text-[10px] text-gray-500 pt-1 font-mono">
+                                    <span>00s</span><span>02s</span><span>04s</span><span>06s</span><span>08s</span><span>10s</span>
+                                </div>
+                            </div>
 
-            {/* Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-10 left-10 md:left-20 flex items-center gap-4 text-white/50"
-            >
-                <span className="text-xs uppercase tracking-widest">Scroll to Explore</span>
-                <div className="h-[1px] w-20 bg-white/20" />
-            </motion.div>
+                            {/* Playhead */}
+                            <motion.div
+                                className="absolute top-0 bottom-0 w-[1px] bg-blue-500 z-50 overflow-visible"
+                                style={{ left: playheadX }}
+                            >
+                                <div className="absolute top-0 -translate-x-1/2 w-3 h-4 bg-blue-500 text-[8px] flex items-center justify-center text-white polygon-marker" />
+                            </motion.div>
+
+                            {/* Keyframes & Bars */}
+                            <div className="mt-[1px] relative space-y-[1px]">
+                                {/* Track 1 Data */}
+                                <div className="h-8 bg-[#222] relative flex items-center">
+                                    <div className="absolute left-[0%] w-[15%] h-5 bg-purple-500/30 border border-purple-500/50 rounded-sm ml-px" />
+                                    {/* Keyframes */}
+                                    <Diamond className="w-3 h-3 text-yellow-500 fill-yellow-500 absolute left-[0%] z-10" />
+                                    <Diamond className="w-3 h-3 text-yellow-500 fill-yellow-500 absolute left-[15%] z-10" />
+                                </div>
+
+                                {/* Track 2 Data */}
+                                <div className="h-8 bg-[#222] relative flex items-center">
+                                    <div className="absolute left-[10%] w-[20%] h-5 bg-red-500/30 border border-red-500/50 rounded-sm ml-px" />
+                                </div>
+
+                                {/* Track 3 Data */}
+                                <div className="h-8 bg-[#222] relative flex items-center">
+                                    <div className="absolute left-[25%] right-0 h-5 bg-blue-500/30 border border-blue-500/50 rounded-sm ml-px" />
+                                    <Diamond className="w-3 h-3 text-blue-400 fill-blue-400 absolute left-[25%] z-10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
     )
 }
-

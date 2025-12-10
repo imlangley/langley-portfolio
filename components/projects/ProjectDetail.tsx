@@ -36,6 +36,7 @@ export function ProjectDetail({ project }: { project: any }) {
                         src={urlFor(project.coverImage).width(1920).height(1080).url()}
                         alt={project.title}
                         fill
+                        sizes="100vw"
                         className="object-cover opacity-60"
                         priority
                     />
@@ -174,6 +175,7 @@ export function ProjectDetail({ project }: { project: any }) {
                                                     src={urlFor(item.image).width(800).url()}
                                                     alt={item.caption || 'Project visual'}
                                                     fill
+                                                    sizes="(max-width: 768px) 100vw, 50vw"
                                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
                                             </div>

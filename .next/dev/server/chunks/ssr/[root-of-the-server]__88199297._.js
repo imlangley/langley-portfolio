@@ -225,7 +225,7 @@ const getFeaturedProjectsQuery = /* groq */ `
   }
 `;
 const getAllProjectsQuery = /* groq */ `
-  *[_type == "project" && ($type == null || projectType == $type)] | order(displayOrder asc, date desc) {
+  *[_type == "project" && (!defined($type) || $type == "" || projectType == $type)] | order(displayOrder asc, date desc) {
     _id,
     title,
     "slug": slug.current,
@@ -429,8 +429,9 @@ async function getFeaturedProjects(preview = false) {
     return sanityFetch(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$queries$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFeaturedProjectsQuery"], {}, preview);
 }
 async function getAllProjects(type = null, preview = false) {
+    // Pass empty string for null type to work with GROQ !defined() check
     return sanityFetch(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$queries$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getAllProjectsQuery"], {
-        type
+        type: type ?? ''
     }, preview);
 }
 async function getProjectBySlug(slug, preview = false) {

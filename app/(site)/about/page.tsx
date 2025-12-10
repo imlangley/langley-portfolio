@@ -1,159 +1,228 @@
-import { getFaq } from '@/sanity/lib'
-import Image from 'next/image'
+import { getProfile, getFaq, getTools, getTestimonials } from '@/sanity/lib'
 import { urlFor } from '@/sanity/lib/image'
 import { PortableText } from '@portabletext/react'
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/Accordion'
-import { Github, Linkedin, Mail, Twitter, Instagram, Youtube } from 'lucide-react'
+import Image from 'next/image'
+import type { Metadata } from 'next'
+import { TerminalSquare, Settings2, Hash, Laptop, MapPin, Calendar, Clock, ChevronDown, Quote, MessageSquare } from 'lucide-react'
 
-export const metadata = {
-    title: 'About | Langley',
-    description: 'Cinematic Video Editor & Visual Storyteller.',
+export const metadata: Metadata = {
+    title: 'Properties | Langley',
+    description: 'Editor configuration and user properties.',
 }
 
 export const revalidate = 60
 
 export default async function AboutPage() {
-    // Static Profile for the Pivot (bypassing Sanity for the specific 'Video Editor' request)
-    const profile = {
-        name: "Langley",
-        role: "Cinematic Video Editor",
-        avatarImage: null, // Use placeholder or keep null
-        longBio: [
-            {
-                _key: '1',
-                _type: 'block',
-                children: [
-                    {
-                        _key: '1a',
-                        _type: 'span',
-                        text: "I believe that every frame has a pulse. My work isn't just about cutting footage; it's about finding the hidden rhythm in the chaos and sculpting it into a narrative that breathes. "
-                    }
-                ],
-                style: 'normal'
-            },
-            {
-                _key: '2',
-                _type: 'block',
-                children: [
-                    {
-                        _key: '2a',
-                        _type: 'span',
-                        text: "With over 5 years of experience in post-production, I specialize in pacing, sound design, and color grading that elevates raw footage into emotional experiences. Whether it's a high-energy music video or a nuanced commercial, I edit with intention."
-                    }
-                ],
-                style: 'normal'
-            }
-        ],
-        socials: [
-            { platform: 'Instagram', url: 'https://instagram.com' },
-            { platform: 'YouTube', url: 'https://youtube.com' },
-            { platform: 'Mail', url: 'mailto:hello@langley.page' }
-        ]
-    }
+    const [profile, faq, tools, testimonials] = await Promise.all([
+        getProfile(),
+        getFaq(),
+        getTools(),
+        getTestimonials()
+    ])
 
-    const faq = await getFaq()
-
-    // Static Tools for Video Editing Pivot
-    const tools = [
-        { _id: '1', name: 'Premiere Pro', icon: null },
-        { _id: '2', name: 'After Effects', icon: null },
-        { _id: '3', name: 'DaVinci Resolve', icon: null },
-        { _id: '4', name: 'Cinema 4D', icon: null },
-        { _id: '5', name: 'Final Cut Pro', icon: null },
-    ]
+    const displayName = profile?.name || "Langley"
+    const displayRole = profile?.role || "Video Editor / Developer"
 
     return (
-        <div className="min-h-screen pt-32 pb-20">
-            <div className="container max-w-5xl space-y-24">
+        <div className="min-h-screen bg-background pt-10 pb-20 px-4 md:px-8">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
 
-                {/* Profile Intro */}
-                <section className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-                    <div className="md:col-span-5 flex justify-center md:justify-start">
-                        <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-[2rem] overflow-hidden border border-border shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500">
-                            {/* Placeholder Avatar since we don't have the image file handy/sanity might be outdated */}
-                            <div className="w-full h-full bg-neutral-900 flex items-center justify-center text-muted-foreground relative overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 group-hover:scale-110 transition-transform duration-700" />
-                                <span className="relative z-10 font-bold text-6xl opacity-20">L.</span>
+                {/* LEFT: Properties Panel (Stats) */}
+                <div className="lg:col-span-4 space-y-px bg-card border border-border select-none">
+
+                    {/* Panel Header */}
+                    <div className="h-9 bg-muted flex items-center px-4 justify-between border-b border-border">
+                        <span className="text-xs font-medium text-foreground uppercase tracking-widest flex items-center gap-2">
+                            <Settings2 className="w-3.5 h-3.5" /> Properties
+                        </span>
+                        <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
+                    </div>
+
+                    {/* Stats Grid */}
+                    <div className="p-4 space-y-6">
+                        {/* Avatar / Identity */}
+                        <div className="flex flex-col items-center gap-4 pb-6 border-b border-border">
+                            <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-border relative">
+                                {profile?.avatarImage ? (
+                                    <Image
+                                        src={urlFor(profile.avatarImage).width(300).height(300).url()}
+                                        alt={displayName}
+                                        fill
+                                        sizes="128px"
+                                        className="object-cover"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-secondary flex items-center justify-center">
+                                        <span className="text-4xl font-bold text-muted-foreground">L.</span>
+                                    </div>
+                                )}
                             </div>
-                            {/* Overlay gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                            <div className="text-center">
+                                <h2 className="text-xl font-bold text-foreground">{displayName}</h2>
+                                <p className="text-sm text-primary font-mono">{displayRole}</p>
+                            </div>
+                        </div>
+
+                        {/* Key Values */}
+                        <div className="space-y-4 text-xs font-mono">
+                            <div className="flex justify-between items-center text-muted-foreground">
+                                <span className="flex items-center gap-2"><MapPin className="w-3 h-3" /> Location</span>
+                                <span className="text-foreground">Indonesia</span>
+                            </div>
+                            <div className="flex justify-between items-center text-muted-foreground">
+                                <span className="flex items-center gap-2"><Clock className="w-3 h-3" /> Timezone</span>
+                                <span className="text-foreground">GMT+7</span>
+                            </div>
+                            <div className="flex justify-between items-center text-muted-foreground">
+                                <span className="flex items-center gap-2"><Calendar className="w-3 h-3" /> Joined</span>
+                                <span className="text-foreground">2020</span>
+                            </div>
+                            <div className="flex justify-between items-center text-muted-foreground">
+                                <span className="flex items-center gap-2"><Laptop className="w-3 h-3" /> System</span>
+                                <span className="text-foreground text-right">After Effects<br />VS Code</span>
+                            </div>
+                        </div>
+
+                        {/* Tool Stack (Icons) */}
+                        <div className="pt-2">
+                            <span className="text-[10px] text-muted-foreground uppercase tracking-wider block mb-3">Loaded Extensions</span>
+                            <div className="flex flex-wrap gap-2">
+                                {tools && tools.map(tool => (
+                                    <div key={tool._id} className="w-8 h-8 bg-background border border-border rounded flex items-center justify-center hover:border-primary/50 transition-colors" title={tool.name}>
+                                        {tool.icon ? (
+                                            <Image
+                                                src={urlFor(tool.icon).width(32).height(32).url()}
+                                                alt={tool.name}
+                                                width={16}
+                                                height={16}
+                                                className="opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all"
+                                            />
+                                        ) : (
+                                            <span className="text-[10px] font-bold text-muted-foreground">{tool.name[0]}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* RIGHT: Terminal (Bio) */}
+                <div className="lg:col-span-8 bg-background font-mono text-sm border border-border flex flex-col h-full min-h-[500px]">
+
+                    {/* Terminal Header */}
+                    <div className="h-9 bg-card flex items-center px-4 gap-4 border-b border-border">
+                        <div className="flex items-center gap-2 text-foreground border-b-2 border-primary h-full px-2 bg-background">
+                            <TerminalSquare className="w-3.5 h-3.5" />
+                            <span className="text-xs uppercase">Terminal</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground h-full px-2 hover:text-foreground cursor-pointer transition-colors">
+                            <span className="text-xs uppercase">Output</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground h-full px-2 hover:text-foreground cursor-pointer transition-colors">
+                            <span className="text-xs uppercase">Debug Console</span>
                         </div>
                     </div>
 
-                    <div className="md:col-span-7 space-y-8">
-                        <div className="space-y-4">
-                            <span className="text-primary font-bold tracking-wider uppercase text-sm">About Me</span>
-                            <h1 className="text-5xl font-extrabold tracking-tight">
-                                {profile?.name}
-                            </h1>
-                            <p className="text-2xl text-foreground/80 font-medium">
-                                {profile?.role}
-                            </p>
+                    {/* Terminal Content */}
+                    <div className="flex-1 p-6 text-foreground overflow-y-auto space-y-6">
+
+                        {/* Command 1 */}
+                        <div>
+                            <div className="flex gap-2 text-primary mb-2">
+                                <span>➜</span>
+                                <span className="text-yellow-500 dark:text-yellow-400">~</span>
+                                <span>cat</span>
+                                <span className="text-muted-foreground">bio.txt</span>
+                            </div>
+                            <div className="pl-4 border-l-2 border-border text-muted-foreground leading-relaxed max-w-2xl">
+                                {profile?.longBio ? (
+                                    <PortableText value={profile.longBio} />
+                                ) : (
+                                    <p>Loading editor profile configuration...</p>
+                                )}
+                            </div>
                         </div>
 
-                        <div className="prose prose-lg dark:prose-invert text-muted-foreground leading-relaxed">
-                            <PortableText value={profile?.longBio || []} />
+                        {/* Command 2: FAQ */}
+                        {faq?.items && (
+                            <div>
+                                <div className="flex gap-2 text-primary mb-2">
+                                    <span>➜</span>
+                                    <span className="text-yellow-500 dark:text-yellow-400">~</span>
+                                    <span>run</span>
+                                    <span className="text-muted-foreground">faq --verbose</span>
+                                </div>
+                                <div className="pl-4 space-y-4">
+                                    {faq.items.map((item, i) => (
+                                        <div key={i} className="group">
+                                            <div className="text-green-600 dark:text-green-400 text-xs mb-1 opacity-70">
+                                                [{new Date().toISOString().split('T')[0]}] INFO: Querying database...
+                                            </div>
+                                            <div className="font-bold text-foreground mb-1">
+                                                Q: {item.question}
+                                            </div>
+                                            <div className="text-muted-foreground pl-4 border-l border-border">
+                                                A: <PortableText value={item.answer} />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Blinking Cursor */}
+                        <div className="flex gap-2 text-primary">
+                            <span>➜</span>
+                            <span className="text-yellow-500 dark:text-yellow-400">~</span>
+                            <span className="w-2 h-5 bg-muted-foreground animate-pulse" />
                         </div>
 
-                        {/* Social Links */}
-                        <div className="flex gap-4 pt-4">
-                            {profile.socials.map((social) => (
-                                <a
-                                    key={social.platform}
-                                    href={social.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-white transition-all transform hover:scale-110 duration-300"
-                                >
-                                    {social.platform.toLowerCase().includes('github') && <Github className="w-5 h-5" />}
-                                    {social.platform.toLowerCase().includes('linkedin') && <Linkedin className="w-5 h-5" />}
-                                    {social.platform.toLowerCase().includes('twitter') && <Twitter className="w-5 h-5" />}
-                                    {social.platform.toLowerCase().includes('mail') && <Mail className="w-5 h-5" />}
-                                    {social.platform.toLowerCase().includes('instagram') && <Instagram className="w-5 h-5" />}
-                                    {social.platform.toLowerCase().includes('youtube') && <Youtube className="w-5 h-5" />}
-                                </a>
+                    </div>
+                </div>
+
+                {/* TESTIMONIALS SECTION - Full Width Below */}
+                {testimonials && testimonials.length > 0 && (
+                    <div className="lg:col-span-12 bg-card border border-border">
+                        {/* Panel Header */}
+                        <div className="h-9 bg-muted flex items-center px-4 justify-between border-b border-border">
+                            <span className="text-xs font-medium text-foreground uppercase tracking-widest flex items-center gap-2">
+                                <MessageSquare className="w-3.5 h-3.5" /> Testimonials
+                            </span>
+                            <span className="text-[10px] text-muted-foreground">{testimonials.length} reviews</span>
+                        </div>
+
+                        {/* Testimonials Grid */}
+                        <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {testimonials.map((testimonial, i) => (
+                                <div key={testimonial._id || i} className="bg-background border border-border rounded-lg p-5 space-y-4 hover:border-primary/30 transition-colors">
+                                    <Quote className="w-6 h-6 text-primary opacity-50" />
+                                    <div className="text-sm text-muted-foreground leading-relaxed">
+                                        <PortableText value={testimonial.testimonialBody} />
+                                    </div>
+                                    <div className="flex items-center gap-3 pt-2 border-t border-border">
+                                        {testimonial.avatarImage ? (
+                                            <Image
+                                                src={urlFor(testimonial.avatarImage).width(80).height(80).url()}
+                                                alt={testimonial.name}
+                                                width={40}
+                                                height={40}
+                                                className="rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
+                                                <span className="text-sm font-bold text-muted-foreground">{testimonial.name?.[0] || '?'}</span>
+                                            </div>
+                                        )}
+                                        <div>
+                                            <div className="font-medium text-foreground text-sm">{testimonial.name}</div>
+                                            <div className="text-xs text-muted-foreground">{testimonial.role}</div>
+                                        </div>
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>
-                </section>
-
-                {/* Tech Stack */}
-                <section className="space-y-8">
-                    <div className="flex items-center gap-4">
-                        <h2 className="text-3xl font-bold">My Toolbox</h2>
-                        <div className="h-px flex-1 bg-border" />
-                    </div>
-
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                        {tools.map((tool) => (
-                            <div key={tool._id} className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                                <div className="relative w-12 h-12 mb-4 grayscale group-hover:grayscale-0 transition-all flex items-center justify-center bg-secondary rounded-xl">
-                                    {/* Icon Placeholder fallback since we are static */}
-                                    <span className="text-xl font-bold opacity-50">{tool.name[0]}</span>
-                                </div>
-                                <span className="text-sm font-semibold text-center">{tool.name}</span>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* FAQ */}
-                {faq?.items && (
-                    <section className="space-y-8 max-w-3xl mx-auto pt-12 border-t border-border">
-                        <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
-                        <Accordion className="space-y-4">
-                            {faq.items.map((item, i) => (
-                                <div key={i}>
-                                    <AccordionItem value={`item-${i}`}>
-                                        <AccordionTrigger>{item.question}</AccordionTrigger>
-                                        <AccordionContent>
-                                            <PortableText value={item.answer} />
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                </div>
-                            ))}
-                        </Accordion>
-                    </section>
                 )}
 
             </div>

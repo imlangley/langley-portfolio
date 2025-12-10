@@ -225,7 +225,7 @@ const getFeaturedProjectsQuery = /* groq */ `
   }
 `;
 const getAllProjectsQuery = /* groq */ `
-  *[_type == "project" && ($type == null || projectType == $type)] | order(displayOrder asc, date desc) {
+  *[_type == "project" && (!defined($type) || $type == "" || projectType == $type)] | order(displayOrder asc, date desc) {
     _id,
     title,
     "slug": slug.current,
@@ -429,8 +429,9 @@ async function getFeaturedProjects(preview = false) {
     return sanityFetch(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$queries$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFeaturedProjectsQuery"], {}, preview);
 }
 async function getAllProjects(type = null, preview = false) {
+    // Pass empty string for null type to work with GROQ !defined() check
     return sanityFetch(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$queries$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getAllProjectsQuery"], {
-        type
+        type: type ?? ''
     }, preview);
 }
 async function getProjectBySlug(slug, preview = false) {
@@ -584,25 +585,26 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langl
 const revalidate = 60 // ISR every 60 seconds
 ;
 async function HomePage() {
-    const settings = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$fetch$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getSiteSettings"])();
-    const projects = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$fetch$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFeaturedProjects"])();
+    const [settings, projects, profile] = await Promise.all([
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$fetch$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getSiteSettings"])(),
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$fetch$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFeaturedProjects"])(),
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$fetch$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getProfile"])()
+    ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$components$2f$home$2f$Hero$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Hero"], {
-                title: settings?.heroTitle,
-                subtitle: settings?.heroSubtitle,
-                image: settings?.heroImage,
-                siteSettings: settings
+                siteSettings: settings,
+                profile: profile
             }, void 0, false, {
                 fileName: "[project]/Documents/GitHub/langley-portfolio/app/(site)/page.tsx",
-                lineNumber: 20,
+                lineNumber: 23,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$components$2f$home$2f$FeaturedProjects$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["FeaturedProjects"], {
                 projects: projects
             }, void 0, false, {
                 fileName: "[project]/Documents/GitHub/langley-portfolio/app/(site)/page.tsx",
-                lineNumber: 27,
+                lineNumber: 24,
                 columnNumber: 13
             }, this)
         ]

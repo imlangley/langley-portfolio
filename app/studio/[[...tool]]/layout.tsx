@@ -2,10 +2,13 @@
  * Sanity Studio Layout
  * 
  * Provides a minimal layout for the studio route.
- * Disables the root layout styling so Studio renders properly.
+ * Does NOT include AppLayout so Studio renders standalone.
+ * Uses root layout's html/body, just provides metadata.
  */
 
-export const metadata = {
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
     title: 'Langley Studio',
     description: 'Content management for langley.page',
 }
@@ -15,9 +18,8 @@ export default function StudioLayout({
 }: {
     children: React.ReactNode
 }) {
-    return (
-        <html lang="en">
-            <body style={{ margin: 0 }}>{children}</body>
-        </html>
-    )
+    // Just pass children through - root layout provides html/body
+    // and (site) layout is NOT applied here since /studio is not in (site) group
+    return <>{children}</>
 }
+

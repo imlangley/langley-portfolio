@@ -3,7 +3,7 @@
     chunks: [
   "static/chunks/[root-of-the-server]__9b00f600._.css",
   "static/chunks/569ca_0698c0fa._.js",
-  "static/chunks/Documents_GitHub_langley-portfolio_providers_169661f9._.js"
+  "static/chunks/Documents_GitHub_langley-portfolio_f0b0fbae._.js"
 ],
     source: "dynamic"
 });
