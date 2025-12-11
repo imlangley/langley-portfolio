@@ -238,6 +238,7 @@ function ProjectGrid({ projects, categories }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>setActiveCategory(ALL_FILTER),
+                                "data-testid": "filter-all-works",
                                 className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("px-5 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap border", activeCategory === ALL_FILTER ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20" : "bg-transparent border-transparent hover:bg-muted text-muted-foreground hover:text-foreground"),
                                 children: "All Works"
                             }, void 0, false, {
@@ -247,11 +248,12 @@ function ProjectGrid({ projects, categories }) {
                             }, this),
                             categories.map((cat)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: ()=>setActiveCategory(cat.slug),
+                                    "data-testid": `filter-category-${cat.slug}`,
                                     className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("px-5 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap border", activeCategory === cat.slug ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20" : "bg-transparent border-transparent hover:bg-muted text-muted-foreground hover:text-foreground"),
                                     children: cat.name
                                 }, cat._id, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                    lineNumber: 52,
+                                    lineNumber: 53,
                                     columnNumber: 25
                                 }, this))
                         ]
@@ -265,13 +267,14 @@ function ProjectGrid({ projects, categories }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>setActiveType(null),
+                                "data-testid": "filter-type-all",
                                 className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("px-3 py-2 rounded-lg transition-all flex items-center gap-2 text-sm font-medium", activeType === null ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"),
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$layout$2d$grid$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__LayoutGrid$3e$__["LayoutGrid"], {
                                         className: "w-4 h-4"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                        lineNumber: 76,
+                                        lineNumber: 79,
                                         columnNumber: 25
                                     }, this),
                                     " ",
@@ -280,24 +283,25 @@ function ProjectGrid({ projects, categories }) {
                                         children: "All"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                        lineNumber: 76,
+                                        lineNumber: 79,
                                         columnNumber: 60
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                lineNumber: 69,
+                                lineNumber: 71,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>setActiveType(activeType === 'web' ? null : 'web'),
+                                "data-testid": "filter-type-web",
                                 className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("px-3 py-2 rounded-lg transition-all flex items-center gap-2 text-sm font-medium", activeType === 'web' ? "bg-background shadow-sm text-blue-500" : "text-muted-foreground hover:text-blue-500"),
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$code$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Code$3e$__["Code"], {
                                         className: "w-4 h-4"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                        lineNumber: 85,
+                                        lineNumber: 89,
                                         columnNumber: 25
                                     }, this),
                                     " ",
@@ -306,24 +310,25 @@ function ProjectGrid({ projects, categories }) {
                                         children: "Dev"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                        lineNumber: 85,
+                                        lineNumber: 89,
                                         columnNumber: 54
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                lineNumber: 78,
+                                lineNumber: 81,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>setActiveType(activeType === 'video' ? null : 'video'),
+                                "data-testid": "filter-type-video",
                                 className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("px-3 py-2 rounded-lg transition-all flex items-center gap-2 text-sm font-medium", activeType === 'video' ? "bg-background shadow-sm text-red-500" : "text-muted-foreground hover:text-red-500"),
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$video$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Video$3e$__["Video"], {
                                         className: "w-4 h-4"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                        lineNumber: 94,
+                                        lineNumber: 99,
                                         columnNumber: 25
                                     }, this),
                                     " ",
@@ -332,19 +337,19 @@ function ProjectGrid({ projects, categories }) {
                                         children: "Video"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                        lineNumber: 94,
+                                        lineNumber: 99,
                                         columnNumber: 55
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                lineNumber: 87,
+                                lineNumber: 91,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                        lineNumber: 68,
+                        lineNumber: 70,
                         columnNumber: 17
                     }, this)
                 ]
@@ -355,6 +360,7 @@ function ProjectGrid({ projects, categories }) {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
                 layout: true,
+                "data-testid": "project-grid",
                 className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AnimatePresence"], {
                     mode: "popLayout",
@@ -387,10 +393,11 @@ function ProjectGrid({ projects, categories }) {
                                                 src: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$sanity$2f$lib$2f$image$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["urlFor"])(project.coverImage).width(600).height(450).url(),
                                                 alt: project.title,
                                                 fill: true,
+                                                sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
                                                 className: "object-cover transition-transform duration-700 group-hover:scale-105"
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                                lineNumber: 118,
+                                                lineNumber: 124,
                                                 columnNumber: 41
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -400,18 +407,18 @@ function ProjectGrid({ projects, categories }) {
                                                     children: "View Case Study"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                                    lineNumber: 127,
+                                                    lineNumber: 134,
                                                     columnNumber: 41
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                                lineNumber: 126,
+                                                lineNumber: 133,
                                                 columnNumber: 37
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                        lineNumber: 116,
+                                        lineNumber: 122,
                                         columnNumber: 33
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -425,7 +432,7 @@ function ProjectGrid({ projects, categories }) {
                                                         children: project.title
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                                        lineNumber: 135,
+                                                        lineNumber: 142,
                                                         columnNumber: 41
                                                     }, this),
                                                     project.projectType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -433,13 +440,13 @@ function ProjectGrid({ projects, categories }) {
                                                         children: project.projectType
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                                        lineNumber: 137,
+                                                        lineNumber: 144,
                                                         columnNumber: 45
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                                lineNumber: 134,
+                                                lineNumber: 141,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -447,38 +454,39 @@ function ProjectGrid({ projects, categories }) {
                                                 children: project.summary
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                                lineNumber: 142,
+                                                lineNumber: 149,
                                                 columnNumber: 37
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                        lineNumber: 133,
+                                        lineNumber: 140,
                                         columnNumber: 33
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                                lineNumber: 115,
+                                lineNumber: 121,
                                 columnNumber: 29
                             }, this)
                         }, project._id, false, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                            lineNumber: 106,
+                            lineNumber: 112,
                             columnNumber: 25
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                    lineNumber: 104,
+                    lineNumber: 110,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                lineNumber: 100,
+                lineNumber: 105,
                 columnNumber: 13
             }, this),
             filteredProjects.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "py-24 text-center",
+                "data-testid": "no-projects-message",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4",
@@ -486,12 +494,12 @@ function ProjectGrid({ projects, categories }) {
                             className: "w-8 h-8 text-muted-foreground"
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                            lineNumber: 153,
+                            lineNumber: 160,
                             columnNumber: 25
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                        lineNumber: 152,
+                        lineNumber: 159,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -499,7 +507,7 @@ function ProjectGrid({ projects, categories }) {
                         children: "No projects found."
                     }, void 0, false, {
                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                        lineNumber: 155,
+                        lineNumber: 162,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -507,7 +515,7 @@ function ProjectGrid({ projects, categories }) {
                         children: "Try adjusting your filters."
                     }, void 0, false, {
                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                        lineNumber: 156,
+                        lineNumber: 163,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -515,17 +523,18 @@ function ProjectGrid({ projects, categories }) {
                             setActiveCategory(ALL_FILTER);
                             setActiveType(null);
                         },
+                        "data-testid": "clear-all-filters",
                         className: "mt-4 text-primary font-medium hover:underline",
                         children: "Clear all filters"
                     }, void 0, false, {
                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                        lineNumber: 157,
+                        lineNumber: 164,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/projects/ProjectGrid.tsx",
-                lineNumber: 151,
+                lineNumber: 158,
                 columnNumber: 17
             }, this)
         ]

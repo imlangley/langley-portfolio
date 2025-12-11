@@ -94,8 +94,8 @@ export function Toolbar() {
             {/* Divider */}
             <div className="w-8 h-px bg-[#333] mb-4" />
 
-            {/* AE Tools Section */}
-            <div className="flex flex-col gap-3">
+            {/* AE Tools Section (Decorative) */}
+            <div className="flex flex-col gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
                 {TOOLS.map((tool) => {
                     const isActive = activeTool === tool.id
                     return (
@@ -110,21 +110,22 @@ export function Toolbar() {
                             {isActive && (
                                 <motion.div
                                     layoutId="activeTool"
-                                    className="absolute -inset-1.5 bg-[#3a3a3a] rounded-md -z-10 border border-blue-500/30"
+                                    className="absolute -inset-1.5 bg-[#3a3a3a] rounded-md -z-10 border border-blue-500/20"
                                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                 />
                             )}
 
                             <Magnetic>
-                                <div className={`p-1.5 rounded-sm transition-colors ${isActive ? 'text-blue-400' : 'text-gray-400 hover:text-white'}`}>
+                                <div className={`p-1.5 rounded-sm transition-colors ${isActive ? 'text-blue-300' : 'text-gray-500 hover:text-gray-300'}`}>
                                     <tool.icon strokeWidth={1.5} className="w-5 h-5" />
                                 </div>
                             </Magnetic>
 
                             {/* Tooltip (AE Style) */}
-                            <div className="absolute left-10 top-1/2 -translate-y-1/2 py-1 px-2 bg-black border border-[#333] text-[10px] text-white rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-xl ml-2 font-sans font-medium">
-                                {tool.label}
-                                <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 border-[4px] border-transparent border-r-black" />
+                            <div className="absolute left-10 top-1/2 -translate-y-1/2 py-1.5 px-3 bg-[#1e1e1e] border border-[#333] text-[10px] text-gray-300 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-xl ml-2 font-sans font-medium">
+                                <span className="block mb-0.5 text-white">{tool.label}</span>
+                                <span className="text-[9px] text-gray-500 uppercase tracking-wider">Decorative Only</span>
+                                <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 border-[4px] border-transparent border-r-[#333]" />
                             </div>
                         </div>
                     )
@@ -134,8 +135,11 @@ export function Toolbar() {
             {/* Bottom Panels Section (VSCode Hybrid) */}
             <div className="mt-auto flex flex-col gap-4">
                 <div className="w-8 h-px bg-[#333]" />
-                <div className="p-1.5 text-gray-500 hover:text-white cursor-pointer transition-colors" title="Project Panel">
+                <div className="p-1.5 text-gray-500 hover:text-white cursor-pointer transition-colors group relative" title="Project Panel">
                     <Layers strokeWidth={1.5} className="w-5 h-5" />
+                    <div className="absolute left-10 top-1/2 -translate-y-1/2 py-1 px-2 bg-black border border-[#333] text-[10px] text-white rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                        Project Panel
+                    </div>
                 </div>
             </div>
 

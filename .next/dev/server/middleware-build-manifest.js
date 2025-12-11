@@ -1,31 +1,6 @@
 globalThis.__BUILD_MANIFEST = {
   "pages": {
-    "/_app": [
-      "static/chunks/569ca_next_dist_compiled_cb1ad895._.js",
-      "static/chunks/569ca_next_dist_shared_lib_42e53984._.js",
-      "static/chunks/569ca_next_dist_client_85ae43a9._.js",
-      "static/chunks/569ca_next_dist_16e48e0f._.js",
-      "static/chunks/569ca_next_app_8e98c817.js",
-      "static/chunks/[next]_entry_page-loader_ts_a02ad8b7._.js",
-      "static/chunks/569ca_react-dom_6741f578._.js",
-      "static/chunks/569ca_c043341c._.js",
-      "static/chunks/[root-of-the-server]__8c5ccf12._.js",
-      "static/chunks/Documents_GitHub_langley-portfolio_pages__app_2da965e7._.js",
-      "static/chunks/turbopack-Documents_GitHub_langley-portfolio_pages__app_3d393c88._.js"
-    ],
-    "/_error": [
-      "static/chunks/569ca_next_dist_compiled_cb1ad895._.js",
-      "static/chunks/569ca_next_dist_shared_lib_948556ea._.js",
-      "static/chunks/569ca_next_dist_client_85ae43a9._.js",
-      "static/chunks/569ca_next_dist_2dfc381d._.js",
-      "static/chunks/569ca_next_error_84118a22.js",
-      "static/chunks/[next]_entry_page-loader_ts_74ccad40._.js",
-      "static/chunks/569ca_react-dom_6741f578._.js",
-      "static/chunks/569ca_c043341c._.js",
-      "static/chunks/[root-of-the-server]__414381ac._.js",
-      "static/chunks/Documents_GitHub_langley-portfolio_pages__error_2da965e7._.js",
-      "static/chunks/turbopack-Documents_GitHub_langley-portfolio_pages__error_8cac1325._.js"
-    ]
+    "/_app": []
   },
   "devFiles": [],
   "polyfillFiles": [

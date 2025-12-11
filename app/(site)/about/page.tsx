@@ -198,7 +198,12 @@ export default async function AboutPage() {
                                 <div key={testimonial._id || i} className="bg-background border border-border rounded-lg p-5 space-y-4 hover:border-primary/30 transition-colors">
                                     <Quote className="w-6 h-6 text-primary opacity-50" />
                                     <div className="text-sm text-muted-foreground leading-relaxed">
-                                        <PortableText value={testimonial.testimonialBody} />
+                                        {/* If testimonialBody is just a string (as per error), render directly. If it's blocks, PortableText is needed. Error says it is string. */}
+                                        {typeof testimonial.testimonialBody === 'string' ? (
+                                            testimonial.testimonialBody
+                                        ) : (
+                                            <PortableText value={testimonial.testimonialBody as any} />
+                                        )}
                                     </div>
                                     <div className="flex items-center gap-3 pt-2 border-t border-border">
                                         {testimonial.avatarImage ? (

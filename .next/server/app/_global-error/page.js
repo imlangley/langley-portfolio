@@ -2,7 +2,7 @@ var R=require("../../chunks/ssr/[turbopack]_runtime.js")("server/app/_global-err
 R.c("server/chunks/ssr/[root-of-the-server]__b251e6cb._.js")
 R.c("server/chunks/ssr/569ca_next_dist_24330fcf._.js")
 R.c("server/chunks/ssr/569ca_next_dist_42f9ee46._.js")
-R.c("server/chunks/ssr/[root-of-the-server]__c344cf4e._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__67a6ca65._.js")
 R.c("server/chunks/ssr/[root-of-the-server]__ddba48ae._.js")
 R.c("server/chunks/ssr/569ca_next_dist_ad172e76._.js")
 R.c("server/chunks/ssr/7889e_langley-portfolio__next-internal_server_app__global-error_page_actions_af555192.js")

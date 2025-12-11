@@ -195,6 +195,8 @@ function ProjectTreeItem({ project, setCursorVariant }: any) {
 }
 
 // Grid View Components
+import SpotlightCard from '@/components/ui/SpotlightCard'
+
 function ProjectGridItem({ project, index, setCursorVariant }: any) {
     return (
         <Link href={`/projects/${project.slug}`} className="group relative block">
@@ -202,35 +204,39 @@ function ProjectGridItem({ project, index, setCursorVariant }: any) {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05 }}
-                className="aspect-[4/3] bg-[#000] border border-[#333] rounded-sm overflow-hidden hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 transition-all"
-                onMouseEnter={() => setCursorVariant('project')}
-                onMouseLeave={() => setCursorVariant('default')}
             >
-                {/* Image / Scrub Preview */}
-                <div className="relative w-full h-[80%] bg-[#1a1a1a] flex items-center justify-center overflow-hidden">
-                    {project.coverImage ? (
-                        <Image
-                            src={urlFor(project.coverImage).width(400).height(300).url()}
-                            alt={project.title}
-                            fill
-                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                            className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-                        />
-                    ) : (
-                        <div className="text-gray-700 font-bold text-4xl select-none">?</div>
-                    )}
+                <SpotlightCard
+                    className="aspect-[4/3] bg-[#000] border border-[#333] rounded-sm overflow-hidden p-0"
+                    spotlightColor="rgba(59, 130, 246, 0.15)"
+                    onMouseEnter={() => setCursorVariant('project')}
+                    onMouseLeave={() => setCursorVariant('default')}
+                >
+                    {/* Image / Scrub Preview */}
+                    <div className="relative w-full h-[80%] bg-[#1a1a1a] flex items-center justify-center overflow-hidden">
+                        {project.coverImage ? (
+                            <Image
+                                src={urlFor(project.coverImage).width(400).height(300).url()}
+                                alt={project.title}
+                                fill
+                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                                className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                            />
+                        ) : (
+                            <div className="text-gray-700 font-bold text-4xl select-none">?</div>
+                        )}
 
-                    {/* Overlay Indicator */}
-                    <div className="absolute top-1 right-1 px-1 bg-black/50 text-[9px] text-white rounded font-mono">
-                        {project.projectType === 'video' ? 'MOV' : 'TSX'}
+                        {/* Overlay Indicator */}
+                        <div className="absolute top-1 right-1 px-1 bg-black/50 text-[9px] text-white rounded font-mono z-10">
+                            {project.projectType === 'video' ? 'MOV' : 'TSX'}
+                        </div>
                     </div>
-                </div>
 
-                {/* Meta */}
-                <div className="h-[20%] bg-[#222] px-2 flex items-center justify-between">
-                    <span className="text-[10px] text-gray-300 truncate max-w-[80%]">{project.title}</span>
-                    <div className={`w-2 h-2 rounded-full ${project.projectType === 'video' ? 'bg-purple-500' : 'bg-blue-500'}`} />
-                </div>
+                    {/* Meta */}
+                    <div className="h-[20%] bg-[#222] px-2 flex items-center justify-between relative z-10">
+                        <span className="text-[10px] text-gray-300 truncate max-w-[80%]">{project.title}</span>
+                        <div className={`w-2 h-2 rounded-full ${project.projectType === 'video' ? 'bg-purple-500' : 'bg-blue-500'}`} />
+                    </div>
+                </SpotlightCard>
             </motion.div>
         </Link>
     )

@@ -70,7 +70,7 @@ ${b}`)}class av{selection;operations;constructor(a,b={}){this.selection=a,this.o
     }
   }
 `,bp=`
-  *[_type == "project" && ($type == null || projectType == $type)] | order(displayOrder asc, date desc) {
+  *[_type == "project" && (!defined($type) || $type == "" || projectType == $type)] | order(displayOrder asc, date desc) {
     _id,
     title,
     "slug": slug.current,
@@ -161,6 +161,21 @@ ${b}`)}class av{selection;operations;constructor(a,b={}){this.selection=a,this.o
     order
   }
 `,bt=`
+  *[_type == "testimonial"] {
+    _id,
+    name,
+    role,
+    testimonialBody,
+    project-> {
+      title,
+      "slug": slug.current
+    },
+    avatarImage {
+      ...,
+      asset->
+    }
+  }
+`,bu=`
   *[_type == "faq"][0] {
     items[] | order(order asc) {
       question,
@@ -168,7 +183,7 @@ ${b}`)}class av{selection;operations;constructor(a,b={}){this.selection=a,this.o
       order
     }
   }
-`,bu=`
+`,bv=`
   *[_type == "projectCategory"] | order(order asc) {
     _id,
     name,
@@ -176,7 +191,7 @@ ${b}`)}class av{selection;operations;constructor(a,b={}){this.selection=a,this.o
     description,
     order
   }
-`,bv=`
+`,bw=`
   *[_type == "tool"] | order(name asc) {
     _id,
     name,
@@ -186,6 +201,6 @@ ${b}`)}class av{selection;operations;constructor(a,b={}){this.selection=a,this.o
     },
     url
   }
-`;async function bw(a,b={},c=!1){return(function(a=!1){return a?bj:bi})(c).fetch(a,b)}async function bx(a=!1){return bw(bm,{},a)}async function by(a=!1){return bw(bn,{},a)}async function bz(a=!1){return bw(bo,{},a)}async function bA(a=null,b=!1){return bw(bp,{type:a},b)}async function bB(a,b=!1){return bw(bq,{slug:a},b)}async function bC(){return bw(br)}async function bD(a=!1){return bw(bs,{},a)}async function bE(a=!1){return bw(bt,{},a)}async function bF(a=!1){return bw(bu,{},a)}async function bG(a=!1){return bw(bv,{},a)}a.s(["getAllProjectSlugs",()=>bC,"getAllProjects",()=>bA,"getFaq",()=>bE,"getFeaturedProjects",()=>bz,"getProfile",()=>by,"getProjectBySlug",()=>bB,"getProjectCategories",()=>bF,"getServices",()=>bD,"getSiteSettings",()=>bx,"getTools",()=>bG],782659),a.s([],467562)}];
+`;async function bx(a,b={},c=!1){return(function(a=!1){return a?bj:bi})(c).fetch(a,b)}async function by(a=!1){return bx(bm,{},a)}async function bz(a=!1){return bx(bn,{},a)}async function bA(a=!1){return bx(bo,{},a)}async function bB(a=null,b=!1){return bx(bp,{type:a??""},b)}async function bC(a,b=!1){return bx(bq,{slug:a},b)}async function bD(){return bx(br)}async function bE(a=!1){return bx(bs,{},a)}async function bF(a=!1){return bx(bt,{},a)}async function bG(a=!1){return bx(bu,{},a)}async function bH(a=!1){return bx(bv,{},a)}async function bI(a=!1){return bx(bw,{},a)}a.s(["getAllProjectSlugs",()=>bD,"getAllProjects",()=>bB,"getFaq",()=>bG,"getFeaturedProjects",()=>bA,"getProfile",()=>bz,"getProjectBySlug",()=>bC,"getProjectCategories",()=>bH,"getServices",()=>bE,"getSiteSettings",()=>by,"getTestimonials",()=>bF,"getTools",()=>bI],782659),a.s([],467562)}];
 
 //# sourceMappingURL=Documents_GitHub_langley-portfolio_8a257ed6._.js.map

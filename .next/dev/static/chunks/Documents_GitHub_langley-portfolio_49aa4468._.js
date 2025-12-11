@@ -13,10 +13,16 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langl
 var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$spring$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Documents/GitHub/langley-portfolio/node_modules/framer-motion/dist/es/value/use-spring.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$clock$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Clock$3e$__ = __turbopack_context__.i("[project]/Documents/GitHub/langley-portfolio/node_modules/lucide-react/dist/esm/icons/clock.js [app-client] (ecmascript) <export default as Clock>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$diamond$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Diamond$3e$__ = __turbopack_context__.i("[project]/Documents/GitHub/langley-portfolio/node_modules/lucide-react/dist/esm/icons/diamond.js [app-client] (ecmascript) <export default as Diamond>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$down$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowDown$3e$__ = __turbopack_context__.i("[project]/Documents/GitHub/langley-portfolio/node_modules/lucide-react/dist/esm/icons/arrow-down.js [app-client] (ecmascript) <export default as ArrowDown>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mail$3e$__ = __turbopack_context__.i("[project]/Documents/GitHub/langley-portfolio/node_modules/lucide-react/dist/esm/icons/mail.js [app-client] (ecmascript) <export default as Mail>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Documents/GitHub/langley-portfolio/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Documents/GitHub/langley-portfolio/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$components$2f$ui$2f$animations$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Documents/GitHub/langley-portfolio/components/ui/animations.tsx [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
+;
+;
 ;
 ;
 ;
@@ -47,19 +53,14 @@ function Hero({ siteSettings, profile }) {
     ], [
         0,
         10
-    ]) // 0 to 10 seconds
-    ;
-    // Copy
-    const copyId = "Video Editor yang kebetulan bisa ngoding";
-    const copyEn = "Video Editor who happens to code";
+    ]);
     // Render Frame (Simulated 30fps)
     const [currentTime, setCurrentTime] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("00:00:00:00");
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Hero.useEffect": ()=>{
-            const unsubscribe = timeDisplay.onChange({
+            const unsubscribe = timeDisplay.on('change', {
                 "Hero.useEffect.unsubscribe": (v)=>{
-                    const frames = Math.floor(v % 1 * 30).toString().padStart(2, '0') // 30fps standard
-                    ;
+                    const frames = Math.floor(v % 1 * 30).toString().padStart(2, '0');
                     const seconds = Math.floor(v).toString().padStart(2, '0');
                     setCurrentTime(`00:00:${seconds}:${frames}`);
                 }
@@ -71,6 +72,14 @@ function Hero({ siteSettings, profile }) {
     }["Hero.useEffect"], [
         timeDisplay
     ]);
+    const scrollToProjects = ()=>{
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+            projectsSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         ref: containerRef,
         className: "relative h-[300vh] w-full bg-[#0d0d0d]",
@@ -88,27 +97,27 @@ function Hero({ siteSettings, profile }) {
                                     children: "Main_Comp"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 50,
+                                    lineNumber: 54,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     children: "1920 x 1080 (1.00)"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 51,
+                                    lineNumber: 55,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     children: "30 fps"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 52,
+                                    lineNumber: 56,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                            lineNumber: 49,
+                            lineNumber: 53,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -121,7 +130,7 @@ function Hero({ siteSettings, profile }) {
                                             className: "w-3.5 h-3.5"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 55,
+                                            lineNumber: 59,
                                             columnNumber: 67
                                         }, this),
                                         " ",
@@ -129,7 +138,7 @@ function Hero({ siteSettings, profile }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 55,
+                                    lineNumber: 59,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -137,7 +146,7 @@ function Hero({ siteSettings, profile }) {
                                     children: "Full"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 56,
+                                    lineNumber: 60,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -145,19 +154,19 @@ function Hero({ siteSettings, profile }) {
                                     children: "86%"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 57,
+                                    lineNumber: 61,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                            lineNumber: 54,
+                            lineNumber: 58,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                    lineNumber: 48,
+                    lineNumber: 52,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -171,7 +180,7 @@ function Hero({ siteSettings, profile }) {
                             }
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                            lineNumber: 65,
+                            lineNumber: 69,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -184,19 +193,18 @@ function Hero({ siteSettings, profile }) {
                                 fill: "none"
                             }, void 0, false, {
                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                lineNumber: 74,
+                                lineNumber: 78,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                            lineNumber: 73,
+                            lineNumber: 77,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "relative z-10 text-center space-y-4 px-4",
+                            className: "relative z-10 text-center space-y-6 px-4 max-w-4xl",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].h1, {
-                                    className: "text-5xl md:text-8xl font-black tracking-tighter text-white select-none cursor-default mix-blend-difference",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                                     style: {
                                         opacity: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransform"])(scrollYProgress, [
                                             0,
@@ -211,19 +219,22 @@ function Hero({ siteSettings, profile }) {
                                         ], [
                                             1,
                                             1.5
-                                        ]),
-                                        filter: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransform"])(scrollYProgress, [
-                                            0,
-                                            0.15
-                                        ], [
-                                            "blur(0px)",
-                                            "blur(20px)"
                                         ])
                                     },
-                                    children: "VIDEO EDITOR"
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$components$2f$ui$2f$animations$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BlurText"], {
+                                        text: "VIDEO EDITOR",
+                                        className: "text-5xl md:text-8xl font-black tracking-tighter text-white select-none cursor-default justify-center",
+                                        animateBy: "letters",
+                                        delay: 50,
+                                        direction: "top"
+                                    }, void 0, false, {
+                                        fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
+                                        lineNumber: 91,
+                                        columnNumber: 29
+                                    }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 81,
+                                    lineNumber: 85,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -249,7 +260,7 @@ function Hero({ siteSettings, profile }) {
                                     children: "&"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 93,
+                                    lineNumber: 101,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -279,7 +290,7 @@ function Hero({ siteSettings, profile }) {
                                                     children: "yang kebetulan"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 112,
+                                                    lineNumber: 120,
                                                     columnNumber: 33
                                                 }, this),
                                                 " ",
@@ -288,14 +299,14 @@ function Hero({ siteSettings, profile }) {
                                                     children: "bisa ngoding"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 112,
+                                                    lineNumber: 120,
                                                     columnNumber: 84
                                                 }, this),
                                                 "."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 111,
+                                            lineNumber: 119,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -303,25 +314,86 @@ function Hero({ siteSettings, profile }) {
                                             children: "(who happens to code.)"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 114,
+                                            lineNumber: 122,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 104,
+                                    lineNumber: 112,
+                                    columnNumber: 25
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                    className: "flex flex-col sm:flex-row items-center justify-center gap-4 pt-8",
+                                    style: {
+                                        opacity: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransform"])(scrollYProgress, [
+                                            0.35,
+                                            0.5
+                                        ], [
+                                            0,
+                                            1
+                                        ]),
+                                        y: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransform"])(scrollYProgress, [
+                                            0.35,
+                                            0.5
+                                        ], [
+                                            30,
+                                            0
+                                        ])
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                            onClick: scrollToProjects,
+                                            className: "group flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-md transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25",
+                                            children: [
+                                                "View Projects",
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$down$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowDown$3e$__["ArrowDown"], {
+                                                    className: "w-4 h-4 group-hover:translate-y-1 transition-transform"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
+                                                    lineNumber: 140,
+                                                    columnNumber: 33
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
+                                            lineNumber: 135,
+                                            columnNumber: 29
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                            href: "/contact",
+                                            className: "flex items-center gap-2 px-6 py-3 border border-[#444] hover:border-blue-500/50 text-gray-300 hover:text-white font-medium rounded-md transition-all hover:bg-[#222]",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mail$3e$__["Mail"], {
+                                                    className: "w-4 h-4"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
+                                                    lineNumber: 146,
+                                                    columnNumber: 33
+                                                }, this),
+                                                "Hire Me"
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
+                                            lineNumber: 142,
+                                            columnNumber: 29
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
+                                    lineNumber: 128,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                            lineNumber: 78,
+                            lineNumber: 82,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                    lineNumber: 62,
+                    lineNumber: 66,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -334,14 +406,14 @@ function Hero({ siteSettings, profile }) {
                                     children: "Render Queue"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 126,
+                                    lineNumber: 159,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "h-4 w-px bg-[#444]"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 127,
+                                    lineNumber: 160,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -349,13 +421,13 @@ function Hero({ siteSettings, profile }) {
                                     children: "Timeline: Main_Comp"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 128,
+                                    lineNumber: 161,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                            lineNumber: 125,
+                            lineNumber: 158,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -372,7 +444,7 @@ function Hero({ siteSettings, profile }) {
                                                     children: "T"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 138,
+                                                    lineNumber: 171,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -380,20 +452,20 @@ function Hero({ siteSettings, profile }) {
                                                     children: "1. Video Editor Title"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 139,
+                                                    lineNumber: 172,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$diamond$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Diamond$3e$__["Diamond"], {
                                                     className: "w-3 h-3 text-purple-500 fill-purple-500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 140,
+                                                    lineNumber: 173,
                                                     columnNumber: 33
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 137,
+                                            lineNumber: 170,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -404,7 +476,7 @@ function Hero({ siteSettings, profile }) {
                                                     children: "S"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 145,
+                                                    lineNumber: 178,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -412,20 +484,20 @@ function Hero({ siteSettings, profile }) {
                                                     children: "2. Transition Matte"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 146,
+                                                    lineNumber: 179,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$diamond$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Diamond$3e$__["Diamond"], {
                                                     className: "w-3 h-3 text-gray-600"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 147,
+                                                    lineNumber: 180,
                                                     columnNumber: 33
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 144,
+                                            lineNumber: 177,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -436,7 +508,7 @@ function Hero({ siteSettings, profile }) {
                                                     children: "T"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 152,
+                                                    lineNumber: 185,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -444,26 +516,26 @@ function Hero({ siteSettings, profile }) {
                                                     children: "3. Subtitle (Bisa Ngoding)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 153,
+                                                    lineNumber: 186,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$diamond$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Diamond$3e$__["Diamond"], {
                                                     className: "w-3 h-3 text-blue-500 fill-blue-500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 154,
+                                                    lineNumber: 187,
                                                     columnNumber: 33
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 151,
+                                            lineNumber: 184,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 134,
+                                    lineNumber: 167,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -478,53 +550,53 @@ function Hero({ siteSettings, profile }) {
                                                         children: "00s"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                        lineNumber: 164,
+                                                        lineNumber: 197,
                                                         columnNumber: 37
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: "02s"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                        lineNumber: 164,
+                                                        lineNumber: 197,
                                                         columnNumber: 53
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: "04s"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                        lineNumber: 164,
+                                                        lineNumber: 197,
                                                         columnNumber: 69
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: "06s"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                        lineNumber: 164,
+                                                        lineNumber: 197,
                                                         columnNumber: 85
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: "08s"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                        lineNumber: 164,
+                                                        lineNumber: 197,
                                                         columnNumber: 101
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: "10s"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                        lineNumber: 164,
+                                                        lineNumber: 197,
                                                         columnNumber: 117
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                lineNumber: 163,
+                                                lineNumber: 196,
                                                 columnNumber: 33
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 162,
+                                            lineNumber: 195,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -536,12 +608,12 @@ function Hero({ siteSettings, profile }) {
                                                 className: "absolute top-0 -translate-x-1/2 w-3 h-4 bg-blue-500 text-[8px] flex items-center justify-center text-white polygon-marker"
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                lineNumber: 173,
+                                                lineNumber: 206,
                                                 columnNumber: 33
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 169,
+                                            lineNumber: 202,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -554,27 +626,27 @@ function Hero({ siteSettings, profile }) {
                                                             className: "absolute left-[0%] w-[15%] h-5 bg-purple-500/30 border border-purple-500/50 rounded-sm ml-px"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                            lineNumber: 180,
+                                                            lineNumber: 213,
                                                             columnNumber: 37
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$diamond$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Diamond$3e$__["Diamond"], {
                                                             className: "w-3 h-3 text-yellow-500 fill-yellow-500 absolute left-[0%] z-10"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                            lineNumber: 182,
+                                                            lineNumber: 214,
                                                             columnNumber: 37
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$diamond$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Diamond$3e$__["Diamond"], {
                                                             className: "w-3 h-3 text-yellow-500 fill-yellow-500 absolute left-[15%] z-10"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                            lineNumber: 183,
+                                                            lineNumber: 215,
                                                             columnNumber: 37
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 179,
+                                                    lineNumber: 212,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -583,12 +655,12 @@ function Hero({ siteSettings, profile }) {
                                                         className: "absolute left-[10%] w-[20%] h-5 bg-red-500/30 border border-red-500/50 rounded-sm ml-px"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                        lineNumber: 188,
+                                                        lineNumber: 220,
                                                         columnNumber: 37
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 187,
+                                                    lineNumber: 219,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -598,62 +670,63 @@ function Hero({ siteSettings, profile }) {
                                                             className: "absolute left-[25%] right-0 h-5 bg-blue-500/30 border border-blue-500/50 rounded-sm ml-px"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                            lineNumber: 193,
+                                                            lineNumber: 225,
                                                             columnNumber: 37
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$diamond$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Diamond$3e$__["Diamond"], {
                                                             className: "w-3 h-3 text-blue-400 fill-blue-400 absolute left-[25%] z-10"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                            lineNumber: 194,
+                                                            lineNumber: 226,
                                                             columnNumber: 37
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                                    lineNumber: 192,
+                                                    lineNumber: 224,
                                                     columnNumber: 33
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                            lineNumber: 177,
+                                            lineNumber: 210,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                                    lineNumber: 160,
+                                    lineNumber: 193,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                            lineNumber: 132,
+                            lineNumber: 165,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-                    lineNumber: 122,
+                    lineNumber: 155,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-            lineNumber: 45,
+            lineNumber: 49,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/Documents/GitHub/langley-portfolio/components/home/Hero.tsx",
-        lineNumber: 42,
+        lineNumber: 46,
         columnNumber: 9
     }, this);
 }
-_s(Hero, "cHBFesWf1TRvaF4DDm5xvREWF0c=", false, function() {
+_s(Hero, "pH4ahy5ao9AhKtr43g1hLNZxjJs=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$scroll$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useScroll"],
         __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$spring$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSpring"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransform"],
         __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransform"],
         __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransform"],
         __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$langley$2d$portfolio$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransform"],

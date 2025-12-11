@@ -1,204 +1,131 @@
 'use client'
 
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion'
-import { Play, Pause, ChevronRight, Clock, Diamond } from 'lucide-react'
-import type { SiteSettings, Profile } from '@/sanity/lib/fetch'
-import { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
+import { TextReveal, SlideIn } from '@/components/ui/TextReveal'
+import Link from 'next/link'
+import { ArrowRight, Play, Layers, Clock, Film } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface HeroProps {
-    siteSettings?: SiteSettings | null
-    profile?: Profile | null
+    siteSettings?: any
+    profile?: any
 }
 
 export function Hero({ siteSettings, profile }: HeroProps) {
-    const containerRef = useRef<HTMLDivElement>(null)
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    })
+    const tagline = "Video editor who happens to code."
 
-    // Timeline Scrubbing Animation
-    const playheadX = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "100%"]), { stiffness: 100, damping: 30 })
-    const timeDisplay = useTransform(scrollYProgress, [0, 1], [0, 10]) // 0 to 10 seconds
-
-    // Copy
-    const copyId = "Video Editor yang kebetulan bisa ngoding"
-    const copyEn = "Video Editor who happens to code"
-
-    // Render Frame (Simulated 30fps)
-    const [currentTime, setCurrentTime] = useState("00:00:00:00")
-
-    useEffect(() => {
-        const unsubscribe = timeDisplay.onChange(v => {
-            const frames = Math.floor((v % 1) * 30).toString().padStart(2, '0') // 30fps standard
-            const seconds = Math.floor(v).toString().padStart(2, '0')
-            setCurrentTime(`00:00:${seconds}:${frames}`)
-        })
-        return () => unsubscribe()
-    }, [timeDisplay])
+    const scrollToProjects = (e: React.MouseEvent) => {
+        e.preventDefault()
+        const el = document.getElementById('projects')
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' })
+        }
+    }
 
     return (
-        <section ref={containerRef} className="relative h-[300vh] w-full bg-[#0d0d0d]">
+        <section className="min-h-[85vh] flex flex-col lg:flex-row items-center justify-center p-6 lg:px-20 gap-12 lg:gap-20 overflow-hidden">
+            {/* Left: Content */}
+            <div className="flex-1 max-w-2xl space-y-8 z-10">
+                <div className="space-y-4">
+                    <SlideIn delay={0.1}>
+                        <div className="flex items-center gap-2 text-blue-400 font-mono text-sm tracking-widest uppercase">
+                            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                            Active Composition
+                        </div>
+                    </SlideIn>
 
-            {/* Sticky Viewport */}
-            <div className="sticky top-0 md:top-10 h-screen md:h-[calc(100vh-40px)] flex flex-col">
-
-                {/* Composition Toolbar (Desktop Only) */}
-                <div className="h-8 bg-[#1f1f1f] border-b border-[#333] hidden md:flex items-center justify-between px-4 text-xs select-none z-20">
-                    <div className="flex items-center gap-4 text-gray-400">
-                        <span className="text-white font-medium">Main_Comp</span>
-                        <span>1920 x 1080 (1.00)</span>
-                        <span>30 fps</span>
-                    </div>
-                    <div className="flex items-center gap-4 text-blue-400 font-mono">
-                        <span className="flex items-center gap-2"><Clock className="w-3.5 h-3.5" /> {currentTime}</span>
-                        <span className="text-gray-500">Full</span>
-                        <span className="text-green-500">86%</span>
-                    </div>
-                </div>
-
-                {/* Main Viewport Area */}
-                <div className="flex-1 relative overflow-hidden flex items-center justify-center bg-[#0d0d0d]">
-
-                    {/* Grid / Safe Margins */}
-                    <div className="absolute inset-0 pointer-events-none opacity-10"
-                        style={{
-                            backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)',
-                            backgroundSize: '100px 100px'
-                        }}
+                    <TextReveal
+                        text={tagline}
+                        className="text-4xl md:text-6xl font-bold leading-tight tracking-tighter text-white"
+                        delay={0.2}
                     />
 
-                    {/* Graph Editor Curve Background (Subtle) */}
-                    <svg className="absolute inset-0 w-full h-full opacity-5 pointer-events-none" preserveAspectRatio="none">
-                        <path d="M0,1080 C500,1080 500,0 1920,0" stroke="white" strokeWidth="2" fill="none" />
-                    </svg>
-
-                    {/* Content Layers */}
-                    <div className="relative z-10 text-center space-y-4 px-4">
-
-                        {/* Layer 1: Title */}
-                        <motion.h1
-                            className="text-5xl md:text-8xl font-black tracking-tighter text-white select-none cursor-default mix-blend-difference"
-                            style={{
-                                opacity: useTransform(scrollYProgress, [0, 0.15], [1, 0]),
-                                scale: useTransform(scrollYProgress, [0, 0.15], [1, 1.5]),
-                                filter: useTransform(scrollYProgress, [0, 0.15], ["blur(0px)", "blur(20px)"])
-                            }}
-                        >
-                            VIDEO EDITOR
-                        </motion.h1>
-
-                        {/* Layer 2: Transition / Transformation */}
-                        <motion.div
-                            className="text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500"
-                            style={{
-                                opacity: useTransform(scrollYProgress, [0.1, 0.2, 0.3], [0, 1, 0]),
-                                scale: useTransform(scrollYProgress, [0.1, 0.3], [0.8, 1.2])
-                            }}
-                        >
-                            &
-                        </motion.div>
-
-                        {/* Layer 3: Subtitle (The Hook) */}
-                        <motion.div
-                            className="relative"
-                            style={{
-                                opacity: useTransform(scrollYProgress, [0.25, 0.4], [0, 1]),
-                                y: useTransform(scrollYProgress, [0.25, 0.4], [100, 0])
-                            }}
-                        >
-                            <div className="text-2xl md:text-5xl font-bold text-white mb-2">
-                                <span className="opacity-50">yang kebetulan</span> <span className="text-blue-500 underline decoration-wavy decoration-blue-500/30">bisa ngoding</span>.
-                            </div>
-                            <div className="text-sm md:text-xl text-gray-500 font-mono">
-                                (who happens to code.)
-                            </div>
-                        </motion.div>
-                    </div>
+                    <SlideIn delay={0.5} className="text-gray-400 text-lg max-w-lg leading-relaxed">
+                        I build immersive web experiences with the precision of a video editor.
+                        Merging motion graphics sensibility with rigorous software engineering.
+                    </SlideIn>
                 </div>
 
-                {/* Timeline Panel (Bottom - Desktop Only) */}
-                <div className="h-64 bg-[#1f1f1f] border-t border-[#333] hidden md:flex flex-col select-none relative z-30 shadow-2xl">
-
-                    {/* Timeline Tools */}
-                    <div className="h-8 bg-[#252526] border-b border-[#333] flex items-center px-2 gap-2 text-gray-400 text-xs">
-                        <span>Render Queue</span>
-                        <div className="h-4 w-px bg-[#444]" />
-                        <span className="text-white bg-gray-700 px-2 py-0.5 rounded-sm">Timeline: Main_Comp</span>
-                    </div>
-
-                    {/* Timeline Tracks */}
-                    <div className="flex-1 flex relative overflow-hidden">
-                        {/* Layer List (Left) */}
-                        <div className="w-80 bg-[#1f1f1f] border-r border-[#333] flex flex-col text-xs font-medium text-gray-300">
-
-                            {/* Track 1 */}
-                            <div className="h-8 flex items-center px-2 border-b border-[#333] bg-[#2a2a2a] gap-2 hover:bg-[#333] transition-colors">
-                                <div className="w-4 h-4 rounded text-center leading-4 text-[10px] bg-purple-600 text-white font-bold">T</div>
-                                <span className="flex-1 truncate">1. Video Editor Title</span>
-                                <Diamond className="w-3 h-3 text-purple-500 fill-purple-500" />
-                            </div>
-
-                            {/* Track 2 */}
-                            <div className="h-8 flex items-center px-2 border-b border-[#333] bg-[#2a2a2a] gap-2 hover:bg-[#333] transition-colors">
-                                <div className="w-4 h-4 rounded text-center leading-4 text-[10px] bg-red-600 text-white font-bold">S</div>
-                                <span className="flex-1 truncate">2. Transition Matte</span>
-                                <Diamond className="w-3 h-3 text-gray-600" />
-                            </div>
-
-                            {/* Track 3 */}
-                            <div className="h-8 flex items-center px-2 border-b border-[#333] bg-[#2a2a2a] gap-2 hover:bg-[#333] transition-colors">
-                                <div className="w-4 h-4 rounded text-center leading-4 text-[10px] bg-blue-600 text-white font-bold">T</div>
-                                <span className="flex-1 truncate">3. Subtitle (Bisa Ngoding)</span>
-                                <Diamond className="w-3 h-3 text-blue-500 fill-blue-500" />
-                            </div>
-
-                        </div>
-
-                        {/* Timeline Visualization (Right) */}
-                        <div className="flex-1 relative bg-[#181818]">
-                            {/* Ruler */}
-                            <div className="h-6 border-b border-[#333] bg-[#222] relative">
-                                <div className="absolute top-0 bottom-0 left-0 w-full flex justify-between px-2 text-[10px] text-gray-500 pt-1 font-mono">
-                                    <span>00s</span><span>02s</span><span>04s</span><span>06s</span><span>08s</span><span>10s</span>
-                                </div>
-                            </div>
-
-                            {/* Playhead */}
-                            <motion.div
-                                className="absolute top-0 bottom-0 w-[1px] bg-blue-500 z-50 overflow-visible"
-                                style={{ left: playheadX }}
-                            >
-                                <div className="absolute top-0 -translate-x-1/2 w-3 h-4 bg-blue-500 text-[8px] flex items-center justify-center text-white polygon-marker" />
-                            </motion.div>
-
-                            {/* Keyframes & Bars */}
-                            <div className="mt-[1px] relative space-y-[1px]">
-                                {/* Track 1 Data */}
-                                <div className="h-8 bg-[#222] relative flex items-center">
-                                    <div className="absolute left-[0%] w-[15%] h-5 bg-purple-500/30 border border-purple-500/50 rounded-sm ml-px" />
-                                    {/* Keyframes */}
-                                    <Diamond className="w-3 h-3 text-yellow-500 fill-yellow-500 absolute left-[0%] z-10" />
-                                    <Diamond className="w-3 h-3 text-yellow-500 fill-yellow-500 absolute left-[15%] z-10" />
-                                </div>
-
-                                {/* Track 2 Data */}
-                                <div className="h-8 bg-[#222] relative flex items-center">
-                                    <div className="absolute left-[10%] w-[20%] h-5 bg-red-500/30 border border-red-500/50 rounded-sm ml-px" />
-                                </div>
-
-                                {/* Track 3 Data */}
-                                <div className="h-8 bg-[#222] relative flex items-center">
-                                    <div className="absolute left-[25%] right-0 h-5 bg-blue-500/30 border border-blue-500/50 rounded-sm ml-px" />
-                                    <Diamond className="w-3 h-3 text-blue-400 fill-blue-400 absolute left-[25%] z-10" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <SlideIn delay={0.7} className="flex flex-wrap items-center gap-4">
+                    <Link
+                        href="#projects"
+                        onClick={scrollToProjects}
+                        className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-all hover:scale-105 active:scale-95"
+                    >
+                        <Play className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" />
+                        View Projects
+                    </Link>
+                    <Link
+                        href="/contact"
+                        className="px-6 py-3 rounded-md border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white transition-all bg-[#1e1e1e]/50 backdrop-blur-sm"
+                    >
+                        Contact Me
+                    </Link>
+                </SlideIn>
             </div>
+
+            {/* Right: AE Panel Visualization (Decorative) */}
+            <SlideIn delay={0.3} className="flex-1 w-full max-w-xl hidden md:block">
+                <div className="relative aspect-video rounded-xl bg-[#1e1e1e] border border-[#333] shadow-2xl overflow-hidden group">
+                    {/* Header */}
+                    <div className="h-8 bg-[#2a2a2a] border-b border-[#333] flex items-center px-4 justify-between">
+                        <span className="text-[10px] uppercase font-bold text-gray-500">Composition: Main_Hero</span>
+                        <div className="flex gap-1.5">
+                            <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                            <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                            <div className="w-2 h-2 rounded-full bg-green-500/50" />
+                        </div>
+                    </div>
+
+                    {/* Timeline Area (Fake) */}
+                    <div className="p-4 space-y-3 relative">
+                        {/* Grid Lines */}
+                        <div className="absolute inset-0 grid grid-cols-12 pointer-events-none opacity-10">
+                            {Array.from({ length: 12 }).map((_, i) => (
+                                <div key={i} className="border-r border-white h-full" />
+                            ))}
+                        </div>
+
+                        {/* Layers */}
+                        {[
+                            { name: 'Headline.mp4', color: 'bg-indigo-500', width: '80%', icon: Film },
+                            { name: 'Shape Layer 1', color: 'bg-purple-500', width: '40%', icon: Layers },
+                            { name: 'Camera 1', color: 'bg-pink-500', width: '100%', icon: Play },
+                        ].map((layer, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: 0.8 + (i * 0.1) }}
+                                className="flex items-center gap-3 relative z-10"
+                            >
+                                <div className="w-32 text-[10px] text-gray-400 font-mono flex items-center gap-2">
+                                    <layer.icon className="w-3 h-3" />
+                                    {layer.name}
+                                </div>
+                                <div className="flex-1 h-6 bg-[#111] rounded-sm relative overflow-hidden">
+                                    <motion.div
+                                        className={`absolute top-0.5 bottom-0.5 left-0 rounded-sm ${layer.color} opacity-60 backdrop-blur-sm`}
+                                        initial={{ width: 0 }}
+                                        animate={{ width: layer.width }}
+                                        transition={{ delay: 1 + (i * 0.2), duration: 1.5, type: "spring" }}
+                                    />
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Time Indicator */}
+                    <motion.div
+                        className="absolute top-8 bottom-0 w-px bg-red-500 z-20 shadow-[0_0_10px_rgba(239,68,68,0.5)]"
+                        animate={{ left: ['0%', '100%'] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    >
+                        <div className="absolute top-0 -translate-x-1/2 -translate-y-1/2 bg-red-500 text-[8px] font-bold text-white px-1 py-0.5 rounded-sm">
+                            00:00:00
+                        </div>
+                    </motion.div>
+                </div>
+            </SlideIn>
         </section>
     )
 }

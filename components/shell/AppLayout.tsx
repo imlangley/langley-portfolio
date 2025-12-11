@@ -45,15 +45,15 @@ export function AppLayout({ children }: AppLayoutProps) {
     const { setCursorVariant } = useCursor()
 
     return (
-        <div className="min-h-screen bg-[#161616] text-gray-300 font-sans selection:bg-blue-500/30 selection:text-white overflow-hidden flex flex-col md:block">
+        <div className="h-screen h-[100dvh] bg-[#161616] text-gray-300 font-sans selection:bg-blue-500/30 selection:text-white overflow-hidden flex flex-col relative">
             {/* Desktop Shell Elements */}
-            <div className="hidden md:block">
+            <div className="hidden md:block shrink-0">
                 <MenuBar />
                 <Toolbar />
             </div>
 
             {/* Mobile Header (Simplified) */}
-            <div className="md:hidden h-14 bg-[#1f1f1f] border-b border-[#333] flex items-center justify-between px-4 z-50 fixed top-0 left-0 w-full">
+            <div className="md:hidden h-14 bg-[#1f1f1f] border-b border-[#333] flex items-center justify-between px-4 z-50 shrink-0">
                 <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded bg-blue-600 flex items-center justify-center text-[10px] font-bold text-white">
                         Ae
@@ -64,30 +64,30 @@ export function AppLayout({ children }: AppLayoutProps) {
 
             {/* Main Content Viewport */}
             <main
-                className="flex-1 md:fixed md:top-10 md:left-14 md:right-0 md:bottom-6 overflow-y-auto scrollbar-hide bg-[#0d0d0d] pt-14 md:pt-0"
+                className="flex-1 relative overflow-y-auto bg-[#0d0d0d] md:pl-14"
                 onMouseEnter={() => setCursorVariant('default')}
             >
                 <div className="min-h-full w-full relative">
                     {/* Editor Gutter (Fake) - Desktop Only */}
-                    <div className="absolute left-0 top-0 bottom-0 w-10 border-r border-[#333] bg-[#1e1e1e] z-0 hidden md:flex flex-col items-end pr-2 pt-4 text-gray-600 font-mono text-[10px] select-none pointer-events-none">
+                    <div className="absolute left-0 top-0 bottom-0 w-10 border-r border-[#333] bg-[#1e1e1e] z-0 hidden md:flex flex-col items-end pr-2 pt-4 text-gray-600 font-mono text-[10px] select-none pointer-events-none sticky top-0 h-full">
                         {Array.from({ length: 50 }).map((_, i) => (
                             <div key={i} className="leading-6">{i + 1}</div>
                         ))}
                     </div>
 
                     {/* Content Area */}
-                    <div className="pl-0 md:pl-10 relative z-10 w-full min-h-screen">
+                    <div className="pl-0 md:pl-10 relative z-10 w-full pb-20 md:pb-10">
                         {children}
                     </div>
                 </div>
             </main>
 
-            <div className="hidden md:block">
+            <div className="hidden md:block shrink-0 z-50">
                 <StatusBar />
             </div>
 
             {/* Mobile Bottom Bar (Navigation) */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#1f1f1f] border-t border-[#333] flex items-center justify-around z-50 pb-2">
+            <div className="md:hidden h-16 bg-[#1f1f1f] border-t border-[#333] flex items-center justify-around z-50 shrink-0">
                 <MobileNavLink href="/" label="Home" />
                 <MobileNavLink href="/projects" label="Projects" />
                 <MobileNavLink href="/about" label="About" />
