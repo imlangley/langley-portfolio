@@ -38,3 +38,4 @@ build/
 # Sanity
 .sanity/
 .sanity-studio/
+next-env.d.ts

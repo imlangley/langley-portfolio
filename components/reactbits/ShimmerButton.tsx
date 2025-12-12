@@ -61,7 +61,7 @@ export function ShimmerButton({
     if (href) {
         return (
             <motion.div
-                className="relative inline-block"
+                className="relative w-full md:w-auto"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
             >
@@ -74,7 +74,7 @@ export function ShimmerButton({
 
     return (
         <motion.div
-            className="relative inline-block"
+            className="relative w-full md:w-auto"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
         >
