@@ -119,7 +119,7 @@ export function Footer() {
                 </div>
 
                 {/* RIGHT: Quick Links & Meta */}
-                <div className="lg:col-span-5 bg-shell-surface p-5 flex flex-col justify-between gap-6">
+                <div className="lg:col-span-5 bg-shell-surface p-2 flex flex-col justify-between gap-6">
 
                     {/* Navigation */}
                     <div className="space-y-3">
@@ -175,6 +175,9 @@ export function Footer() {
 
                 </div>
             </div>
+
+            {/* Mobile bottom spacing to account for fixed bottom navigation */}
+            <div className="h-17 md:h-6 bg-shell-surface shrink-0" />
         </footer>
     )
 }

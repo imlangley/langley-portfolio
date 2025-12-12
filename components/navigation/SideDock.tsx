@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCursor } from '@/context/CursorContext'
 import { Home, FolderOpen, User, Mail } from 'lucide-react'
+import { GlassSurface } from '@/components/reactbits/GlassSurface'
 
 interface DockItemProps {
     href: string
@@ -117,39 +118,48 @@ export function SideDock({ items = defaultNavItems, className = '', position = '
     const mouseY = useMotionValue(Infinity)
 
     return (
-        <motion.nav
+        <motion.div
             initial={{ opacity: 0, x: position === 'left' ? -100 : 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, type: 'spring' as const, stiffness: 100, damping: 20 }}
-            onMouseEnter={(e) => mouseY.set(e.pageY)}
-            onMouseMove={(e) => mouseY.set(e.pageY)}
-            onMouseLeave={() => mouseY.set(Infinity)}
             className={`
                 fixed top-1/2 -translate-y-1/2 z-50
                 ${position === 'left' ? 'left-3' : 'right-3'}
-                flex flex-col items-center gap-2 px-2 py-3
-                bg-shell-bg/90 backdrop-blur-xl
-                border border-shell-border rounded-2xl
-                shadow-2xl shadow-black/50
                 ${className}
             `}
-            aria-label="Side navigation"
         >
-            {items.map((item) => (
-                <DockItem
-                    key={item.href}
-                    href={item.href}
-                    icon={item.icon}
-                    label={item.label}
-                    isActive={
-                        item.href === '/'
-                            ? pathname === '/'
-                            : pathname.startsWith(item.href)
-                    }
-                    mouseY={mouseY}
-                />
-            ))}
-        </motion.nav>
+            <GlassSurface
+                width="auto"
+                height="auto"
+                borderRadius={16}
+                backgroundOpacity={0.20}
+                blur={12}
+                saturation={1.5}
+            >
+                <nav
+                    onMouseEnter={(e) => mouseY.set(e.pageY)}
+                    onMouseMove={(e) => mouseY.set(e.pageY)}
+                    onMouseLeave={() => mouseY.set(Infinity)}
+                    className="flex flex-col items-center gap-2 px-2 py-3"
+                    aria-label="Side navigation"
+                >
+                    {items.map((item) => (
+                        <DockItem
+                            key={item.href}
+                            href={item.href}
+                            icon={item.icon}
+                            label={item.label}
+                            isActive={
+                                item.href === '/'
+                                    ? pathname === '/'
+                                    : pathname.startsWith(item.href)
+                            }
+                            mouseY={mouseY}
+                        />
+                    ))}
+                </nav>
+            </GlassSurface>
+        </motion.div>
     )
 }
 
