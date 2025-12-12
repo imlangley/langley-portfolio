@@ -3,10 +3,14 @@
 import * as React from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
-export function ThemeToggle({ className }: { className?: string }) {
+export interface ThemeToggleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    className?: string;
+}
+
+export function ThemeToggle({ className, ...props }: ThemeToggleProps) {
     const { theme, setTheme } = useTheme()
     const [mounted, setMounted] = React.useState(false)
 
@@ -29,6 +33,9 @@ export function ThemeToggle({ className }: { className?: string }) {
                 className
             )}
             aria-label="Toggle theme"
+            data-testid="theme-toggle"
+            type="button"
+            {...props}
         >
             <motion.div
                 initial={false}

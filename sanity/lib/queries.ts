@@ -116,7 +116,7 @@ export const getFeaturedProjectsQuery = /* groq */ `
  * ```
  */
 export const getAllProjectsQuery = /* groq */ `
-  *[_type == "project" && ($type == null || projectType == $type)] | order(displayOrder asc, date desc) {
+  *[_type == "project" && (!defined($type) || $type == "" || projectType == $type)] | order(displayOrder asc, date desc) {
     _id,
     title,
     "slug": slug.current,
@@ -198,6 +198,31 @@ export const getProjectBySlugQuery = /* groq */ `
     liveUrl,
     repoUrl,
     videoEmbedUrl
+  }
+`
+
+/**
+ * Fetch related projects by category or tags.
+ * Returns projects in the same category, excluding the current project.
+ */
+export const getRelatedProjectsQuery = /* groq */ `
+  *[_type == "project" && _id != $currentId && (
+    category._ref == $categoryId ||
+    count((tags[]._ref)[@ in $tagIds]) > 0
+  )] | order(isFeatured desc, date desc) [0...6] {
+    _id,
+    title,
+    "slug": slug.current,
+    summary,
+    projectType,
+    category-> {
+      name,
+      "slug": slug.current
+    },
+    coverImage {
+      ...,
+      asset->
+    }
   }
 `
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { LayoutGrid, Video, Code, Filter, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { ProjectCard, ProjectCategory } from '@/sanity/lib/fetch'
@@ -39,6 +39,7 @@ export function ProjectGrid({ projects, categories }: ProjectGridProps) {
                 <div className="flex overflow-x-auto gap-2 w-full md:w-auto p-1 no-scrollbar mask-gradient">
                     <button
                         onClick={() => setActiveCategory(ALL_FILTER)}
+                        data-testid="filter-all-works"
                         className={cn(
                             "px-5 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap border",
                             activeCategory === ALL_FILTER
@@ -52,6 +53,7 @@ export function ProjectGrid({ projects, categories }: ProjectGridProps) {
                         <button
                             key={cat._id}
                             onClick={() => setActiveCategory(cat.slug)}
+                            data-testid={`filter-category-${cat.slug}`}
                             className={cn(
                                 "px-5 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap border",
                                 activeCategory === cat.slug
@@ -68,6 +70,7 @@ export function ProjectGrid({ projects, categories }: ProjectGridProps) {
                 <div className="flex items-center bg-muted/50 p-1.5 rounded-xl border border-border/50">
                     <button
                         onClick={() => setActiveType(null)}
+                        data-testid="filter-type-all"
                         className={cn(
                             "px-3 py-2 rounded-lg transition-all flex items-center gap-2 text-sm font-medium",
                             activeType === null ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
@@ -77,6 +80,7 @@ export function ProjectGrid({ projects, categories }: ProjectGridProps) {
                     </button>
                     <button
                         onClick={() => setActiveType(activeType === 'web' ? null : 'web')}
+                        data-testid="filter-type-web"
                         className={cn(
                             "px-3 py-2 rounded-lg transition-all flex items-center gap-2 text-sm font-medium",
                             activeType === 'web' ? "bg-background shadow-sm text-blue-500" : "text-muted-foreground hover:text-blue-500"
@@ -86,6 +90,7 @@ export function ProjectGrid({ projects, categories }: ProjectGridProps) {
                     </button>
                     <button
                         onClick={() => setActiveType(activeType === 'video' ? null : 'video')}
+                        data-testid="filter-type-video"
                         className={cn(
                             "px-3 py-2 rounded-lg transition-all flex items-center gap-2 text-sm font-medium",
                             activeType === 'video' ? "bg-background shadow-sm text-red-500" : "text-muted-foreground hover:text-red-500"
@@ -99,6 +104,7 @@ export function ProjectGrid({ projects, categories }: ProjectGridProps) {
             {/* Grid */}
             <motion.div
                 layout
+                data-testid="project-grid"
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20"
             >
                 <AnimatePresence mode='popLayout'>
@@ -119,6 +125,7 @@ export function ProjectGrid({ projects, categories }: ProjectGridProps) {
                                             src={urlFor(project.coverImage).width(600).height(450).url()}
                                             alt={project.title}
                                             fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
                                     )}
@@ -148,13 +155,17 @@ export function ProjectGrid({ projects, categories }: ProjectGridProps) {
             </motion.div>
 
             {filteredProjects.length === 0 && (
-                <div className="py-24 text-center">
+                <div className="py-24 text-center" data-testid="no-projects-message">
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
                         <Filter className="w-8 h-8 text-muted-foreground" />
                     </div>
                     <h3 className="text-xl font-bold">No projects found.</h3>
                     <p className="text-muted-foreground mt-2">Try adjusting your filters.</p>
-                    <button onClick={() => { setActiveCategory(ALL_FILTER); setActiveType(null) }} className="mt-4 text-primary font-medium hover:underline">
+                    <button
+                        onClick={() => { setActiveCategory(ALL_FILTER); setActiveType(null) }}
+                        data-testid="clear-all-filters"
+                        className="mt-4 text-primary font-medium hover:underline"
+                    >
                         Clear all filters
                     </button>
                 </div>

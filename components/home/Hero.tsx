@@ -1,144 +1,275 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown } from 'lucide-react'
-import Image from 'next/image'
+import { TextReveal, SlideIn } from '@/components/ui/TextReveal'
 import Link from 'next/link'
-import { urlFor } from '@/sanity/lib/image'
+import { ArrowRight, Play, Layers, Clock, Film, ChevronDown, Sparkles, Code2, Video } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'motion/react'
+import { useRef } from 'react'
+import { useCursor } from '@/context/CursorContext'
+import {
+    RotatingText,
+    DecryptedText,
+    Magnet,
+    ClickSpark,
+    Squares,
+    BlurText,
+    GradientText,
+} from '@/components/reactbits'
 
 interface HeroProps {
-    title?: string
-    subtitle?: string
-    image?: any
     siteSettings?: any
+    profile?: any
 }
 
-export function Hero({ title, subtitle, image, siteSettings }: HeroProps) {
-    const { scrollY } = useScroll()
-    const yText = useTransform(scrollY, [0, 500], [0, 100])
-    const opacity = useTransform(scrollY, [0, 500], [1, 0])
+export function Hero({ siteSettings, profile }: HeroProps) {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const { setCursorVariant } = useCursor()
 
-    // Staggered Text Animation Variants
-    const containerVars = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.2
-            }
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ['start start', 'end start'],
+    })
+
+    // Parallax effects
+    const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+
+    const scrollToProjects = (e: React.MouseEvent) => {
+        e.preventDefault()
+        const el = document.getElementById('projects')
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' })
         }
     }
 
-    const wordVars = {
-        hidden: { y: 100, rotateX: 90, opacity: 0 },
-        visible: {
-            y: 0,
-            rotateX: 0,
-            opacity: 1,
-            transition: { type: "spring", stiffness: 50, damping: 20 }
-        }
-    }
-
-    const heroTitle = siteSettings?.heroTitle || "Cinematic Video Editor"
-    const heroSubtitle = siteSettings?.heroSubtitle || "Crafting visual narratives that captivate and inspire."
+    const roles = ['Video Editor', 'Web Developer', 'Motion Designer', 'Creative Technologist']
 
     return (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden snap-start bg-background perspective-1000">
-
-            {/* Cinematic Background Element - Placeholder for Video Loop */}
-            <div className="absolute inset-0 z-0 opacity-20">
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background" />
-                <div className="absolute inset-0 bg-radial-gradient from-accent/20 to-transparent blur-3xl opacity-40 animate-pulse duration-[5000ms]" />
-
-                {/* Abstract Moving Shapes/Gradient */}
-                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen animate-blob" />
-                <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[150px] mix-blend-screen animate-blob animation-delay-2000" />
+        <section
+            ref={containerRef}
+            className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden"
+        >
+            {/* Animated Grid Background */}
+            <div className="absolute inset-0 z-0 opacity-60">
+                <Squares
+                    speed={0.2}
+                    squareSize={60}
+                    direction="diagonal"
+                    borderColor="rgba(59,130,246,0.15)"
+                    hoverFillColor="rgba(147, 51, 234, 0.25)"
+                    className="w-full h-full"
+                />
             </div>
 
-            <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center h-full">
+            {/* Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background z-[1] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-transparent to-background/50 z-[1] pointer-events-none" />
 
-                {/* Text Content */}
-                <motion.div
-                    className="lg:col-span-8 flex flex-col justify-center"
-                    style={{ y: yText, opacity }}
-                >
+            {/* Floating Orbs */}
+            <motion.div
+                className="absolute top-20 left-[10%] w-72 h-72 rounded-full bg-blue-500/10 blur-[100px] z-0"
+                animate={{
+                    x: [0, 30, 0],
+                    y: [0, -20, 0],
+                    scale: [1, 1.1, 1],
+                }}
+                transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                }}
+            />
+            <motion.div
+                className="absolute bottom-20 right-[10%] w-96 h-96 rounded-full bg-purple-500/10 blur-[120px] z-0"
+                animate={{
+                    x: [0, -40, 0],
+                    y: [0, 30, 0],
+                    scale: [1, 1.2, 1],
+                }}
+                transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                }}
+            />
+
+            {/* Main Content */}
+            <motion.div
+                className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto"
+                style={{ y, opacity }}
+            >
+                {/* Status Badge */}
+                <SlideIn delay={0.1}>
                     <motion.div
-                        variants={containerVars}
-                        initial="hidden"
-                        animate="visible"
-                        className="space-y-6"
+                        className="flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 backdrop-blur-sm mb-8"
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.2, type: 'spring' }}
                     >
-                        {/* Status Line */}
-                        <motion.div variants={wordVars} className="overflow-hidden">
-                            <span className="inline-block px-3 py-1 text-xs font-mono tracking-[0.2em] uppercase border border-white/20 text-white/70 backdrop-blur-md">
-                                Available for Booking
-                            </span>
-                        </motion.div>
-
-                        {/* Staggered Giant Title */}
-                        <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white mix-blend-overlay">
-                            {/* Split title for animation (Demo logic) */}
-                            <span className="block overflow-hidden">
-                                <motion.span variants={wordVars} className="block">VISUAL</motion.span>
-                            </span>
-                            <span className="block overflow-hidden">
-                                <motion.span variants={wordVars} className="block text-stroke-sm text-transparent">STORYTELLING</motion.span>
-                            </span>
-                        </h1>
-
-                        <motion.div variants={wordVars} className="max-w-xl">
-                            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
-                                {heroSubtitle}
-                            </p>
-                        </motion.div>
-
-                        <motion.div variants={wordVars} className="pt-8 flex gap-6">
-                            <Link href="#projects" className="group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm hover:bg-gray-200 transition-colors">
-                                <span className="relative z-10">Select Work</span>
-                                {/* Hover Effect */}
-                                <span className="absolute inset-0 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 mix-blend-difference" />
-                            </Link>
-                        </motion.div>
+                        <motion.span
+                            className="w-2 h-2 rounded-full bg-green-500"
+                            animate={{ opacity: [1, 0.3, 1] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                        <span className="text-xs font-medium text-blue-400 tracking-widest uppercase">
+                            Available for Projects
+                        </span>
                     </motion.div>
-                </motion.div>
+                </SlideIn>
 
-                {/* Right Visual - Abstract/Video Placeholder */}
-                <div className="hidden lg:col-span-4 lg:flex items-center justify-center h-full relative">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
-                        className="relative w-full aspect-[9/16] max-h-[80vh] bg-black/50 border border-white/10 overflow-hidden"
-                    >
-                        {/* Placeholder for Showreel Preview */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-center space-y-2 opacity-50">
-                                <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center mx-auto">
-                                    <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[16px] border-l-white/80 border-b-[8px] border-b-transparent ml-1" />
-                                </div>
-                                <p className="text-xs font-mono uppercase tracking-widest text-white/60">Play Showreel</p>
+                {/* Main Headline with Rotating Text */}
+                <SlideIn delay={0.2} className="mb-6">
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter">
+                        <span className="text-foreground">I'm a </span>
+                        <RotatingText
+                            texts={roles}
+                            rotationInterval={2500}
+                            staggerDuration={0.02}
+                            staggerFrom="first"
+                            mainClassName="text-blue-400"
+                            elementLevelClassName="hover:text-purple-400 transition-colors"
+                        />
+                    </h1>
+                </SlideIn>
+
+                {/* Subtitle with Blur Reveal */}
+                <SlideIn delay={0.4} className="mb-8">
+                    <div className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl leading-relaxed mx-auto">
+                        <BlurText
+                            text="Crafting immersive digital experiences where motion graphics precision meets modern web engineering."
+                            delay={30}
+                            animateBy="words"
+                            direction="bottom"
+                            className="justify-center"
+                        />
+                    </div>
+                </SlideIn>
+
+                {/* Tech Stack Pills */}
+                <SlideIn delay={0.5} className="flex flex-wrap justify-center gap-3 mb-10">
+                    {['After Effects', 'Next.js', 'TypeScript', 'Framer Motion', 'Premiere Pro'].map(
+                        (tech, i) => (
+                            <motion.span
+                                key={tech}
+                                className="px-4 py-2 text-xs font-medium rounded-full border border-border bg-card/50 text-muted-foreground backdrop-blur-sm"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6 + i * 0.1 }}
+                                whileHover={{
+                                    scale: 1.05,
+                                    borderColor: 'hsl(var(--primary))',
+                                    color: 'hsl(var(--foreground))',
+                                }}
+                            >
+                                {tech}
+                            </motion.span>
+                        )
+                    )}
+                </SlideIn>
+
+                {/* CTA Buttons with Magnetic Effect */}
+                <SlideIn delay={0.7} className="flex flex-wrap items-center justify-center gap-4">
+                    <ClickSpark sparkColor="#3b82f6" sparkCount={12}>
+                        <Magnet padding={20} magnetStrength={0.2}>
+                            <button
+                                onClick={scrollToProjects}
+                                onMouseEnter={() => setCursorVariant('button')}
+                                onMouseLeave={() => setCursorVariant('default')}
+                                className="group relative flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all overflow-hidden"
+                            >
+                                <motion.span
+                                    className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                                />
+                                <span className="relative flex items-center gap-3">
+                                    <Play className="w-5 h-5 fill-current" />
+                                    View My Work
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            </button>
+                        </Magnet>
+                    </ClickSpark>
+
+                    <Magnet padding={20} magnetStrength={0.2}>
+                        <Link
+                            href="/contact"
+                            onMouseEnter={() => setCursorVariant('button')}
+                            onMouseLeave={() => setCursorVariant('default')}
+                            className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-border hover:border-primary/50 text-foreground hover:text-primary transition-all bg-card/50 backdrop-blur-sm"
+                        >
+                            <Sparkles className="w-5 h-5" />
+                            Let's Talk
+                        </Link>
+                    </Magnet>
+                </SlideIn>
+
+                {/* Stats Row */}
+                <SlideIn delay={0.9} className="mt-16 grid grid-cols-3 gap-8 md:gap-16">
+                    {[
+                        { value: '5+', label: 'Years Experience' },
+                        { value: '50+', label: 'Projects Completed' },
+                        { value: '30+', label: 'Happy Clients' },
+                    ].map((stat, i) => (
+                        <motion.div
+                            key={stat.label}
+                            className="text-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1 + i * 0.1 }}
+                        >
+                            <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
+                                {stat.value}
                             </div>
-                        </div>
-
-                        {/* Grain/Scanline Overlay */}
-                        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
-                        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/80" />
-                    </motion.div>
-                </div>
-            </div>
+                            <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">
+                                {stat.label}
+                            </div>
+                        </motion.div>
+                    ))}
+                </SlideIn>
+            </motion.div>
 
             {/* Scroll Indicator */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-10 left-10 md:left-20 flex items-center gap-4 text-white/50"
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2 }}
             >
-                <span className="text-xs uppercase tracking-widest">Scroll to Explore</span>
-                <div className="h-[1px] w-20 bg-white/20" />
+                <motion.button
+                    onClick={scrollToProjects}
+                    className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                    onMouseEnter={() => setCursorVariant('button')}
+                    onMouseLeave={() => setCursorVariant('default')}
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                    <span className="text-xs uppercase tracking-widest">Scroll</span>
+                    <ChevronDown className="w-5 h-5" />
+                </motion.button>
             </motion.div>
+
+            {/* Corner Decorations */}
+            <div className="absolute top-20 left-10 hidden lg:block z-0">
+                <motion.div
+                    className="flex items-center gap-2 text-muted-foreground/50 font-mono text-xs"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 0.5, x: 0 }}
+                    transition={{ delay: 1.5 }}
+                >
+                    <Code2 className="w-4 h-4" />
+                    <span>// Welcome to my portfolio</span>
+                </motion.div>
+            </div>
+            <div className="absolute top-20 right-10 hidden lg:block z-0">
+                <motion.div
+                    className="flex items-center gap-2 text-muted-foreground/50 font-mono text-xs"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 0.5, x: 0 }}
+                    transition={{ delay: 1.5 }}
+                >
+                    <Video className="w-4 h-4" />
+                    <span>Composition: Hero_v3.aep</span>
+                </motion.div>
+            </div>
         </section>
     )
 }
-

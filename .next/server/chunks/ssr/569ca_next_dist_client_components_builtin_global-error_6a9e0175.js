@@ -1,3 +1,0 @@
-module.exports=[289970,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(230535);a.n(d("[project]/Documents/GitHub/langley-portfolio/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},587292,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(230535);a.n(d("[project]/Documents/GitHub/langley-portfolio/node_modules/next/dist/client/components/builtin/global-error.js"))},552332,a=>{"use strict";a.i(289970);var b=a.i(587292);a.n(b)}];
-
-//# sourceMappingURL=569ca_next_dist_client_components_builtin_global-error_6a9e0175.js.map

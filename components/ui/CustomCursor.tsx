@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
+import { motion, useMotionValue, useSpring, AnimatePresence } from 'motion/react'
 import { useEffect } from 'react'
 import { useCursor } from '@/context/CursorContext'
 
@@ -44,13 +44,22 @@ export function CustomCursor() {
             height: 16,
             width: 16,
             backgroundColor: "#ffffff",
-            mixBlendMode: "difference" as any
+            mixBlendMode: "difference" as const,
+            opacity: 1
+        },
+        button: {
+            height: 40,
+            width: 40,
+            backgroundColor: "#ffffff",
+            mixBlendMode: "difference" as const,
+            opacity: 1
         },
         project: {
             height: 100,
             width: 100,
             backgroundColor: "#ffffff",
-            mixBlendMode: "difference" as any
+            mixBlendMode: "difference" as const,
+            opacity: 1
         }
     }
 

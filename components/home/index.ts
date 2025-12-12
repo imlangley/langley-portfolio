@@ -1,0 +1,5 @@
+export { Hero } from './Hero'
+export { FeaturedProjects } from './FeaturedProjects'
+export { AboutSection } from './AboutSection'
+export { FeaturedProjectsSection } from './FeaturedProjectsSection'
+export { ToolsSection } from './ToolsSection'

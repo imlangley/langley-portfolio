@@ -1,32 +1,32 @@
 /**
  * Homepage - Main Entry Point
  * 
- * Assembles the Hero, Featured Projects, and other sections.
+ * Assembles the Hero, About, Featured Projects, and Tools sections.
  * Fetches data from Sanity on the server.
  */
 
-import { getSiteSettings, getFeaturedProjects } from '@/sanity/lib'
+import { getSiteSettings, getFeaturedProjects, getProfile, getTools } from '@/sanity/lib'
 import { Hero } from '@/components/home/Hero'
-import { FeaturedProjects } from '@/components/home/FeaturedProjects'
+import { AboutSection } from '@/components/home/AboutSection'
+import { FeaturedProjectsSection } from '@/components/home/FeaturedProjectsSection'
+import { ToolsSection } from '@/components/home/ToolsSection'
 
 export const revalidate = 60 // ISR every 60 seconds
 
 export default async function HomePage() {
-    const settings = await getSiteSettings()
-    const projects = await getFeaturedProjects()
+    const [settings, projects, profile, tools] = await Promise.all([
+        getSiteSettings(),
+        getFeaturedProjects(),
+        getProfile(),
+        getTools(),
+    ])
 
     return (
         <>
-            <Hero
-                title={settings?.heroTitle}
-                subtitle={settings?.heroSubtitle}
-                image={settings?.heroImage}
-                siteSettings={settings} // Pass settings for socials
-            />
-
-            <FeaturedProjects projects={projects} />
-
-            {/* Services Preview could go here */}
+            <Hero siteSettings={settings} profile={profile} />
+            <AboutSection profile={profile} />
+            <FeaturedProjectsSection projects={projects} />
+            <ToolsSection tools={tools} />
         </>
     )
 }
