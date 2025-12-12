@@ -2,10 +2,12 @@
  * Projects Page
  * 
  * Fetches all projects and categories to populate the interactive grid.
+ * Enhanced with animated filtering, search, and pagination.
  */
 
 import { getAllProjects, getProjectCategories } from '@/sanity/lib'
-import { ProjectGrid } from '@/components/projects/ProjectGrid'
+import { ProjectGridEnhanced } from '@/components/projects/ProjectGridEnhanced'
+import { SplitText } from '@/components/reactbits/SplitText'
 
 export const metadata = {
     title: 'Projects | Langley',
@@ -16,28 +18,34 @@ export const revalidate = 60
 
 export default async function ProjectsPage() {
     // Fetch data
-    const projects = await getAllProjects() // Gets all projects sorted by displayOrder/date
+    const projects = await getAllProjects()
     const categories = await getProjectCategories()
 
     return (
         <div className="min-h-screen pt-24 pb-20">
-            <div className="container space-y-12">
+            <div className="container space-y-8">
 
                 {/* Page Header */}
                 <div className="max-w-3xl space-y-6">
                     <h1 className="text-4xl md:text-6xl font-bold tracking-tighter">
-                        Archive <span className="text-primary">&</span> Work
+                        <SplitText
+                            text="Archive & Work"
+                            className="inline"
+                            delay={50}
+                            animationFrom={{ opacity: 0, y: 40 }}
+                            animationTo={{ opacity: 1, y: 0 }}
+                            easing={[0.33, 1, 0.68, 1]}
+                            threshold={0.1}
+                        />
                     </h1>
                     <p className="text-xl text-muted-foreground">
                         A complete list of my commercial and personal projects.
-                        Filter by category or type to find what you're looking for.
+                        Filter by category, type, or search to find what you're looking for.
                     </p>
                 </div>
 
-                <hr className="border-border" />
-
-                {/* Client Component */}
-                <ProjectGrid projects={projects} categories={categories} />
+                {/* Enhanced Client Component */}
+                <ProjectGridEnhanced projects={projects} categories={categories} />
             </div>
         </div>
     )

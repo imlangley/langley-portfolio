@@ -13,6 +13,7 @@ import {
   getAllProjectsQuery,
   getProjectBySlugQuery,
   getAllProjectSlugsQuery,
+  getRelatedProjectsQuery,
   getServicesQuery,
   getTestimonialsQuery,
   getFaqQuery,
@@ -235,6 +236,35 @@ export async function getProjectBySlug(
  */
 export async function getAllProjectSlugs(): Promise<{ slug: string }[]> {
   return sanityFetch<{ slug: string }[]>(getAllProjectSlugsQuery)
+}
+
+/**
+ * Related project card type
+ */
+export interface RelatedProject {
+  _id: string
+  title: string
+  slug: string
+  summary?: string
+  projectType: 'web' | 'video' | 'mixed'
+  category?: ProjectCategory
+  coverImage?: SanityImageAsset
+}
+
+/**
+ * Fetch related projects by category or tags.
+ */
+export async function getRelatedProjects(
+  currentId: string,
+  categoryId: string | null,
+  tagIds: string[] = [],
+  preview = false
+): Promise<RelatedProject[]> {
+  return sanityFetch<RelatedProject[]>(
+    getRelatedProjectsQuery,
+    { currentId, categoryId: categoryId ?? '', tagIds },
+    preview
+  )
 }
 
 /**

@@ -1,61 +1,83 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, useSpring } from 'motion/react';
+import { useEffect } from 'react';
 
-interface TextRevealProps {
+export interface TextRevealProps {
     text: string;
     className?: string;
     delay?: number;
     duration?: number;
 }
 
-export function TextReveal({ text, className, delay = 0, duration = 0.5 }: TextRevealProps) {
-    const characters = text.split("");
+// Individual character with clamped blur animation
+function AnimatedChar({ char, delay }: { char: string; delay: number }) {
+    // Use motion value for blur to clamp negative values
+    const blurValue = useMotionValue(10);
 
-    const container = {
-        hidden: { opacity: 0 },
-        visible: (i = 1) => ({
-            opacity: 1,
-            transition: { staggerChildren: 0.03, delayChildren: delay },
-        }),
-    };
+    // Clamp blur to minimum 0 to prevent invalid CSS
+    const clampedBlur = useTransform(blurValue, (v) => Math.max(0, v));
+    const filter = useTransform(clampedBlur, (v) => `blur(${v}px)`);
 
-    const child = {
-        visible: {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            transition: {
+    // Spring animation for blur
+    const springBlur = useSpring(blurValue, {
+        damping: 12,
+        stiffness: 100,
+    });
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            blurValue.set(0);
+        }, delay * 1000);
+        return () => clearTimeout(timeout);
+    }, [delay, blurValue]);
+
+    return (
+        <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+                delay,
                 type: "spring",
                 damping: 12,
                 stiffness: 100,
-                duration: duration
-            },
-        },
-        hidden: {
-            opacity: 0,
-            y: 20,
-            filter: "blur(10px)",
-        },
-    };
+            }}
+            style={{ filter }}
+        >
+            {char === " " ? "\u00A0" : char}
+        </motion.span>
+    );
+}
+
+export function TextReveal({ text, className, delay = 0, duration = 0.5 }: TextRevealProps) {
+    const characters = text.split("");
+    const staggerDelay = 0.03;
 
     return (
         <motion.h1
             className={className}
-            variants={container}
-            initial="hidden"
-            animate="visible"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay }}
         >
             {characters.map((char, index) => (
-                <motion.span variants={child} key={index}>
-                    {char === " " ? "\u00A0" : char}
-                </motion.span>
+                <AnimatedChar
+                    key={index}
+                    char={char}
+                    delay={delay + index * staggerDelay}
+                />
             ))}
         </motion.h1>
     );
 }
 
-export function SlideIn({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) {
+export interface SlideInProps {
+    children: React.ReactNode;
+    delay?: number;
+    className?: string;
+}
+
+export function SlideIn({ children, delay = 0, className }: SlideInProps) {
     return (
         <motion.div
             initial={{ y: 20, opacity: 0 }}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { LayoutGrid, Video, Code, Filter, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { ProjectCard, ProjectCategory } from '@/sanity/lib/fetch'

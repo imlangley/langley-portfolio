@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Github, Twitter, Linkedin, Instagram, ExternalLink, CheckCircle2, Clock, PlayCircle } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Github, Twitter, Linkedin, Instagram, Folder, Film, Layers, Monitor, Cpu, ExternalLink } from 'lucide-react'
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
@@ -14,114 +14,163 @@ export function Footer() {
         { label: 'Instagram', href: 'https://instagram.com', icon: Instagram },
     ]
 
-    const QUEUE_ITEMS = [
-        { id: 1, name: 'Portfolio_v2.aep', status: 'Rendering', progress: 65, color: 'bg-blue-500' },
-        { id: 2, name: 'Client_Work_2024.prproj', status: 'Queued', progress: 0, color: 'bg-gray-600' },
-        { id: 3, name: 'Showreel_Final.mov', status: 'Done', progress: 100, color: 'bg-green-500' },
+    // After Effects style compositions
+    const COMPOSITIONS = [
+        { id: 1, name: 'Portfolio_Main.aep', duration: '00:00:30:00', layers: 24, status: 'active' },
+        { id: 2, name: 'Hero_Section.aep', duration: '00:00:15:00', layers: 12, status: 'ready' },
+        { id: 3, name: 'Projects_Gallery.aep', duration: '00:00:45:00', layers: 36, status: 'ready' },
     ]
 
     return (
-        <footer className="w-full bg-[#161616] border-t border-[#333] font-sans text-xs select-none z-10 relative">
+        <footer className="w-full bg-shell-bg-alt border-t border-shell-border font-sans text-xs select-none relative z-10">
 
-            {/* Render Queue Header */}
-            <div className="flex items-center gap-4 px-4 py-2 bg-[#1f1f1f] border-b border-[#333] text-gray-400 font-medium uppercase tracking-wider text-[10px]">
-                <div className="w-4 h-4 rounded-sm bg-[#333] flex items-center justify-center">
-                    <PlayCircle className="w-3 h-3" />
+            {/* Project Panel Header - After Effects Style */}
+            <div className="flex items-center justify-between px-4 py-2 bg-shell-bg border-b border-shell-border">
+                <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded bg-gradient-to-br from-[#9999FF] to-[#D291FF] flex items-center justify-center">
+                        <Layers className="w-3 h-3 text-white" />
+                    </div>
+                    <span className="text-[10px] font-bold text-shell-text uppercase tracking-widest">Project Panel</span>
                 </div>
-                <span>Render Queue</span>
+                <div className="flex items-center gap-2 text-[10px] text-shell-text-muted">
+                    <span className="px-2 py-0.5 rounded bg-[#9999FF]/20 text-[#9999FF] font-medium">AE 2024</span>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12">
 
-                {/* LEFT: Render Status (Simulation) */}
-                <div className="lg:col-span-8 border-b lg:border-b-0 lg:border-r border-[#333]">
-                    <div className="grid grid-cols-12 gap-2 px-4 py-2 bg-[#1a1a1a] text-[10px] text-gray-500 font-medium border-b border-white/5">
-                        <div className="col-span-4">Comp Name</div>
-                        <div className="col-span-2">Status</div>
-                        <div className="col-span-6">Progress</div>
+                {/* LEFT: Compositions Panel - After Effects Style */}
+                <div className="lg:col-span-7 border-b lg:border-b-0 lg:border-r border-shell-border">
+                    {/* Folder Header */}
+                    <div className="flex items-center gap-2 px-4 py-2 bg-shell-surface border-b border-shell-border/50">
+                        <Folder className="w-3.5 h-3.5 text-[#9999FF]" />
+                        <span className="text-[10px] text-shell-text font-medium">Compositions</span>
+                        <span className="text-[10px] text-shell-text-muted ml-auto">{COMPOSITIONS.length} items</span>
                     </div>
 
-                    <div className="divide-y divide-[#222]">
-                        {QUEUE_ITEMS.map((item) => (
-                            <div key={item.id} className="grid grid-cols-12 gap-2 px-4 py-3 items-center hover:bg-[#1f1f1f] transition-colors group">
-                                <div className="col-span-4 font-mono text-gray-300 truncate flex items-center gap-2">
-                                    <div className={`w-1.5 h-1.5 rounded-full ${item.status === 'Rendering' ? 'bg-blue-500 animate-pulse' : item.status === 'Done' ? 'bg-green-500' : 'bg-yellow-500'}`} />
-                                    {item.name}
-                                </div>
-                                <div className="col-span-2 text-gray-400 flex items-center gap-1.5">
-                                    {item.status === 'Done' && <CheckCircle2 className="w-3 h-3 text-green-500" />}
-                                    {item.status === 'Queued' && <Clock className="w-3 h-3 text-yellow-500" />}
-                                    {item.status === 'Rendering' && <span className="text-blue-400">Processing...</span>}
-                                    {item.status !== 'Rendering' && item.status}
-                                </div>
-                                <div className="col-span-6">
-                                    <div className="h-1.5 w-full bg-[#111] rounded-full overflow-hidden relative">
+                    {/* Composition Items */}
+                    <div className="divide-y divide-shell-border/30">
+                        {COMPOSITIONS.map((comp, index) => (
+                            <motion.div
+                                key={comp.id}
+                                className="flex items-center gap-3 px-4 py-2.5 hover:bg-shell-surface/50 transition-colors group cursor-default"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                {/* Comp Icon */}
+                                <div className={`relative w-5 h-5 rounded flex items-center justify-center ${comp.status === 'active'
+                                    ? 'bg-[#9999FF]/30 border border-[#9999FF]'
+                                    : 'bg-shell-surface border border-shell-border'
+                                    }`}>
+                                    <Film className={`w-3 h-3 ${comp.status === 'active' ? 'text-[#9999FF]' : 'text-shell-text-muted'}`} />
+                                    {comp.status === 'active' && (
                                         <motion.div
-                                            className={`absolute top-0 bottom-0 left-0 ${item.color}`}
-                                            initial={{ width: `${item.progress}%` }}
-                                            animate={
-                                                item.status === 'Rendering'
-                                                    ? { width: ['65%', '70%'], opacity: [1, 0.8, 1] }
-                                                    : { width: `${item.progress}%` }
-                                            }
-                                            transition={
-                                                item.status === 'Rendering'
-                                                    ? { duration: 2, repeat: Infinity, repeatType: "reverse" }
-                                                    : {}
-                                            }
+                                            className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-green-500"
+                                            animate={{ opacity: [1, 0.5, 1] }}
+                                            transition={{ duration: 1.5, repeat: Infinity }}
                                         />
-                                    </div>
+                                    )}
                                 </div>
-                            </div>
+
+                                {/* Comp Name */}
+                                <div className="flex-1 min-w-0">
+                                    <span className="font-mono text-shell-text text-[11px] truncate block group-hover:text-[#9999FF] transition-colors">
+                                        {comp.name}
+                                    </span>
+                                </div>
+
+                                {/* Layers Count */}
+                                <div className="flex items-center gap-1 text-[10px] text-shell-text-muted">
+                                    <Layers className="w-3 h-3" />
+                                    <span>{comp.layers}</span>
+                                </div>
+
+                                {/* Duration / Timecode */}
+                                <div className="font-mono text-[10px] text-shell-text-muted w-24 text-right">
+                                    {comp.duration}
+                                </div>
+                            </motion.div>
                         ))}
+                    </div>
+
+                    {/* RAM Preview Status Bar */}
+                    <div className="flex items-center gap-4 px-4 py-2 bg-shell-bg border-t border-shell-border/50 text-[10px]">
+                        <div className="flex items-center gap-1.5">
+                            <motion.div
+                                className="w-2 h-2 rounded-full bg-green-500"
+                                animate={{ scale: [1, 1.2, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                            />
+                            <span className="text-shell-text-muted">RAM Preview:</span>
+                            <span className="text-green-500 font-medium">Ready</span>
+                        </div>
+                        <div className="h-3 w-px bg-shell-border" />
+                        <div className="flex items-center gap-1.5">
+                            <Monitor className="w-3 h-3 text-shell-text-muted" />
+                            <span className="text-shell-text-muted">Full</span>
+                        </div>
+                        <div className="h-3 w-px bg-shell-border" />
+                        <div className="flex items-center gap-1.5">
+                            <Cpu className="w-3 h-3 text-shell-text-muted" />
+                            <span className="text-shell-text-muted">30 fps</span>
+                        </div>
                     </div>
                 </div>
 
                 {/* RIGHT: Quick Links & Meta */}
-                <div className="lg:col-span-4 bg-[#1a1a1a] p-6 flex flex-col justify-between gap-8">
+                <div className="lg:col-span-5 bg-shell-surface p-5 flex flex-col justify-between gap-6">
 
-                    <div className="space-y-4">
-                        <h4 className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Output Module</h4>
-                        <div className="flex flex-wrap gap-x-6 gap-y-2">
-                            <Link href="/projects" className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-1">
+                    {/* Navigation */}
+                    <div className="space-y-3">
+                        <h4 className="text-[10px] uppercase tracking-widest text-shell-text-muted font-bold flex items-center gap-2">
+                            <span>Quick Access</span>
+                            <div className="h-px bg-shell-border flex-1" />
+                        </h4>
+                        <nav className="flex flex-wrap gap-x-5 gap-y-2" aria-label="Footer navigation">
+                            <Link href="/projects" className="text-shell-text-muted hover:text-[#9999FF] transition-colors flex items-center gap-1.5 text-[11px]">
                                 <ExternalLink className="w-3 h-3" /> Projects
                             </Link>
-                            <Link href="/about" className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-1">
+                            <Link href="/about" className="text-shell-text-muted hover:text-[#9999FF] transition-colors flex items-center gap-1.5 text-[11px]">
                                 <ExternalLink className="w-3 h-3" /> About
                             </Link>
-                            <Link href="/contact" className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-1">
+                            <Link href="/contact" className="text-shell-text-muted hover:text-[#9999FF] transition-colors flex items-center gap-1.5 text-[11px]">
                                 <ExternalLink className="w-3 h-3" /> Contact
                             </Link>
-                            <Link href="/studio" className="text-gray-400 hover:text-purple-400 transition-colors flex items-center gap-1">
-                                <ExternalLink className="w-3 h-3 text-purple-500" /> Studio
-                            </Link>
-                        </div>
+                        </nav>
                     </div>
 
-                    <div className="space-y-4">
-                        <h4 className="text-[10px] uppercase tracking-widest text-gray-500 font-bold flex items-center gap-2">
-                            Social Output
-                            <div className="h-px bg-[#333] flex-1" />
+                    {/* Social Links */}
+                    <div className="space-y-3">
+                        <h4 className="text-[10px] uppercase tracking-widest text-shell-text-muted font-bold flex items-center gap-2">
+                            <span>Connect</span>
+                            <div className="h-px bg-shell-border flex-1" />
                         </h4>
-                        <div className="flex gap-3">
+                        <nav className="flex gap-2" aria-label="Social media links">
                             {SOCIALS.map((social) => (
-                                <a
+                                <motion.a
                                     key={social.label}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-8 h-8 rounded bg-[#222] border border-[#333] flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all group"
-                                    title={social.label}
+                                    className="w-8 h-8 rounded-lg bg-shell-bg border border-shell-border flex items-center justify-center text-shell-text-muted hover:text-[#9999FF] hover:border-[#9999FF]/50 hover:bg-[#9999FF]/10 transition-all"
+                                    aria-label={social.label}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
                                 >
-                                    <social.icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                </a>
+                                    <social.icon className="w-4 h-4" />
+                                </motion.a>
                             ))}
-                        </div>
+                        </nav>
                     </div>
 
-                    <div className="pt-4 border-t border-[#333] flex items-center justify-between text-[10px] text-gray-600 font-mono">
-                        <span>© {currentYear} Langley. All rights reserved.</span>
-                        <span>v2.0.4 [Stable]</span>
+                    {/* Copyright */}
+                    <div className="pt-3 border-t border-shell-border flex items-center justify-between text-[10px] text-shell-text-muted font-mono">
+                        <span>© {currentYear} Langley</span>
+                        <span className="flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#9999FF]" />
+                            v2.0.4 [AE]
+                        </span>
                     </div>
 
                 </div>

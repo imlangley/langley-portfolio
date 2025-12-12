@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import Image from 'next/image'
 import { ArrowLeft, ExternalLink, Github, Calendar, User, Wrench, Play, Share2 } from 'lucide-react'
 import Link from 'next/link'

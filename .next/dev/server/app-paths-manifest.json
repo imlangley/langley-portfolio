@@ -1,8 +1,0 @@
-{
-  "/(site)/about/page": "app/(site)/about/page.js",
-  "/(site)/contact/page": "app/(site)/contact/page.js",
-  "/(site)/page": "app/(site)/page.js",
-  "/(site)/projects/[slug]/page": "app/(site)/projects/[slug]/page.js",
-  "/(site)/projects/page": "app/(site)/projects/page.js",
-  "/studio/[[...tool]]/page": "app/studio/[[...tool]]/page.js"
-}

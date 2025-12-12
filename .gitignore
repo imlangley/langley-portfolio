@@ -1,3 +1,40 @@
-node_modules
+# Next.js build output
 .next
-.env.local
+out
+dist
+
+# Log files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+.production/
+
+# Misc
+*.pem
+*.env
+*.local
+*.swp
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.code-workspace
+
+# Sanity
+.sanity/
+.sanity-studio/

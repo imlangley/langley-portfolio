@@ -1,5 +1,5 @@
-import { getProjectBySlug, getAllProjectSlugs, getSiteSettings } from '@/sanity/lib'
-import { ProjectDetail } from '@/components/projects/ProjectDetail'
+import { getProjectBySlug, getAllProjectSlugs, getSiteSettings, getRelatedProjects } from '@/sanity/lib'
+import { ProjectDetailEnhanced } from '@/components/projects/ProjectDetailEnhanced'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { urlFor } from '@/sanity/lib/image'
@@ -31,7 +31,8 @@ export async function generateStaticParams() {
     return slugs.map(s => ({ slug: s.slug }))
 }
 
-export const revalidate = 60
+// Longer revalidation for detail pages
+export const revalidate = 300
 
 export default async function ProjectPage({ params }: PageProps) {
     const { slug } = await params
@@ -41,5 +42,18 @@ export default async function ProjectPage({ params }: PageProps) {
         notFound()
     }
 
-    return <ProjectDetail project={project} />
+    // Fetch related projects based on category and tags
+    const tagIds = project.tags?.map((t: any) => t._id) || []
+    const relatedProjects = await getRelatedProjects(
+        project._id,
+        project.category?._id ?? null,
+        tagIds
+    )
+
+    return (
+        <ProjectDetailEnhanced
+            project={project}
+            relatedProjects={relatedProjects}
+        />
+    )
 }

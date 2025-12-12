@@ -11,9 +11,11 @@ import { Inter } from 'next/font/google' // Using Google Fonts
 import { ThemeProvider } from '@/providers/ThemeProvider'
 import { SmoothScroll } from '@/providers/SmoothScroll'
 import { PreviewBanner } from '@/components/PreviewBanner'
+import { ToastProviderWrapper } from '@/providers/ToastProviderWrapper'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import { CursorProvider } from '@/context/CursorContext'
+import { TargetCursor } from '@/components/reactbits'
 
 import type { Metadata } from 'next'
 
@@ -39,11 +41,18 @@ export default async function RootLayout({
             <body className={cn('min-h-screen bg-background font-sans antialiased', inter.variable)}>
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                     <CursorProvider>
-                        <SmoothScroll>
-                            {isEnabled && <PreviewBanner />}
-                            {/* Children rendered directly - AppLayout is in (site)/layout.tsx */}
-                            {children}
-                        </SmoothScroll>
+                        <ToastProviderWrapper>
+                            <TargetCursor
+                                targetSelector="a, button, [role='button'], input, textarea, .cursor-target"
+                                spinDuration={4}
+                                hoverDuration={0.3}
+                            />
+                            <SmoothScroll>
+                                {isEnabled && <PreviewBanner />}
+                                {/* Children rendered directly - AppLayout is in (site)/layout.tsx */}
+                                {children}
+                            </SmoothScroll>
+                        </ToastProviderWrapper>
                     </CursorProvider>
                 </ThemeProvider>
             </body>

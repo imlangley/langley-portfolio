@@ -18,8 +18,11 @@ export default function StudioLayout({
 }: {
     children: React.ReactNode
 }) {
-    // Just pass children through - root layout provides html/body
-    // and (site) layout is NOT applied here since /studio is not in (site) group
-    return <>{children}</>
+    // Wrap in scrollable container - Sanity Studio needs full height with overflow
+    return (
+        <div className="h-screen w-full overflow-auto">
+            {children}
+        </div>
+    )
 }
 

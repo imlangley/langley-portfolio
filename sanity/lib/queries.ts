@@ -202,6 +202,31 @@ export const getProjectBySlugQuery = /* groq */ `
 `
 
 /**
+ * Fetch related projects by category or tags.
+ * Returns projects in the same category, excluding the current project.
+ */
+export const getRelatedProjectsQuery = /* groq */ `
+  *[_type == "project" && _id != $currentId && (
+    category._ref == $categoryId ||
+    count((tags[]._ref)[@ in $tagIds]) > 0
+  )] | order(isFeatured desc, date desc) [0...6] {
+    _id,
+    title,
+    "slug": slug.current,
+    summary,
+    projectType,
+    category-> {
+      name,
+      "slug": slug.current
+    },
+    coverImage {
+      ...,
+      asset->
+    }
+  }
+`
+
+/**
  * Fetch all project slugs for static generation.
  * Used with Next.js generateStaticParams().
  */

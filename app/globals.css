@@ -23,6 +23,16 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   
+  /* Shell/IDE Theme Colors */
+  --color-shell-bg: var(--shell-bg);
+  --color-shell-bg-alt: var(--shell-bg-alt);
+  --color-shell-border: var(--shell-border);
+  --color-shell-surface: var(--shell-surface);
+  --color-shell-text: var(--shell-text);
+  --color-shell-text-muted: var(--shell-text-muted);
+  --color-shell-accent: var(--shell-accent);
+  --color-shell-active: var(--shell-active);
+  
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -73,6 +83,16 @@
     --input: hsl(240 5.9% 90%);
     --ring: hsl(217 91% 60%);
     --radius: 1rem;
+    
+    /* Shell/IDE Theme - Light Mode */
+    --shell-bg: hsl(0 0% 95%);
+    --shell-bg-alt: hsl(0 0% 92%);
+    --shell-border: hsl(0 0% 85%);
+    --shell-surface: hsl(0 0% 88%);
+    --shell-text: hsl(0 0% 20%);
+    --shell-text-muted: hsl(0 0% 45%);
+    --shell-accent: hsl(217 91% 60%);
+    --shell-active: hsl(0 0% 100%);
   }
 
   .dark {
@@ -101,6 +121,16 @@
     --border: hsl(240 3.7% 15.9%);
     --input: hsl(240 3.7% 15.9%);
     --ring: hsl(217 91% 60%);
+    
+    /* Shell/IDE Theme - Dark Mode */
+    --shell-bg: hsl(0 0% 12%);
+    --shell-bg-alt: hsl(0 0% 8%);
+    --shell-border: hsl(0 0% 20%);
+    --shell-surface: hsl(0 0% 16%);
+    --shell-text: hsl(0 0% 85%);
+    --shell-text-muted: hsl(0 0% 60%);
+    --shell-accent: hsl(217 91% 60%);
+    --shell-active: hsl(0 0% 18%);
   }
 
   * {
@@ -160,6 +190,17 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  
+  /* 3D Transform Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .perspective-500 {
+    perspective: 500px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
 }
 
 /* Lenis Smooth Scroll */
@@ -177,4 +218,23 @@ html.lenis, html.lenis body {
 }
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* Sanity Studio scroll fix - restore native scroll behavior */
+[data-sanity-studio] *,
+.sanity-studio *,
+[class*="StudioProvider"] *,
+#sanity {
+  overscroll-behavior: auto !important;
+}
+[data-sanity-studio],
+.sanity-studio,
+[class*="StudioLayout"] {
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Command Menu scroll isolation */
+[role="dialog"] [data-scroll-area] {
+  overscroll-behavior: contain;
 }

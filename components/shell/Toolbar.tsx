@@ -18,7 +18,7 @@ import {
     Settings
 } from 'lucide-react'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { useCursor } from '@/context/CursorContext'
 import { Magnetic } from '@/components/ui/Magnetic'
 import Link from 'next/link'
@@ -46,7 +46,6 @@ export function Toolbar() {
         { href: '/projects', icon: FolderOpen, label: 'Projects' },
         { href: '/about', icon: User, label: 'About' },
         { href: '/contact', icon: Mail, label: 'Contact' },
-        { href: '/studio', icon: Settings, label: 'Studio' },
     ]
 
     const handleToolClick = (id: string) => {
@@ -59,11 +58,11 @@ export function Toolbar() {
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: "circOut" }}
-            className="fixed top-10 left-0 bottom-6 w-14 bg-[#1f1f1f] border-r border-[#333] flex flex-col items-center py-4 z-40 select-none hidden md:flex"
+            className="fixed top-10 left-0 bottom-6 w-14 bg-shell-bg border-r border-shell-border flex flex-col items-center py-4 z-40 select-none hidden md:flex"
         >
 
             {/* Navigation Section (VSCode Style) */}
-            <div className="flex flex-col gap-2 mb-4">
+            <nav className="flex flex-col gap-2 mb-4" aria-label="Main navigation">
                 {NAV_ITEMS.map((item) => {
                     const isActive = pathname === item.href
                     return (
@@ -76,23 +75,23 @@ export function Toolbar() {
                             data-testid={`nav-${item.label.toLowerCase()}`}
                         >
                             <Magnetic>
-                                <div className={`p-2 rounded-md transition-all ${isActive ? 'text-blue-400 bg-[#2a2a2a] border-l-2 border-blue-500' : 'text-gray-400 hover:text-white hover:bg-[#2a2a2a]'}`}>
+                                <div className={`p-2 rounded-md transition-all ${isActive ? 'text-primary bg-shell-active border-l-2 border-primary' : 'text-shell-text-muted hover:text-shell-text hover:bg-shell-active'}`}>
                                     <item.icon strokeWidth={1.5} className="w-5 h-5" />
                                 </div>
                             </Magnetic>
 
                             {/* Tooltip */}
-                            <div className="absolute left-12 top-1/2 -translate-y-1/2 py-1 px-2 bg-black border border-[#333] text-[10px] text-white rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-xl font-sans font-medium">
+                            <div className="absolute left-12 top-1/2 -translate-y-1/2 py-1 px-2 bg-shell-bg border border-shell-border text-[10px] text-shell-text rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-xl font-sans font-medium">
                                 {item.label}
-                                <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 border-[4px] border-transparent border-r-black" />
+                                <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 border-[4px] border-transparent border-r-shell-bg" />
                             </div>
                         </Link>
                     )
                 })}
-            </div>
+            </nav>
 
             {/* Divider */}
-            <div className="w-8 h-px bg-[#333] mb-4" />
+            <div className="w-8 h-px bg-shell-border mb-4" />
 
             {/* AE Tools Section (Decorative) */}
             <div className="flex flex-col gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
@@ -110,22 +109,22 @@ export function Toolbar() {
                             {isActive && (
                                 <motion.div
                                     layoutId="activeTool"
-                                    className="absolute -inset-1.5 bg-[#3a3a3a] rounded-md -z-10 border border-blue-500/20"
+                                    className="absolute -inset-1.5 bg-shell-surface rounded-md -z-10 border border-primary/20"
                                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                 />
                             )}
 
                             <Magnetic>
-                                <div className={`p-1.5 rounded-sm transition-colors ${isActive ? 'text-blue-300' : 'text-gray-500 hover:text-gray-300'}`}>
+                                <div className={`p-1.5 rounded-sm transition-colors ${isActive ? 'text-primary' : 'text-shell-text-muted hover:text-shell-text'}`}>
                                     <tool.icon strokeWidth={1.5} className="w-5 h-5" />
                                 </div>
                             </Magnetic>
 
                             {/* Tooltip (AE Style) */}
-                            <div className="absolute left-10 top-1/2 -translate-y-1/2 py-1.5 px-3 bg-[#1e1e1e] border border-[#333] text-[10px] text-gray-300 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-xl ml-2 font-sans font-medium">
-                                <span className="block mb-0.5 text-white">{tool.label}</span>
-                                <span className="text-[9px] text-gray-500 uppercase tracking-wider">Decorative Only</span>
-                                <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 border-[4px] border-transparent border-r-[#333]" />
+                            <div className="absolute left-10 top-1/2 -translate-y-1/2 py-1.5 px-3 bg-shell-bg border border-shell-border text-[10px] text-shell-text-muted rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-xl ml-2 font-sans font-medium">
+                                <span className="block mb-0.5 text-shell-text">{tool.label}</span>
+                                <span className="text-[9px] text-shell-text-muted uppercase tracking-wider">Decorative Only</span>
+                                <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 border-[4px] border-transparent border-r-shell-border" />
                             </div>
                         </div>
                     )
@@ -134,10 +133,10 @@ export function Toolbar() {
 
             {/* Bottom Panels Section (VSCode Hybrid) */}
             <div className="mt-auto flex flex-col gap-4">
-                <div className="w-8 h-px bg-[#333]" />
-                <div className="p-1.5 text-gray-500 hover:text-white cursor-pointer transition-colors group relative" title="Project Panel">
+                <div className="w-8 h-px bg-shell-border" />
+                <div className="p-1.5 text-shell-text-muted hover:text-shell-text cursor-pointer transition-colors group relative" title="Project Panel">
                     <Layers strokeWidth={1.5} className="w-5 h-5" />
-                    <div className="absolute left-10 top-1/2 -translate-y-1/2 py-1 px-2 bg-black border border-[#333] text-[10px] text-white rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                    <div className="absolute left-10 top-1/2 -translate-y-1/2 py-1 px-2 bg-shell-bg border border-shell-border text-[10px] text-shell-text rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                         Project Panel
                     </div>
                 </div>

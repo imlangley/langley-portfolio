@@ -4,12 +4,15 @@ import { ReactNode } from 'react'
 import { MenuBar } from './MenuBar'
 import { Toolbar } from './Toolbar'
 import { StatusBar } from './StatusBar'
+import { ThemeToggle } from '@/components/global/ThemeToggle'
+import { SideDock } from '@/components/navigation/SideDock'
+import { ScrollProgress } from '@/components/ui/ScrollProgress'
 import { useCursor } from '@/context/CursorContext'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, FolderOpen, User, Mail, Settings } from 'lucide-react'
 
-interface AppLayoutProps {
+export interface AppLayoutProps {
     children: ReactNode
 }
 
@@ -31,8 +34,8 @@ function MobileNavLink({ href, label }: { href: string; label: string }) {
             href={href}
             data-testid={`mobile-nav-${label.toLowerCase()}`}
             className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-all ${isActive
-                ? 'text-blue-400 bg-[#2a2a2a]'
-                : 'text-gray-500 hover:text-white'
+                ? 'text-primary bg-shell-active'
+                : 'text-shell-text-muted hover:text-shell-text'
                 }`}
         >
             {icons[label]}
@@ -45,55 +48,63 @@ export function AppLayout({ children }: AppLayoutProps) {
     const { setCursorVariant } = useCursor()
 
     return (
-        <div className="h-screen h-[100dvh] bg-[#161616] text-gray-300 font-sans selection:bg-blue-500/30 selection:text-white overflow-hidden flex flex-col relative">
-            {/* Desktop Shell Elements */}
+        // Removed h-screen, h-[100dvh], overflow-hidden to allow Lenis smooth scroll
+        <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 selection:text-primary flex flex-col relative">
+            {/* Scroll Progress Indicator */}
+            <ScrollProgress />
+
+            {/* Desktop Shell Elements - kept minimal for cleaner look */}
             <div className="hidden md:block shrink-0">
                 <MenuBar />
-                <Toolbar />
             </div>
 
             {/* Mobile Header (Simplified) */}
-            <div className="md:hidden h-14 bg-[#1f1f1f] border-b border-[#333] flex items-center justify-between px-4 z-50 shrink-0">
+            <header className="md:hidden h-14 bg-shell-bg border-b border-shell-border flex items-center justify-between px-4 z-50 shrink-0">
                 <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded bg-blue-600 flex items-center justify-center text-[10px] font-bold text-white">
+                    <div className="w-5 h-5 rounded bg-primary flex items-center justify-center text-[10px] font-bold text-primary-foreground">
                         Ae
                     </div>
-                    <span className="font-bold text-gray-200">Langley.aep</span>
+                    <span className="font-bold text-shell-text">Langley.aep</span>
                 </div>
-            </div>
+                {/* Theme Toggle - Mobile */}
+                <ThemeToggle
+                    className="text-shell-text-muted hover:text-shell-text"
+                    data-testid="theme-toggle-mobile"
+                />
+            </header>
 
-            {/* Main Content Viewport */}
+            {/* Main Content Viewport - Full width for immersive experience */}
             <main
-                className="flex-1 relative overflow-y-auto bg-[#0d0d0d] md:pl-14"
+                className="flex-1 relative bg-background"
                 onMouseEnter={() => setCursorVariant('default')}
             >
                 <div className="min-h-full w-full relative">
-                    {/* Editor Gutter (Fake) - Desktop Only */}
-                    <div className="absolute left-0 top-0 bottom-0 w-10 border-r border-[#333] bg-[#1e1e1e] z-0 hidden md:flex flex-col items-end pr-2 pt-4 text-gray-600 font-mono text-[10px] select-none pointer-events-none sticky top-0 h-full">
-                        {Array.from({ length: 50 }).map((_, i) => (
-                            <div key={i} className="leading-6">{i + 1}</div>
-                        ))}
-                    </div>
-
-                    {/* Content Area */}
-                    <div className="pl-0 md:pl-10 relative z-10 w-full pb-20 md:pb-10">
+                    {/* Content Area - Full width now */}
+                    <div className="relative z-10 w-full">
                         {children}
                     </div>
                 </div>
             </main>
 
-            <div className="hidden md:block shrink-0 z-50">
+            {/* Side Dock Navigation - Desktop (Left Vertical) */}
+            <div className="hidden md:block">
+                <SideDock position="left" />
+            </div>
+
+            <div className="hidden md:block shrink-0 z-40">
                 <StatusBar />
             </div>
 
             {/* Mobile Bottom Bar (Navigation) */}
-            <div className="md:hidden h-16 bg-[#1f1f1f] border-t border-[#333] flex items-center justify-around z-50 shrink-0">
+            <nav
+                className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-shell-bg/95 backdrop-blur-xl border-t border-shell-border flex items-center justify-around z-50"
+                aria-label="Mobile navigation"
+            >
                 <MobileNavLink href="/" label="Home" />
                 <MobileNavLink href="/projects" label="Projects" />
                 <MobileNavLink href="/about" label="About" />
                 <MobileNavLink href="/contact" label="Contact" />
-                <MobileNavLink href="/studio" label="Studio" />
-            </div>
+            </nav>
         </div>
     )
 }

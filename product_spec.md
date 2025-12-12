@@ -1,703 +1,1184 @@
-# Product Specification: Langley Portfolio
+# Product Specification - Langley Portfolio
 
-## 1. Executive Summary
+## 📋 Executive Summary
 
-**Langley Portfolio** is a premium, full-stack portfolio website designed for a creative professional who bridges video editing and web development. The project features a unique "Creative Software Suite" aesthetic that merges the visual languages of **Adobe After Effects** and **VS Code**, creating an immersive, editor-like experience.
-
-### Key Highlights
-- **Unique Design Identity**: Award-winning aesthetic combining video editing and code editor interfaces
-- **Headless CMS**: Powered by Sanity.io for flexible content management
-- **Modern Tech Stack**: Built with Next.js 16, React 19, TypeScript, and Tailwind CSS 4
-- **Dual Content Types**: Showcases both web development projects and video editing work
-- **Premium Animations**: Smooth, elastic animations using Framer Motion
-- **Fully Responsive**: Optimized for desktop and mobile experiences
+**Product Name:** Langley Portfolio  
+**Version:** 0.1.0  
+**Type:** Personal Portfolio Website with Headless CMS  
+**Target Users:** Prospective clients, employers, collaborators  
+**Primary Purpose:** Professional showcase for web development and video editing work  
+**Platform:** Web Application (Responsive)
 
 ---
 
-## 2. Product Vision & Goals
+## 🎯 Product Overview
 
-### Vision Statement
-Create a portfolio that doesn't just showcase work—it embodies the creator's dual identity as both a video editor and developer through an innovative, interactive interface that feels like stepping into a professional creative suite.
+Langley Portfolio adalah website portfolio modern yang menampilkan karya web development dan video editing dengan desain terinspirasi IDE/code editor (seperti VS Code). Project ini menggunakan Next.js 16 untuk frontend dan Sanity CMS untuk content management, dengan fokus pada performa, SEO, dan user experience yang unik.
 
-### Primary Goals
-1. **Differentiation**: Stand out from typical portfolio websites with a unique editor-inspired design
-2. **Showcase Versatility**: Effectively present both web development and video editing projects
-3. **Professional Credibility**: Demonstrate technical expertise through the portfolio itself
-4. **Content Flexibility**: Enable easy content updates without code changes via Sanity CMS
-5. **Performance**: Deliver a fast, smooth user experience with premium animations
+### Key Value Propositions
 
-### Target Audience
-- **Potential Clients**: Seeking web development or video editing services
-- **Recruiters/Employers**: Looking for creative technologists
-- **Peers/Community**: Fellow developers and video editors
-- **Collaborators**: Potential project partners
+1. **Unique Design System:** Tampilan menyerupai IDE profesional untuk menarik perhatian tech audience
+2. **Content-First Approach:** Headless CMS memungkinkan update konten tanpa deploy ulang
+3. **Performance Optimized:** Next.js App Router dengan ISR untuk loading yang cepat
+4. **SEO Ready:** Server-side rendering dan metadata optimization
+5. **Interactive Experience:** Custom cursor, smooth scroll, dan animasi Framer Motion
 
 ---
 
-## 3. Technical Architecture
+## 🏗️ Technical Architecture
 
-### 3.1 Technology Stack
+### Technology Stack
 
 #### Frontend Framework
-- **Next.js 16.0.8**: React framework with App Router
-- **React 19.0.0**: Latest React with concurrent features
-- **TypeScript 5.6.0**: Type-safe development
+- **Next.js 16.0.8** - React framework dengan App Router & Turbopack
+- **React 19.0.0** - UI library dengan Server Components
+- **React DOM 19.0.0** - DOM rendering
+- **TypeScript 5.6.0** - Type-safe development
 
-#### Styling & UI
-- **Tailwind CSS 4.0.0**: Utility-first CSS framework
-- **Framer Motion 11.5.4**: Advanced animation library
-- **Custom Design System**: Editor-inspired color palette and components
-- **Lenis (@studio-freight/react-lenis)**: Smooth scroll library
+#### Styling & Design
+- **Tailwind CSS 4.0.0** - Utility-first CSS framework (latest version)
+- **@tailwindcss/postcss 4.0.0** - PostCSS plugin untuk Tailwind v4
+- **PostCSS 8.4.31** - CSS processing
+- **clsx 2.1.1** - Conditional class names utility
+- **tailwind-merge 2.5.2** - Merge Tailwind classes intelligently
 
-#### Content Management
-- **Sanity.io 3.57.0**: Headless CMS
-- **@sanity/client 6.21.0**: Sanity client library
-- **@sanity/image-url 1.0.2**: Image optimization
-- **@sanity/vision 3.57.0**: GROQ query testing
-- **next-sanity 9.5.0**: Next.js integration
+#### Animation & Interaction
+- **motion 12.23.26** - Framer Motion rebranded (latest animation library)
+- **Framer Motion 11.5.4** - Legacy imports compatibility
+- **Lenis 1.1.0** - Smooth scroll library dengan native scroll integration
+- **Lucide React 0.439.0** - Icon system (1000+ icons)
 
-#### UI Components & Icons
-- **Lucide React 0.439.0**: Icon library
-- **clsx 2.1.1**: Conditional className utility
-- **tailwind-merge 2.5.2**: Tailwind class merging
+#### Content Management (Sanity CMS)
+- **Sanity 3.57.0** - Headless CMS dengan real-time collaboration
+- **@sanity/client 6.21.0** - Sanity API client
+- **next-sanity 9.5.0** - Next.js integration untuk Sanity
+- **@sanity/image-url 1.0.2** - Image URL builder dengan transformations
+- **@sanity/vision 3.57.0** - GROQ query testing tool
+- **@sanity/icons 3.4.0** - Icon system untuk Sanity Studio
 
-#### Theming
-- **next-themes 0.3.0**: Dark/light mode support
+#### UI/UX & Theming
+- **next-themes 0.3.0** - Dark/light theme support dengan system preference
+- **Custom cursor system** - Magnetic cursor dengan Framer Motion
+- **VS Code-inspired interface** - IDE-style layout components
+- **ReactBits Library** - 23 custom animation components
 
-### 3.2 Project Structure
+#### Development Tools
+- **@types/node 20.16.0** - Node.js TypeScript definitions
+- **@types/react 19.0.0** - React TypeScript definitions
+- **@types/react-dom 19.0.0** - React DOM TypeScript definitions
+
+#### Build & Performance
+- **Turbopack** - Next.js 16 development bundler (built-in)
+- **ISR (Incremental Static Regeneration)** - Revalidation strategy
+- **Image Optimization** - Next.js Image component + Sanity CDN
+- **Server Components** - React 19 server-side rendering
+- **Edge Runtime** - API routes dengan edge functions support
+
+### Architecture Patterns
+
+#### 1. Complete Project Structure
 
 ```
 langley-portfolio/
-├── app/                          # Next.js App Router
-│   ├── (site)/                   # Main site routes
-│   │   ├── layout.tsx           # Site layout with Navbar/Footer
-│   │   ├── page.tsx             # Homepage
-│   │   ├── about/               # About page
-│   │   ├── projects/            # Projects listing & detail
-│   │   └── services/            # Services page
-│   ├── api/                     # API routes
-│   │   ├── draft/               # Draft mode
-│   │   └── revalidate/          # On-demand revalidation
-│   ├── studio/                  # Sanity Studio
-│   ├── layout.tsx               # Root layout
-│   └── globals.css              # Global styles
-├── components/                   # React components
-│   ├── global/                  # Global components
-│   │   ├── Navbar.tsx
-│   │   ├── Footer.tsx
-│   │   └── ThemeToggle.tsx
-│   ├── home/                    # Homepage components
-│   │   ├── Hero.tsx
-│   │   └── FeaturedProjects.tsx
-│   ├── projects/                # Project components
-│   │   ├── ProjectCard.tsx
-│   │   └── ProjectDetail.tsx
-│   ├── shell/                   # Editor shell components
-│   │   ├── AppLayout.tsx        # Main editor layout
-│   │   ├── MenuBar.tsx          # Top menu bar
-│   │   ├── Toolbar.tsx          # Left toolbar
-│   │   └── StatusBar.tsx        # Bottom status bar
-│   └── ui/                      # Reusable UI components
-│       ├── CustomCursor.tsx
-│       ├── Button.tsx
-│       └── Card.tsx
-├── context/                      # React contexts
-│   └── CursorContext.tsx        # Custom cursor state
-├── lib/                         # Utility libraries
-│   └── utils.ts
-├── providers/                    # React providers
-│   ├── LenisProvider.tsx        # Smooth scroll
-│   └── ThemeProvider.tsx        # Theme management
-├── sanity/                      # Sanity CMS configuration
-│   ├── lib/                     # Sanity utilities
-│   │   ├── client.ts            # Sanity client
-│   │   ├── fetch.ts             # Data fetching functions
-│   │   ├── image.ts             # Image URL builder
-│   │   └── queries.ts           # GROQ queries
-│   ├── plugins/                 # Sanity plugins
-│   ├── schemaTypes/             # Content schemas
-│   │   ├── documents/           # Document types
-│   │   │   ├── project.ts
-│   │   │   ├── service.ts
-│   │   │   ├── testimonial.ts
-│   │   │   ├── tool.ts
-│   │   │   ├── tag.ts
-│   │   │   └── projectCategory.ts
-│   │   ├── singletons/          # Singleton types
-│   │   │   ├── profile.ts
-│   │   │   ├── siteSettings.ts
-│   │   │   └── faq.ts
-│   │   └── objects/             # Object types
-│   │       ├── galleryItem.ts
-│   │       ├── socialLink.ts
-│   │       ├── faqItem.ts
-│   │       └── seo.ts
-│   ├── structure.ts             # Studio structure
-│   └── index.ts
-├── sanity.config.ts             # Sanity configuration
-├── next.config.js               # Next.js configuration
-├── tailwind.config.ts           # Tailwind configuration
-└── tsconfig.json                # TypeScript configuration
+├── .next/                          # Next.js build output (auto-generated)
+├── .vscode/                        # VS Code configuration
+│   └── mcp.json                    # Model Context Protocol config
+├── node_modules/                   # Dependencies (auto-generated)
+│
+├── app/                            # Next.js App Router
+│   ├── (site)/                     # Main site group dengan AppLayout
+│   │   ├── about/
+│   │   │   ├── page.tsx            # About page (Server Component)
+│   │   │   └── AboutPageClient.tsx # Client component dengan ReactBits
+│   │   ├── contact/
+│   │   │   └── page.tsx            # Contact page dengan AnimatedInput
+│   │   ├── projects/
+│   │   │   ├── page.tsx            # Projects listing
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx        # Dynamic project detail
+│   │   ├── services/
+│   │   │   ├── page.tsx            # Services page (Server Component)
+│   │   │   └── ServicesPageClient.tsx # Client component dengan BentoGrid
+│   │   ├── showcase/
+│   │   │   └── page.tsx            # Easter egg - ReactBits showcase
+│   │   ├── layout.tsx              # Site layout dengan CommandMenuWrapper
+│   │   └── page.tsx                # Homepage dengan Hero & Featured Projects
+│   │
+│   ├── api/                        # API Routes
+│   │   ├── draft/
+│   │   │   ├── route.ts            # Enable draft mode
+│   │   │   └── disable/
+│   │   │       └── route.ts        # Disable draft mode
+│   │   └── revalidate/
+│   │       └── route.ts            # On-demand ISR revalidation
+│   │
+│   ├── studio/                     # Sanity Studio (isolated)
+│   │   └── [[...tool]]/
+│   │       ├── layout.tsx          # Studio layout (no AppLayout)
+│   │       └── page.tsx            # Studio entry point
+│   │
+│   ├── globals.css                 # Global styles & Tailwind imports
+│   └── layout.tsx                  # Root layout (ThemeProvider, ToastProvider)
+│
+├── components/                     # React Components
+│   ├── global/                     # Global UI components
+│   │   ├── CommandMenuWrapper.tsx  # Client wrapper for CommandMenu
+│   │   ├── Footer.tsx              # Site footer
+│   │   └── ThemeToggle.tsx         # Dark/light mode toggle
+│   │
+│   ├── home/                       # Homepage-specific components
+│   │   ├── AboutSection.tsx        # About preview section
+│   │   ├── FeaturedProjects.tsx    # Featured projects grid
+│   │   ├── FeaturedProjectsSection.tsx # Section wrapper
+│   │   ├── Hero.tsx                # Hero section
+│   │   └── ToolsSection.tsx        # Tech stack showcase
+│   │
+│   ├── navigation/                 # Navigation components (future)
+│   │
+│   ├── projects/                   # Project-related components
+│   │   ├── LoadMoreButton.tsx      # Pagination button
+│   │   ├── ParallaxHero.tsx        # Parallax hero image
+│   │   ├── ProjectDetail.tsx       # Project detail view
+│   │   ├── ProjectDetailEnhanced.tsx # Enhanced detail dengan animations
+│   │   ├── ProjectGrid.tsx         # Basic project grid
+│   │   ├── ProjectGridEnhanced.tsx # Grid dengan filter & search
+│   │   ├── RelatedProjects.tsx     # Related projects carousel
+│   │   └── StickySidebar.tsx       # Sticky project info sidebar
+│   │
+│   ├── reactbits/                  # ReactBits Animation Library (23 components)
+│   │   ├── Accordion.tsx           # Expandable accordion component
+│   │   ├── AnimatedAvatar.tsx      # Avatar dengan glow & particles
+│   │   ├── AnimatedCounter.tsx     # Counting animation dengan spring
+│   │   ├── AnimatedInput.tsx       # Form inputs dengan floating labels
+│   │   ├── BentoGrid.tsx           # Grid layout untuk services
+│   │   ├── ClickSpark.tsx          # Click spark effect
+│   │   ├── CommandMenu.tsx         # Command palette (Cmd+K)
+│   │   ├── DecryptedText.tsx       # Matrix-style text reveal
+│   │   ├── GlitchText.tsx          # Glitch text effect
+│   │   ├── LogoLoop.tsx            # Infinite logo carousel
+│   │   ├── Magnet.tsx              # Magnetic hover effect
+│   │   ├── RotatingText.tsx        # Rotating text animation
+│   │   ├── ScrollProgress.tsx      # Scroll progress indicator
+│   │   ├── ShimmerButton.tsx       # Button dengan shimmer effect
+│   │   ├── ShinyText.tsx           # Shiny text animation
+│   │   ├── SkillBar.tsx            # Animated skill progress bars
+│   │   ├── SplitText.tsx           # Character-by-character reveal
+│   │   ├── Squares.tsx             # Animated squares background
+│   │   ├── StarBorder.tsx          # Star border animation
+│   │   ├── TiltedCard.tsx          # 3D tilt card effect
+│   │   ├── Timeline.tsx            # Animated timeline component
+│   │   ├── Toast.tsx               # Toast notifications dengan confetti
+│   │   └── index.ts                # Central exports file
+│   │
+│   ├── shell/                      # IDE-inspired layout components
+│   │   ├── AppLayout.tsx           # Main layout wrapper (MenuBar + StatusBar)
+│   │   ├── MenuBar.tsx             # Top menu bar (VS Code style)
+│   │   ├── StatusBar.tsx           # Bottom status bar
+│   │   └── Toolbar.tsx             # Toolbar dengan breadcrumbs
+│   │
+│   ├── ui/                         # Reusable UI components
+│   │   ├── CustomCursor.tsx        # Custom cursor dengan magnetic effect
+│   │   ├── Magnetic.tsx            # Magnetic wrapper component
+│   │   ├── ScrollProgress.tsx      # Scroll progress component
+│   │   ├── SpotlightCard.tsx       # Card dengan spotlight effect
+│   │   └── TextReveal.tsx          # Text reveal animation
+│   │
+│   └── PreviewBanner.tsx           # Draft mode preview banner
+│
+├── context/                        # React Context providers
+│   └── CursorContext.tsx           # Custom cursor state management
+│
+├── hooks/                          # Custom React hooks (future)
+│
+├── lib/                            # Utility functions & helpers
+│   └── utils.ts                    # cn() function, class utilities
+│
+├── providers/                      # Client-side providers
+│   ├── SmoothScroll.tsx            # Lenis smooth scroll wrapper
+│   ├── ThemeProvider.tsx           # next-themes wrapper
+│   └── ToastProviderWrapper.tsx    # Toast context provider
+│
+├── public/                         # Static assets
+│   └── (images, fonts, icons)      # Public files
+│
+├── sanity/                         # Sanity CMS Configuration
+│   ├── lib/                        # Sanity utilities
+│   │   ├── client.ts               # Sanity client config
+│   │   ├── fetch.ts                # Server-side fetch utilities
+│   │   ├── image.ts                # Image URL builder
+│   │   ├── index.ts                # Central exports
+│   │   └── queries.ts              # GROQ query definitions
+│   │
+│   ├── plugins/                    # Sanity plugins
+│   │   └── singletonPlugin.ts      # Singleton document plugin
+│   │
+│   ├── schemaTypes/                # Content type schemas
+│   │   ├── documents/              # Regular document types
+│   │   │   ├── project.ts          # Project schema (main content)
+│   │   │   ├── projectCategory.ts  # Project categories
+│   │   │   ├── service.ts          # Service offerings
+│   │   │   ├── tag.ts              # Project tags
+│   │   │   ├── testimonial.ts      # Client testimonials
+│   │   │   ├── tool.ts             # Tools/technologies
+│   │   │   └── index.ts            # Document exports
+│   │   │
+│   │   ├── objects/                # Reusable object types
+│   │   │   ├── faqItem.ts          # FAQ item object
+│   │   │   ├── galleryItem.ts      # Gallery item object
+│   │   │   ├── socialLink.ts       # Social link object
+│   │   │   └── index.ts            # Object exports
+│   │   │
+│   │   ├── singletons/             # Singleton document types
+│   │   │   ├── faq.ts              # FAQ singleton
+│   │   │   ├── profile.ts          # Profile singleton
+│   │   │   ├── siteSettings.ts     # Site settings singleton
+│   │   │   └── index.ts            # Singleton exports
+│   │   │
+│   │   └── index.ts                # All schema types export
+│   │
+│   └── structure.ts                # Sanity Studio structure config
+│
+├── .env.example                    # Environment variables template
+├── .env.local                      # Local environment (gitignored)
+├── .gitignore                      # Git ignore rules
+├── build_log.txt                   # Build logs (gitignored)
+├── components.json                 # shadcn/ui configuration
+├── next-env.d.ts                   # Next.js TypeScript declarations
+├── next.config.js                  # Next.js configuration
+├── package.json                    # Dependencies & scripts
+├── package-lock.json               # Lock file
+├── postcss.config.mjs              # PostCSS configuration
+├── product_spec.md                 # Product specification (this file)
+├── sanity.config.ts                # Sanity Studio config
+├── tsconfig.json                   # TypeScript configuration
+└── _tailwind.config.ts             # Tailwind CSS v4 configuration
 ```
 
-### 3.3 Data Architecture
+#### 2. File-based Routing (App Router) - Detail
 
-#### Content Types
+```
+app/
+├── (site)/                         # Route group (shares layout)
+│   ├── page.tsx                    # Route: /
+│   ├── about/page.tsx              # Route: /about
+│   ├── contact/page.tsx            # Route: /contact
+│   ├── services/page.tsx           # Route: /services
+│   ├── showcase/page.tsx           # Route: /showcase (Easter egg)
+│   ├── projects/
+│   │   ├── page.tsx                # Route: /projects
+│   │   └── [slug]/page.tsx         # Route: /projects/[slug]
+│   └── layout.tsx                  # Shared layout untuk (site) group
+│
+├── studio/[[...tool]]/
+│   ├── page.tsx                    # Route: /studio/* (catch-all)
+│   └── layout.tsx                  # Studio-specific layout
+│
+└── api/
+    ├── draft/route.ts              # API: /api/draft
+    ├── draft/disable/route.ts      # API: /api/draft/disable
+    └── revalidate/route.ts         # API: /api/revalidate
+```
 
-##### Documents (Multiple Instances)
-1. **Project** (`project`)
-   - Core portfolio item for web/video work
-   - Fields: title, slug, summary, description, coverImage, gallery, videoEmbedUrl
-   - Metadata: projectType (web/video/mixed), category, tools, tags, date, clientName
-   - Flags: isFeatured, isPinned, isCommission
-   - Links: liveUrl, repoUrl
+#### 3. Content Layer (Sanity CMS)
+- **Schema-first approach** dengan TypeScript
+- **Singleton documents** untuk global settings (profile, siteSettings, faq)
+- **Document types:** projects, services, testimonials, tags, tools, projectCategory
+- **Object types:** socialLink, galleryItem, faqItem
+- **GROQ queries** untuk data fetching (defined in sanity/lib/queries.ts)
+- **Draft mode** untuk preview dengan token authentication
+- **ISR (Incremental Static Regeneration)** setiap 60 detik
 
-2. **Service** (`service`)
-   - Service offerings
-   - Fields: title, slug, description, icon, pricing
+#### 4. Component Organization Strategy
 
-3. **Testimonial** (`testimonial`)
-   - Client testimonials
-   - Fields: clientName, role, company, quote, avatar
+**ReactBits Library (23 Components):**
+Koleksi lengkap animation components untuk interactive experiences:
+- **Text Animations:** DecryptedText, GlitchText, RotatingText, ShinyText, SplitText
+- **UI Components:** Accordion, AnimatedInput, BentoGrid, CommandMenu, Toast
+- **Effects:** AnimatedAvatar, AnimatedCounter, ClickSpark, Magnet, ShimmerButton
+- **Visual Elements:** SkillBar, Timeline, TiltedCard, ScrollProgress, StarBorder
+- **Backgrounds:** LogoLoop, Squares
 
-4. **Tool** (`tool`)
-   - Technologies and software
-   - Fields: name, category, icon, url
+**Layout Components:**
+- **shell/** - IDE-inspired interface (MenuBar, StatusBar, Toolbar, AppLayout)
+- **global/** - Site-wide components (Footer, ThemeToggle, CommandMenuWrapper)
 
-5. **Tag** (`tag`)
-   - Freeform project tags
-   - Fields: name, slug
+**Feature Components:**
+- **home/** - Homepage sections (Hero, FeaturedProjects, AboutSection, ToolsSection)
+- **projects/** - Project displays (Grid, Detail, Sidebar, ParallaxHero, RelatedProjects)
 
-6. **Project Category** (`projectCategory`)
-   - Project categorization
-   - Fields: title, slug, description
-
-##### Singletons (Single Instance)
-1. **Profile** (`profile`)
-   - Personal information
-   - Fields: name, role, shortBio, longBio, avatarImage, socials
-
-2. **Site Settings** (`siteSettings`)
-   - Global site configuration
-   - Fields: title, description, seo, navigation, footer
-
-3. **FAQ** (`faq`)
-   - Frequently asked questions
-   - Fields: array of faqItem objects
-
-##### Object Types (Embedded)
-- **Gallery Item**: Image or video with caption
-- **Social Link**: Platform, URL, icon
-- **FAQ Item**: Question and answer
-- **SEO**: Meta title, description, keywords, og:image
+**Utility Components:**
+- **ui/** - Base UI elements (CustomCursor, Magnetic, SpotlightCard, TextReveal)
 
 ---
 
-## 4. Design System
+## 📱 Feature Specifications
 
-### 4.1 Visual Identity
+### 1. Homepage (Landing Page)
 
-#### Theme: "Creative Software Suite"
-The design merges two professional creative tools:
-- **Adobe After Effects**: Timeline, composition panels, keyframes, playhead
-- **VS Code**: File explorer, status bar, syntax highlighting, command palette
+#### 1.1 Hero Section
+- **Dynamic Content:** Judul dan subtitle dari Sanity CMS
+- **Profile Integration:** Nama, role, dan short bio dari profile singleton
+- **Visual Identity:** Hero background image (optional)
+- **Responsive Design:** Optimized untuk mobile hingga desktop
+- **SEO Metadata:** Dynamic meta tags dari site settings
+
+#### 1.2 Featured Projects Section
+- **Content Source:** Projects marked as `featured: true` di Sanity
+- **Grid Layout:** Responsive grid dengan project cards
+- **Project Cards:** 
+  - Cover image dengan hotspot optimization
+  - Judul dan summary
+  - Project type badge (Web/Video/Mixed)
+  - Tags dan tools
+  - Hover effects dengan custom cursor
+- **CTA:** Link ke halaman projects lengkap
+
+#### Technical Implementation
+- Server-side data fetching
+- ISR dengan revalidation 60 detik
+- Image optimization via Sanity CDN
+- Framer Motion animations
+
+---
+
+### 2. Projects Section
+
+#### 2.1 Projects Listing Page (`/projects`)
+- **Grid/List View:** Menampilkan semua projects
+- **Filtering:** 
+  - By project type (Web/Video/Mixed)
+  - By category
+  - By tags
+- **Sorting:** By date, title, featured status
+- **Search:** Real-time search by title/summary
+- **Pagination/Infinite Scroll:** Performance optimization
+
+#### 2.2 Project Detail Page (`/projects/[slug]`)
+
+**Content Sections:**
+- **Hero:**
+  - Large cover image dengan focal point
+  - Judul dan summary
+  - Metadata (client, date, role, duration)
+  - Project type dan category
+  - Tags dan tools used
+
+- **Main Content:**
+  - Rich text description (portable text)
+  - Embedded images dengan captions
+  - Code blocks (syntax highlighted)
+  - Headings, lists, quotes
+  - External links
+
+- **Media Gallery:**
+  - Additional images
+  - Video embeds (YouTube/Vimeo)
+  - Lightbox view
+
+- **Project Info Sidebar:**
+  - Client name
+  - Completion date
+  - Role/contribution
+  - Duration/timeline
+  - Project links (live site, repo, case study)
+  - Related projects
+
+- **Call to Action:**
+  - Contact button
+  - Share buttons
+  - Download case study (optional)
+
+#### Features
+- **SEO Optimization:**
+  - Dynamic meta tags
+  - Open Graph tags
+  - JSON-LD structured data
+  - Canonical URLs
+
+- **Draft Mode:**
+  - Preview unpublished projects
+  - Content editor workflow
+
+- **Accent Colors:**
+  - Per-project custom accent color
+  - Dynamic theming untuk branding
+
+---
+
+### 3. About Page (`/about`)
+
+**Content:**
+- Profile avatar image
+- Extended biography (portable text)
+- Skills dan expertise
+- Work experience timeline (optional)
+- Education (optional)
+- Certifications (optional)
+- Social links
+- Resume/CV download (optional)
+
+**Visual Elements:**
+- Animated text reveals
+- Image hover effects
+- Skill bars/tags
+- Timeline visualization
+
+---
+
+### 4. Services Page (`/services`)
+
+**Content Structure:**
+- Service listings dari Sanity
+- Service cards with:
+  - Icon/image
+  - Service name
+  - Description
+  - Features/deliverables list
+  - Pricing info (optional)
+  - CTA button
+
+**Features:**
+- Tabbed interface atau accordion
+- FAQ section integration
+- Testimonials carousel
+- Contact form link
+
+---
+
+### 5. Contact Page (`/contact`)
+
+**Form Fields:**
+- Name
+- Email
+- Subject
+- Message
+- Project type selection
+- Budget range (optional)
+
+**Features:**
+- Form validation
+- Email integration (future)
+- Success/error states
+- Contact information display
+- Social links
+- Business hours (optional)
+
+**Alternative Contact Methods:**
+- Email link
+- Phone (optional)
+- Social media links
+- Location (optional)
+
+---
+
+### 6. Sanity Studio (`/studio`)
+
+**Access:** Isolated route tanpa AppLayout shell
+
+**Features:**
+- **Document Management:**
+  - Projects (full CRUD)
+  - Services (full CRUD)
+  - Testimonials (full CRUD)
+  - Tags, Tools, Categories
+  
+- **Singleton Documents:**
+  - Site Settings (global SEO, hero content, social links)
+  - Profile (personal info, bio, avatar)
+  - FAQ (frequently asked questions)
+
+- **Media Management:**
+  - Image uploads
+  - Asset library
+  - Hotspot/crop tool
+
+- **Content Preview:**
+  - Live preview integration
+  - Draft mode support
+
+- **Custom Desk Structure:**
+  - Organized sidebar
+  - Singleton documents grouped
+  - Document filtering
+
+**Studio Configuration:**
+- Vision plugin untuk GROQ testing
+- Custom schema validation
+- Reference relationships
+- Array fields dengan custom objects
+
+---
+
+## 🎨 Design System
+
+### Visual Theme: IDE/Code Editor
 
 #### Color Palette
 
-**Dark Mode (Primary)**
+**Dark Theme (Primary):**
 ```css
---background: hsl(0 0% 4%)           /* Deep black */
---foreground: hsl(0 0% 98%)          /* Near white */
---primary: hsl(217 91% 60%)          /* Electric blue */
---accent: hsl(271 91% 65%)           /* Neon purple */
---muted: hsl(240 3.7% 15.9%)         /* Dark gray */
---border: hsl(240 3.7% 15.9%)        /* Subtle borders */
+--background: #1e1e1e       /* Editor background */
+--surface: #252526          /* Panels */
+--border: #333              /* Dividers */
+--accent: #007acc           /* VS Code blue */
+--text-primary: #cccccc     /* Main text */
+--text-secondary: #858585   /* Muted text */
 ```
 
-**Light Mode**
+**Light Theme:**
 ```css
---background: hsl(0 0% 98%)          /* Off white */
---foreground: hsl(240 10% 10%)       /* Dark text */
---primary: hsl(217 91% 60%)          /* Electric blue */
---accent: hsl(271 91% 65%)           /* Neon purple */
+--background: #ffffff
+--surface: #f3f3f3
+--border: #e5e5e5
+--accent: #007acc
+--text-primary: #333333
+--text-secondary: #666666
 ```
 
-**Editor-Specific Colors**
-- Panel backgrounds: `#1f1f1f`, `#252526`, `#2a2a2a`
-- Viewport: `#0d0d0d`, `#161616`, `#181818`
-- Borders: `#333`, `#444`
-- Highlights: Blue `#4a9eff`, Purple `#c678dd`, Yellow `#e5c07b`
+**Accent Colors:**
+- Dynamic per-project
+- Overrides pada cards dan detail pages
 
 #### Typography
-- **Font Stack**: System fonts with ligatures enabled
-- **Headings**: Bold, tracking-tighter
-- **Code/Mono**: For technical elements and timecodes
-- **Sizes**: Responsive scale from mobile to desktop
+- **Font Family:** Inter (Google Fonts)
+- **Headings:** Bold, system font stack
+- **Body:** Regular, sans-serif
+- **Code:** Monospace (for code blocks)
 
-#### Spacing & Layout
-- **Border Radius**: 1rem (16px) for cards and panels
-- **Container**: Max-width with responsive padding
-- **Grid**: 100px grid overlay for composition feel
+**Scale:**
+- H1: 2.5rem (40px)
+- H2: 2rem (32px)
+- H3: 1.5rem (24px)
+- Body: 1rem (16px)
+- Small: 0.875rem (14px)
 
-### 4.2 Component Design Patterns
+#### Components
 
-#### Glassmorphism
-```css
-.glass: bg-background/40 backdrop-blur-xl border-white/5
-.glass-heavy: bg-background/60 backdrop-blur-2xl border-white/10
-.glass-card: bg-black/40 backdrop-blur-lg border-white/10
-```
+**VS Code-Inspired Elements:**
+1. **MenuBar:**
+   - Top fixed bar
+   - File menus simulation
+   - Window controls (yellow/green/red dots)
+   - App identity badge
 
-#### Text Effects
-```css
-.text-gradient: Gradient from primary to accent
-.text-stroke: Outlined text effect
-```
+2. **Toolbar:**
+   - Navigation breadcrumbs
+   - Status indicators
+   - Quick actions
 
-#### Scrollbar
-- Width: 6px
-- Thumb: White/10 with hover state
-- Rounded, minimal design
+3. **StatusBar:**
+   - Bottom fixed bar
+   - Current page info
+   - GitHub link
+   - Theme toggle
+   - Visitor count (optional)
 
-### 4.3 Animation Principles
+4. **Sidebar:**
+   - File explorer style
+   - Collapsible sections
+   - Icons dari Lucide
 
-#### Motion Values
-- **Stiffness**: 100 (spring animations)
-- **Damping**: 30 (smooth deceleration)
-- **Duration**: 0.3-0.5s for micro-interactions
+#### Interactive Elements
 
-#### Scroll-Based Animations
-- Hero section: 300vh scroll container with sticky viewport
-- Parallax effects on scroll progress
-- Timeline playhead synced to scroll position
-
-#### Interaction States
-- Hover: Subtle scale (1.02-1.05) and glow
-- Active: Scale down (0.98)
-- Focus: Ring with primary color
-- Disabled: Opacity 50%
-
----
-
-## 5. Key Features & User Experience
-
-### 5.1 Homepage
-
-#### Hero Section
-**Design**: After Effects-inspired composition viewport with timeline
-
-**Elements**:
-- **Composition Toolbar** (Desktop): Shows comp name, resolution (1920×1080), framerate (30fps), timecode
-- **Main Viewport**: Centered content with grid overlay and graph editor curves
-- **Animated Text Layers**:
-  1. "VIDEO EDITOR" - Fades and scales out
-  2. "&" symbol - Transition effect
-  3. "yang kebetulan bisa ngoding" (who happens to code) - Slides in
-- **Timeline Panel** (Desktop): 
-  - 3 tracks with layer names
-  - Keyframe diamonds
-  - Animated playhead synced to scroll
-  - Ruler with time markers (0-10s)
-- **Mobile**: Simplified version without timeline
-
-**Scroll Interaction**: 
-- 300vh total scroll height
-- Sticky viewport stays in view
-- Text animations triggered by scroll progress
-- Playhead moves from 0% to 100%
-- Timecode updates in real-time (00:00:00:00 to 00:00:10:00)
-
-#### Featured Projects Section
-- Grid layout of project cards
-- Filter by project type (web/video/mixed)
-- Hover effects with accent color
-- Quick view of cover image, title, summary, tools
-
-### 5.2 Projects Page
-
-#### Project Listing
-- Filterable by type, category, tags, tools
-- Sortable by date, name, custom order
-- Card grid with hover animations
-- Pagination or infinite scroll
-
-#### Project Detail Page
-- Hero image with accent color overlay
-- Project metadata (date, client, type, tools)
-- Rich text description with embedded images
-- Image gallery with lightbox
-- Video embed (YouTube/Vimeo)
-- Related projects
-- Call-to-action (live site, repository links)
-
-### 5.3 About Page
-
-#### Profile Section
-- Avatar image
-- Name and role
-- Short bio
-- Social links
-
-#### Long Biography
-- Rich text content
-- Skills and expertise
-- Work history
-- Personal interests
-
-#### Services Offered
-- Service cards with icons
-- Description and pricing
-- Call-to-action
-
-#### Testimonials
-- Client quotes
-- Avatar, name, role, company
-- Carousel or grid layout
-
-### 5.4 Services Page
-
-- Detailed service offerings
-- Pricing information
-- Process explanation
-- Contact form or booking CTA
-
-### 5.5 Global Features
-
-#### Editor Shell (AppLayout)
-**Desktop**:
-- **MenuBar** (Top): File, Edit, View, Window, Help menus
-- **Toolbar** (Left): Icon-based navigation (Home, Projects, About, Services)
-- **StatusBar** (Bottom): Current page, stats, theme toggle
-- **Line Numbers**: Fake code editor gutter on left
-- **Viewport**: Main content area with dark background
-
-**Mobile**:
-- Simplified header with logo
-- Bottom navigation bar
-- Responsive content area
-- Touch-optimized interactions
-
-#### Custom Cursor
-- Follows mouse movement
-- Changes on hover states (buttons, links, interactive elements)
+**Custom Cursor:**
+- Default: 16×16 white dot
+- Hover state: 100×100 dengan text label
+- Mix-blend-mode untuk contrast
 - Smooth spring animation
-- Desktop only
+- Hidden pada touch devices
 
-#### Smooth Scroll
-- Lenis integration for buttery smooth scrolling
-- Momentum and easing
-- Scroll-based animations
+**Magnetic Effect:**
+- Buttons dan links "menarik" cursor
+- Framer Motion spring physics
 
-#### Theme Toggle
-- Dark/light mode switcher
-- Persisted preference
-- Smooth color transitions
+**Spotlight Card:**
+- Mouse tracking effect
+- Gradient overlay mengikuti cursor
+- Subtle glow pada hover
 
-#### Navigation
-- Responsive navbar (hidden on editor shell pages)
-- Footer with social links, copyright
-- Breadcrumbs on detail pages
-
----
-
-## 6. Content Management (Sanity CMS)
-
-### 6.1 Studio Configuration
-
-**Access**: `/studio` route
-**Features**:
-- Custom structure with organized sections
-- Document actions (publish, unpublish, duplicate)
-- Preview pane for live content
-- Media library management
-- GROQ query testing with Vision plugin
-
-### 6.2 Content Workflow
-
-1. **Create/Edit Content**: Use Sanity Studio interface
-2. **Preview**: Real-time preview in Studio
-3. **Publish**: Content goes live
-4. **Revalidate**: On-demand ISR revalidation via webhook
-5. **Draft Mode**: Preview unpublished changes
-
-### 6.3 Data Fetching Strategy
-
-- **Static Generation (SSG)**: Homepage, about page
-- **Incremental Static Regeneration (ISR)**: Project listings, detail pages
-- **On-Demand Revalidation**: Webhook from Sanity on publish
-- **Draft Mode**: Preview unpublished content for editors
-
-### 6.4 Image Optimization
-
-- Sanity CDN for image hosting
-- Automatic format conversion (WebP, AVIF)
-- Responsive image sizes
-- Hotspot/crop support
-- Lazy loading
+**Text Reveal:**
+- Animated text entrance
+- Character/word split animation
+- Intersection Observer trigger
 
 ---
 
-## 7. Performance & SEO
+## 📊 Content Model (Sanity Schema)
 
-### 7.1 Performance Targets
+### Document Types
 
-- **Lighthouse Score**: 90+ across all metrics
-- **First Contentful Paint (FCP)**: < 1.5s
-- **Largest Contentful Paint (LCP)**: < 2.5s
-- **Time to Interactive (TTI)**: < 3.5s
-- **Cumulative Layout Shift (CLS)**: < 0.1
+#### 1. **project** (Main Content Type)
 
-### 7.2 Optimization Strategies
+**Fields:**
 
-- Next.js Image component for optimized images
-- Code splitting and lazy loading
-- Font optimization with next/font
-- Minimal JavaScript bundle size
-- Server components where possible
-- Static generation for most pages
+**Content Group:**
+- `title` (string, required, max 100 chars)
+- `slug` (slug, required, auto-generated from title)
+- `summary` (text, required, max 280 chars) - Card description
+- `description` (portable text) - Full case study content
 
-### 7.3 SEO Implementation
+**Media Group:**
+- `coverImage` (image, required) - Hero image with hotspot
+- `gallery` (array of galleryItem) - Additional media
+- `videoEmbedUrl` (string) - YouTube/Vimeo URL
+- `accentColor` (string) - Hex color for theming
 
-- **Meta Tags**: Dynamic per page from Sanity
-- **Open Graph**: Social sharing previews
-- **Structured Data**: JSON-LD for projects, person, organization
-- **Sitemap**: Auto-generated from content
-- **Robots.txt**: Proper crawling directives
-- **Semantic HTML**: Proper heading hierarchy, landmarks
-- **Alt Text**: All images have descriptive alt text
-- **Performance**: Fast loading times boost rankings
+**Metadata Group:**
+- `projectType` (string, required) - web | video | mixed
+- `category` (reference to projectCategory)
+- `tags` (array of references to tag)
+- `tools` (array of references to tool)
+- `client` (string) - Client name
+- `role` (string) - Your role/contribution
+- `completionDate` (date)
+- `duration` (string) - Timeline
+- `featured` (boolean) - Show on homepage
+
+**Links Group:**
+- `projectUrl` (url) - Live site
+- `repositoryUrl` (url) - GitHub repo
+- `caseStudyUrl` (url) - External case study
+- `otherLinks` (array) - Additional resources
+
+**SEO Group:**
+- `seoTitle` (string, max 60)
+- `seoDescription` (text, max 160)
+- `seoImage` (image) - OG image override
+
+**Relations:**
+- `relatedProjects` (array of project references)
+- `testimonials` (array of testimonial references)
+
+#### 2. **service**
+- `title` (string)
+- `slug` (slug)
+- `description` (portable text)
+- `icon` (image)
+- `features` (array of strings)
+- `pricing` (object: from, to, currency)
+- `order` (number) - Display order
+
+#### 3. **testimonial**
+- `author` (string)
+- `role` (string)
+- `company` (string)
+- `content` (text)
+- `rating` (number, 1-5)
+- `avatar` (image)
+- `featured` (boolean)
+
+#### 4. **tag**
+- `name` (string)
+- `slug` (slug)
+- `color` (string) - Badge color
+
+#### 5. **tool**
+- `name` (string)
+- `slug` (slug)
+- `icon` (image)
+- `url` (url)
+- `category` (string) - development | design | video | other
+
+#### 6. **projectCategory**
+- `name` (string)
+- `slug` (slug)
+- `description` (text)
+- `projectType` (string) - Filtered by type
+
+### Singleton Types
+
+#### 1. **siteSettings** (ID: `site-settings`)
+
+**General Group:**
+- `siteTitle` (string, required, max 60)
+- `siteDescription` (text, required, max 160)
+- `defaultSeoImage` (image, required)
+
+**Hero Group:**
+- `heroTitle` (string)
+- `heroSubtitle` (string)
+- `heroImage` (image)
+
+**Social Group:**
+- `socials` (array of socialLink)
+- `footerText` (string)
+
+#### 2. **profile** (ID: `profile`)
+- `name` (string, required)
+- `role` (string)
+- `shortBio` (text, max 200)
+- `longBio` (portable text)
+- `avatarImage` (image)
+- `socials` (array of socialLink)
+
+#### 3. **faq** (ID: `faq`)
+- `title` (string)
+- `description` (text)
+- `items` (array of faqItem)
+
+### Object Types
+
+#### **socialLink**
+- `platform` (string) - github | linkedin | twitter | instagram | etc.
+- `url` (url)
+- `handle` (string)
+
+#### **galleryItem**
+- `mediaType` (string) - image | video
+- `image` (image) - If type is image
+- `videoUrl` (url) - If type is video
+- `caption` (string)
+- `alt` (string)
+
+#### **faqItem**
+- `question` (string)
+- `answer` (portable text)
 
 ---
 
-## 8. Responsive Design
+## 🔄 User Flows
 
-### 8.1 Breakpoints
+### 1. Visitor Journey (First-Time User)
 
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1023px
-- **Desktop**: ≥ 1024px
+```
+Landing (Homepage) 
+  ↓
+Hero Section → Sees name, role, tagline
+  ↓
+Featured Projects → Clicks interesting project card
+  ↓
+Project Detail → Views case study, media, info
+  ↓
+Related Projects / CTA → Explores more work
+  ↓
+Contact Page → Sends inquiry
+```
 
-### 8.2 Mobile Adaptations
+### 2. Content Editor Flow (Admin)
 
-#### Hero Section
-- Remove timeline panel
-- Remove composition toolbar
-- Simplify viewport to centered text
-- Reduce scroll height
-- Touch-friendly interactions
+```
+/studio Login
+  ↓
+Dashboard → Sees document types
+  ↓
+Create New Project:
+  ↓
+  1. Fill basic info (title, summary, type)
+  2. Upload cover image (set hotspot)
+  3. Write description (rich text)
+  4. Add gallery items
+  5. Set metadata (tags, tools, dates)
+  6. Add project links
+  7. Configure SEO
+  8. Save as draft
+  9. Preview on site (draft mode)
+  10. Publish
+  ↓
+Content appears on site (after ISR revalidation)
+```
 
-#### Editor Shell
-- Hide MenuBar, Toolbar, StatusBar
-- Show simplified mobile header
-- Bottom navigation bar
-- Full-width content
-- Remove line numbers gutter
+### 3. Navigation Flow
 
-#### Project Cards
-- Single column on mobile
-- 2 columns on tablet
-- 3-4 columns on desktop
-
-#### Typography
-- Smaller font sizes on mobile
-- Adjusted line heights
-- Shorter text blocks
-
-### 8.3 Touch Interactions
-
-- Larger tap targets (min 44×44px)
-- Swipe gestures for galleries
-- Pull-to-refresh disabled
-- Smooth momentum scrolling
-
----
-
-## 9. Accessibility
-
-### 9.1 WCAG Compliance
-
-**Target**: WCAG 2.1 Level AA
-
-### 9.2 Features
-
-- **Keyboard Navigation**: All interactive elements accessible via keyboard
-- **Focus Indicators**: Visible focus rings
-- **Screen Reader Support**: Semantic HTML, ARIA labels where needed
-- **Color Contrast**: 4.5:1 minimum for text
-- **Alt Text**: All images have descriptive alternatives
-- **Skip Links**: Skip to main content
-- **Heading Hierarchy**: Proper H1-H6 structure
-- **Form Labels**: All inputs properly labeled
-- **Error Messages**: Clear, descriptive error states
-
-### 9.3 Custom Cursor Accessibility
-
-- Custom cursor is visual enhancement only
-- Does not interfere with native cursor
-- Disabled on touch devices
-- Does not hide native cursor
+```
+MenuBar (Always visible)
+  ↓
+  - Home
+  - Projects (+ filtering)
+  - About
+  - Services
+  - Contact
+  ↓
+StatusBar (Always visible)
+  - Page info
+  - Theme toggle
+  - Social links
+```
 
 ---
 
-## 10. Browser & Device Support
+## 🚀 Performance & Optimization
 
-### 10.1 Browsers
+### Next.js Optimizations
 
-**Fully Supported**:
-- Chrome/Edge (last 2 versions)
-- Firefox (last 2 versions)
-- Safari (last 2 versions)
+#### 1. Rendering Strategy
+- **Static Generation (SSG):** Static pages (about, services, contact)
+- **ISR (Incremental Static Regeneration):** 
+  - Homepage: revalidate every 60 seconds
+  - Project pages: revalidate every 300 seconds
+  - Projects listing: revalidate every 120 seconds
+- **Server-Side Rendering (SSR):** Draft mode preview
 
-**Graceful Degradation**:
-- Older browsers get functional experience without advanced animations
-- Fallbacks for CSS features (backdrop-filter, etc.)
+#### 2. Image Optimization
+- **Next.js Image Component:** Automatic optimization, lazy loading
+- **Sanity CDN:** 
+  - Format optimization (WebP, AVIF)
+  - Responsive images with hotspot
+  - Quality optimization
+  - Auto-caching
 
-### 10.2 Devices
+#### 3. Code Splitting
+- **Automatic chunking** by Next.js
+- **Dynamic imports** untuk heavy components
+- **Route-based splitting**
 
-- Desktop (Windows, macOS, Linux)
-- Tablets (iPad, Android tablets)
-- Mobile (iOS, Android)
-- Screen sizes: 320px - 2560px+
+#### 4. Caching Strategy
+- **Sanity CDN Cache:** Edge caching untuk images dan data
+- **Browser Caching:** Static assets
+- **ISR Cache:** Stale-while-revalidate
+
+### Performance Targets
+
+- **First Contentful Paint (FCP):** < 1.5s
+- **Largest Contentful Paint (LCP):** < 2.5s
+- **Time to Interactive (TTI):** < 3.5s
+- **Cumulative Layout Shift (CLS):** < 0.1
+- **Lighthouse Score:** 90+ (Performance, SEO, Accessibility)
 
 ---
 
-## 11. Development & Deployment
+## 🔒 Security & Privacy
 
-### 11.1 Development Workflow
+### Authentication
+- Sanity Studio: OAuth/password authentication
+- Draft mode: Token-based authentication
 
-1. **Local Development**: `npm run dev` (port 3000)
-2. **Sanity Studio**: Accessible at `/studio`
-3. **Type Checking**: TypeScript strict mode
-4. **Linting**: Next.js ESLint configuration
-5. **Git Workflow**: Feature branches, pull requests
+### Data Protection
+- Environment variables untuk sensitive data
+- Sanity API tokens disimpan di environment
+- No sensitive data di client-side
 
-### 11.2 Environment Variables
+### HTTPS
+- Production deployment via HTTPS only
+- Secure headers (CSP, HSTS, etc.)
+
+---
+
+## 🌐 SEO Strategy
+
+### On-Page SEO
+
+#### 1. Meta Tags
+```tsx
+<title>{project.seoTitle || project.title} | Langley</title>
+<meta name="description" content={project.seoDescription || project.summary} />
+<link rel="canonical" href={`https://langley.dev/projects/${project.slug}`} />
+```
+
+#### 2. Open Graph Tags
+```tsx
+<meta property="og:title" content={project.title} />
+<meta property="og:description" content={project.summary} />
+<meta property="og:image" content={project.seoImage || project.coverImage} />
+<meta property="og:type" content="article" />
+```
+
+#### 3. Twitter Cards
+```tsx
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={project.title} />
+<meta name="twitter:description" content={project.summary} />
+<meta name="twitter:image" content={project.coverImage} />
+```
+
+#### 4. Structured Data (JSON-LD)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Project Title",
+  "description": "Project summary",
+  "image": "cover-image-url",
+  "author": {
+    "@type": "Person",
+    "name": "Langley"
+  },
+  "datePublished": "2024-01-01"
+}
+```
+
+### Technical SEO
+- **Semantic HTML:** Proper heading hierarchy
+- **Alt text:** All images have descriptive alt text
+- **Sitemap.xml:** Auto-generated by Next.js
+- **Robots.txt:** Proper crawl directives
+- **Mobile-friendly:** Responsive design
+- **Page Speed:** Optimized loading times
+
+---
+
+## 📈 Analytics & Monitoring (Future)
+
+### Potential Integrations
+- Google Analytics 4
+- Vercel Analytics
+- Sanity Analytics
+- Search Console
+
+### Key Metrics
+- Page views
+- Bounce rate
+- Session duration
+- Conversion rate (contact form submissions)
+- Popular projects
+- Traffic sources
+
+---
+
+## 🔧 Development Workflow
+
+### Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+# → http://localhost:3000 (site)
+# → http://localhost:3000/studio (CMS)
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+### Environment Variables
 
 ```env
-# Sanity
-NEXT_PUBLIC_SANITY_PROJECT_ID=
-NEXT_PUBLIC_SANITY_DATASET=
-SANITY_API_TOKEN=
-
-# Revalidation
-REVALIDATION_SECRET=
+# Sanity Configuration
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_TOKEN=your_api_token
 
 # Draft Mode
-SANITY_PREVIEW_SECRET=
+SANITY_REVALIDATE_SECRET=your_secret_key
 ```
 
-### 11.3 Build & Deployment
-
-**Build Command**: `npm run build`
-**Start Command**: `npm start`
-
-**Recommended Platform**: Vercel
-- Automatic deployments from Git
-- Preview deployments for PRs
-- Edge network for fast global delivery
-- Serverless functions for API routes
-- Automatic HTTPS
-
-**Alternative Platforms**: Netlify, Cloudflare Pages, self-hosted
-
-### 11.4 Post-Deployment Setup
-
-1. Configure Sanity webhook for revalidation
-2. Set up custom domain
-3. Configure analytics (optional)
-4. Set up error tracking (optional)
-5. Configure email for contact forms (if applicable)
+### Git Workflow
+1. Feature branch dari `main`
+2. Local development dan testing
+3. Commit dengan descriptive messages
+4. Pull request untuk review
+5. Merge ke `main`
+6. Auto-deploy (jika configured)
 
 ---
 
-## 12. Future Enhancements
+## 🚢 Deployment
 
-### 12.1 Planned Features
+### Recommended Platform: Vercel
 
-- **Blog**: Add blog functionality with MDX support
-- **Case Studies**: Detailed project breakdowns with process documentation
-- **Contact Form**: Integrated contact form with email notifications
-- **Newsletter**: Email subscription for updates
-- **Search**: Full-text search across projects and content
-- **Filtering**: Advanced filtering and sorting on projects page
-- **Analytics Dashboard**: View project views and engagement
-- **Internationalization**: Multi-language support (English/Indonesian)
+#### Configuration
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs"
+}
+```
 
-### 12.2 Technical Improvements
+#### Environment Variables (Production)
+- Set di Vercel dashboard
+- Automatic deployment dari GitHub
+- Preview deployments untuk PRs
 
-- **Progressive Web App (PWA)**: Offline support, installable
-- **Animation Presets**: Reusable animation configurations
-- **Component Library**: Storybook for component documentation
-- **Testing**: Unit tests (Jest), E2E tests (Playwright)
-- **Performance Monitoring**: Real User Monitoring (RUM)
-- **A/B Testing**: Experiment with different layouts and CTAs
+#### Sanity Studio Deployment
+```bash
+# Deploy studio ke Sanity hosting
+npx sanity deploy
+```
 
-### 12.3 Content Enhancements
-
-- **Video Backgrounds**: Subtle animated backgrounds
-- **Interactive Demos**: Embedded project demos
-- **3D Elements**: Three.js integration for visual interest
-- **Audio**: Background music or sound effects (toggleable)
-- **Micro-interactions**: More delightful UI feedback
+### Alternative Platforms
+- Netlify
+- Railway
+- Self-hosted (Docker)
 
 ---
 
-## 13. Success Metrics
+## 🎯 Future Enhancements
 
-### 13.1 Technical KPIs
+### Phase 2 Features (Planned)
 
-- Lighthouse Performance Score: 90+
-- Page Load Time: < 2s
-- Time to Interactive: < 3s
-- Zero critical accessibility issues
+#### 1. Blog System
+- Blog post content type
+- Markdown/MDX support
+- Tag filtering
+- RSS feed
+- Comments (Disqus/Giscus)
+
+#### 2. Advanced Filtering
+- Multi-select filters
+- Search with fuzzy matching
+- Saved filter presets
+
+#### 3. Interactive Components
+- 3D model viewer (Three.js)
+- Interactive code snippets (Sandpack)
+- Live demos embed
+
+#### 4. Client Portal
+- Private project access
+- File downloads
+- Revision requests
+- Feedback system
+
+#### 5. E-commerce Integration
+- Digital products
+- Course offerings
+- Booking system
+
+#### 6. Multi-language Support
+- i18n with next-intl
+- Localized content in Sanity
+- Language switcher
+
+#### 7. Advanced Analytics
+- Custom event tracking
+- Heatmaps
+- A/B testing
+
+#### 8. Performance Enhancements
+- Edge Functions
+- Service Worker
+- Offline support
+- Progressive Web App (PWA)
+
+### Technical Debt & Improvements
+
+- [ ] Unit tests (Jest, React Testing Library)
+- [ ] E2E tests (Playwright)
+- [ ] Storybook untuk component documentation
+- [ ] Accessibility audit (WCAG 2.1 AA)
+- [ ] Performance monitoring
+- [ ] Error tracking (Sentry)
+- [ ] Code splitting optimization
+- [ ] Image lazy loading enhancement
+- [ ] SEO audit dan improvements
+
+---
+
+## 📚 Documentation
+
+### For Developers
+- README.md dengan setup instructions
+- Component documentation
+- API documentation
+- Contributing guidelines
+
+### For Content Editors
+- Sanity Studio guide
+- Content creation best practices
+- Image optimization guide
+- SEO checklist
+
+---
+
+## 🤝 Support & Maintenance
+
+### Update Schedule
+- **Weekly:** Dependency updates (patch versions)
+- **Monthly:** Minor version updates
+- **Quarterly:** Major version updates (with testing)
+
+### Backup Strategy
+- Sanity automatic backups
+- Git history sebagai version control
+- Export content reguler (JSON dumps)
+
+### Monitoring
+- Uptime monitoring
+- Error tracking
+- Performance monitoring
+- Security updates
+
+---
+
+## 📊 Success Metrics
+
+### Business Goals
+- Increase client inquiries by 50%
+- Improve professional visibility
+- Showcase portfolio effectively
+
+### Technical Goals
+- Lighthouse score > 90
+- Page load time < 2s
+- Zero critical bugs
 - 99.9% uptime
 
-### 13.2 Business KPIs
-
-- Visitor engagement (time on site, pages per session)
-- Project view rate
-- Contact form submissions / inquiries
-- Social shares
-- Return visitor rate
-
-### 13.3 User Feedback
-
-- Qualitative feedback from visitors
-- Usability testing results
-- Peer reviews from developer/designer community
-- Client testimonials
+### Content Goals
+- Regular project updates (monthly)
+- SEO ranking untuk target keywords
+- Social media engagement
 
 ---
 
-## 14. Maintenance & Support
+## 📝 Appendix
 
-### 14.1 Regular Maintenance
+### A. Technology Justification
 
-- **Content Updates**: Weekly/monthly via Sanity Studio
-- **Dependency Updates**: Monthly security patches, quarterly major updates
-- **Performance Monitoring**: Weekly Lighthouse audits
-- **Backup**: Automated Sanity backups
-- **Security**: Regular security audits
+**Next.js 16:**
+- Latest features (Server Actions, Server Components)
+- Best-in-class DX dan performance
+- Built-in optimization
 
-### 14.2 Support Channels
+**Sanity CMS:**
+- Developer-friendly schema
+- Real-time collaboration
+- Flexible content modeling
+- Powerful GROQ query language
 
-- GitHub Issues for bug reports
-- Email for general inquiries
-- Documentation for common tasks
+**Tailwind CSS 4:**
+- Rapid development
+- Consistent design system
+- Small production bundle
+- Latest v4 features
+
+**Framer Motion:**
+- Declarative animations
+- Great performance
+- Spring physics
+- Gesture support
+
+### B. Browser Support
+- Chrome (last 2 versions)
+- Firefox (last 2 versions)
+- Safari (last 2 versions)
+- Edge (last 2 versions)
+- Mobile browsers (iOS Safari, Chrome Android)
+
+### C. Accessibility
+- WCAG 2.1 Level AA compliance
+- Keyboard navigation
+- Screen reader support
+- Focus indicators
+- Alt text pada images
+- Semantic HTML
+- Color contrast compliance
+
+### D. References
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Sanity Documentation](https://www.sanity.io/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Framer Motion](https://www.framer.com/motion/)
 
 ---
 
-## 15. Conclusion
+## 📞 Contact & Resources
 
-**Langley Portfolio** is a cutting-edge, full-stack portfolio website that pushes the boundaries of traditional portfolio design. By merging the visual languages of professional creative software (After Effects and VS Code), it creates a unique, memorable experience that showcases the creator's dual expertise in video editing and web development.
+**Project Repository:** [GitHub](https://github.com/imlangley/langley-portfolio)  
+**Live Site:** [To be deployed]  
+**Sanity Studio:** [To be configured]  
 
-The project leverages modern web technologies (Next.js, React, TypeScript, Sanity CMS) to deliver a fast, flexible, and maintainable solution. With its premium animations, responsive design, and comprehensive content management system, it serves as both a portfolio and a demonstration of technical capabilities.
-
-The modular architecture and headless CMS approach ensure the site can evolve with the creator's career, easily accommodating new projects, services, and content types without requiring code changes.
+**Developer:** Langley  
+**Last Updated:** December 12, 2025  
+**Document Version:** 1.0.0
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: December 11, 2025  
-**Project Status**: Active Development  
-**Tech Stack Version**: Next.js 16, React 19, Sanity 3.57
+**End of Product Specification**
+
+*This document serves as the complete technical and functional specification for the Langley Portfolio project. It should be updated as the project evolves and new features are added.*
