@@ -1,0 +1,49 @@
+---
+name: Sync Rebuild Branch to Main
+
+"on":
+  push:
+    branches:
+      - rebuild/ae-vscode
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync rebuild branch to main
+        run: |
+          # Fetch all branches
+          git fetch origin
+
+          # Checkout main branch
+          git checkout main
+
+          # Attempt to merge rebuild/ae-vscode into main
+          if git merge origin/rebuild/ae-vscode --no-ff \
+            -m "chore: sync changes from rebuild/ae-vscode branch"; then
+            echo "Merge successful, pushing to main..."
+            git push origin main
+            echo "✅ Successfully synced rebuild/ae-vscode to main"
+          else
+            echo "❌ Merge conflict detected!"
+            echo "Please resolve conflicts manually and merge the branches."
+            git merge --abort
+            exit 1
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
