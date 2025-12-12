@@ -1,0 +1,42 @@
+name: Sync Rebuild Branch to Main
+
+on:
+  push:
+    branches:
+      - rebuild/ae-vscode
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Sync rebuild branch to main
+        run: |
+          # Fetch all branches
+          git fetch origin
+          
+          # Checkout main branch
+          git checkout main
+          
+          # Merge rebuild/ae-vscode into main
+          git merge origin/rebuild/ae-vscode --no-ff -m "chore: sync changes from rebuild/ae-vscode branch"
+          
+          # Push changes to main
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
