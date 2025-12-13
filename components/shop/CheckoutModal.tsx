@@ -54,8 +54,10 @@ export function CheckoutModal({ isOpen, onClose, slug, title, price }: CheckoutM
                     const cookieParam = data.sessionCookie ? `&cookie=${encodeURIComponent(data.sessionCookie)}` : ''
                     window.location.href = `/shop/success?url=${targetUrl}${cookieParam}`
                 } else {
-                    // Paid item or other flow, go external
-                    window.location.href = data.redirectUrl
+                    // Paid item
+                    const targetUrl = encodeURIComponent(data.redirectUrl)
+                    const cookieParam = data.sessionCookie ? `&cookie=${encodeURIComponent(data.sessionCookie)}` : ''
+                    window.location.href = `/shop/payment?url=${targetUrl}${cookieParam}`
                 }
             } else {
                 throw new Error('No redirect URL returned')

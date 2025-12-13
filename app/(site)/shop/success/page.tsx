@@ -5,10 +5,15 @@ import { CheckCircle2, Download, ArrowLeft, ExternalLink } from 'lucide-react'
 import { TiltedCard, BlurText, ShimmerButton } from '@/components/reactbits'
 
 interface PageProps {
-    searchParams: Promise<{ url?: string; cookie?: string }>
+    searchParams: Promise<{
+        url?: string;
+        cookie?: string;
+        transaction_status?: string;
+        status_code?: string;
+    }>
 }
 
-async function getSuccessData(targetUrl: string, cookie?: string) {
+async function getSuccessData(targetUrl: string, cookie?: string): Promise<{ accessUrl: string; accessText: string } | null> {
     if (!targetUrl) return null
 
     try {
@@ -25,14 +30,9 @@ async function getSuccessData(targetUrl: string, cookie?: string) {
             next: { revalidate: 0 } // Don't cache success results
         })
 
-        // ... rest of scraping logic ...
-
-
         const html = await res.text()
         const $ = cheerio.load(html)
 
-        // The "Access" button is a <button> with onclick location.href
-        // Example: onclick="location.href=`https://...`"
         let accessUrl = ''
         let accessText = 'Access Content'
 
@@ -42,8 +42,8 @@ async function getSuccessData(targetUrl: string, cookie?: string) {
             const onclick = $(el).attr('onclick')
 
             if (onclick && (text.includes('Access') || text.includes('Akses') || text.includes('Download'))) {
-                // Extract URL from location.href=`URL` or location.href='URL'
-                const match = onclick.match(/location\.href=[`"'](.*)[`"']/)
+                // Extract URL from location.href=`URL`, location.href='URL', or location.href="URL"
+                const match = onclick.match(/location\.href\s*=\s*[`"']([^`"']+)["'`]/);
                 if (match && match[1]) {
                     accessUrl = match[1]
                     accessText = text
@@ -56,9 +56,12 @@ async function getSuccessData(targetUrl: string, cookie?: string) {
             $('a').each((i, el) => {
                 const text = $(el).text().trim().toLowerCase()
                 const href = $(el).attr('href')
-                if (href && (text === 'access' || text === 'akses' || text === 'download')) {
-                    accessUrl = href
-                    accessText = $(el).text().trim()
+                if (href && (text === 'access' || text === 'akses' || text === 'download' || text.includes('contact'))) {
+                    // Filter out contact links if they are just mailto/whatsapp
+                    if (!href.includes('whatsapp') && !href.includes('mailto')) {
+                        accessUrl = href
+                        accessText = $(el).text().trim()
+                    }
                 }
             })
         }
@@ -82,8 +85,15 @@ async function getSuccessData(targetUrl: string, cookie?: string) {
     }
 }
 
+// ... Re-implementing component ...
+
 export default async function SuccessPage({ searchParams }: PageProps) {
-    const { url, cookie } = await searchParams
+    const { url, cookie, transaction_status } = await searchParams
+
+    // Check if this is a callback from Payment Provider
+    const isPending = transaction_status === 'pending'
+
+    // If it's a direct success scrape (old flow)
     const successData = url ? await getSuccessData(url, cookie) : null
 
     return (
@@ -91,64 +101,89 @@ export default async function SuccessPage({ searchParams }: PageProps) {
 
             <div className="max-w-md w-full text-center space-y-8">
 
-                {/* Success Icon Animation */}
+                {/* Status Icon */}
                 <div className="relative mx-auto w-24 h-24">
-                    <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full animate-pulse" />
-                    <CheckCircle2 className="relative w-24 h-24 text-green-500 mx-auto" />
+                    <div className={`absolute inset-0 blur-xl rounded-full animate-pulse ${isPending ? 'bg-yellow-500/20' : 'bg-green-500/20'}`} />
+                    {isPending ? (
+                        <CheckCircle2 className="relative w-24 h-24 text-yellow-500 mx-auto" />
+                    ) : (
+                        <CheckCircle2 className="relative w-24 h-24 text-green-500 mx-auto" />
+                    )}
                 </div>
 
                 <div className="space-y-2">
                     <div className="text-4xl text-center flex justify-center font-black tracking-tight text-white">
-                        <BlurText text="Order Successful!" delay={0.1} />
+                        <BlurText
+                            text={isPending ? "Payment Pending" : "Order Successful!"}
+                            delay={0.1}
+                        />
                     </div>
                     <p className="text-zinc-400">
-                        Thank you for your purchase. Your access is ready.
+                        {isPending
+                            ? "We have received your payment request. Please complete the payment if you haven't already."
+                            : "Thank you for your purchase. Your access is ready."
+                        }
                     </p>
                 </div>
 
                 <div className="p-8 rounded-3xl bg-zinc-900/50 border border-white/10 backdrop-blur-sm space-y-6">
-
-                    <div className="space-y-4">
-                        <div className="text-sm text-zinc-500 uppercase tracking-widest font-medium">
-                            What to do next
+                    {isPending ? (
+                        <div className="space-y-4">
+                            <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400 text-sm text-left">
+                                <p className="font-semibold mb-1">Waiting for Confirmation</p>
+                                Once you complete the payment, the system will automatically process your order. You will receive an email confirmation shortly.
+                            </div>
+                            <Link href="/shop" className="block w-full py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors font-medium">
+                                Return to Shop
+                            </Link>
                         </div>
-                        <ul className="text-left space-y-3 text-zinc-300 text-sm">
-                            <li className="flex gap-3">
-                                <span className="bg-blue-500/20 text-blue-400 w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0">1</span>
-                                Check your email for the receipt and backup link.
-                            </li>
-                            <li className="flex gap-3">
-                                <span className="bg-blue-500/20 text-blue-400 w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0">2</span>
-                                Click the button below to access your content now.
-                            </li>
-                        </ul>
-                    </div>
-
-                    {successData?.accessUrl ? (
-                        <ShimmerButton
-                            href={successData.accessUrl}
-                            className="w-full justify-center h-12"
-                        >
-                            <span className="flex items-center gap-2">
-                                <Download className="w-4 h-4" />
-                                {successData.accessText}
-                            </span>
-                        </ShimmerButton>
                     ) : (
-                        <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl text-yellow-400 text-sm text-left">
-                            <p className="font-semibold mb-1">Confirmation Required</p>
-                            We couldn't auto-fetch the direct access link. Please check your email inbox (and spam folder) for the access link from Sociabuzz.
-                        </div>
+                        <>
+                            <div className="space-y-4">
+                                <div className="text-sm text-zinc-500 uppercase tracking-widest font-medium">
+                                    What to do next
+                                </div>
+                                <ul className="text-left space-y-3 text-zinc-300 text-sm">
+                                    <li className="flex gap-3">
+                                        <span className="bg-blue-500/20 text-blue-400 w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0">1</span>
+                                        Check your email for the receipt and backup link.
+                                    </li>
+                                    <li className="flex gap-3">
+                                        <span className="bg-blue-500/20 text-blue-400 w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0">2</span>
+                                        Click the button below to access your content now.
+                                    </li>
+                                </ul>
+                            </div>
+
+                            {successData?.accessUrl ? (
+                                <ShimmerButton
+                                    href={successData.accessUrl}
+                                    className="w-full justify-center h-12"
+                                >
+                                    <span className="flex items-center gap-2">
+                                        <Download className="w-4 h-4" />
+                                        {successData.accessText}
+                                    </span>
+                                </ShimmerButton>
+                            ) : (
+                                <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl text-yellow-400 text-sm text-left">
+                                    <p className="font-semibold mb-1">Confirmation Required</p>
+                                    We couldn't auto-fetch the direct access link. Please check your email inbox (and spam folder) for the access link from Sociabuzz.
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
 
-                <Link
-                    href="/shop"
-                    className="inline-flex items-center gap-2 text-muted-foreground hover:text-white transition-colors"
-                >
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to Shop
-                </Link>
+                {!isPending && (
+                    <Link
+                        href="/shop"
+                        className="inline-flex items-center gap-2 text-muted-foreground hover:text-white transition-colors"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Back to Shop
+                    </Link>
+                )}
 
             </div>
         </div>
