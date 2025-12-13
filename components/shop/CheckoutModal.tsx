@@ -17,13 +17,23 @@ interface CheckoutModalProps {
 export function CheckoutModal({ isOpen, onClose, slug, title, price }: CheckoutModalProps) {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
+    const [accordionOpen, setAccordionOpen] = useState(true)
 
     // Form State
     const [formData, setFormData] = useState({
         fullname: '',
         email: '',
         whatsapp: '',
-        isAdult: false
+        isAdult: false,
+        lang: 'id' // Default to ID
+    })
+
+    // Detect browser language on mount
+    useState(() => {
+        if (typeof window !== 'undefined' && window.navigator) {
+            const browserLang = window.navigator.language.slice(0, 2)
+            setFormData(prev => ({ ...prev, lang: browserLang }))
+        }
     })
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -106,6 +116,49 @@ export function CheckoutModal({ isOpen, onClose, slug, title, price }: CheckoutM
 
                         {/* Body */}
                         <div className="p-6">
+                            {/* How to Purchase Guide */}
+                            <div className="mb-6 rounded-lg border border-white/10 bg-white/5 overflow-hidden">
+                                <button
+                                    onClick={() => setAccordionOpen(!accordionOpen)}
+                                    className="w-full flex items-center justify-between p-3 text-sm font-medium text-zinc-300 hover:bg-white/5 transition-colors"
+                                >
+                                    <span className="flex items-center gap-2">
+                                        <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs">?</div>
+                                        How to Purchase
+                                    </span>
+                                    <span className={`transform transition-transform ${accordionOpen ? 'rotate-180' : ''}`}>▼</span>
+                                </button>
+                                <AnimatePresence>
+                                    {accordionOpen && (
+                                        <motion.div
+                                            initial={{ height: 0 }}
+                                            animate={{ height: 'auto' }}
+                                            exit={{ height: 0 }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="p-3 pt-0 text-xs text-zinc-400 space-y-2 border-t border-white/5">
+                                                <div className="flex gap-2">
+                                                    <span className="font-bold text-blue-400">1.</span>
+                                                    <span>Fill in your details below.</span>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    <span className="font-bold text-blue-400">2.</span>
+                                                    <span>Click "Proceed to Payment" to be redirected to secure gateway.</span>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    <span className="font-bold text-blue-400">3.</span>
+                                                    <span>Complete payment (QRIS/Gopay/ShopeePay for ID, PayPal for Intl).</span>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    <span className="font-bold text-blue-400">4.</span>
+                                                    <span>Receive instant access via email.</span>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+
                             {error && (
                                 <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-400">
                                     {error}
@@ -196,7 +249,7 @@ export function CheckoutModal({ isOpen, onClose, slug, title, price }: CheckoutM
 
                                     <p className="text-center text-[10px] text-zinc-500 mt-4 flex items-center justify-center gap-1.5">
                                         <ShieldCheck className="w-3 h-3" />
-                                        Securely processed by Sociabuzz
+                                        Securely processed by Sociabuzz ({formData.lang === 'id' ? 'IDR' : 'USD'})
                                     </p>
                                 </div>
                             </form>

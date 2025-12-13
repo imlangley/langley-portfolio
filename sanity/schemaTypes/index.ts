@@ -37,7 +37,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   // Documents with references
   project,
   testimonial,
-  testimonial,
+
   
   // Singletons
   profile,
@@ -61,5 +61,5 @@ export const documentTypes = [
   'tool',
   'tag',
   'testimonial',
-  'testimonial',
+
 ] as const

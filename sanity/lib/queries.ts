@@ -31,6 +31,10 @@ export const getSiteSettingsQuery = /* groq */ `
       ...,
       asset->
     },
+    favicon {
+      ...,
+      asset->
+    },
     socials[] {
       platform,
       url,

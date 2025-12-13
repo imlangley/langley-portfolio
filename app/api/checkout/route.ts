@@ -1,107 +1,90 @@
-
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import * as cheerio from 'cheerio'
+import { getSociabuzzSession } from '@/lib/sociabuzz'
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
     try {
-        let body;
-        try {
-            body = await req.json();
-        } catch (e) {
-            console.error('JSON Parse Error:', e);
-            return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+        const body = await req.json()
+        const { slug, fullname, email, whatsapp, lang = 'id' } = body
+
+        if (!slug || !fullname || !email) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
         }
 
-        const { slug, fullname, email, whatsapp } = body
+        // 1. Get a fresh session specifically for the requested language
+        // This ensures Sociabuzz treats the user as ID (Rupiah) or Intl (USD)
+        const { cookies: sessionCookies, csrfToken: sessionCsrf } = await getSociabuzzSession(lang)
+        
+        console.log(`[Checkout] Initialized session for lang=${lang}. Got cookies: ${!!sessionCookies}, csrf: ${!!sessionCsrf}`)
 
-        if (!slug || !email || !fullname) {
-            return NextResponse.json(
-                { error: 'Missing required fields' },
-                { status: 400 }
-            )
-        }
-
-        const targetUrl = `https://sociabuzz.com/langlieyy/p/${slug}/buy`
-
-        // Step 1: GET request to establish session and get CSRF token
-        const initialRes = await fetch(targetUrl, {
+        // 2. Fetch the "Buy" page using this session to get the form-specific CSRF token 
+        // (Sociabuzz sometimes rotates tokens or requires a fresh visit)
+        const buyUrl = `https://sociabuzz.com/langlieyy/p/${slug}/buy`
+        const pageRes = await fetch(buyUrl, {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'X-Requested-With': 'XMLHttpRequest',
-                'Referer': `https://sociabuzz.com/langlieyy/p/${slug}`,
+                'Cookie': sessionCookies
             }
         })
 
-        const initialHtml = await initialRes.text()
-        const cookies = initialRes.headers.get('set-cookie') || ''
-        
-        // Extract CSRF token
-        const $ = cheerio.load(initialHtml)
-        const csrfToken = $('input[name="sb_token_csrf"]').val() as string
-
-        if (!csrfToken) {
-            console.error('Failed to extract CSRF token')
-            return NextResponse.json(
-                { error: 'Failed to initialize checkout session' },
-                { status: 502 }
-            )
+        if (!pageRes.ok) {
+            throw new Error(`Failed to fetch buy page: ${pageRes.status}`)
         }
 
-        // Step 2: POST request to submit form
-        const formData = new FormData()
-        formData.append('fullname', fullname)
-        formData.append('email', email)
-        formData.append('whatsapp', whatsapp || '') // Optional
-        formData.append('address', '')
-        formData.append('sb_token_csrf', csrfToken)
-        formData.append('prev_url', targetUrl) // Mimic origin
-        formData.append('years18', '1') // Auto-check 18+
+        // Parse CSRF token from the page itself as a fallback/confirmation
+        const html = await pageRes.text()
+        const $ = cheerio.load(html)
+        const pageCsrfToken = $('input[name="csrf_test_name"]').val() as string
+        
+        // Use the token from the page if available, otherwise fallback to the one from cookies
+        const finalCsrfToken = pageCsrfToken || sessionCsrf
 
-        const submitRes = await fetch(targetUrl, {
+        if (!finalCsrfToken) {
+            console.error('[Checkout] Failed to find CSRF token')
+            throw new Error('Payment gateway initialization failed (CSRF)')
+        }
+
+        // 3. Submit the checkout form using the SAME session
+        const formData = new URLSearchParams()
+        formData.append('csrf_test_name', finalCsrfToken)
+        formData.append('data[name]', fullname)
+        formData.append('data[message]', '') // Optional message
+        formData.append('data[email]', email)
+        formData.append('data[whatsapp]', whatsapp || '')
+        formData.append('data[amount_custom]', '') // For custom items
+        
+        // IMPORTANT: The session cookie must be passed here to maintain the language/currency context
+        const buyRes = await fetch(buyUrl, {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'X-Requested-With': 'XMLHttpRequest',
-                'Cookie': cookies, // Pass the session cookie
-                // Note: fetch automatically sets Content-Type for FormData
+                'Cookie': sessionCookies,
+                'Origin': 'https://sociabuzz.com',
+                'Referer': buyUrl
             },
             body: formData
         })
 
-        const result = await submitRes.json()
+        const buyData = await buyRes.json()
 
-        if (result.success === 'true' && result.content?.redirect) {
-            // Clean cookies: remove attributes like Path, HttpOnly, and ensure semicolon separation
-            const rawCookies = submitRes.headers.get('set-cookie') || cookies || ''
-            const cleanCookies = rawCookies
-                .split(',') // Split multiple cookies
-                .map(c => c.split(';')[0].trim()) // Keep only 'name=value' part
-                .join('; ') // Join with semicolons for Cookie header
-            
-            return NextResponse.json({ 
-                success: true, 
-                redirectUrl: result.content.redirect,
-                sessionCookie: cleanCookies 
-            })
-        } else {
-            console.error('Sociabuzz Error:', result)
-            // Extract validation errors if present
-             let errorMessage = 'Checkout failed'
-             if (result.validates) {
-                 const errors = Object.values(result.validates).filter(Boolean).join(', ')
-                 if (errors) errorMessage = errors
-             }
-
-            return NextResponse.json(
-                { error: errorMessage, details: result },
-                { status: 400 }
-            )
+        if (buyData.status !== 'success') {
+            console.error('[Checkout] Sociabuzz error:', buyData)
+            throw new Error(buyData.message || 'Payment processing failed')
         }
 
-    } catch (error) {
-        console.error('Checkout Proxy Error:', error)
+        // Return the redirect URL and the session cookie so the client can follow it if needed 
+        // (though usually just redirecting to the URL is enough)
+        return NextResponse.json({ 
+            redirectUrl: buyData.redirect_url,
+            // Pass the session cookie back to client so they can carry the session if needed (optional)
+            sessionCookie: sessionCookies
+        })
+
+    } catch (error: any) {
+        console.error('[Checkout] Error:', error)
         return NextResponse.json(
-            { error: 'Internal Server Error' },
+            { error: error.message || 'Internal server error' },
             { status: 500 }
         )
     }
