@@ -24,21 +24,21 @@ export function ShimmerButton({
     const buttonContent = (
         <>
             {/* Shimmer effect using framer motion */}
-            <motion.span 
+            <motion.span
                 className="absolute inset-0 overflow-hidden rounded-xl"
                 initial={false}
             >
-                <motion.span 
+                <motion.span
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                     animate={{ x: ['-100%', '100%'] }}
-                    transition={{ 
-                        duration: 2, 
+                    transition={{
+                        duration: 2,
                         repeat: Infinity,
                         ease: 'linear'
                     }}
                 />
             </motion.span>
-            
+
             {/* Content */}
             <span className="relative z-10 flex items-center gap-2">
                 {children}
@@ -57,7 +57,7 @@ export function ShimmerButton({
         disabled:opacity-50 disabled:cursor-not-allowed
         ${className}
     `
-    
+
     if (href) {
         return (
             <motion.div
@@ -75,8 +75,9 @@ export function ShimmerButton({
     return (
         <motion.div
             className="relative w-full md:w-auto"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={disabled ? undefined : { scale: 1.02 }}
+            whileTap={disabled ? undefined : { scale: 0.98 }}
+            style={{ pointerEvents: disabled ? 'none' : 'auto' }}
         >
             <button
                 onClick={onClick}

@@ -14,7 +14,7 @@ import type { SchemaTypeDefinition } from 'sanity'
 import { socialLink, galleryItem, faqItem } from './objects'
 
 // Document schemas (regular content)
-import { tag, tool, projectCategory, project, testimonial, service } from './documents'
+import { tag, tool, projectCategory, project, testimonial } from './documents'
 
 // Singleton schemas (single-instance documents)
 import { profile, siteSettings, faq } from './singletons'
@@ -37,7 +37,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   // Documents with references
   project,
   testimonial,
-  service,
+  testimonial,
   
   // Singletons
   profile,
@@ -61,5 +61,5 @@ export const documentTypes = [
   'tool',
   'tag',
   'testimonial',
-  'service',
+  'testimonial',
 ] as const

@@ -15,7 +15,8 @@ import {
     Twitter,
     Sparkles,
     Terminal,
-    Palette
+    Palette,
+    ShoppingBag
 } from 'lucide-react'
 
 export function CommandMenuWrapper() {
@@ -59,6 +60,15 @@ export function CommandMenuWrapper() {
             icon: <Mail className="w-4 h-4" />,
             shortcut: ['G', 'C'],
             action: () => router.push('/contact'),
+            category: 'Navigation',
+        },
+        {
+            id: 'shop',
+            title: 'Go to Shop',
+            description: 'Browse digital assets',
+            icon: <ShoppingBag className="w-4 h-4" />,
+            shortcut: ['G', 'S'],
+            action: () => router.push('/shop'),
             category: 'Navigation',
         },
 

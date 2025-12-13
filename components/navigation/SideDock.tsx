@@ -5,7 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCursor } from '@/context/CursorContext'
-import { Home, FolderOpen, User, Mail } from 'lucide-react'
+import { Home, FolderOpen, User, Mail, ShoppingBag } from 'lucide-react'
 import { GlassSurface } from '@/components/reactbits/GlassSurface'
 
 interface DockItemProps {
@@ -104,6 +104,7 @@ const defaultNavItems: NavItem[] = [
     { href: '/', label: 'Home', icon: <Home className="w-5 h-5" /> },
     { href: '/projects', label: 'Projects', icon: <FolderOpen className="w-5 h-5" /> },
     { href: '/about', label: 'About', icon: <User className="w-5 h-5" /> },
+    { href: '/shop', label: 'Shop', icon: <ShoppingBag className="w-5 h-5" /> },
     { href: '/contact', label: 'Contact', icon: <Mail className="w-5 h-5" /> },
 ]
 
