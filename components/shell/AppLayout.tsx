@@ -11,38 +11,14 @@ import { useCursor } from '@/context/CursorContext'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, FolderOpen, User, Mail, Settings } from 'lucide-react'
+import { MobileDock } from '@/components/navigation/MobileDock'
 
 export interface AppLayoutProps {
     children: ReactNode
 }
 
 // Mobile navigation link component
-function MobileNavLink({ href, label }: { href: string; label: string }) {
-    const pathname = usePathname()
-    const isActive = pathname === href
-
-    const icons: Record<string, React.ReactNode> = {
-        'Home': <Home className="w-5 h-5" />,
-        'Projects': <FolderOpen className="w-5 h-5" />,
-        'About': <User className="w-5 h-5" />,
-        'Contact': <Mail className="w-5 h-5" />,
-        'Studio': <Settings className="w-5 h-5" />,
-    }
-
-    return (
-        <Link
-            href={href}
-            data-testid={`mobile-nav-${label.toLowerCase()}`}
-            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-all ${isActive
-                ? 'text-primary bg-shell-active'
-                : 'text-shell-text-muted hover:text-shell-text'
-                }`}
-        >
-            {icons[label]}
-            <span className="text-[9px] font-medium uppercase tracking-wider">{label}</span>
-        </Link>
-    )
-}
+// MobileNavLink removed in favor of MobileDock
 
 export function AppLayout({ children }: AppLayoutProps) {
     const { setCursorVariant } = useCursor()
@@ -95,16 +71,10 @@ export function AppLayout({ children }: AppLayoutProps) {
                 <StatusBar />
             </div>
 
-            {/* Mobile Bottom Bar (Navigation) */}
-            <nav
-                className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-shell-bg/95 backdrop-blur-xl border-t border-shell-border flex items-center justify-around z-50"
-                aria-label="Mobile navigation"
-            >
-                <MobileNavLink href="/" label="Home" />
-                <MobileNavLink href="/projects" label="Projects" />
-                <MobileNavLink href="/about" label="About" />
-                <MobileNavLink href="/contact" label="Contact" />
-            </nav>
+            {/* Mobile Bottom Dock */}
+            <div className="md:hidden">
+                <MobileDock />
+            </div>
         </div>
     )
 }

@@ -13,7 +13,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const project = await getProjectBySlug(slug)
     const siteSettings = await getSiteSettings()
 
-    if (!project) return {}
+    if (!project) {
+        return {
+            title: 'Project Not Found',
+            description: 'The requested project could not be found.'
+        }
+    }
 
     const ogImage = project.coverImage ? urlFor(project.coverImage).width(1200).height(630).url() : undefined
 

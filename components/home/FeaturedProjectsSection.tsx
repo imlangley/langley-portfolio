@@ -172,7 +172,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                         ) : (
-                            <div 
+                            <div
                                 className="w-full h-full flex items-center justify-center"
                                 style={{ backgroundColor: project.accentColor || '#252525' }}
                             >
@@ -204,7 +204,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                         <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                             {project.title}
                         </h3>
-                        
+
                         <p className="text-muted-foreground text-sm line-clamp-2 mb-4 flex-1">
                             {project.summary || 'A creative project showcasing design and development skills.'}
                         </p>
@@ -229,7 +229,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                         )}
 
                         {/* Accent bar */}
-                        <div 
+                        <div
                             className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity"
                             style={{ backgroundColor: project.accentColor || '#3b82f6' }}
                         />

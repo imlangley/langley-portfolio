@@ -1,4 +1,4 @@
-import { getProfile, getFaq, getTools, getTestimonials } from '@/sanity/lib'
+import { getProfile, getFaq, getTools, getTestimonials, getAllProjects } from '@/sanity/lib/fetch'
 import { urlFor } from '@/sanity/lib/image'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
@@ -14,23 +14,28 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function AboutPage() {
-    const [profile, faq, tools, testimonials] = await Promise.all([
+    const [profile, faq, tools, testimonials, projects] = await Promise.all([
         getProfile(),
         getFaq(),
         getTools(),
-        getTestimonials()
+        getTestimonials(),
+        getAllProjects()
     ])
 
     const displayName = profile?.name || "Langley"
     const displayRole = profile?.role || "Video Editor / Developer"
-    
+
+    // Calculate stats
+    const yearsExperience = new Date().getFullYear() - 2020
+    const projectsCount = projects?.length || 50
+
     // Convert tools to client-friendly format
     const toolsData = tools?.map(tool => ({
         _id: tool._id,
         name: tool.name,
         iconUrl: tool.icon ? urlFor(tool.icon).width(32).height(32).url() : null
     })) || []
-    
+
     // Convert testimonials to client-friendly format  
     const testimonialsData = testimonials?.map(t => ({
         _id: t._id,
@@ -39,9 +44,9 @@ export default async function AboutPage() {
         testimonialBody: t.testimonialBody,
         avatarUrl: t.avatarImage ? urlFor(t.avatarImage).width(80).height(80).url() : null
     })) || []
-    
+
     // Avatar URL
-    const avatarUrl = profile?.avatarImage 
+    const avatarUrl = profile?.avatarImage
         ? urlFor(profile.avatarImage).width(400).height(400).url()
         : null
 
@@ -55,6 +60,8 @@ export default async function AboutPage() {
             faqItems={faq?.items}
             tools={toolsData}
             testimonials={testimonialsData}
+            projectsCount={projectsCount}
+            yearsExperience={yearsExperience}
         />
     )
 }

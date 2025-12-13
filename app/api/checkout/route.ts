@@ -4,7 +4,14 @@ import * as cheerio from 'cheerio'
 
 export async function POST(req: NextRequest) {
     try {
-        const body = await req.json()
+        let body;
+        try {
+            body = await req.json();
+        } catch (e) {
+            console.error('JSON Parse Error:', e);
+            return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+        }
+
         const { slug, fullname, email, whatsapp } = body
 
         if (!slug || !email || !fullname) {

@@ -76,7 +76,7 @@ export function ToolsSection({ tools }: ToolsSectionProps) {
                 {/* Tools Marquee/Grid */}
                 <div className="space-y-4">
                     {rows.map((row, rowIndex) => (
-                        <ToolRow 
+                        <ToolRow
                             key={rowIndex}
                             tools={row}
                             direction={rowIndex % 2 === 0 ? 'left' : 'right'}

@@ -68,7 +68,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     {/* Left: Image */}
-                    <div className="sticky top-24">
+                    <div className="lg:sticky lg:top-24">
                         <TiltedCard
                             rotateAmplitude={5}
                             scaleOnHover={1.02}

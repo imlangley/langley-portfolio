@@ -2,17 +2,33 @@
 
 import Link from 'next/link'
 import { motion } from 'motion/react'
-import { Github, Twitter, Linkedin, Instagram, Folder, Film, Layers, Monitor, Cpu, ExternalLink } from 'lucide-react'
+import { Github, Twitter, Linkedin, Instagram, Folder, Film, Layers, Monitor, Cpu, ExternalLink, Globe } from 'lucide-react'
 
-export function Footer() {
+// Helper to map platform names to icons
+const getSocialIcon = (platform: string) => {
+    switch (platform?.toLowerCase()) {
+        case 'github': return Github
+        case 'twitter': return Twitter
+        case 'linkedin': return Linkedin
+        case 'instagram': return Instagram
+        default: return Globe
+    }
+}
+
+interface FooterProps {
+
+    siteSettings?: any
+}
+
+export function Footer({ siteSettings }: FooterProps) {
     const currentYear = new Date().getFullYear()
 
-    const SOCIALS = [
-        { label: 'GitHub', href: 'https://github.com/imlangley', icon: Github },
-        { label: 'Twitter', href: 'https://twitter.com', icon: Twitter },
-        { label: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
-        { label: 'Instagram', href: 'https://instagram.com', icon: Instagram },
-    ]
+    const SOCIALS = siteSettings?.socials?.map((social: any) => ({
+        label: social.label,
+        href: social.url,
+        // Map platform string to icon component dynamically or fallback
+        icon: getSocialIcon(social.platform),
+    })) || []
 
     // After Effects style compositions
     const COMPOSITIONS = [
@@ -147,9 +163,9 @@ export function Footer() {
                             <div className="h-px bg-shell-border flex-1" />
                         </h4>
                         <nav className="flex gap-2" aria-label="Social media links">
-                            {SOCIALS.map((social) => (
+                            {SOCIALS.map((social: { label: string; href: string; icon: any }, i: number) => (
                                 <motion.a
-                                    key={social.label}
+                                    key={social.label || i}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -166,7 +182,7 @@ export function Footer() {
 
                     {/* Copyright */}
                     <div className="pt-3 border-t border-shell-border flex items-center justify-between text-[10px] text-shell-text-muted font-mono">
-                        <span>© {currentYear} Langley</span>
+                        <span>© {currentYear} {siteSettings?.footerText || 'Langley'}</span>
                         <span className="flex items-center gap-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#9999FF]" />
                             v2.0.4 [AE]
@@ -177,7 +193,7 @@ export function Footer() {
             </div>
 
             {/* Mobile bottom spacing to account for fixed bottom navigation */}
-            <div className="h-17 md:h-6 bg-shell-surface shrink-0" />
+            <div className="md:h-6 bg-shell-surface shrink-0" />
         </footer>
     )
 }

@@ -2,7 +2,7 @@
 
 import { TextReveal, SlideIn } from '@/components/ui/TextReveal'
 import Link from 'next/link'
-import { ArrowRight, Play, Layers, Clock, Film, ChevronDown, Sparkles, Code2, Video } from 'lucide-react'
+import { ArrowRight, Play, Layers, Clock, Film, ChevronDown, Sparkles, Code2, Video, ShoppingBag } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
 import { useCursor } from '@/context/CursorContext'
@@ -19,9 +19,10 @@ import {
 interface HeroProps {
     siteSettings?: any
     profile?: any
+    tools?: any[]
 }
 
-export function Hero({ siteSettings, profile }: HeroProps) {
+export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
     const containerRef = useRef<HTMLDivElement>(null)
     const { setCursorVariant } = useCursor()
 
@@ -42,7 +43,10 @@ export function Hero({ siteSettings, profile }: HeroProps) {
         }
     }
 
-    const roles = ['Video Editor', 'Web Developer', 'Motion Designer', 'Creative Technologist']
+    // Dynamic Data Mapping
+    const roles = profile?.role ? profile.role.split('&').map((r: string) => r.trim()) : ['Creative Developer']
+    const techStack = tools?.slice(0, 5).map(t => t.name) || ['Next.js', 'React', 'TypeScript']
+    const bioText = siteSettings?.heroSubtitle || profile?.shortBio || "Crafting immersive digital experiences."
 
     return (
         <section
@@ -120,15 +124,21 @@ export function Hero({ siteSettings, profile }: HeroProps) {
                 {/* Main Headline with Rotating Text */}
                 <SlideIn delay={0.2} className="mb-6">
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter">
-                        <span className="text-foreground">I'm a </span>
-                        <RotatingText
-                            texts={roles}
-                            rotationInterval={2500}
-                            staggerDuration={0.02}
-                            staggerFrom="first"
-                            mainClassName="text-blue-400"
-                            elementLevelClassName="hover:text-purple-400 transition-colors"
-                        />
+                        <span className="text-foreground">{siteSettings?.heroTitle || "I'm a "}</span>
+                        <div className="hidden md:block mt-2">
+                            <RotatingText
+                                texts={roles}
+                                rotationInterval={2500}
+                                staggerDuration={0.02}
+                                staggerFrom="first"
+                                mainClassName="text-blue-400"
+                                elementLevelClassName="hover:text-purple-400 transition-colors"
+                            />
+                        </div>
+                        {/* Mobile Static Fallback for Rotating Text */}
+                        <div className="md:hidden mt-2 text-blue-400">
+                            {roles[0]}
+                        </div>
                     </h1>
                 </SlideIn>
 
@@ -136,7 +146,7 @@ export function Hero({ siteSettings, profile }: HeroProps) {
                 <SlideIn delay={0.4} className="mb-8">
                     <div className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl leading-relaxed mx-auto">
                         <BlurText
-                            text="Crafting immersive digital experiences where motion graphics precision meets modern web engineering."
+                            text={bioText}
                             delay={30}
                             animateBy="words"
                             direction="bottom"
@@ -147,7 +157,7 @@ export function Hero({ siteSettings, profile }: HeroProps) {
 
                 {/* Tech Stack Pills */}
                 <SlideIn delay={0.5} className="flex flex-wrap justify-center gap-3 mb-10">
-                    {['After Effects', 'Next.js', 'TypeScript', 'Framer Motion', 'Premiere Pro'].map(
+                    {techStack.map(
                         (tech, i) => (
                             <motion.span
                                 key={tech}
@@ -191,40 +201,19 @@ export function Hero({ siteSettings, profile }: HeroProps) {
 
                     <Magnet padding={20} magnetStrength={0.2}>
                         <Link
-                            href="/contact"
+                            href="/shop"
                             onMouseEnter={() => setCursorVariant('button')}
                             onMouseLeave={() => setCursorVariant('default')}
                             className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-border hover:border-primary/50 text-foreground hover:text-primary transition-all bg-card/50 backdrop-blur-sm"
                         >
-                            <Sparkles className="w-5 h-5" />
-                            Let's Talk
+                            <ShoppingBag className="w-5 h-5" />
+                            Visit Shop
                         </Link>
                     </Magnet>
                 </SlideIn>
 
-                {/* Stats Row */}
-                <SlideIn delay={0.9} className="mt-16 grid grid-cols-3 gap-8 md:gap-16">
-                    {[
-                        { value: '5+', label: 'Years Experience' },
-                        { value: '50+', label: 'Projects Completed' },
-                        { value: '30+', label: 'Happy Clients' },
-                    ].map((stat, i) => (
-                        <motion.div
-                            key={stat.label}
-                            className="text-center"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 1 + i * 0.1 }}
-                        >
-                            <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                                {stat.value}
-                            </div>
-                            <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">
-                                {stat.label}
-                            </div>
-                        </motion.div>
-                    ))}
-                </SlideIn>
+                {/* Stats Row REMOVED - Preventing fake data as per user request */}
+
             </motion.div>
 
             {/* Scroll Indicator */}

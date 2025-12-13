@@ -44,15 +44,9 @@ interface AboutPageClientProps {
     faqItems?: FaqItem[]
     tools: Tool[]
     testimonials: Testimonial[]
+    projectsCount: number
+    yearsExperience: number
 }
-
-// Stats for the counter animations
-const stats = [
-    { value: 50, label: 'Projects', suffix: '+' },
-    { value: 5, label: 'Years Experience', suffix: '+' },
-    { value: 100, label: 'Happy Clients', suffix: '%' },
-    { value: 24, label: 'Hour Support', suffix: '/7' },
-]
 
 export function AboutPageClient({
     displayName,
@@ -62,8 +56,18 @@ export function AboutPageClient({
     longBio,
     faqItems,
     tools,
-    testimonials
+    testimonials,
+    projectsCount,
+    yearsExperience
 }: AboutPageClientProps) {
+
+    // Stats for the counter animations
+    const stats = [
+        { value: projectsCount, label: 'Projects', suffix: '+' },
+        { value: yearsExperience, label: 'Years Experience', suffix: '+' },
+        { value: 100, label: 'Happy Clients', suffix: '%' },
+        { value: 24, label: 'Hour Support', suffix: '/7' },
+    ]
 
     // Convert FAQ items to accordion format
     const accordionItems = faqItems?.map((item, i) => ({

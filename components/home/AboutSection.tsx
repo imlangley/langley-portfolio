@@ -6,21 +6,26 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { SplitText, Magnet, ShinyText } from '@/components/reactbits'
 import { urlFor } from '@/sanity/lib/image'
-import type { Profile } from '@/sanity/lib/fetch'
+import type { Profile, Tool } from '@/sanity/lib/fetch'
 import { useCursor } from '@/context/CursorContext'
 
 interface AboutSectionProps {
     profile: Profile | null
+    tools: Tool[]
 }
 
-export function AboutSection({ profile }: AboutSectionProps) {
+export function AboutSection({ profile, tools }: AboutSectionProps) {
     const { setCursorVariant } = useCursor()
 
     if (!profile) {
         return null
     }
 
-    const skills = ['Video Editing', 'Motion Graphics', 'Web Development', 'Creative Direction']
+    // Use tools as skills, fallback to default if empty (but avoid hardcoding specific roles if possible)
+    // Taking first 6 tools as "skills" or "top tech"
+    const skills = tools.length > 0
+        ? tools.slice(0, 5).map(t => t.name)
+        : ['Video Editing', 'Motion Graphics', 'Web Development', 'Creative Direction']
 
     return (
         <section className="relative py-24 px-6">
@@ -44,7 +49,7 @@ export function AboutSection({ profile }: AboutSectionProps) {
                             {/* Decorative frame */}
                             <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl" />
                             <div className="absolute -inset-2 border border-border rounded-xl" />
-                            
+
                             {/* Main image container */}
                             <div className="relative aspect-square rounded-lg overflow-hidden bg-card border border-border">
                                 {profile.avatarImage?.asset ? (

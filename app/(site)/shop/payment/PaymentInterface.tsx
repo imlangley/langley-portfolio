@@ -331,8 +331,8 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                                                     : 'bg-black/20 border-white/5 hover:border-white/10 hover:bg-white/5'
                                                     }`}
                                             >
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-8 relative bg-white rounded flex items-center justify-center p-1">
+                                                <div className="flex items-center gap-4 flex-1 min-w-0">
+                                                    <div className="w-12 h-8 relative bg-white rounded flex-shrink-0 flex items-center justify-center p-1">
                                                         {/* Use the scraped icon URL */}
                                                         {method.icon || method.logo ? (
                                                             <img
@@ -344,18 +344,18 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                                                             <div className="w-full h-full bg-zinc-200 rounded" />
                                                         )}
                                                     </div>
-                                                    <div className="text-left">
-                                                        <div className="text-sm font-medium text-white">
+                                                    <div className="text-left min-w-0">
+                                                        <div className="text-sm font-medium text-white truncate">
                                                             {method.alias || method.name}
                                                         </div>
                                                         {method.total_fee && parseFloat(method.total_fee) > 0 && (
-                                                            <div className="text-xs text-zinc-500">
+                                                            <div className="text-xs text-zinc-500 truncate">
                                                                 Fee: {config.currency_def} {method.total_fee}
                                                             </div>
                                                         )}
                                                     </div>
                                                 </div>
-                                                <div className="text-right">
+                                                <div className="text-right flex-shrink-0 ml-2">
                                                     <div className="text-sm font-bold text-white">
                                                         {paymentData.currency_convert} {method.total_pay}
                                                     </div>

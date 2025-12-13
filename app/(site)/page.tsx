@@ -23,8 +23,8 @@ export default async function HomePage() {
 
     return (
         <>
-            <Hero siteSettings={settings} profile={profile} />
-            <AboutSection profile={profile} />
+            <Hero siteSettings={settings} profile={profile} tools={tools} />
+            <AboutSection profile={profile} tools={tools} />
             <FeaturedProjectsSection projects={projects} />
             <ToolsSection tools={tools} />
         </>

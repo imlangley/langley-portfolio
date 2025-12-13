@@ -14,11 +14,15 @@ import { AppLayout } from '@/components/shell/AppLayout'
 import { ScrollProgress } from '@/components/reactbits/ScrollProgress'
 import { CommandMenuWrapper } from '@/components/global/CommandMenuWrapper'
 
-export default function SiteLayout({
+import { getSiteSettings } from '@/sanity/lib/fetch'
+
+export default async function SiteLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
+    const siteSettings = await getSiteSettings()
+
     return (
         <>
             {/* Scroll Progress Indicator */}
@@ -33,7 +37,7 @@ export default function SiteLayout({
                     <main className="flex-1">
                         {children}
                     </main>
-                    <Footer />
+                    <Footer siteSettings={siteSettings} />
                 </div>
             </AppLayout>
         </>
