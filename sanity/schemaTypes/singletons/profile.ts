@@ -32,13 +32,12 @@ export const profile = defineType({
       title: 'Short Bio',
       type: 'text',
       description: '1-2 sentence tagline for headers and cards',
-      rows: 2,
       validation: (Rule) => Rule.max(200),
     }),
     defineField({
       name: 'longBio',
       title: 'Long Bio',
-      type: 'array',
+      type: 'array' as const,
       description: 'Extended biography for the About page',
       of: [
         {
@@ -87,7 +86,7 @@ export const profile = defineType({
     defineField({
       name: 'socials',
       title: 'Social Links',
-      type: 'array',
+      type: 'array' as const,
       description: 'Your social media profiles',
       of: [{ type: 'socialLink' }],
     }),

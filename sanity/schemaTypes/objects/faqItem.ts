@@ -22,7 +22,7 @@ export const faqItem = defineType({
     defineField({
       name: 'answer',
       title: 'Answer',
-      type: 'array',
+      type: 'array' as const,
       description: 'Rich text answer',
       of: [
         {

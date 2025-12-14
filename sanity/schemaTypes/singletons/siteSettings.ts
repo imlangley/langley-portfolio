@@ -39,7 +39,6 @@ export const siteSettings = defineType({
       type: 'text',
       group: 'general',
       description: 'Default meta description for search engines',
-      rows: 2,
       validation: (Rule) => Rule.required().max(160),
     }),
     defineField({
@@ -85,7 +84,7 @@ export const siteSettings = defineType({
     defineField({
       name: 'socials',
       title: 'Social Links',
-      type: 'array',
+      type: 'array' as const,
       group: 'social',
       description: 'Site-wide social media links (shown in header/footer)',
       of: [{ type: 'socialLink' }],

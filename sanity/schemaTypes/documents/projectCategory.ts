@@ -37,7 +37,7 @@ export const projectCategory = defineType({
       title: 'Description',
       type: 'text',
       description: 'Brief description of this category',
-      rows: 2,
+
     }),
     defineField({
       name: 'order',

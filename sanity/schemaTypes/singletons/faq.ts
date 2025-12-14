@@ -17,7 +17,7 @@ export const faq = defineType({
     defineField({
       name: 'items',
       title: 'FAQ Items',
-      type: 'array',
+      type: 'array' as const,
       description: 'Add questions and answers',
       of: [{ type: 'faqItem' }],
     }),

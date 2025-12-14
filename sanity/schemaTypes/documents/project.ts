@@ -54,13 +54,12 @@ export const project = defineType({
       type: 'text',
       group: 'content',
       description: 'Short 1-2 sentence description for cards. Max 280 characters.',
-      rows: 2,
       validation: (Rule) => Rule.required().max(280),
     }),
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'array',
+      type: 'array' as const,
       group: 'content',
       description: 'Rich case-study content with headings, images, and code blocks',
       of: [
@@ -124,7 +123,7 @@ export const project = defineType({
     defineField({
       name: 'coverImage',
       title: 'Cover Image',
-      type: 'image',
+      type: 'image' as const,
       group: 'media',
       description: 'Hero image. Recommended: 1920×1080 (16:9). Set the focal point.',
       options: {
@@ -143,7 +142,7 @@ export const project = defineType({
     defineField({
       name: 'gallery',
       title: 'Gallery',
-      type: 'array',
+      type: 'array' as const,
       group: 'media',
       description: 'Additional images and videos for the project',
       of: [{ type: 'galleryItem' }],
@@ -192,7 +191,7 @@ export const project = defineType({
     defineField({
       name: 'category',
       title: 'Category',
-      type: 'reference',
+      type: 'reference' as const,
       group: 'metadata',
       description: 'Optional sub-category (e.g., "Landing Pages", "Music Videos")',
       to: [{ type: 'projectCategory' }],
@@ -200,7 +199,7 @@ export const project = defineType({
     defineField({
       name: 'tools',
       title: 'Tools & Stack',
-      type: 'array',
+      type: 'array' as const,
       group: 'metadata',
       description: 'Technologies and software used',
       of: [{ type: 'reference', to: [{ type: 'tool' }] }],
@@ -208,7 +207,7 @@ export const project = defineType({
     defineField({
       name: 'tags',
       title: 'Tags',
-      type: 'array',
+      type: 'array' as const,
       group: 'metadata',
       description: 'Freeform tags for filtering',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, CreditCard, Wallet, Smartphone, ShieldCheck, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { ShimmerButton } from '@/components/reactbits';
-import { QRCodeSVG } from 'qrcode.react';
+// import { QRCodeSVG } from 'qrcode.react';
 
 interface PaymentMethod {
     name: string;
@@ -207,10 +207,13 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                             <p className="text-zinc-400 text-sm">Please complete your payment.</p>
                         </div>
 
-                        {/* QRIS Display */}
+                        {/* QRIS Display - QRCodeSVG package missing, commented out */}
                         {paymentResult.payment_method === 'qris' && paymentResult.data?.qr_string && (
                             <div className="flex flex-col items-center space-y-4 bg-white p-4 rounded-xl">
-                                <QRCodeSVG value={paymentResult.data.qr_string} size={200} />
+                                {/* <QRCodeSVG value={paymentResult.data.qr_string} size={200} /> */}
+                                <div className="w-[200px] h-[200px] bg-gray-200 flex items-center justify-center text-black text-xs text-center p-2">
+                                    QR Code Placeholder (Package Missing)
+                                </div>
                                 <p className="text-black font-mono text-sm font-bold">Scan with any QRIS app</p>
                             </div>
                         )}
