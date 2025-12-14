@@ -17,23 +17,16 @@ import { cn } from '@/lib/utils'
 import { CursorProvider } from '@/context/CursorContext'
 import { TargetCursor } from '@/components/reactbits'
 
-import { getSiteSettings } from '@/sanity/lib/fetch'
-import { urlFor } from '@/sanity/lib/image'
-
 import type { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
-export async function generateMetadata(): Promise<Metadata> {
-    const siteSettings = await getSiteSettings()
-
-    return {
-        title: siteSettings?.siteTitle || 'Langley | Developer & Editor',
-        description: siteSettings?.siteDescription || 'Portfolio of web development and video editing work.',
-        icons: {
-            icon: siteSettings?.favicon ? urlFor(siteSettings.favicon).width(128).height(128).url() : '/favicon.ico',
-        },
-    }
+export const metadata: Metadata = {
+    title: 'Langley | Developer & Editor',
+    description: 'Portfolio of web development and video editing work.',
+    icons: {
+        icon: '/favicon.ico',
+    },
 }
 
 export default async function RootLayout({

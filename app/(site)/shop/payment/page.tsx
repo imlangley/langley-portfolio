@@ -42,18 +42,40 @@ export default async function PaymentPage({ searchParams }: PageProps) {
     }
 
     // Extract variables from the script tag
+    // We look for the main config script which usually contains base_url
     const scriptContent = $('script').filter((i, el) => {
-        return $(el).html()?.includes('const base_url') || false;
+        const content = $(el).html() || '';
+        return content.includes('base_url') && content.includes('token');
     }).html();
 
     if (!scriptContent) {
+        console.error('Failed to parse payment page script. HTML preview:', html.substring(0, 500));
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen text-center p-6 space-y-4">
-                <div className="text-red-500 font-bold text-xl">Payment Session Expired or Invalid</div>
-                <p className="text-zinc-400">We could not load the payment configuration. The payment may have already been processed.</p>
-                <a href="/shop" className="px-6 py-2 bg-white text-black rounded-lg font-medium hover:bg-zinc-200 transition-colors">
-                    Return to Shop
-                </a>
+            <div className="flex flex-col items-center justify-center min-h-screen text-center p-6 space-y-6">
+                <div className="space-y-2">
+                    <div className="text-red-500 font-bold text-xl">Payment Configuration Error</div>
+                    <p className="text-zinc-400 max-w-md">
+                        We couldn't load the embedded checkout. This usually happens if the session expired or the payment provider updated their system.
+                    </p>
+                </div>
+
+                <div className="flex flex-col gap-3 w-full max-w-xs">
+                    <a
+                        href={paymentUrl}
+                        className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-500 transition-colors flex items-center justify-center gap-2"
+                    >
+                        Continue to Sociabuzz
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                    <a
+                        href="/shop"
+                        className="px-6 py-3 bg-white/5 text-zinc-400 rounded-xl font-medium hover:bg-white/10 transition-colors"
+                    >
+                        Return to Shop
+                    </a>
+                </div>
             </div>
         );
     }
@@ -150,6 +172,39 @@ export default async function PaymentPage({ searchParams }: PageProps) {
     }
 
     const settingData = await settingRes.json();
+
+    // Validate configuration
+    if (!settingData || !settingData.payment_channel) {
+        console.error('Invalid payment configuration:', settingData);
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen text-center p-6 space-y-6">
+                <div className="space-y-2">
+                    <div className="text-red-500 font-bold text-xl">Payment Configuration Error</div>
+                    <p className="text-zinc-400 max-w-md">
+                        We received an invalid response from the payment provider. Please try the direct link below.
+                    </p>
+                </div>
+
+                <div className="flex flex-col gap-3 w-full max-w-xs">
+                    <a
+                        href={paymentUrl}
+                        className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-500 transition-colors flex items-center justify-center gap-2"
+                    >
+                        Continue to Sociabuzz
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                    <a
+                        href="/shop"
+                        className="px-6 py-3 bg-white/5 text-zinc-400 rounded-xl font-medium hover:bg-white/10 transition-colors"
+                    >
+                        Return to Shop
+                    </a>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen pt-24 pb-20 px-4">

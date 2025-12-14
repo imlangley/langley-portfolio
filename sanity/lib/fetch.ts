@@ -62,7 +62,6 @@ export interface SiteSettings {
   heroSubtitle?: string
   heroImage?: SanityImageAsset
   defaultSeoImage: SanityImageAsset
-  favicon?: SanityImageAsset
   socials?: SocialLink[]
   footerText?: string
 }

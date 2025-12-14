@@ -50,13 +50,6 @@ export const siteSettings = defineType({
       description: 'Default OG image for social sharing (recommended: 1200×630)',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'favicon',
-      title: 'Favicon / Browser Icon',
-      type: 'image',
-      group: 'general',
-      description: 'Icon shown in browser tab (recommended: 32x32 or 512x512 PNG)',
-    }),
 
     // ============================================
     // HERO GROUP - Homepage hero content

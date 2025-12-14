@@ -39,6 +39,3 @@ build/
 .sanity/
 .sanity-studio/
 next-env.d.ts
-
-# Unused
-_unused/
