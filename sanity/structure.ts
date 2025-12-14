@@ -74,15 +74,7 @@ export function structure(
                     .defaultOrdering([{ field: 'date', direction: 'desc' }])
                 ),
 
-              // Services
-              S.listItem()
-                .title('Services')
-                .icon(BulbOutlineIcon)
-                .child(
-                  S.documentTypeList('service')
-                    .title('Services')
-                    .defaultOrdering([{ field: 'order', direction: 'asc' }])
-                ),
+
 
               // Testimonials
               S.listItem()
