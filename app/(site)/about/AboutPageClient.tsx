@@ -43,7 +43,6 @@ interface AboutPageClientProps {
     longBio?: any
     faqItems?: FaqItem[]
     tools: Tool[]
-    testimonials: Testimonial[]
     projectsCount: number
     yearsExperience: number
 }
@@ -56,7 +55,6 @@ export function AboutPageClient({
     longBio,
     faqItems,
     tools,
-    testimonials,
     projectsCount,
     yearsExperience
 }: AboutPageClientProps) {
@@ -385,77 +383,7 @@ export function AboutPageClient({
                     </motion.div>
                 )}
 
-                {/* TESTIMONIALS SECTION */}
-                {testimonials.length > 0 && (
-                    <motion.div
-                        className="mt-16"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <div className="text-center mb-8">
-                            <SplitText
-                                text="What Clients Say"
-                                className="text-2xl md:text-3xl font-bold text-foreground"
-                                delay={50}
-                            />
-                        </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {testimonials.map((testimonial, i) => (
-                                <motion.div
-                                    key={testimonial._id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                >
-                                    <TiltedCard
-                                        containerClassName="h-full"
-                                        scaleOnHover={1.02}
-                                        rotateAmplitude={5}
-                                    >
-                                        <div className="bg-card border border-border rounded-xl p-6 space-y-4 h-full">
-                                            <Quote className="w-6 h-6 text-primary opacity-50" />
-                                            <div className="text-sm text-muted-foreground leading-relaxed">
-                                                {typeof testimonial.testimonialBody === 'string' ? (
-                                                    testimonial.testimonialBody
-                                                ) : (
-                                                    <PortableText value={testimonial.testimonialBody} />
-                                                )}
-                                            </div>
-                                            <div className="flex items-center gap-3 pt-4 border-t border-border">
-                                                {testimonial.avatarUrl ? (
-                                                    <Image
-                                                        src={testimonial.avatarUrl}
-                                                        alt={testimonial.name}
-                                                        width={40}
-                                                        height={40}
-                                                        className="rounded-full object-cover"
-                                                    />
-                                                ) : (
-                                                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                                                        <span className="text-sm font-bold text-muted-foreground">
-                                                            {testimonial.name?.[0] || '?'}
-                                                        </span>
-                                                    </div>
-                                                )}
-                                                <div>
-                                                    <div className="font-medium text-foreground text-sm">
-                                                        {testimonial.name}
-                                                    </div>
-                                                    <div className="text-xs text-muted-foreground">
-                                                        {testimonial.role}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </TiltedCard>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
             </div>
         </div>
     )

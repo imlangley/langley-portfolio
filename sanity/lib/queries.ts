@@ -21,16 +21,11 @@ export const getSiteSettingsQuery = /* groq */ `
   *[_type == "siteSettings"][0] {
     siteTitle,
     siteDescription,
+    favicon {
+      asset->
+    },
     heroTitle,
     heroSubtitle,
-    heroImage {
-      ...,
-      asset->
-    },
-    defaultSeoImage {
-      ...,
-      asset->
-    },
     socials[] {
       platform,
       url,
@@ -255,30 +250,7 @@ export const getServicesQuery = /* groq */ `
   }
 `
 
-// ============================================
-// TESTIMONIAL QUERIES
-// ============================================
 
-/**
- * Fetch all testimonials.
- * Includes optional project reference.
- */
-export const getTestimonialsQuery = /* groq */ `
-  *[_type == "testimonial"] {
-    _id,
-    name,
-    role,
-    testimonialBody,
-    project-> {
-      title,
-      "slug": slug.current
-    },
-    avatarImage {
-      ...,
-      asset->
-    }
-  }
-`
 
 // ============================================
 // FAQ QUERIES

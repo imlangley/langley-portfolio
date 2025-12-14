@@ -15,7 +15,7 @@ import {
   getAllProjectSlugsQuery,
   getRelatedProjectsQuery,
   getServicesQuery,
-  getTestimonialsQuery,
+
   getFaqQuery,
   getProjectCategoriesQuery,
   getToolsQuery,
@@ -58,10 +58,9 @@ export interface SanityImageAsset {
 export interface SiteSettings {
   siteTitle: string
   siteDescription: string
+  favicon?: SanityImageAsset
   heroTitle?: string
   heroSubtitle?: string
-  heroImage?: SanityImageAsset
-  defaultSeoImage: SanityImageAsset
   socials?: SocialLink[]
   footerText?: string
 }
@@ -151,17 +150,7 @@ export interface Service {
   order?: number
 }
 
-export interface Testimonial {
-  _id: string
-  name: string
-  role?: string
-  testimonialBody: string
-  project?: {
-    title: string
-    slug: string
-  }
-  avatarImage?: SanityImageAsset
-}
+
 
 export interface FaqItem {
   question: string
@@ -274,12 +263,7 @@ export async function getServices(preview = false): Promise<Service[]> {
   return sanityFetch<Service[]>(getServicesQuery, {}, preview)
 }
 
-/**
- * Fetch all testimonials.
- */
-export async function getTestimonials(preview = false): Promise<Testimonial[]> {
-  return sanityFetch<Testimonial[]>(getTestimonialsQuery, {}, preview)
-}
+
 
 /**
  * Fetch FAQ.

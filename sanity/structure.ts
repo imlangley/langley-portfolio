@@ -76,14 +76,7 @@ export function structure(
 
 
 
-              // Testimonials
-              S.listItem()
-                .title('Testimonials')
-                .icon(CommentIcon)
-                .child(
-                  S.documentTypeList('testimonial')
-                    .title('Testimonials')
-                ),
+
             ])
         ),
 

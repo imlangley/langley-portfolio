@@ -19,14 +19,27 @@ import { TargetCursor } from '@/components/reactbits'
 
 import type { Metadata } from 'next'
 
+import { getSiteSettings } from '@/sanity/lib/fetch'
+import { urlFor } from '@/sanity/lib/image'
+
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
-export const metadata: Metadata = {
-    title: 'Langley | Developer & Editor',
-    description: 'Portfolio of web development and video editing work.',
-    icons: {
-        icon: '/favicon.ico',
-    },
+export async function generateMetadata(): Promise<Metadata> {
+    const settings = await getSiteSettings()
+
+    const title = settings?.siteTitle || 'Langley | Developer & Editor'
+    const description = settings?.siteDescription || 'Portfolio of web development and video editing work.'
+
+    // Dynamic favicon from Sanity, fallback to local file
+    const icons = settings?.favicon
+        ? { icon: urlFor(settings.favicon).width(128).height(128).url() }
+        : { icon: '/icon.svg' }
+
+    return {
+        title,
+        description,
+        icons,
+    }
 }
 
 export default async function RootLayout({

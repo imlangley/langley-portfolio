@@ -1,4 +1,4 @@
-import { getProfile, getFaq, getTools, getTestimonials, getAllProjects } from '@/sanity/lib/fetch'
+import { getProfile, getFaq, getTools, getAllProjects } from '@/sanity/lib/fetch'
 import { urlFor } from '@/sanity/lib/image'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
@@ -14,11 +14,10 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function AboutPage() {
-    const [profile, faq, tools, testimonials, projects] = await Promise.all([
+    const [profile, faq, tools, projects] = await Promise.all([
         getProfile(),
         getFaq(),
         getTools(),
-        getTestimonials(),
         getAllProjects()
     ])
 
@@ -36,15 +35,6 @@ export default async function AboutPage() {
         iconUrl: tool.icon ? urlFor(tool.icon).width(32).height(32).url() : null
     })) || []
 
-    // Convert testimonials to client-friendly format  
-    const testimonialsData = testimonials?.map(t => ({
-        _id: t._id,
-        name: t.name,
-        role: t.role,
-        testimonialBody: t.testimonialBody,
-        avatarUrl: t.avatarImage ? urlFor(t.avatarImage).width(80).height(80).url() : null
-    })) || []
-
     // Avatar URL
     const avatarUrl = profile?.avatarImage
         ? urlFor(profile.avatarImage).width(400).height(400).url()
@@ -59,7 +49,6 @@ export default async function AboutPage() {
             longBio={profile?.longBio}
             faqItems={faq?.items}
             tools={toolsData}
-            testimonials={testimonialsData}
             projectsCount={projectsCount}
             yearsExperience={yearsExperience}
         />

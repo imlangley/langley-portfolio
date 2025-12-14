@@ -42,12 +42,14 @@ export const siteSettings = defineType({
       validation: (Rule) => Rule.required().max(160),
     }),
     defineField({
-      name: 'defaultSeoImage',
-      title: 'Default SEO Image',
+      name: 'favicon',
+      title: 'Favicon / Browser Icon',
       type: 'image',
       group: 'general',
-      description: 'Default OG image for social sharing (recommended: 1200×630)',
-      validation: (Rule) => Rule.required(),
+      description: 'Upload a square image (png/jpg/svg) to be used as the browser tab icon. Falls back to default if empty.',
+      options: {
+        accept: 'image/png, image/jpeg, image/svg+xml, image/x-icon',
+      },
     }),
 
     // ============================================
@@ -66,16 +68,6 @@ export const siteSettings = defineType({
       type: 'string',
       group: 'hero',
       description: 'Homepage hero subheading',
-    }),
-    defineField({
-      name: 'heroImage',
-      title: 'Hero Background Image',
-      type: 'image',
-      group: 'hero',
-      description: 'Optional hero background image',
-      options: {
-        hotspot: true,
-      },
     }),
 
     // ============================================
