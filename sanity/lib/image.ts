@@ -5,15 +5,14 @@
  * Supports responsive images, hotspots, and crops.
  */
 
-import imageUrlBuilder from '@sanity/image-url'
-import { type SanityImageSource } from '@sanity/image-url/lib/types/types'
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url'
 import { client, projectId, dataset } from './client'
 
 /**
  * Image URL builder instance.
  * Used to generate URLs with transformations.
  */
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
 /**
  * Generate an image URL from a Sanity image reference.
