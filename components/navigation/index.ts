@@ -1,1 +1,2 @@
-export { FloatingDock, type NavItem } from './FloatingDock'
+// Navigation components barrel file
+// FloatingDock removed - use SideDock and MobileDock instead

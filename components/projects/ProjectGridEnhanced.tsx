@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { urlFor } from '@/sanity/lib/image'
 import { AnimatedFilterTabs } from './AnimatedFilterTabs'
 import { AnimatedSearch } from './AnimatedSearch'
-import { AnimatedCounter } from './AnimatedCounter'
+import { AnimatedCounter } from '@/components/reactbits'
 import { LoadMoreButton } from './LoadMoreButton'
 import { TiltedCard } from '@/components/reactbits/TiltedCard'
 
