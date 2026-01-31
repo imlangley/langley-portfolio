@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'motion/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Search, ArrowRight, Moon, Sun, Home, User, Briefcase, Mail, FileCode, X, Command } from 'lucide-react'
+import { Search, ArrowRight, Moon, Sun, Home, User, Briefcase, Activity, FileCode, X, Command } from 'lucide-react'
 
 interface CommandItem {
     id: string
@@ -48,12 +48,12 @@ const defaultItems: CommandItem[] = [
         category: 'Navigation',
     },
     {
-        id: 'contact',
-        title: 'Go to Contact',
-        description: 'Get in touch',
-        icon: <Mail className="w-4 h-4" />,
-        shortcut: ['G', 'C'],
-        action: () => window.location.href = '/contact',
+        id: 'status',
+        title: 'Go to Status',
+        description: 'Server uptime monitoring',
+        icon: <Activity className="w-4 h-4" />,
+        shortcut: ['G', 'U'],
+        action: () => window.location.href = '/uptime',
         category: 'Navigation',
     },
 ]

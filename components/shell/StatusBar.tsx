@@ -19,7 +19,7 @@ function useBreadcrumb() {
     const pageNames: Record<string, string> = {
         'projects': 'Projects',
         'about': 'About',
-        'contact': 'Contact',
+        'uptime': 'Status',
         'services': 'Services',
         'studio': 'Studio',
     }

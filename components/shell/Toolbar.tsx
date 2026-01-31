@@ -14,7 +14,7 @@ import {
     FolderOpen,
     Home,
     User,
-    Mail,
+    Activity,
     Settings
 } from 'lucide-react'
 import { useState } from 'react'
@@ -45,7 +45,7 @@ export function Toolbar() {
         { href: '/', icon: Home, label: 'Home' },
         { href: '/projects', icon: FolderOpen, label: 'Projects' },
         { href: '/about', icon: User, label: 'About' },
-        { href: '/contact', icon: Mail, label: 'Contact' },
+        { href: '/uptime', icon: Activity, label: 'Status' },
     ]
 
     const handleToolClick = (id: string) => {

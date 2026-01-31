@@ -155,9 +155,9 @@ export function AboutPageClient({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.7 }}
                     >
-                        <ShimmerButton href="/contact">
+                        <ShimmerButton href="/uptime">
                             <Sparkles className="w-4 h-4" />
-                            Let&apos;s Work Together
+                            Check Server Status
                         </ShimmerButton>
 
                         <Magnet padding={0} className="w-full sm:w-auto">

@@ -150,8 +150,8 @@ export function Footer({ siteSettings }: FooterProps) {
                             <Link href="/about" className="text-shell-text-muted hover:text-[#9999FF] transition-colors flex items-center gap-1.5 text-[11px]">
                                 <ExternalLink className="w-3 h-3" /> About
                             </Link>
-                            <Link href="/contact" className="text-shell-text-muted hover:text-[#9999FF] transition-colors flex items-center gap-1.5 text-[11px]">
-                                <ExternalLink className="w-3 h-3" /> Contact
+                            <Link href="/uptime" className="text-shell-text-muted hover:text-[#9999FF] transition-colors flex items-center gap-1.5 text-[11px]">
+                                <ExternalLink className="w-3 h-3" /> Status
                             </Link>
                         </nav>
                     </div>
