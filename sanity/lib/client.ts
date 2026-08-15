@@ -8,38 +8,70 @@
  * - Configurable for draft/preview mode
  * - Type-safe environment variable handling
  * - Reusable across the application
+ * - Lazy initialization to avoid build-time failures when env vars are missing
  */
 
 import { createClient, type ClientConfig } from '@sanity/client'
 
-/**
- * Sanity API configuration from environment variables.
- * NEXT_PUBLIC_ prefix makes these available in the browser.
- */
-export const sanityConfig: ClientConfig = {
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-01-01',
-  // useCdn: true for production, false for preview/development
-  useCdn: process.env.NODE_ENV === 'production',
+let _client: ReturnType<typeof createClient> | null = null
+let _previewClient: ReturnType<typeof createClient> | null = null
+
+function getSanityConfig(): ClientConfig {
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  if (!projectId) {
+    throw new Error('NEXT_PUBLIC_SANITY_PROJECT_ID is not set')
+  }
+  return {
+    projectId,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-01-01',
+    useCdn: process.env.NODE_ENV === 'production',
+  }
+}
+
+function getClientInstance(): ReturnType<typeof createClient> {
+  if (!_client) {
+    _client = createClient(getSanityConfig())
+  }
+  return _client
+}
+
+function getPreviewClientInstance(): ReturnType<typeof createClient> {
+  if (!_previewClient) {
+    const config = getSanityConfig()
+    _previewClient = createClient({
+      ...config,
+      useCdn: false,
+      token: process.env.SANITY_API_READ_TOKEN,
+      perspective: 'previewDrafts',
+    })
+  }
+  return _previewClient
 }
 
 /**
  * Standard Sanity client for fetching published content.
  * Uses CDN for fast, cached responses in production.
+ * Lazily initialized to avoid build-time failures.
  */
-export const client = createClient(sanityConfig)
+export const client = new Proxy({} as ReturnType<typeof createClient>, {
+  get(target, prop, receiver) {
+    const instance = getClientInstance()
+    return Reflect.get(instance, prop, receiver)
+  },
+})
 
 /**
  * Preview client for fetching draft content.
  * Requires SANITY_API_READ_TOKEN for authentication.
  * Used in preview/draft mode.
+ * Lazily initialized.
  */
-export const previewClient = createClient({
-  ...sanityConfig,
-  useCdn: false, // Disable CDN for fresh draft content
-  token: process.env.SANITY_API_READ_TOKEN,
-  perspective: 'previewDrafts', // Fetch drafts instead of published
+export const previewClient = new Proxy({} as ReturnType<typeof createClient>, {
+  get(target, prop, receiver) {
+    const instance = getPreviewClientInstance()
+    return Reflect.get(instance, prop, receiver)
+  },
 })
 
 /**
@@ -54,7 +86,8 @@ export function getClient(preview = false) {
 
 /**
  * Re-export config values for convenience.
+ * These throw if accessed without env vars set.
  */
-export const projectId = sanityConfig.projectId
-export const dataset = sanityConfig.dataset
-export const apiVersion = sanityConfig.apiVersion
+export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || ''
+export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-01-01'
