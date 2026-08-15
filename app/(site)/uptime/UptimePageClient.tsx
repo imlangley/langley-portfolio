@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
-import { RefreshCw, AlertTriangle, CheckCircle2, Clock } from 'lucide-react'
-import { SplitText, DecryptedText } from '@/components/reactbits'
+import { useCallback, useEffect, useState } from 'react'
+import { AlertTriangle, CheckCircle2, Clock, RefreshCw, TerminalSquare } from 'lucide-react'
 import { StatusCard, type MonitorData } from '@/components/status'
+import { cn } from '@/lib/utils'
 
 interface StatusResponse {
     monitors: MonitorData[]
@@ -18,7 +17,7 @@ export function UptimePageClient() {
     const [refreshing, setRefreshing] = useState(false)
     const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
-    const fetchStatus = async (isRefresh = false) => {
+    const fetchStatus = useCallback(async (isRefresh = false) => {
         if (isRefresh) setRefreshing(true)
         else setLoading(true)
 
@@ -33,161 +32,119 @@ export function UptimePageClient() {
             setLoading(false)
             setRefreshing(false)
         }
-    }
-
-    useEffect(() => {
-        fetchStatus()
-        
-        // Auto-refresh every 60 seconds
-        const interval = setInterval(() => fetchStatus(true), 60000)
-        return () => clearInterval(interval)
     }, [])
 
-    // Calculate overall status
-    const allUp = data?.monitors.every(m => m.status === 'up')
-    const anyDown = data?.monitors.some(m => m.status === 'down')
+    useEffect(() => {
+        const initial = setTimeout(() => void fetchStatus(), 0)
+        const interval = setInterval(() => {
+            void fetchStatus(true)
+        }, 60000)
+        return () => {
+            clearTimeout(initial)
+            clearInterval(interval)
+        }
+    }, [fetchStatus])
+
+    const allUp = data?.monitors.every((m) => m.status === 'up')
+    const anyDown = data?.monitors.some((m) => m.status === 'down')
     const overallStatus = anyDown ? 'down' : allUp ? 'up' : 'partial'
 
     return (
-        <div className="min-h-screen pt-32 pb-20">
-            {/* Background elements */}
-            <div className="fixed top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
-            <div className="fixed bottom-1/4 left-0 w-80 h-80 bg-secondary/5 rounded-full blur-3xl -z-10" />
+        <section className="w-full border-b border-shell-border bg-shell-bg-alt">
+            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col">
+                <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
+                    <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
+                        <TerminalSquare className="h-3 w-3 text-syn-green" aria-hidden="true" />
+                        status.log
+                        <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
+                    </span>
+                    {lastUpdated && (
+                        <span className="ml-auto hidden items-center gap-2 px-4 py-2 text-shell-text-muted sm:flex">
+                            <Clock className="h-3 w-3" aria-hidden="true" />
+                            {lastUpdated.toLocaleTimeString()}
+                        </span>
+                    )}
+                </div>
 
-            <div className="container max-w-6xl">
-                {/* Header */}
-                <motion.div
-                    className="text-center mb-12"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <SplitText
-                        text="Server Status"
-                        className="text-5xl font-extrabold tracking-tight mb-4"
-                        delay={40}
-                    />
-                    <motion.p
-                        className="text-xl text-muted-foreground"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                    >
-                        <DecryptedText 
-                            text="Real-time monitoring for Langley's infrastructure" 
-                            speed={30}
-                        />
-                    </motion.p>
-                </motion.div>
-
-                {/* Overall Status Banner */}
-                <motion.div
-                    className={`mb-8 p-6 rounded-2xl border ${
-                        overallStatus === 'up' 
-                            ? 'bg-green-500/10 border-green-500/30' 
-                            : overallStatus === 'down'
-                            ? 'bg-red-500/10 border-red-500/30'
-                            : 'bg-yellow-500/10 border-yellow-500/30'
-                    }`}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4 }}
-                >
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                            {overallStatus === 'up' ? (
-                                <CheckCircle2 className="w-8 h-8 text-green-500" />
-                            ) : overallStatus === 'down' ? (
-                                <AlertTriangle className="w-8 h-8 text-red-500" />
-                            ) : (
-                                <AlertTriangle className="w-8 h-8 text-yellow-500" />
-                            )}
-                            <div>
-                                <h2 className={`text-xl font-bold ${
-                                    overallStatus === 'up' 
-                                        ? 'text-green-500' 
-                                        : overallStatus === 'down'
-                                        ? 'text-red-500'
-                                        : 'text-yellow-500'
-                                }`}>
-                                    {overallStatus === 'up' 
-                                        ? 'All Systems Operational' 
-                                        : overallStatus === 'down'
-                                        ? 'System Outage Detected'
-                                        : 'Partial System Issues'}
-                                </h2>
-                                {data?.error && (
-                                    <p className="text-sm text-muted-foreground mt-1">{data.error}</p>
-                                )}
-                            </div>
+                <div className="px-4 py-8 sm:px-6 sm:py-10">
+                    <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
+                                Render monitor
+                            </p>
+                            <h1 className="mt-1 text-3xl font-black tracking-tight text-shell-text sm:text-4xl">
+                                Server status
+                            </h1>
+                            <p className="mt-2 text-sm text-muted-foreground">
+                                Live telemetry for Langley infrastructure.
+                            </p>
                         </div>
-                        
-                        <div className="flex items-center gap-4">
-                            {lastUpdated && (
-                                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                    <Clock className="w-4 h-4" />
-                                    <span>Updated {lastUpdated.toLocaleTimeString()}</span>
-                                </div>
+                        <button
+                            type="button"
+                            onClick={() => void fetchStatus(true)}
+                            disabled={refreshing}
+                            className="inline-flex items-center justify-center gap-2 rounded-md border border-shell-border bg-shell-bg px-4 py-2 font-mono text-[12px] text-shell-text transition-colors hover:border-shell-accent/50 disabled:opacity-50"
+                        >
+                            <RefreshCw className={cn('h-3.5 w-3.5', refreshing && 'animate-spin')} aria-hidden="true" />
+                            Refresh
+                        </button>
+                    </div>
+
+                    <div
+                        className={cn(
+                            'mb-6 flex items-center gap-3 rounded-md border px-4 py-4',
+                            overallStatus === 'up' && 'border-syn-green/40 bg-shell-bg',
+                            overallStatus === 'down' && 'border-ae-pink/40 bg-shell-bg',
+                            overallStatus === 'partial' && 'border-syn-yellow/40 bg-shell-bg'
+                        )}
+                    >
+                        {overallStatus === 'up' ? (
+                            <CheckCircle2 className="h-6 w-6 shrink-0 text-syn-green" aria-hidden="true" />
+                        ) : (
+                            <AlertTriangle
+                                className={cn(
+                                    'h-6 w-6 shrink-0',
+                                    overallStatus === 'down' ? 'text-ae-pink' : 'text-syn-yellow'
+                                )}
+                                aria-hidden="true"
+                            />
+                        )}
+                        <div>
+                            <p className="text-sm font-bold text-shell-text">
+                                {overallStatus === 'up'
+                                    ? 'All systems operational'
+                                    : overallStatus === 'down'
+                                      ? 'System outage detected'
+                                      : 'Partial system issues'}
+                            </p>
+                            {data?.error && (
+                                <p className="mt-1 font-mono text-[11px] text-muted-foreground">{data.error}</p>
                             )}
-                            <motion.button
-                                onClick={() => fetchStatus(true)}
-                                disabled={refreshing}
-                                className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors disabled:opacity-50"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <RefreshCw className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} />
-                            </motion.button>
                         </div>
                     </div>
-                </motion.div>
 
-                {/* Loading state */}
-                <AnimatePresence mode="wait">
                     {loading ? (
-                        <motion.div
-                            key="loading"
-                            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                        >
-                            {[...Array(4)].map((_, i) => (
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                            {Array.from({ length: 4 }).map((_, i) => (
                                 <div
                                     key={i}
-                                    className="h-48 rounded-2xl bg-card animate-pulse border border-border"
+                                    className="h-40 animate-pulse rounded-md border border-shell-border bg-shell-bg"
                                 />
                             ))}
-                        </motion.div>
+                        </div>
                     ) : (
-                        <motion.div
-                            key="content"
-                            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                        >
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                             {data?.monitors.map((monitor, index) => (
-                                <StatusCard 
-                                    key={monitor.id} 
-                                    monitor={monitor} 
-                                    index={index} 
-                                />
+                                <StatusCard key={monitor.id} monitor={monitor} index={index} />
                             ))}
-                        </motion.div>
+                        </div>
                     )}
-                </AnimatePresence>
 
-                {/* Footer info */}
-                <motion.div
-                    className="mt-12 text-center text-sm text-muted-foreground"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                >
-                    <p>Powered by Uptime Kuma. Auto-refreshes every 60 seconds.</p>
-                </motion.div>
+                    <p className="mt-8 text-center font-mono text-[11px] text-shell-text-muted">
+                        Powered by Uptime Kuma. Auto-refreshes every 60 seconds.
+                    </p>
+                </div>
             </div>
-        </div>
+        </section>
     )
 }

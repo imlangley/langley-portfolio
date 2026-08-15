@@ -39,3 +39,5 @@ build/
 .sanity/
 .sanity-studio/
 next-env.d.ts
+.vercel
+.env*

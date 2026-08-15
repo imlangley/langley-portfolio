@@ -15,13 +15,13 @@ import {
     Twitter,
     Sparkles,
     Terminal,
-    Palette,
+    
     ShoppingBag
 } from 'lucide-react'
 
 export function CommandMenuWrapper() {
     const router = useRouter()
-    const { theme, setTheme } = useTheme()
+    const { setTheme } = useTheme()
     const { addToast } = useToast()
 
     const commandItems = [

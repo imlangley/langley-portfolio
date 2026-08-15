@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
+import { motion } from 'motion/react'
 import { ReactNode, useRef, useState } from 'react'
 
 interface MagneticProps {

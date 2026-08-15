@@ -1,5 +1,5 @@
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { headers } from 'next/headers';
 import * as cheerio from 'cheerio';
 import { PaymentInterface } from './PaymentInterface';
 
@@ -55,7 +55,7 @@ export default async function PaymentPage({ searchParams }: PageProps) {
                 <div className="space-y-2">
                     <div className="text-red-500 font-bold text-xl">Payment Configuration Error</div>
                     <p className="text-zinc-400 max-w-md">
-                        We couldn't load the embedded checkout. This usually happens if the session expired or the payment provider updated their system.
+                        We couldn&apos;t load the embedded checkout. This usually happens if the session expired or the payment provider updated their system.
                     </p>
                 </div>
 
@@ -69,12 +69,12 @@ export default async function PaymentPage({ searchParams }: PageProps) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                     </a>
-                    <a
+                    <Link
                         href="/shop"
                         className="px-6 py-3 bg-white/5 text-zinc-400 rounded-xl font-medium hover:bg-white/10 transition-colors"
                     >
                         Return to Shop
-                    </a>
+                    </Link>
                 </div>
             </div>
         );
@@ -195,12 +195,12 @@ export default async function PaymentPage({ searchParams }: PageProps) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                     </a>
-                    <a
+                    <Link
                         href="/shop"
                         className="px-6 py-3 bg-white/5 text-zinc-400 rounded-xl font-medium hover:bg-white/10 transition-colors"
                     >
                         Return to Shop
-                    </a>
+                    </Link>
                 </div>
             </div>
         );

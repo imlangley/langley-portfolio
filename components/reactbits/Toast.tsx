@@ -39,7 +39,7 @@ const icons = {
     success: <CheckCircle className="w-5 h-5 text-green-500" />,
     error: <XCircle className="w-5 h-5 text-red-500" />,
     warning: <AlertCircle className="w-5 h-5 text-yellow-500" />,
-    info: <Info className="w-5 h-5 text-blue-500" />,
+    info: <Info className="w-5 h-5 text-ae-cyan" />,
 }
 
 const borderColors = {
@@ -53,25 +53,27 @@ const borderColors = {
 function ConfettiParticle({ index }: { index: number }) {
     const colors = ['#f97316', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ec4899']
     const color = colors[index % colors.length]
-    
+    // Deterministic pseudo-random from index keeps render pure
+    const rand = (n: number) => (Math.sin(n * 127.1 + 311.7) + 1) / 2
+
     return (
         <motion.div
             className="absolute w-2 h-2 rounded-full"
-            style={{ 
+            style={{
                 backgroundColor: color,
                 left: '50%',
                 top: '50%',
             }}
-            initial={{ 
+            initial={{
                 scale: 0,
                 x: 0,
                 y: 0,
             }}
             animate={{
                 scale: [0, 1, 1, 0],
-                x: Math.cos((index * 30) * Math.PI / 180) * (80 + Math.random() * 40),
-                y: Math.sin((index * 30) * Math.PI / 180) * (80 + Math.random() * 40) - 20,
-                rotate: Math.random() * 720,
+                x: Math.cos((index * 30) * Math.PI / 180) * (80 + rand(index) * 40),
+                y: Math.sin((index * 30) * Math.PI / 180) * (80 + rand(index + 7) * 40) - 20,
+                rotate: rand(index + 13) * 720,
             }}
             transition={{
                 duration: 0.8,

@@ -47,12 +47,10 @@ export default async function ProjectPage({ params }: PageProps) {
         notFound()
     }
 
-    // Fetch related projects based on category and tags
-    const tagIds = project.tags?.map((t: any) => t._id) || []
     const relatedProjects = await getRelatedProjects(
         project._id,
         project.category?._id ?? null,
-        tagIds
+        []
     )
 
     return (

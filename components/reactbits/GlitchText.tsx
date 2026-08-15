@@ -31,7 +31,7 @@ export function GlitchText({
 
     // Create glitch layers
     const colors = ['#ff00ff', '#00ffff', '#ffff00']
-    colors.forEach((color, i) => {
+    colors.forEach((color) => {
       const layer = document.createElement('span')
       layer.className = `glitch-layer absolute inset-0 pointer-events-none`
       layer.style.color = color

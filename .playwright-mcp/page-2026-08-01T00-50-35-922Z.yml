@@ -1,0 +1,280 @@
+- generic [active] [ref=f20e1]:
+  - button "Quick Menu ⌘K" [ref=f20e2]:
+    - generic [ref=f20e5]: Quick Menu
+    - generic [ref=f20e6]: ⌘K
+  - generic [ref=f20e7]:
+    - generic [ref=f20e9]:
+      - generic [ref=f20e11]:
+        - generic [ref=f20e12]: Ae
+        - generic [ref=f20e14]: Langley.aep
+      - button "Open command palette" [ref=f20e16]:
+        - generic [ref=f20e20]: Search
+        - generic [ref=f20e21]: ⌘K
+    - main [ref=f20e27]:
+      - generic [ref=f20e30]:
+        - main [ref=f20e31]:
+          - generic [ref=f20e34]:
+            - generic [ref=f20e35]:
+              - generic [ref=f20e36]: projects
+              - generic [ref=f20e40]: 16 of 16
+            - generic [ref=f20e41]:
+              - group "Filter by type" [ref=f20e42]:
+                - button "All" [pressed] [ref=f20e43]
+                - button "Dev" [ref=f20e44]
+                - button "Video" [ref=f20e45]
+              - generic [ref=f20e46]:
+                - generic [ref=f20e47]: Search projects
+                - textbox "Search projects" [ref=f20e48]:
+                  - /placeholder: search projects…
+            - group "Filter by category" [ref=f20e49]:
+              - button "all 16" [pressed] [ref=f20e50]:
+                - text: all
+                - generic [ref=f20e51]: "16"
+              - button "Music Video 14" [ref=f20e52]:
+                - text: Music Video
+                - generic [ref=f20e53]: "14"
+              - button "Animation 2" [ref=f20e54]:
+                - text: Animation
+                - generic [ref=f20e55]: "2"
+            - list [ref=f20e57]:
+              - listitem [ref=f20e58]:
+                - link "newjeans.aep Newjeans Newjeans Video editing commission. videos" [ref=f20e59] [cursor=pointer]:
+                  - /url: /projects/newjeans
+                  - generic [ref=f20e60]: newjeans.aep
+                  - img "Newjeans" [ref=f20e65]
+                  - generic [ref=f20e66]:
+                    - heading "Newjeans" [level=2] [ref=f20e67]
+                    - paragraph [ref=f20e68]: Video editing commission.
+                    - list [ref=f20e69]:
+                      - listitem [ref=f20e70]: videos
+              - listitem [ref=f20e71]:
+                - link "this-december.aep pinned This December This December Just for my content. videos" [ref=f20e72] [cursor=pointer]:
+                  - /url: /projects/this-december
+                  - generic [ref=f20e73]:
+                    - generic [ref=f20e76]: this-december.aep
+                    - generic [ref=f20e77]: pinned
+                  - img "This December" [ref=f20e79]
+                  - generic [ref=f20e80]:
+                    - heading "This December" [level=2] [ref=f20e81]
+                    - paragraph [ref=f20e82]: Just for my content.
+                    - list [ref=f20e83]:
+                      - listitem [ref=f20e84]: videos
+              - listitem [ref=f20e85]:
+                - link "unlock-it.aep Unlock It Unlock It Video editing commission. videos" [ref=f20e86] [cursor=pointer]:
+                  - /url: /projects/unlock-it
+                  - generic [ref=f20e87]: unlock-it.aep
+                  - img "Unlock It" [ref=f20e92]
+                  - generic [ref=f20e93]:
+                    - heading "Unlock It" [level=2] [ref=f20e94]
+                    - paragraph [ref=f20e95]: Video editing commission.
+                    - list [ref=f20e96]:
+                      - listitem [ref=f20e97]: videos
+              - listitem [ref=f20e98]:
+                - link "cruel-summer.aep Cruel Summer Cruel Summer Video editing commission. videos" [ref=f20e99] [cursor=pointer]:
+                  - /url: /projects/cruel-summer
+                  - generic [ref=f20e100]: cruel-summer.aep
+                  - img "Cruel Summer" [ref=f20e105]
+                  - generic [ref=f20e106]:
+                    - heading "Cruel Summer" [level=2] [ref=f20e107]
+                    - paragraph [ref=f20e108]: Video editing commission.
+                    - list [ref=f20e109]:
+                      - listitem [ref=f20e110]: videos
+              - listitem [ref=f20e111]:
+                - link "love-me-not.aep Love Me Not Love Me Not Video editing commission. videos" [ref=f20e112] [cursor=pointer]:
+                  - /url: /projects/love-me-not
+                  - generic [ref=f20e113]: love-me-not.aep
+                  - img "Love Me Not" [ref=f20e118]
+                  - generic [ref=f20e119]:
+                    - heading "Love Me Not" [level=2] [ref=f20e120]
+                    - paragraph [ref=f20e121]: Video editing commission.
+                    - list [ref=f20e122]:
+                      - listitem [ref=f20e123]: videos
+              - listitem [ref=f20e124]:
+                - link "eenie-meenie.aep Eenie Meenie Eenie Meenie Video editing commision. videos" [ref=f20e125] [cursor=pointer]:
+                  - /url: /projects/eenie-meenie
+                  - generic [ref=f20e126]: eenie-meenie.aep
+                  - img "Eenie Meenie" [ref=f20e131]
+                  - generic [ref=f20e132]:
+                    - heading "Eenie Meenie" [level=2] [ref=f20e133]
+                    - paragraph [ref=f20e134]: Video editing commision.
+                    - list [ref=f20e135]:
+                      - listitem [ref=f20e136]: videos
+              - listitem [ref=f20e137]:
+                - link "main-main.aep Main-Main Main-Main Video editing commission. videos" [ref=f20e138] [cursor=pointer]:
+                  - /url: /projects/main-main
+                  - generic [ref=f20e139]: main-main.aep
+                  - img "Main-Main" [ref=f20e144]
+                  - generic [ref=f20e145]:
+                    - heading "Main-Main" [level=2] [ref=f20e146]
+                    - paragraph [ref=f20e147]: Video editing commission.
+                    - list [ref=f20e148]:
+                      - listitem [ref=f20e149]: videos
+              - listitem [ref=f20e150]:
+                - link "am-i-bothering-you.aep Am I Bothering You Am I Bothering You Just trying another style. videos" [ref=f20e151] [cursor=pointer]:
+                  - /url: /projects/am-i-bothering-you
+                  - generic [ref=f20e152]: am-i-bothering-you.aep
+                  - img "Am I Bothering You" [ref=f20e157]
+                  - generic [ref=f20e158]:
+                    - heading "Am I Bothering You" [level=2] [ref=f20e159]
+                    - paragraph [ref=f20e160]: Just trying another style.
+                    - list [ref=f20e161]:
+                      - listitem [ref=f20e162]: videos
+              - listitem [ref=f20e163]:
+                - link "aeao.aep pinned AEAO AEAO Editing for my community. videos community" [ref=f20e164] [cursor=pointer]:
+                  - /url: /projects/aeao
+                  - generic [ref=f20e165]:
+                    - generic [ref=f20e168]: aeao.aep
+                    - generic [ref=f20e169]: pinned
+                  - img "AEAO" [ref=f20e171]
+                  - generic [ref=f20e172]:
+                    - heading "AEAO" [level=2] [ref=f20e173]
+                    - paragraph [ref=f20e174]: Editing for my community.
+                    - list [ref=f20e175]:
+                      - listitem [ref=f20e176]: videos
+                      - listitem [ref=f20e177]: community
+              - listitem [ref=f20e178]:
+                - link "skye-banner.aep Skye's Banner for Streamer Skye's Banner for Streamer Skye's streamer banners. videos community" [ref=f20e179] [cursor=pointer]:
+                  - /url: /projects/skye-banner
+                  - generic [ref=f20e180]: skye-banner.aep
+                  - img "Skye's Banner for Streamer" [ref=f20e185]
+                  - generic [ref=f20e186]:
+                    - heading "Skye's Banner for Streamer" [level=2] [ref=f20e187]
+                    - paragraph [ref=f20e188]: Skye's streamer banners.
+                    - list [ref=f20e189]:
+                      - listitem [ref=f20e190]: videos
+                      - listitem [ref=f20e191]: community
+              - listitem [ref=f20e192]:
+                - link "genie-in-a-bottle.aep Genie in A Bottle Genie in A Bottle Video editing commision. videos" [ref=f20e193] [cursor=pointer]:
+                  - /url: /projects/genie-in-a-bottle
+                  - generic [ref=f20e194]: genie-in-a-bottle.aep
+                  - img "Genie in A Bottle" [ref=f20e199]
+                  - generic [ref=f20e200]:
+                    - heading "Genie in A Bottle" [level=2] [ref=f20e201]
+                    - paragraph [ref=f20e202]: Video editing commision.
+                    - list [ref=f20e203]:
+                      - listitem [ref=f20e204]: videos
+              - listitem [ref=f20e205]:
+                - link "skye-logo-animation.mix Skye Logo Animation Skye Logo Animation Animating my discord community logos. videos community" [ref=f20e206] [cursor=pointer]:
+                  - /url: /projects/skye-logo-animation
+                  - generic [ref=f20e207]: skye-logo-animation.mix
+                  - img "Skye Logo Animation" [ref=f20e212]
+                  - generic [ref=f20e213]:
+                    - heading "Skye Logo Animation" [level=2] [ref=f20e214]
+                    - paragraph [ref=f20e215]: Animating my discord community logos.
+                    - list [ref=f20e216]:
+                      - listitem [ref=f20e217]: videos
+                      - listitem [ref=f20e218]: community
+              - listitem [ref=f20e219]:
+                - link "ain-t-it-fun.aep Ain't it Fun? Ain't it Fun? Archive of me and my friends, videos" [ref=f20e220] [cursor=pointer]:
+                  - /url: /projects/ain-t-it-fun
+                  - generic [ref=f20e221]: ain-t-it-fun.aep
+                  - img "Ain't it Fun?" [ref=f20e226]
+                  - generic [ref=f20e227]:
+                    - heading "Ain't it Fun?" [level=2] [ref=f20e228]
+                    - paragraph [ref=f20e229]: Archive of me and my friends,
+                    - list [ref=f20e230]:
+                      - listitem [ref=f20e231]: videos
+              - listitem [ref=f20e232]:
+                - link "bunga-maaf.aep Bunga Maaf Bunga Maaf Just for stay active." [ref=f20e233] [cursor=pointer]:
+                  - /url: /projects/bunga-maaf
+                  - generic [ref=f20e234]: bunga-maaf.aep
+                  - img "Bunga Maaf" [ref=f20e239]
+                  - generic [ref=f20e240]:
+                    - heading "Bunga Maaf" [level=2] [ref=f20e241]
+                    - paragraph [ref=f20e242]: Just for stay active.
+              - listitem [ref=f20e243]:
+                - link "coba-coba.aep Coba-Coba Coba-Coba Just for my content videos" [ref=f20e244] [cursor=pointer]:
+                  - /url: /projects/coba-coba
+                  - generic [ref=f20e245]: coba-coba.aep
+                  - img "Coba-Coba" [ref=f20e250]
+                  - generic [ref=f20e251]:
+                    - heading "Coba-Coba" [level=2] [ref=f20e252]
+                    - paragraph [ref=f20e253]: Just for my content
+                    - list [ref=f20e254]:
+                      - listitem [ref=f20e255]: videos
+              - listitem [ref=f20e256]:
+                - link "the-lazy-song.aep The Lazy Song The Lazy Song 12 SIJA A Archive. videos" [ref=f20e257] [cursor=pointer]:
+                  - /url: /projects/the-lazy-song
+                  - generic [ref=f20e258]: the-lazy-song.aep
+                  - img "The Lazy Song" [ref=f20e263]
+                  - generic [ref=f20e264]:
+                    - heading "The Lazy Song" [level=2] [ref=f20e265]
+                    - paragraph [ref=f20e266]: 12 SIJA A Archive.
+                    - list [ref=f20e267]:
+                      - listitem [ref=f20e268]: videos
+        - generic [ref=f20e269]:
+          - generic [ref=f20e270]:
+            - generic [ref=f20e271]: Project Panel
+            - generic [ref=f20e278]: AE 2024
+          - generic [ref=f20e280]:
+            - generic [ref=f20e281]:
+              - generic [ref=f20e282]:
+                - generic [ref=f20e285]: Compositions
+                - generic [ref=f20e286]: 3 items
+              - generic [ref=f20e287]:
+                - generic [ref=f20e288]:
+                  - generic [ref=f20e293]: Portfolio_Main.aep
+                  - generic [ref=f20e295]: "24"
+                  - generic [ref=f20e301]: 00:00:30:00
+                - generic [ref=f20e302]:
+                  - generic [ref=f20e306]: Hero_Section.aep
+                  - generic [ref=f20e308]: "12"
+                  - generic [ref=f20e314]: 00:00:15:00
+                - generic [ref=f20e315]:
+                  - generic [ref=f20e319]: Projects_Gallery.aep
+                  - generic [ref=f20e321]: "36"
+                  - generic [ref=f20e327]: 00:00:45:00
+              - generic [ref=f20e328]:
+                - generic [ref=f20e329]:
+                  - generic [ref=f20e331]: "RAM Preview:"
+                  - generic [ref=f20e332]: Ready
+                - generic [ref=f20e334]: Full
+                - generic [ref=f20e339]: 30 fps
+            - generic [ref=f20e344]:
+              - generic [ref=f20e345]:
+                - heading "Quick Access" [level=4] [ref=f20e346]
+                - navigation "Footer navigation" [ref=f20e349]:
+                  - link "Projects" [ref=f20e350] [cursor=pointer]:
+                    - /url: /projects
+                  - link "About" [ref=f20e355] [cursor=pointer]:
+                    - /url: /about
+                  - link "Status" [ref=f20e360] [cursor=pointer]:
+                    - /url: /uptime
+              - generic [ref=f20e365]:
+                - heading "Connect" [level=4] [ref=f20e366]
+                - navigation "Social media links" [ref=f20e369]:
+                  - link [ref=f20e370] [cursor=pointer]:
+                    - /url: https://www.instagram.com/giilang.nh
+                  - link [ref=f20e374] [cursor=pointer]:
+                    - /url: https://www.tiktok.com/@langliey
+                  - link [ref=f20e378] [cursor=pointer]:
+                    - /url: https://github.com/imlangley
+              - generic [ref=f20e382]:
+                - generic [ref=f20e383]: © 2026 Langley
+                - generic [ref=f20e384]: v2.0.4 [AE]
+    - navigation "Side navigation" [ref=f20e389]:
+      - link "Home" [ref=f20e390] [cursor=pointer]:
+        - /url: /
+      - link "Projects" [ref=f20e396] [cursor=pointer]:
+        - /url: /projects
+      - link "About" [ref=f20e402] [cursor=pointer]:
+        - /url: /about
+      - link "Shop" [ref=f20e408] [cursor=pointer]:
+        - /url: /shop
+      - link "Status" [ref=f20e414] [cursor=pointer]:
+        - /url: /uptime
+    - status "Editor status bar" [ref=f20e419]:
+      - generic [ref=f20e420]:
+        - generic [ref=f20e421]: Projects
+        - generic [ref=f20e427]: main
+        - generic [ref=f20e435]:
+          - generic [ref=f20e440]: "0"
+          - generic [ref=f20e443]: "0"
+      - generic [ref=f20e444]: Langley · Portfolio
+      - generic [ref=f20e446]:
+        - generic [ref=f20e447]: © 2026
+        - generic [ref=f20e451]: UTF-8
+        - generic [ref=f20e452]: TypeScript React
+        - generic [ref=f20e453]: Live
+        - button "Notifications" [ref=f20e459]
+  - button "Open Next.js Dev Tools" [ref=f20e469] [cursor=pointer]

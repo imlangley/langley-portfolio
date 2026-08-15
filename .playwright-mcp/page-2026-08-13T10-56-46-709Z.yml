@@ -1,0 +1,278 @@
+- generic [active] [ref=f1e1]:
+  - button "Quick Menu ⌘K" [ref=f1e2]:
+    - generic [ref=f1e5]: Quick Menu
+    - generic [ref=f1e6]: ⌘K
+  - generic [ref=f1e7]:
+    - generic [ref=f1e9]:
+      - generic [ref=f1e10]:
+        - generic [ref=f1e11]:
+          - generic [ref=f1e12]: Ae
+          - generic [ref=f1e14]: Langley.aep
+        - navigation "Application menu" [ref=f1e15]:
+          - button "File" [ref=f1e16]
+          - button "Edit" [ref=f1e17]
+          - button "Composition" [ref=f1e18]
+          - button "Layer" [ref=f1e19]
+          - button "Effect" [ref=f1e20]
+          - button "View" [ref=f1e21]
+          - button "Help" [ref=f1e22]
+      - generic [ref=f1e23]:
+        - generic [ref=f1e24]: ~/langley
+        - generic [ref=f1e27]: index.tsx
+      - button "Open command palette" [ref=f1e29]:
+        - generic [ref=f1e33]: Search
+        - generic [ref=f1e34]: ⌘K
+    - main [ref=f1e40]:
+      - generic [ref=f1e43]:
+        - main [ref=f1e44]:
+          - generic [ref=f1e46]:
+            - complementary "Project explorer" [ref=f1e47]:
+              - generic [ref=f1e48]: Explorer
+              - generic [ref=f1e49]:
+                - generic [ref=f1e50]: langley
+                - list [ref=f1e55]:
+                  - listitem [ref=f1e56]:
+                    - generic [ref=f1e57]: hero.tsx
+                  - listitem [ref=f1e63]:
+                    - link "projects.tsx" [ref=f1e64] [cursor=pointer]:
+                      - /url: /projects
+                  - listitem [ref=f1e70]:
+                    - link "about.md" [ref=f1e71] [cursor=pointer]:
+                      - /url: /about
+                  - listitem [ref=f1e74]:
+                    - link "shop.tsx" [ref=f1e75] [cursor=pointer]:
+                      - /url: /shop
+                  - listitem [ref=f1e81]:
+                    - link "status.log" [ref=f1e82] [cursor=pointer]:
+                      - /url: /uptime
+            - generic [ref=f1e85]:
+              - generic [ref=f1e86]:
+                - generic [ref=f1e87]: hero.tsx
+                - generic [ref=f1e94]: hero.aep
+              - generic [ref=f1e97]:
+                - generic [ref=f1e99]:
+                  - generic [ref=f1e100]:
+                    - generic [ref=f1e101]: "1"
+                    - generic [ref=f1e102]: "2"
+                    - generic [ref=f1e103]: "3"
+                    - generic [ref=f1e104]: "4"
+                    - generic [ref=f1e105]: "5"
+                    - generic [ref=f1e106]: "6"
+                    - generic [ref=f1e107]: "7"
+                    - generic [ref=f1e108]: "8"
+                    - generic [ref=f1e109]: "9"
+                  - generic [ref=f1e110]:
+                    - paragraph [ref=f1e111]: // portfolio — developer & editor
+                    - heading "Hi, I'm Langley Web Developer" [level=1] [ref=f1e112]:
+                      - generic [ref=f1e113]: Hi, I'm Langley
+                      - generic [ref=f1e115]:
+                        - generic [ref=f1e116]: Web Developer
+                        - generic [ref=f1e117]: Web Developer
+                    - paragraph [ref=f1e118]: I build websites and edit videos.
+                    - list [ref=f1e119]:
+                      - listitem [ref=f1e120]: Adobe After Effects
+                      - listitem [ref=f1e121]: Adobe Photoshop
+                      - listitem [ref=f1e122]: Alight Motion
+                      - listitem [ref=f1e123]: Antigravity
+                      - listitem [ref=f1e124]: Davinci Resolve Studio
+                      - listitem [ref=f1e125]: Ffmpeg
+                    - generic [ref=f1e126]:
+                      - button "View My Work" [ref=f1e127]
+                      - link "Visit Shop" [ref=f1e130] [cursor=pointer]:
+                        - /url: /shop
+                - generic [ref=f1e135]:
+                  - generic [ref=f1e136]: Composition
+                  - generic [ref=f1e137]: hero.aep
+              - generic [ref=f1e139]:
+                - generic [ref=f1e140]:
+                  - generic [ref=f1e141]: Timeline
+                  - generic [ref=f1e142]: 4 layers
+                - list [ref=f1e143]:
+                  - listitem [ref=f1e144]:
+                    - generic [ref=f1e145]: hero
+                  - listitem [ref=f1e147]:
+                    - generic [ref=f1e148]: projects
+                  - listitem [ref=f1e150]:
+                    - generic [ref=f1e151]: about
+                  - listitem [ref=f1e153]:
+                    - generic [ref=f1e154]: contact
+          - generic [ref=f1e157]:
+            - complementary [ref=f1e158]:
+              - generic [ref=f1e159]: Inspector
+              - generic [ref=f1e160]:
+                - generic [ref=f1e161]: about
+                - paragraph [ref=f1e164]: Loaded
+                - list [ref=f1e165]:
+                  - listitem [ref=f1e166]: Adobe After Effects
+                  - listitem [ref=f1e167]: Adobe Photoshop
+                  - listitem [ref=f1e168]: Alight Motion
+                  - listitem [ref=f1e169]: Antigravity
+                  - listitem [ref=f1e170]: Davinci Resolve Studio
+                  - listitem [ref=f1e171]: Ffmpeg
+            - generic [ref=f1e172]:
+              - generic [ref=f1e173]: about.md
+              - generic [ref=f1e179]:
+                - generic [ref=f1e180]:
+                  - img "Langley" [ref=f1e182]
+                  - paragraph [ref=f1e183]: Web Developer & Video Editor
+                - generic [ref=f1e184]:
+                  - generic [ref=f1e185]: Layer 01 · Profile
+                  - heading "Langley" [level=2] [ref=f1e189]
+                  - paragraph [ref=f1e190]: Web Developer & Video Editor crafting clean and modern digital experiences.
+                  - link "Open properties" [ref=f1e191] [cursor=pointer]:
+                    - /url: /about
+          - generic [ref=f1e194]:
+            - generic [ref=f1e195]:
+              - generic [ref=f1e196]: featured.aep
+              - generic [ref=f1e200]: 6 comps
+            - generic [ref=f1e201]:
+              - generic [ref=f1e202]:
+                - generic [ref=f1e203]:
+                  - paragraph [ref=f1e204]: Layer 02 · Selected work
+                  - heading "Timeline comps" [level=2] [ref=f1e205]
+                - link "View all" [ref=f1e206] [cursor=pointer]:
+                  - /url: /projects
+              - list [ref=f1e209]:
+                - listitem [ref=f1e210]:
+                  - link "this-december.aep pinned This December This December Just for my content." [ref=f1e211] [cursor=pointer]:
+                    - /url: /projects/this-december
+                    - generic [ref=f1e212]:
+                      - generic [ref=f1e215]: this-december.aep
+                      - generic [ref=f1e216]: pinned
+                    - img "This December" [ref=f1e218]
+                    - generic [ref=f1e219]:
+                      - heading "This December" [level=3] [ref=f1e220]
+                      - paragraph [ref=f1e221]: Just for my content.
+                - listitem [ref=f1e222]:
+                  - link "aeao.aep pinned AEAO AEAO Editing for my community." [ref=f1e223] [cursor=pointer]:
+                    - /url: /projects/aeao
+                    - generic [ref=f1e224]:
+                      - generic [ref=f1e227]: aeao.aep
+                      - generic [ref=f1e228]: pinned
+                    - img "AEAO" [ref=f1e230]
+                    - generic [ref=f1e231]:
+                      - heading "AEAO" [level=3] [ref=f1e232]
+                      - paragraph [ref=f1e233]: Editing for my community.
+                - listitem [ref=f1e234]:
+                  - link "am-i-bothering-you.aep Am I Bothering You Am I Bothering You Just trying another style." [ref=f1e235] [cursor=pointer]:
+                    - /url: /projects/am-i-bothering-you
+                    - generic [ref=f1e236]: am-i-bothering-you.aep
+                    - img "Am I Bothering You" [ref=f1e241]
+                    - generic [ref=f1e242]:
+                      - heading "Am I Bothering You" [level=3] [ref=f1e243]
+                      - paragraph [ref=f1e244]: Just trying another style.
+                - listitem [ref=f1e245]:
+                  - link "eenie-meenie.aep Eenie Meenie Eenie Meenie Video editing commision." [ref=f1e246] [cursor=pointer]:
+                    - /url: /projects/eenie-meenie
+                    - generic [ref=f1e247]: eenie-meenie.aep
+                    - img "Eenie Meenie" [ref=f1e252]
+                    - generic [ref=f1e253]:
+                      - heading "Eenie Meenie" [level=3] [ref=f1e254]
+                      - paragraph [ref=f1e255]: Video editing commision.
+                - listitem [ref=f1e256]:
+                  - link "love-me-not.aep Love Me Not Love Me Not Video editing commission." [ref=f1e257] [cursor=pointer]:
+                    - /url: /projects/love-me-not
+                    - generic [ref=f1e258]: love-me-not.aep
+                    - img "Love Me Not" [ref=f1e263]
+                    - generic [ref=f1e264]:
+                      - heading "Love Me Not" [level=3] [ref=f1e265]
+                      - paragraph [ref=f1e266]: Video editing commission.
+                - listitem [ref=f1e267]:
+                  - link "cruel-summer.aep Cruel Summer Cruel Summer Video editing commission." [ref=f1e268] [cursor=pointer]:
+                    - /url: /projects/cruel-summer
+                    - generic [ref=f1e269]: cruel-summer.aep
+                    - img "Cruel Summer" [ref=f1e274]
+                    - generic [ref=f1e275]:
+                      - heading "Cruel Summer" [level=3] [ref=f1e276]
+                      - paragraph [ref=f1e277]: Video editing commission.
+          - generic [ref=f1e278]:
+            - generic [ref=f1e279]:
+              - generic [ref=f1e280]: extensions.json
+              - generic [ref=f1e284]: 9 loaded
+            - generic [ref=f1e285]:
+              - paragraph [ref=f1e286]: Layer 03 · Toolchain
+              - heading "Extensions" [level=2] [ref=f1e287]
+              - paragraph [ref=f1e288]: Editor and compositor stack used to cut, compile, and ship.
+              - list [ref=f1e289]:
+                - listitem [ref=f1e290]:
+                  - generic [ref=f1e291]: Adobe After Effects
+                - listitem [ref=f1e294]:
+                  - generic [ref=f1e295]: Adobe Photoshop
+                - listitem [ref=f1e298]:
+                  - generic [ref=f1e299]: Alight Motion
+                - listitem [ref=f1e302]:
+                  - generic [ref=f1e303]: Antigravity
+                - listitem [ref=f1e306]:
+                  - generic [ref=f1e307]: Davinci Resolve Studio
+                - listitem [ref=f1e310]:
+                  - generic [ref=f1e311]: Ffmpeg
+                - listitem [ref=f1e314]:
+                  - generic [ref=f1e315]: Figma
+                - listitem [ref=f1e318]:
+                  - generic [ref=f1e319]: Topaz Video
+                - listitem [ref=f1e322]:
+                  - generic [ref=f1e323]: Visual Studio Code
+        - generic [ref=f1e326]:
+          - generic [ref=f1e327]:
+            - generic [ref=f1e328]: Project Panel
+            - generic [ref=f1e335]: AE 2024
+          - generic [ref=f1e337]:
+            - generic [ref=f1e338]:
+              - generic [ref=f1e339]:
+                - generic [ref=f1e342]: Compositions
+                - generic [ref=f1e343]: 3 items
+              - generic [ref=f1e344]:
+                - generic [ref=f1e345]:
+                  - generic [ref=f1e350]: Portfolio_Main.aep
+                  - generic [ref=f1e352]: "24"
+                  - generic [ref=f1e358]: 00:00:30:00
+                - generic [ref=f1e359]:
+                  - generic [ref=f1e363]: Hero_Section.aep
+                  - generic [ref=f1e365]: "12"
+                  - generic [ref=f1e371]: 00:00:15:00
+                - generic [ref=f1e372]:
+                  - generic [ref=f1e376]: Projects_Gallery.aep
+                  - generic [ref=f1e378]: "36"
+                  - generic [ref=f1e384]: 00:00:45:00
+              - generic [ref=f1e385]:
+                - generic [ref=f1e386]:
+                  - generic [ref=f1e388]: "RAM Preview:"
+                  - generic [ref=f1e389]: Ready
+                - generic [ref=f1e391]: Full
+                - generic [ref=f1e396]: 30 fps
+            - generic [ref=f1e401]:
+              - generic [ref=f1e402]:
+                - heading "Quick Access" [level=4] [ref=f1e403]
+                - navigation "Footer navigation" [ref=f1e406]:
+                  - link "Projects" [ref=f1e407] [cursor=pointer]:
+                    - /url: /projects
+                  - link "About" [ref=f1e412] [cursor=pointer]:
+                    - /url: /about
+                  - link "Status" [ref=f1e417] [cursor=pointer]:
+                    - /url: /uptime
+              - generic [ref=f1e422]:
+                - heading "Connect" [level=4] [ref=f1e423]
+                - navigation "Social media links" [ref=f1e426]:
+                  - link [ref=f1e427] [cursor=pointer]:
+                    - /url: https://www.instagram.com/giilang.nh
+                  - link [ref=f1e431] [cursor=pointer]:
+                    - /url: https://www.tiktok.com/@langliey
+                  - link [ref=f1e435] [cursor=pointer]:
+                    - /url: https://github.com/imlangley
+              - generic [ref=f1e439]:
+                - generic [ref=f1e440]: © 2026 Langley
+                - generic [ref=f1e441]: v2.0.4 [AE]
+    - status "Editor status bar" [ref=f1e444]:
+      - generic [ref=f1e445]:
+        - generic [ref=f1e446]: Home
+        - generic [ref=f1e453]: main
+        - generic [ref=f1e461]:
+          - generic [ref=f1e466]: "0"
+          - generic [ref=f1e469]: "0"
+      - generic [ref=f1e470]: Langley · Portfolio
+      - generic [ref=f1e472]:
+        - generic [ref=f1e473]: © 2026
+        - generic [ref=f1e477]: UTF-8
+        - generic [ref=f1e478]: TypeScript React
+        - generic [ref=f1e479]: Live
+        - button "Notifications" [ref=f1e485]

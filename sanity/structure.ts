@@ -9,12 +9,10 @@
  * Singletons are shown as direct edit views (no list view needed).
  */
 
-import { type StructureBuilder, type StructureResolverContext } from 'sanity/structure'
+import { type StructureBuilder, } from 'sanity/structure'
 import {
   ProjectsIcon,
-  BulbOutlineIcon,
-  CommentIcon,
-  FolderIcon,
+      FolderIcon,
   WrenchIcon,
   TagIcon,
   UserIcon,
@@ -49,8 +47,7 @@ function createSingletonListItem(
  * Organizes documents into Content, Taxonomy, and Settings groups.
  */
 export function structure(
-  S: StructureBuilder,
-  context: StructureResolverContext
+  S: StructureBuilder
 ) {
   return S.list()
     .title('Content')

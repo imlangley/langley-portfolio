@@ -69,7 +69,7 @@ export interface Profile {
   name: string
   role?: string
   shortBio?: string
-  longBio?: any[] // Portable Text
+  longBio?: unknown[]
   avatarImage?: SanityImageAsset
   socials?: SocialLink[]
 }
@@ -105,7 +105,7 @@ export interface Project {
   title: string
   slug: string
   summary: string
-  description?: any[] // Portable Text
+  description?: unknown[]
   projectType: 'web' | 'video' | 'mixed'
   category?: ProjectCategory
   coverImage: SanityImageAsset
@@ -154,7 +154,7 @@ export interface Service {
 
 export interface FaqItem {
   question: string
-  answer: any[] // Portable Text
+  answer: unknown[]
   order?: number
 }
 

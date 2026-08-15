@@ -1,10 +1,6 @@
-
 'use client'
 
-import { useState } from 'react'
 import { ShoppingBag } from 'lucide-react'
-import { ShimmerButton } from '@/components/reactbits'
-
 
 interface BuyButtonProps {
     slug: string
@@ -13,16 +9,14 @@ interface BuyButtonProps {
     url: string
 }
 
-export function BuyButton({ slug, title, price, url }: BuyButtonProps) {
+export function BuyButton({ url }: BuyButtonProps) {
     return (
-        <ShimmerButton
-            onClick={() => window.location.href = `${url}`}
-            className="w-full text-center justify-center h-14 text-lg cursor-pointer"
+        <a
+            href={url}
+            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-ae-purple text-sm font-semibold text-[#0b0b14] transition-colors hover:bg-ae-cyan"
         >
-            <span className="flex items-center gap-2">
-                Buy Now
-                <ShoppingBag className="w-5 h-5" />
-            </span>
-        </ShimmerButton>
+            Buy now
+            <ShoppingBag className="h-4 w-4" aria-hidden="true" />
+        </a>
     )
 }

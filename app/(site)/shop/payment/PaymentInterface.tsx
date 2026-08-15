@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, CreditCard, Wallet, Smartphone, ShieldCheck, Loader2 } from 'lucide-react';
-import Image from 'next/image';
-import { ShimmerButton } from '@/components/reactbits';
+
 // import { QRCodeSVG } from 'qrcode.react';
 
 interface PaymentMethod {
@@ -16,7 +15,10 @@ interface PaymentMethod {
     total_pay?: string;
     show?: boolean;
     active?: boolean;
-    // Add other fields as needed
+    type?: string;
+    source?: string;
+    payment_currency?: string;
+    currency_convert?: string;
 }
 
 interface PaymentCategory {
@@ -56,14 +58,30 @@ interface PaymentInterfaceProps {
     cookie: string;
 }
 
+
+
+interface PaymentResult {
+    status?: string;
+    payment_method?: string;
+    type_payment?: string;
+    data?: {
+        qr_string?: string;
+        account_number?: string;
+        pay_code?: string;
+        retail_outlet_name?: string;
+        expiration_date?: string;
+        payment_link?: string;
+    };
+}
+
 export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfaceProps) {
-    const [selectedMethod, setSelectedMethod] = useState<any>(null);
+    const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(null);
     const [selectedCategoryType, setSelectedCategoryType] = useState<string>('');
     const [email, setEmail] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [openCategory, setOpenCategory] = useState<string | null>('ewallet');
-    const [paymentResult, setPaymentResult] = useState<any>(null);
+    const [paymentResult, setPaymentResult] = useState<PaymentResult | null>(null);
 
     // Polling for payment status
     useEffect(() => {
@@ -110,7 +128,7 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
         cat => cat.available && cat.available.length > 0 && cat.available.some(m => m.show !== false)
     );
 
-    const handleSelectMethod = (method: any, categoryName: string) => {
+    const handleSelectMethod = (method: PaymentMethod, categoryName: string) => {
         setSelectedMethod(method);
         setSelectedCategoryType(categoryName);
         setError('');
@@ -165,7 +183,7 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
             let data;
             try {
                 data = JSON.parse(text);
-            } catch (e) {
+            } catch {
                 console.error('Failed to parse API response:', text);
                 throw new Error('Server returned invalid response');
             }
@@ -188,9 +206,9 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                 setPaymentResult(data);
             }
 
-        } catch (err: any) {
+        } catch (err) {
             console.error(err);
-            setError(err.message || 'Payment failed');
+            setError(err instanceof Error ? err.message : 'Payment failed');
         } finally {
             setIsLoading(false);
         }
@@ -271,7 +289,7 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
 
             {/* Header */}
             <div className="text-center space-y-2">
-                <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+                <h1 className="text-3xl font-bold tracking-tight text-shell-text">
                     Select Payment Method
                 </h1>
                 <p className="text-zinc-500">Secure payment powered by Sociabuzz</p>
@@ -375,20 +393,21 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
 
             {/* Footer */}
             <div className="pt-4 space-y-4">
-                <ShimmerButton
+                <button
+                    type="button"
                     onClick={handlePayment}
                     disabled={!selectedMethod || isLoading}
-                    className="w-full h-14 text-lg font-medium"
+                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-ae-purple text-sm font-semibold text-[#0b0b14] transition-colors hover:bg-ae-cyan disabled:opacity-50"
                 >
                     {isLoading ? (
                         <span className="flex items-center gap-2">
-                            <Loader2 className="w-5 h-5 animate-spin" />
+                            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
                             Processing...
                         </span>
                     ) : (
                         `Pay ${selectedMethod ? `${paymentData.currency_convert} ${selectedMethod.total_pay}` : ''}`
                     )}
-                </ShimmerButton>
+                </button>
 
                 <div className="flex items-center justify-center gap-2 text-xs text-zinc-500">
                     <ShieldCheck className="w-4 h-4" />

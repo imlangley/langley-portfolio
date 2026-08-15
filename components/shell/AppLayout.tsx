@@ -2,15 +2,11 @@
 
 import { ReactNode } from 'react'
 import { MenuBar } from './MenuBar'
-import { Toolbar } from './Toolbar'
 import { StatusBar } from './StatusBar'
 import { ThemeToggle } from '@/components/global/ThemeToggle'
 import { SideDock } from '@/components/navigation/SideDock'
 import { ScrollProgress } from '@/components/reactbits/ScrollProgress'
 import { useCursor } from '@/context/CursorContext'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Home, FolderOpen, User, Mail, Settings } from 'lucide-react'
 import { MobileDock } from '@/components/navigation/MobileDock'
 
 export interface AppLayoutProps {
@@ -29,20 +25,28 @@ export function AppLayout({ children }: AppLayoutProps) {
             {/* Scroll Progress Indicator */}
             <ScrollProgress />
 
-            {/* Desktop Shell Elements - kept minimal for cleaner look */}
-            <div className="hidden md:block shrink-0">
+            {/* Desktop Shell Elements */}
+            <div className="hidden md:block shrink-0 h-11">
                 <MenuBar />
             </div>
 
-            {/* Mobile Header (Simplified) */}
-            <header className="md:hidden h-14 bg-shell-bg border-b border-shell-border flex items-center justify-between px-4 z-50 shrink-0">
+            {/* Mobile Header — liquid glass */}
+            <header className="md:hidden sticky top-0 h-14 flex items-center justify-between px-4 z-50 shrink-0"
+                style={{
+                    background: 'hsl(231 22% 9% / 0.92)',
+                    backdropFilter: 'blur(20px) saturate(1.6)',
+                    WebkitBackdropFilter: 'blur(20px) saturate(1.6)',
+                    borderBottom: '1px solid hsl(228 30% 96% / 0.06)',
+                }}
+            >
                 <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded bg-primary flex items-center justify-center text-[10px] font-bold text-primary-foreground">
+                    <div className="w-5 h-5 rounded bg-ae-purple flex items-center justify-center text-[10px] font-black text-white">
                         Ae
                     </div>
-                    <span className="font-bold text-shell-text">Langley.aep</span>
+                    <span className="font-bold text-shell-text text-sm">
+                        Langley<span className="text-shell-accent">.aep</span>
+                    </span>
                 </div>
-                {/* Theme Toggle - Mobile */}
                 <ThemeToggle
                     className="text-shell-text-muted hover:text-shell-text"
                     data-testid="theme-toggle-mobile"
@@ -62,19 +66,21 @@ export function AppLayout({ children }: AppLayoutProps) {
                 </div>
             </main>
 
-            {/* Side Dock Navigation - Desktop (Left Vertical) */}
-            <div className="hidden md:block">
-                <SideDock position="left" />
+            {/* Side Dock — hidden on lg+ where the Explorer rail handles navigation */}
+            <div className="hidden md:block lg:hidden">
+                <SideDock />
             </div>
 
-            <div className="hidden md:block shrink-0 z-40">
+            <div className="hidden lg:block shrink-0 z-40">
                 <StatusBar />
             </div>
 
-            {/* Mobile Bottom Dock */}
+            {/* Mobile Bottom Dock — thumb-reachable, liquid glass */}
             <div className="md:hidden">
                 <MobileDock />
             </div>
+
+            <div className="h-24 shrink-0 md:h-28 lg:h-0" aria-hidden />
         </div>
     )
 }

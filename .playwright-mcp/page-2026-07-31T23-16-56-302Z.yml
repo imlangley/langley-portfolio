@@ -1,0 +1,344 @@
+- generic [active] [ref=e1]:
+  - button "Quick Menu ⌘K" [ref=e2]:
+    - generic [ref=e5]: Quick Menu
+    - generic [ref=e6]: ⌘K
+  - generic [ref=e7]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e12]: Ae
+          - generic [ref=e14]: Langley.aep
+        - navigation "Application menu" [ref=e15]:
+          - button "File" [ref=e16]
+          - button "Edit" [ref=e17]
+          - button "Composition" [ref=e18]
+          - button "Layer" [ref=e19]
+          - button "Effect" [ref=e20]
+          - button "View" [ref=e21]
+          - button "Help" [ref=e22]
+      - generic [ref=e23]:
+        - generic [ref=e24]: ~/langley
+        - generic [ref=e27]: index.tsx
+      - button "Open command palette" [ref=e29]:
+        - generic [ref=e33]: Search
+        - generic [ref=e34]: ⌘K
+    - main [ref=e40]:
+      - generic [ref=e43]:
+        - main [ref=e44]:
+          - generic [ref=e45]:
+            - generic [ref=e48]:
+              - generic [ref=e49]: Available for Projects
+              - heading "Hi, I'm Langley Web Developer" [level=1] [ref=e52]:
+                - generic [ref=e53]: Hi, I'm Langley
+                - generic [ref=e55]:
+                  - generic [ref=e56]: Web Developer
+                  - generic [ref=e57]: Web Developer
+              - paragraph [ref=e58]: I build websites and edit videos.
+              - list [ref=e59]:
+                - listitem [ref=e60]: Adobe After Effects
+                - listitem [ref=e61]: Adobe Photoshop
+                - listitem [ref=e62]: Alight Motion
+                - listitem [ref=e63]: Antigravity
+                - listitem [ref=e64]: Davinci Resolve Studio
+                - listitem [ref=e65]: Ffmpeg
+              - generic [ref=e66]:
+                - button "View My Work" [ref=e67]
+                - link "Visit Shop" [ref=e72] [cursor=pointer]:
+                  - /url: /shop
+              - button "⌘K quick navigation" [ref=e76]:
+                - generic [ref=e77]: ⌘K
+                - text: quick navigation
+            - button "Scroll to projects" [ref=e78]:
+              - generic [ref=e79]: scroll
+          - generic [ref=e84]:
+            - generic [ref=e86]:
+              - img "Langley" [ref=e90]
+              - generic [ref=e91]: Web Developer & Video Editor
+            - generic [ref=e92]:
+              - generic [ref=e93]: About Me
+              - heading "L a n g l e y" [level=2] [ref=e96]:
+                - generic [ref=e98]:
+                  - generic [ref=e99]: L
+                  - generic [ref=e100]: a
+                  - generic [ref=e101]: "n"
+                  - generic [ref=e102]: g
+                  - generic [ref=e103]: l
+                  - generic [ref=e104]: e
+                  - generic [ref=e105]: "y"
+              - paragraph [ref=e106]: Web Developer & Video Editor crafting clean and modern digital experiences.
+              - generic [ref=e107]:
+                - generic [ref=e108]: Adobe After Effects
+                - generic [ref=e109]: Adobe Photoshop
+                - generic [ref=e110]: Alight Motion
+                - generic [ref=e111]: Antigravity
+                - generic [ref=e112]: Davinci Resolve Studio
+              - link "Learn More About Me" [ref=e115] [cursor=pointer]:
+                - /url: /about
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - generic [ref=e122]: Layer 02 · Selected Work
+              - heading "T i m e l i n e C o m p s" [level=2] [ref=e126]:
+                - generic [ref=e127]:
+                  - generic [ref=e128]:
+                    - generic [ref=e129]: T
+                    - generic [ref=e130]: i
+                    - generic [ref=e131]: m
+                    - generic [ref=e132]: e
+                    - generic [ref=e133]: l
+                    - generic [ref=e134]: i
+                    - generic [ref=e135]: "n"
+                    - generic [ref=e136]: e
+                  - generic [ref=e137]:
+                    - generic [ref=e138]: C
+                    - generic [ref=e139]: o
+                    - generic [ref=e140]: m
+                    - generic [ref=e141]: p
+                    - generic [ref=e142]: s
+              - paragraph [ref=e143]: Each project is a composition — layered, keyframed, and rendered.
+            - generic [ref=e144]:
+              - link [ref=e148] [cursor=pointer]:
+                - /url: /projects/this-december
+                - article [ref=e149]:
+                  - generic [ref=e150]: this-december
+                  - generic [ref=e153]:
+                    - img "This December" [ref=e154]
+                    - generic [ref=e156]: Comp
+                    - generic [ref=e160]: Pinned
+                  - generic [ref=e161]:
+                    - heading "This December" [level=3] [ref=e162]
+                    - paragraph [ref=e163]: Just for my content.
+              - link [ref=e168] [cursor=pointer]:
+                - /url: /projects/aeao
+                - article [ref=e169]:
+                  - generic [ref=e170]: aeao
+                  - generic [ref=e173]:
+                    - img "AEAO" [ref=e174]
+                    - generic [ref=e176]: Comp
+                    - generic [ref=e180]: Pinned
+                  - generic [ref=e181]:
+                    - heading "AEAO" [level=3] [ref=e182]
+                    - paragraph [ref=e183]: Editing for my community.
+              - link [ref=e188] [cursor=pointer]:
+                - /url: /projects/eenie-meenie
+                - article [ref=e189]:
+                  - generic [ref=e190]: eenie-meenie
+                  - generic [ref=e193]:
+                    - img "Eenie Meenie" [ref=e194]
+                    - generic [ref=e196]: Comp
+                  - generic [ref=e200]:
+                    - heading "Eenie Meenie" [level=3] [ref=e201]
+                    - paragraph [ref=e202]: Video editing commision.
+              - link [ref=e207] [cursor=pointer]:
+                - /url: /projects/cruel-summer
+                - article [ref=e208]:
+                  - generic [ref=e209]: cruel-summer
+                  - generic [ref=e212]:
+                    - img "Cruel Summer" [ref=e213]
+                    - generic [ref=e215]: Comp
+                  - generic [ref=e219]:
+                    - heading "Cruel Summer" [level=3] [ref=e220]
+                    - paragraph [ref=e221]: Video editing commission.
+              - link [ref=e226] [cursor=pointer]:
+                - /url: /projects/am-i-bothering-you
+                - article [ref=e227]:
+                  - generic [ref=e228]: am-i-bothering-you
+                  - generic [ref=e231]:
+                    - img "Am I Bothering You" [ref=e232]
+                    - generic [ref=e234]: Comp
+                  - generic [ref=e238]:
+                    - heading "Am I Bothering You" [level=3] [ref=e239]
+                    - paragraph [ref=e240]: Just trying another style.
+              - link [ref=e245] [cursor=pointer]:
+                - /url: /projects/love-me-not
+                - article [ref=e246]:
+                  - generic [ref=e247]: love-me-not
+                  - generic [ref=e250]:
+                    - img "Love Me Not" [ref=e251]
+                    - generic [ref=e253]: Comp
+                  - generic [ref=e257]:
+                    - heading "Love Me Not" [level=3] [ref=e258]
+                    - paragraph [ref=e259]: Video editing commission.
+            - link "View All Projects" [ref=e263] [cursor=pointer]:
+              - /url: /projects
+          - generic [ref=e268]:
+            - generic [ref=e269]:
+              - generic [ref=e270]: Tech Stack
+              - heading "T o o l s & S o f t w a r e" [level=2] [ref=e274]:
+                - generic [ref=e275]:
+                  - generic [ref=e276]:
+                    - generic [ref=e277]: T
+                    - generic [ref=e278]: o
+                    - generic [ref=e279]: o
+                    - generic [ref=e280]: l
+                    - generic [ref=e281]: s
+                  - generic [ref=e282]: "&"
+                  - generic [ref=e284]:
+                    - generic [ref=e285]: S
+                    - generic [ref=e286]: o
+                    - generic [ref=e287]: f
+                    - generic [ref=e288]: t
+                    - generic [ref=e289]: w
+                    - generic [ref=e290]: a
+                    - generic [ref=e291]: r
+                    - generic [ref=e292]: e
+              - paragraph [ref=e293]: The technologies and software I use to bring creative visions to life.
+            - generic [ref=e294]:
+              - generic [ref=e296]:
+                - generic [ref=e298]:
+                  - img "Adobe After Effects" [ref=e300]
+                  - generic [ref=e301]: Adobe After Effects
+                - generic [ref=e303]:
+                  - img "Adobe Photoshop" [ref=e305]
+                  - generic [ref=e306]: Adobe Photoshop
+                - generic [ref=e308]:
+                  - img "Alight Motion" [ref=e310]
+                  - generic [ref=e311]: Alight Motion
+                - generic [ref=e313]:
+                  - img "Antigravity" [ref=e315]
+                  - generic [ref=e316]: Antigravity
+                - generic [ref=e318]:
+                  - img "Davinci Resolve Studio" [ref=e320]
+                  - generic [ref=e321]: Davinci Resolve Studio
+                - generic [ref=e323]:
+                  - img "Adobe After Effects" [ref=e325]
+                  - generic [ref=e326]: Adobe After Effects
+                - generic [ref=e328]:
+                  - img "Adobe Photoshop" [ref=e330]
+                  - generic [ref=e331]: Adobe Photoshop
+                - generic [ref=e333]:
+                  - img "Alight Motion" [ref=e335]
+                  - generic [ref=e336]: Alight Motion
+                - generic [ref=e338]:
+                  - img "Antigravity" [ref=e340]
+                  - generic [ref=e341]: Antigravity
+                - generic [ref=e343]:
+                  - img "Davinci Resolve Studio" [ref=e345]
+                  - generic [ref=e346]: Davinci Resolve Studio
+                - generic [ref=e348]:
+                  - img "Adobe After Effects" [ref=e350]
+                  - generic [ref=e351]: Adobe After Effects
+                - generic [ref=e353]:
+                  - img "Adobe Photoshop" [ref=e355]
+                  - generic [ref=e356]: Adobe Photoshop
+                - generic [ref=e358]:
+                  - img "Alight Motion" [ref=e360]
+                  - generic [ref=e361]: Alight Motion
+                - generic [ref=e363]:
+                  - img "Antigravity" [ref=e365]
+                  - generic [ref=e366]: Antigravity
+                - generic [ref=e368]:
+                  - img "Davinci Resolve Studio" [ref=e370]
+                  - generic [ref=e371]: Davinci Resolve Studio
+              - generic [ref=e373]:
+                - generic [ref=e375]:
+                  - img "Ffmpeg" [ref=e377]
+                  - generic [ref=e378]: Ffmpeg
+                - generic [ref=e380]:
+                  - img "Figma" [ref=e382]
+                  - generic [ref=e383]: Figma
+                - generic [ref=e385]:
+                  - img "Topaz Video" [ref=e387]
+                  - generic [ref=e388]: Topaz Video
+                - generic [ref=e390]:
+                  - img "Visual Studio Code" [ref=e392]
+                  - generic [ref=e393]: Visual Studio Code
+                - generic [ref=e395]:
+                  - img "Ffmpeg" [ref=e397]
+                  - generic [ref=e398]: Ffmpeg
+                - generic [ref=e400]:
+                  - img "Figma" [ref=e402]
+                  - generic [ref=e403]: Figma
+                - generic [ref=e405]:
+                  - img "Topaz Video" [ref=e407]
+                  - generic [ref=e408]: Topaz Video
+                - generic [ref=e410]:
+                  - img "Visual Studio Code" [ref=e412]
+                  - generic [ref=e413]: Visual Studio Code
+                - generic [ref=e415]:
+                  - img "Ffmpeg" [ref=e417]
+                  - generic [ref=e418]: Ffmpeg
+                - generic [ref=e420]:
+                  - img "Figma" [ref=e422]
+                  - generic [ref=e423]: Figma
+                - generic [ref=e425]:
+                  - img "Topaz Video" [ref=e427]
+                  - generic [ref=e428]: Topaz Video
+                - generic [ref=e430]:
+                  - img "Visual Studio Code" [ref=e432]
+                  - generic [ref=e433]: Visual Studio Code
+        - generic [ref=e434]:
+          - generic [ref=e435]:
+            - generic [ref=e436]: Project Panel
+            - generic [ref=e443]: AE 2024
+          - generic [ref=e445]:
+            - generic [ref=e446]:
+              - generic [ref=e447]:
+                - generic [ref=e450]: Compositions
+                - generic [ref=e451]: 3 items
+              - generic [ref=e452]:
+                - generic [ref=e453]:
+                  - generic [ref=e458]: Portfolio_Main.aep
+                  - generic [ref=e460]: "24"
+                  - generic [ref=e466]: 00:00:30:00
+                - generic [ref=e467]:
+                  - generic [ref=e471]: Hero_Section.aep
+                  - generic [ref=e473]: "12"
+                  - generic [ref=e479]: 00:00:15:00
+                - generic [ref=e480]:
+                  - generic [ref=e484]: Projects_Gallery.aep
+                  - generic [ref=e486]: "36"
+                  - generic [ref=e492]: 00:00:45:00
+              - generic [ref=e493]:
+                - generic [ref=e494]:
+                  - generic [ref=e496]: "RAM Preview:"
+                  - generic [ref=e497]: Ready
+                - generic [ref=e499]: Full
+                - generic [ref=e504]: 30 fps
+            - generic [ref=e509]:
+              - generic [ref=e510]:
+                - heading "Quick Access" [level=4] [ref=e511]
+                - navigation "Footer navigation" [ref=e514]:
+                  - link "Projects" [ref=e515] [cursor=pointer]:
+                    - /url: /projects
+                  - link "About" [ref=e520] [cursor=pointer]:
+                    - /url: /about
+                  - link "Status" [ref=e525] [cursor=pointer]:
+                    - /url: /uptime
+              - generic [ref=e530]:
+                - heading "Connect" [level=4] [ref=e531]
+                - navigation "Social media links" [ref=e534]:
+                  - link [ref=e535] [cursor=pointer]:
+                    - /url: https://www.instagram.com/giilang.nh
+                  - link [ref=e539] [cursor=pointer]:
+                    - /url: https://www.tiktok.com/@langliey
+                  - link [ref=e543] [cursor=pointer]:
+                    - /url: https://github.com/imlangley
+              - generic [ref=e547]:
+                - generic [ref=e548]: © 2026 Langley
+                - generic [ref=e549]: v2.0.4 [AE]
+    - navigation "Side navigation" [ref=e554]:
+      - link "Home" [ref=e555] [cursor=pointer]:
+        - /url: /
+      - link "Projects" [ref=e562] [cursor=pointer]:
+        - /url: /projects
+      - link "About" [ref=e567] [cursor=pointer]:
+        - /url: /about
+      - link "Shop" [ref=e573] [cursor=pointer]:
+        - /url: /shop
+      - link "Status" [ref=e579] [cursor=pointer]:
+        - /url: /uptime
+    - status "Editor status bar" [ref=e584]:
+      - generic [ref=e585]:
+        - generic [ref=e586]: Home
+        - generic [ref=e593]: main
+        - generic [ref=e601]:
+          - generic [ref=e606]: "0"
+          - generic [ref=e609]: "0"
+      - generic [ref=e610]: Langley · Portfolio
+      - generic [ref=e612]:
+        - generic [ref=e613]: © 2026
+        - generic [ref=e617]: UTF-8
+        - generic [ref=e618]: TypeScript React
+        - generic [ref=e619]: Live
+        - button "Notifications" [ref=e625]
+  - button "Open Next.js Dev Tools" [ref=e635] [cursor=pointer]

@@ -187,7 +187,6 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
       <motion.span
         className={cn('flex flex-wrap whitespace-pre-wrap relative', mainClassName, className)}
         {...rest}
-        layout
         transition={transition}
       >
         <span className="sr-only">{texts[currentTextIndex]}</span>
@@ -197,7 +196,6 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
             className={cn(
               splitBy === 'lines' ? 'flex flex-col w-full' : 'flex flex-wrap whitespace-pre-wrap relative'
             )}
-            layout
             aria-hidden="true"
           >
             {elements.map((wordObj, wordIndex, array) => {

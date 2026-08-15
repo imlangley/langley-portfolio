@@ -14,8 +14,7 @@ import {
     FolderOpen,
     Home,
     User,
-    Activity,
-    Settings
+    Activity
 } from 'lucide-react'
 import { useState } from 'react'
 import { motion } from 'motion/react'
@@ -30,7 +29,7 @@ export function Toolbar() {
     const pathname = usePathname()
 
     const TOOLS = [
-        { id: 'select', icon: MousePointer2, label: 'Selection Tool (V)', color: 'text-blue-400' },
+        { id: 'select', icon: MousePointer2, label: 'Selection Tool (V)', color: 'text-ae-purple' },
         { id: 'hand', icon: Hand, label: 'Hand Tool (H)', color: 'text-white' },
         { id: 'zoom', icon: Search, label: 'Zoom Tool (Z)', color: 'text-white' }, // Search icon as Zoom proxy
         { id: 'rotate', icon: RotateCw, label: 'Rotation Tool (W)', color: 'text-white' },

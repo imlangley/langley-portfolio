@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { motion, useSpring, useInView, useMotionValue, useTransform } from 'motion/react'
+import { motion, useSpring, useInView, useMotionValue } from 'motion/react'
 
 interface AnimatedCounterProps {
     value: number

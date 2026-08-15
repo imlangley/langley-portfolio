@@ -26,6 +26,7 @@ import {
   singletonActionFilter,
   SINGLETON_TYPES,
   SINGLETON_IDS,
+  type SingletonType,
 } from './sanity/plugins/singletonPlugin'
 
 /**
@@ -68,7 +69,7 @@ export default defineConfig({
     templates: (prev) => {
       // Filter out singleton templates and add custom ones with fixed IDs
       const filtered = prev.filter(
-        (template) => !SINGLETON_TYPES.includes(template.schemaType as any)
+        (template) => !SINGLETON_TYPES.includes(template.schemaType as SingletonType)
       )
 
       // Add singleton templates with fixed document IDs

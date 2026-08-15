@@ -6,7 +6,7 @@
  */
 
 import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url'
-import { client, projectId, dataset } from './client'
+import { client } from './client'
 
 /**
  * Image URL builder instance.

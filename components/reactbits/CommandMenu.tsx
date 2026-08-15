@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'motion/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Search, ArrowRight, Moon, Sun, Home, User, Briefcase, Activity, FileCode, X, Command } from 'lucide-react'
+import { Search, ArrowRight,  Home, User, Briefcase, Activity,  X, Command } from 'lucide-react'
 
 interface CommandItem {
     id: string
@@ -62,6 +62,11 @@ export function CommandMenu({ items = defaultItems, onClose }: CommandMenuProps)
     const [isOpen, setIsOpen] = useState(false)
     const [search, setSearch] = useState('')
     const [selectedIndex, setSelectedIndex] = useState(0)
+    const [prevSearch, setPrevSearch] = useState(search)
+    if (prevSearch !== search) {
+        setPrevSearch(search)
+        setSelectedIndex(0)
+    }
     const inputRef = useRef<HTMLInputElement>(null)
 
     const filteredItems = items.filter(item =>
@@ -145,10 +150,6 @@ export function CommandMenu({ items = defaultItems, onClose }: CommandMenuProps)
             inputRef.current.focus()
         }
     }, [isOpen])
-
-    useEffect(() => {
-        setSelectedIndex(0)
-    }, [search])
 
     return (
         <>

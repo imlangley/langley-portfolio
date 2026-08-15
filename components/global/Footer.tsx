@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { motion } from 'motion/react'
-import { Github, Twitter, Linkedin, Instagram, Folder, Film, Layers, Monitor, Cpu, ExternalLink, Globe } from 'lucide-react'
+import { Github, Twitter, Linkedin, Instagram, Folder, Film, Layers, Monitor, Cpu, ExternalLink, Globe, type LucideIcon } from 'lucide-react'
+import type { SiteSettings, SocialLink } from '@/sanity/lib/fetch'
 
 // Helper to map platform names to icons
 const getSocialIcon = (platform: string) => {
@@ -16,14 +17,13 @@ const getSocialIcon = (platform: string) => {
 }
 
 interface FooterProps {
-
-    siteSettings?: any
+    siteSettings?: SiteSettings | null
 }
 
 export function Footer({ siteSettings }: FooterProps) {
     const currentYear = new Date().getFullYear()
 
-    const SOCIALS = siteSettings?.socials?.map((social: any) => ({
+    const SOCIALS = siteSettings?.socials?.map((social: SocialLink) => ({
         label: social.label,
         href: social.url,
         // Map platform string to icon component dynamically or fallback
@@ -43,7 +43,7 @@ export function Footer({ siteSettings }: FooterProps) {
             {/* Project Panel Header - After Effects Style */}
             <div className="flex items-center justify-between px-4 py-2 bg-shell-bg border-b border-shell-border">
                 <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded bg-gradient-to-br from-[#9999FF] to-[#D291FF] flex items-center justify-center">
+                    <div className="w-5 h-5 rounded bg-ae-purple flex items-center justify-center">
                         <Layers className="w-3 h-3 text-white" />
                     </div>
                     <span className="text-[10px] font-bold text-shell-text uppercase tracking-widest">Project Panel</span>
@@ -163,7 +163,7 @@ export function Footer({ siteSettings }: FooterProps) {
                             <div className="h-px bg-shell-border flex-1" />
                         </h4>
                         <nav className="flex gap-2" aria-label="Social media links">
-                            {SOCIALS.map((social: { label: string; href: string; icon: any }, i: number) => (
+                            {SOCIALS.map((social, i: number) => (
                                 <motion.a
                                     key={social.label || i}
                                     href={social.href}

@@ -1,10 +1,8 @@
 'use client'
 
-import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { SplitText, Magnet, ShinyText } from '@/components/reactbits'
+import { ArrowRight, FileText, Folder, Settings2 } from 'lucide-react'
 import { urlFor } from '@/sanity/lib/image'
 import type { Profile, Tool } from '@/sanity/lib/fetch'
 import { useCursor } from '@/context/CursorContext'
@@ -17,154 +15,101 @@ interface AboutSectionProps {
 export function AboutSection({ profile, tools }: AboutSectionProps) {
     const { setCursorVariant } = useCursor()
 
-    if (!profile) {
-        return null
-    }
+    if (!profile) return null
 
-    // Use tools as skills, fallback to default if empty (but avoid hardcoding specific roles if possible)
-    // Taking first 6 tools as "skills" or "top tech"
-    const skills = tools.length > 0
-        ? tools.slice(0, 5).map(t => t.name)
-        : ['Video Editing', 'Motion Graphics', 'Web Development', 'Creative Direction']
+    const skills =
+        tools.length > 0
+            ? tools.slice(0, 6).map((t) => t.name)
+            : ['After Effects', 'VS Code', 'Motion', 'Web']
 
     return (
-        <section className="relative py-24 px-6">
-            {/* Background accent */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
-            </div>
+        <section className="border-b border-shell-border bg-shell-bg-alt">
+            <div className="flex flex-col lg:flex-row">
+                <aside className="hidden lg:flex w-56 shrink-0 flex-col border-r border-shell-border bg-shell-bg">
+                    <div className="border-b border-shell-border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-shell-text-muted">
+                        Inspector
+                    </div>
+                    <div className="px-3 py-3 font-mono text-[11px] text-shell-text-muted">
+                        <div className="flex items-center gap-1.5 px-1 py-1">
+                            <Folder className="h-3 w-3 text-syn-blue" aria-hidden="true" />
+                            about
+                        </div>
+                        <p className="mt-3 px-1 text-[10px] uppercase tracking-wider">Loaded</p>
+                        <ul className="mt-1 space-y-1">
+                            {skills.map((skill) => (
+                                <li
+                                    key={skill}
+                                    className="rounded border border-shell-border bg-shell-bg-alt px-2 py-1 text-shell-text"
+                                >
+                                    {skill}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </aside>
 
-            <div className="max-w-6xl mx-auto relative">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                    {/* Avatar/Image Side */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                        className="relative"
-                    >
-                        <div className="relative aspect-square max-w-md mx-auto">
-                            {/* Decorative frame */}
-                            <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl" />
-                            <div className="absolute -inset-2 border border-border rounded-xl" />
+                <div className="min-w-0 flex-1">
+                    <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
+                        <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
+                            <FileText className="h-3 w-3 text-syn-blue" aria-hidden="true" />
+                            about.md
+                            <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
+                        </span>
+                    </div>
 
-                            {/* Main image container */}
-                            <div className="relative aspect-square rounded-lg overflow-hidden bg-card border border-border">
+                    <div className="grid gap-0 md:grid-cols-[220px_1fr] lg:grid-cols-[260px_1fr]">
+                        <div className="border-b border-shell-border bg-shell-bg p-4 md:border-b-0 md:border-r">
+                            <div className="relative aspect-square overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt">
                                 {profile.avatarImage?.asset ? (
                                     <Image
                                         src={urlFor(profile.avatarImage).width(500).height(500).url()}
                                         alt={profile.name || 'Profile'}
                                         fill
                                         className="object-cover"
-                                        priority
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary to-card">
-                                        <span className="text-8xl font-bold text-muted-foreground">
-                                            {profile.name?.charAt(0) || 'L'}
-                                        </span>
+                                    <div className="flex h-full items-center justify-center font-mono text-6xl text-shell-text-muted/30">
+                                        {profile.name?.charAt(0) || 'L'}
                                     </div>
                                 )}
                             </div>
-
-                            {/* Floating role badge */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.4, duration: 0.5 }}
-                                className="absolute -bottom-4 -right-4 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-lg shadow-blue-500/30"
-                            >
-                                {profile.role || 'Creative Professional'}
-                            </motion.div>
+                            <p className="mt-3 font-mono text-[11px] text-ae-cyan">
+                                {profile.role || 'Developer / Editor'}
+                            </p>
                         </div>
-                    </motion.div>
 
-                    {/* Content Side */}
-                    <div className="space-y-6">
-                        {/* Section Label */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="flex items-center gap-2"
-                        >
-                            <div className="w-8 h-px bg-blue-500" />
-                            <span className="text-blue-400 text-sm font-mono uppercase tracking-wider">
-                                About Me
-                            </span>
-                        </motion.div>
-
-                        {/* Name */}
-                        <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-                            <SplitText
-                                text={profile.name || 'Hello, I\'m Langley'}
-                                delay={0.2}
-                                animationFrom={{ opacity: 0, y: 30 }}
-                                animationTo={{ opacity: 1, y: 0 }}
-                                textAlign="left"
-                            />
-                        </h2>
-
-                        {/* Bio */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3 }}
-                            className="text-lg text-muted-foreground leading-relaxed"
-                        >
-                            {profile.shortBio || 'A passionate creator working at the intersection of video editing and web development.'}
-                        </motion.p>
-
-                        {/* Skills tags */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4 }}
-                            className="flex flex-wrap gap-2"
-                        >
-                            {skills.map((skill, index) => (
-                                <motion.span
-                                    key={skill}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.5 + index * 0.1 }}
-                                    className="px-3 py-1.5 bg-secondary border border-border rounded-full text-sm text-muted-foreground hover:bg-secondary/80 hover:border-primary/30 transition-colors"
-                                >
-                                    {skill}
-                                </motion.span>
-                            ))}
-                        </motion.div>
-
-                        {/* CTA Button */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.6 }}
-                            className="pt-4"
-                        >
-                            <Magnet magnetStrength={0.3}>
-                                <Link
-                                    href="/about"
-                                    onMouseEnter={() => setCursorVariant('button')}
-                                    onMouseLeave={() => setCursorVariant('default')}
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-border hover:border-primary rounded-lg text-foreground font-medium transition-all duration-300 group hover:shadow-lg hover:shadow-primary/10"
-                                >
-                                    <ShinyText
-                                        text="Learn More About Me"
-                                        speed={4}
-                                        className="text-muted-foreground group-hover:text-foreground"
-                                    />
-                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </Link>
-                            </Magnet>
-                        </motion.div>
+                        <div className="space-y-5 p-5 sm:p-8">
+                            <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
+                                <Settings2 className="h-3 w-3" aria-hidden="true" />
+                                Layer 01 · Profile
+                            </div>
+                            <h2 className="text-3xl font-black tracking-tight text-shell-text sm:text-4xl">
+                                {profile.name || 'Langley'}
+                            </h2>
+                            <p className="max-w-xl text-[15px] leading-relaxed text-muted-foreground">
+                                {profile.shortBio ||
+                                    'A creator working at the intersection of video editing and web development.'}
+                            </p>
+                            <ul className="flex flex-wrap gap-1.5 md:hidden">
+                                {skills.map((skill) => (
+                                    <li
+                                        key={skill}
+                                        className="rounded border border-shell-border bg-shell-bg px-2 py-1 font-mono text-[11px] text-shell-text-muted"
+                                    >
+                                        {skill}
+                                    </li>
+                                ))}
+                            </ul>
+                            <Link
+                                href="/about"
+                                onMouseEnter={() => setCursorVariant('button')}
+                                onMouseLeave={() => setCursorVariant('default')}
+                                className="inline-flex items-center gap-2 rounded-md border border-shell-border bg-shell-bg px-5 py-2.5 text-sm font-semibold text-shell-text transition-colors hover:border-shell-accent/50"
+                            >
+                                Open properties
+                                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,20 +1,22 @@
 'use client'
 
-import { motion } from 'motion/react'
+import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
-import { TerminalSquare, Settings2, Laptop, MapPin, Calendar, Clock, ChevronDown, Quote, MessageSquare, Download, Sparkles, HelpCircle } from 'lucide-react'
 import {
-    AnimatedAvatar,
-    AnimatedCounter,
-    ShimmerButton,
-    RotatingText,
-    DecryptedText,
-    SplitText,
-    TiltedCard,
-    Accordion,
-    Magnet
-} from '@/components/reactbits'
+    Calendar,
+    ChevronDown,
+    Clock,
+    Download,
+    FileText,
+    Folder,
+    Laptop,
+    MapPin,
+    Settings2,
+    TerminalSquare,
+} from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface Tool {
     _id: string
@@ -22,17 +24,9 @@ interface Tool {
     iconUrl: string | null
 }
 
-interface Testimonial {
-    _id: string
-    name: string
-    role?: string
-    testimonialBody: any
-    avatarUrl: string | null
-}
-
 interface FaqItem {
     question: string
-    answer: any
+    answer: unknown
 }
 
 interface AboutPageClientProps {
@@ -40,7 +34,7 @@ interface AboutPageClientProps {
     displayRole: string
     avatarUrl: string | null
     shortBio?: string
-    longBio?: any
+    longBio?: unknown
     faqItems?: FaqItem[]
     tools: Tool[]
     projectsCount: number
@@ -56,335 +50,224 @@ export function AboutPageClient({
     faqItems,
     tools,
     projectsCount,
-    yearsExperience
+    yearsExperience,
 }: AboutPageClientProps) {
+    const [openFaq, setOpenFaq] = useState<string | null>(null)
 
-    // Stats for the counter animations
     const stats = [
-        { value: projectsCount, label: 'Projects', suffix: '+' },
-        { value: yearsExperience, label: 'Years Experience', suffix: '+' },
-        { value: 100, label: 'Happy Clients', suffix: '%' },
-        { value: 24, label: 'Hour Support', suffix: '/7' },
+        { label: 'projects', value: `${projectsCount}+` },
+        { label: 'years', value: `${yearsExperience}+` },
+        { label: 'joined', value: '2020' },
+        { label: 'tz', value: 'GMT+7' },
     ]
 
-    // Convert FAQ items to accordion format
-    const accordionItems = faqItems?.map((item, i) => ({
-        id: `faq-${i}`,
-        title: item.question,
-        icon: <HelpCircle className="w-4 h-4" />,
-        content: (
-            <div className="prose prose-sm dark:prose-invert max-w-none">
-                <PortableText value={item.answer} />
-            </div>
-        )
-    })) || []
-
     return (
-        <div className="min-h-screen bg-background pt-10 pb-20 px-4 md:px-8 overflow-x-hidden">
-            <div className="max-w-7xl mx-auto overflow-hidden">
-
-                {/* Hero Section with Avatar and Title */}
-                <motion.div
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+        <section className="w-full border-b border-shell-border bg-shell-bg-alt">
+            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col lg:flex-row">
+                <aside
+                    className="hidden w-56 shrink-0 flex-col border-r border-shell-border bg-shell-bg lg:flex"
+                    aria-label="Profile inspector"
                 >
-                    {/* Animated Avatar */}
-                    <div className="flex justify-center mb-8">
-                        {avatarUrl ? (
-                            <AnimatedAvatar
-                                src={avatarUrl}
-                                alt={displayName}
-                                size={180}
-                            />
-                        ) : (
-                            <motion.div
-                                className="w-44 h-44 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                            >
-                                <span className="text-6xl font-bold text-primary-foreground">
-                                    {displayName[0]}
+                    <div className="border-b border-shell-border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-shell-text-muted">
+                        Properties
+                    </div>
+                    <div className="space-y-4 px-3 py-3 font-mono text-[11px]">
+                        <div className="flex items-center gap-1.5 text-shell-text-muted">
+                            <Folder className="h-3 w-3 text-syn-blue" aria-hidden="true" />
+                            profile
+                        </div>
+                        <dl className="space-y-2 text-shell-text-muted">
+                            <div className="flex items-center justify-between gap-2">
+                                <dt className="flex items-center gap-1.5">
+                                    <MapPin className="h-3 w-3" aria-hidden="true" />
+                                    Location
+                                </dt>
+                                <dd className="text-shell-text">Indonesia</dd>
+                            </div>
+                            <div className="flex items-center justify-between gap-2">
+                                <dt className="flex items-center gap-1.5">
+                                    <Clock className="h-3 w-3" aria-hidden="true" />
+                                    Timezone
+                                </dt>
+                                <dd className="text-shell-text">GMT+7</dd>
+                            </div>
+                            <div className="flex items-center justify-between gap-2">
+                                <dt className="flex items-center gap-1.5">
+                                    <Calendar className="h-3 w-3" aria-hidden="true" />
+                                    Joined
+                                </dt>
+                                <dd className="text-shell-text">2020</dd>
+                            </div>
+                            <div className="flex items-center justify-between gap-2">
+                                <dt className="flex items-center gap-1.5">
+                                    <Laptop className="h-3 w-3" aria-hidden="true" />
+                                    System
+                                </dt>
+                                <dd className="text-right text-shell-text">AE / VS Code</dd>
+                            </div>
+                        </dl>
+                        <div>
+                            <p className="mb-2 text-[10px] uppercase tracking-wider text-shell-text-muted">
+                                Extensions
+                            </p>
+                            <ul className="flex flex-wrap gap-1.5">
+                                {tools.map((tool) => (
+                                    <li
+                                        key={tool._id}
+                                        title={tool.name}
+                                        className="flex h-8 w-8 items-center justify-center overflow-hidden rounded border border-shell-border bg-shell-bg-alt"
+                                    >
+                                        {tool.iconUrl ? (
+                                            <Image src={tool.iconUrl} alt="" width={16} height={16} />
+                                        ) : (
+                                            <span className="text-[10px] text-shell-text-muted">
+                                                {tool.name[0]}
+                                            </span>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+
+                <div className="flex min-w-0 flex-1 flex-col">
+                    <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
+                        <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
+                            <FileText className="h-3 w-3 text-syn-blue" aria-hidden="true" />
+                            about.md
+                            <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
+                        </span>
+                        <span className="hidden items-center gap-2 px-4 py-2 text-shell-text-muted sm:flex">
+                            <Settings2 className="h-3 w-3" aria-hidden="true" />
+                            properties
+                        </span>
+                    </div>
+
+                    <div className="grid flex-1 gap-0 lg:grid-cols-[280px_1fr]">
+                        <div className="border-b border-shell-border bg-shell-bg p-5 lg:border-b-0 lg:border-r">
+                            <div className="relative mx-auto aspect-square max-w-[220px] overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt lg:max-w-none">
+                                {avatarUrl ? (
+                                    <Image
+                                        src={avatarUrl}
+                                        alt={displayName}
+                                        fill
+                                        className="object-cover"
+                                        sizes="280px"
+                                    />
+                                ) : (
+                                    <div className="flex h-full items-center justify-center font-mono text-6xl text-shell-text-muted/30">
+                                        {displayName[0]}
+                                    </div>
+                                )}
+                            </div>
+                            <h1 className="mt-4 text-2xl font-black tracking-tight text-shell-text">
+                                {displayName}
+                            </h1>
+                            <p className="mt-1 font-mono text-[12px] text-ae-cyan">{displayRole}</p>
+                            {shortBio && (
+                                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{shortBio}</p>
+                            )}
+                            <dl className="mt-5 grid grid-cols-2 gap-2">
+                                {stats.map((stat) => (
+                                    <div
+                                        key={stat.label}
+                                        className="rounded-md border border-shell-border bg-shell-bg-alt px-3 py-2"
+                                    >
+                                        <dt className="font-mono text-[10px] uppercase tracking-wider text-shell-text-muted">
+                                            {stat.label}
+                                        </dt>
+                                        <dd className="mt-0.5 text-lg font-bold text-shell-text">{stat.value}</dd>
+                                    </div>
+                                ))}
+                            </dl>
+                            <div className="mt-4 flex flex-col gap-2">
+                                <Link
+                                    href="/uptime"
+                                    className="inline-flex items-center justify-center rounded-md bg-ae-purple px-4 py-2.5 text-sm font-semibold text-[#0b0b14] transition-colors hover:bg-ae-cyan"
+                                >
+                                    Open status.log
+                                </Link>
+                                <a
+                                    href="/resume.pdf"
+                                    download
+                                    className="inline-flex items-center justify-center gap-2 rounded-md border border-shell-border bg-shell-bg-alt px-4 py-2.5 text-sm font-semibold text-shell-text transition-colors hover:border-shell-accent/50"
+                                >
+                                    <Download className="h-4 w-4" aria-hidden="true" />
+                                    Download CV
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="flex min-h-[420px] flex-col bg-shell-bg-alt">
+                            <div className="flex items-center gap-4 border-b border-shell-border bg-shell-bg px-4 font-mono text-[11px]">
+                                <span className="flex h-9 items-center gap-2 border-b-2 border-shell-accent px-1 text-shell-text">
+                                    <TerminalSquare className="h-3.5 w-3.5" aria-hidden="true" />
+                                    Terminal
                                 </span>
-                            </motion.div>
-                        )}
-                    </div>
-
-                    {/* Name with DecryptedText effect */}
-                    <motion.h1
-                        className="text-4xl md:text-5xl font-bold text-foreground mb-4"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                    >
-                        <DecryptedText
-                            text={displayName}
-                            speed={80}
-                        />
-                    </motion.h1>
-
-                    {/* Role with RotatingText */}
-                    <div className="flex items-center justify-center gap-2 text-xl text-muted-foreground mb-6">
-                        <span>I&apos;m a</span>
-                        <RotatingText
-                            texts={[displayRole, 'Creative Director', 'Problem Solver', 'Tech Enthusiast']}
-                            mainClassName="text-primary font-semibold"
-                            rotationInterval={3000}
-                            staggerDuration={0.02}
-                        />
-                    </div>
-
-                    {/* Short Bio */}
-                    {shortBio && (
-                        <motion.p
-                            className="max-w-2xl mx-auto text-muted-foreground text-lg"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                        >
-                            {shortBio}
-                        </motion.p>
-                    )}
-
-                    {/* CTA Buttons */}
-                    <motion.div
-                        className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mt-8 w-full max-w-md mx-auto sm:max-w-none sm:w-auto"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.7 }}
-                    >
-                        <ShimmerButton href="/uptime">
-                            <Sparkles className="w-4 h-4" />
-                            Check Server Status
-                        </ShimmerButton>
-
-                        <Magnet padding={0} className="w-full sm:w-auto">
-                            <motion.a
-                                href="/resume.pdf"
-                                download
-                                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-border text-foreground font-semibold hover:border-primary hover:text-primary transition-colors"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                            >
-                                <Download className="w-4 h-4" />
-                                Download CV
-                            </motion.a>
-                        </Magnet>
-                    </motion.div>
-                </motion.div>
-
-                {/* Stats Section with Animated Counters */}
-                <motion.div
-                    className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
-                    {stats.map((stat, i) => (
-                        <motion.div
-                            key={stat.label}
-                            className="text-center p-6 rounded-2xl bg-card border border-border"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            whileHover={{ y: -4, borderColor: 'hsl(var(--primary))' }}
-                        >
-                            <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                                <AnimatedCounter
-                                    value={stat.value}
-                                    suffix={stat.suffix}
-                                    duration={2}
-                                />
                             </div>
-                            <div className="text-sm text-muted-foreground">
-                                {stat.label}
+                            <div className="flex-1 space-y-6 overflow-y-auto p-5 font-mono text-sm text-shell-text sm:p-6">
+                                <div>
+                                    <p className="mb-2 text-ae-purple">
+                                        <span className="text-syn-green">➜</span>{' '}
+                                        <span className="text-syn-yellow">~</span> cat bio.txt
+                                    </p>
+                                    <div className="border-l-2 border-shell-border pl-4 text-[13px] leading-relaxed text-muted-foreground">
+                                        {longBio ? (
+                                            <PortableText value={longBio as never} />
+                                        ) : (
+                                            <p>Loading editor profile configuration…</p>
+                                        )}
+                                    </div>
+                                </div>
+                                <p className="text-ae-purple">
+                                    <span className="text-syn-green">➜</span>{' '}
+                                    <span className="text-syn-yellow">~</span>{' '}
+                                    <span className="inline-block h-4 w-2 bg-shell-text blink align-middle" />
+                                </p>
                             </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                {/* Main Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-                    {/* LEFT: Properties Panel (Stats) */}
-                    <motion.div
-                        className="lg:col-span-4 space-y-px bg-card border border-border select-none h-fit"
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        {/* Panel Header */}
-                        <div className="h-9 bg-muted flex items-center px-4 justify-between border-b border-border">
-                            <span className="text-xs font-medium text-foreground uppercase tracking-widest flex items-center gap-2">
-                                <Settings2 className="w-3.5 h-3.5" /> Properties
-                            </span>
-                            <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
                         </div>
+                    </div>
 
-                        {/* Stats Grid */}
-                        <div className="p-4 space-y-6">
-                            {/* Key Values */}
-                            <div className="space-y-4 text-xs font-mono">
-                                <motion.div
-                                    className="flex justify-between items-center text-muted-foreground"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.1 }}
-                                >
-                                    <span className="flex items-center gap-2"><MapPin className="w-3 h-3" /> Location</span>
-                                    <span className="text-foreground">Indonesia</span>
-                                </motion.div>
-                                <motion.div
-                                    className="flex justify-between items-center text-muted-foreground"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.2 }}
-                                >
-                                    <span className="flex items-center gap-2"><Clock className="w-3 h-3" /> Timezone</span>
-                                    <span className="text-foreground">GMT+7</span>
-                                </motion.div>
-                                <motion.div
-                                    className="flex justify-between items-center text-muted-foreground"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.3 }}
-                                >
-                                    <span className="flex items-center gap-2"><Calendar className="w-3 h-3" /> Joined</span>
-                                    <span className="text-foreground">2020</span>
-                                </motion.div>
-                                <motion.div
-                                    className="flex justify-between items-center text-muted-foreground"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.4 }}
-                                >
-                                    <span className="flex items-center gap-2"><Laptop className="w-3 h-3" /> System</span>
-                                    <span className="text-foreground text-right">After Effects<br />VS Code</span>
-                                </motion.div>
-                            </div>
-
-                            {/* Tool Stack (Icons) */}
-                            <div className="pt-2">
-                                <span className="text-[10px] text-muted-foreground uppercase tracking-wider block mb-3">Loaded Extensions</span>
-                                <div className="flex flex-wrap gap-2">
-                                    {tools.map((tool, i) => (
-                                        <motion.div
-                                            key={tool._id}
-                                            className="w-8 h-8 bg-background border border-border rounded flex items-center justify-center hover:border-primary/50 transition-colors cursor-pointer"
-                                            title={tool.name}
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: i * 0.05, type: 'spring', stiffness: 500 }}
-                                            whileHover={{ scale: 1.1, rotate: 5 }}
-                                        >
-                                            {tool.iconUrl ? (
-                                                <Image
-                                                    src={tool.iconUrl}
-                                                    alt={tool.name}
-                                                    width={16}
-                                                    height={16}
-                                                    className="opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all"
+                    {faqItems && faqItems.length > 0 && (
+                        <div className="border-t border-shell-border bg-shell-bg px-4 py-6 sm:px-6">
+                            <h2 className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
+                                FAQ
+                            </h2>
+                            <ul className="space-y-2">
+                                {faqItems.map((item, index) => {
+                                    const id = `faq-${index}`
+                                    const open = openFaq === id
+                                    return (
+                                        <li key={id} className="rounded-md border border-shell-border bg-shell-bg-alt">
+                                            <button
+                                                type="button"
+                                                aria-expanded={open}
+                                                onClick={() => setOpenFaq(open ? null : id)}
+                                                className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-medium text-shell-text"
+                                            >
+                                                {item.question}
+                                                <ChevronDown
+                                                    className={cn(
+                                                        'h-4 w-4 shrink-0 text-shell-text-muted transition-transform',
+                                                        open && 'rotate-180'
+                                                    )}
+                                                    aria-hidden="true"
                                                 />
-                                            ) : (
-                                                <span className="text-[10px] font-bold text-muted-foreground">{tool.name[0]}</span>
+                                            </button>
+                                            {open && (
+                                                <div className="border-t border-shell-border px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+                                                    <PortableText value={item.answer as never} />
+                                                </div>
                                             )}
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
                         </div>
-                    </motion.div>
-
-                    {/* RIGHT: Terminal (Bio) */}
-                    <motion.div
-                        className="lg:col-span-8 bg-background font-mono text-sm border border-border flex flex-col min-h-[500px]"
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        {/* Terminal Header */}
-                        <div className="h-9 bg-card flex items-center px-4 gap-4 border-b border-border">
-                            <div className="flex items-center gap-2 text-foreground border-b-2 border-primary h-full px-2 bg-background">
-                                <TerminalSquare className="w-3.5 h-3.5" />
-                                <span className="text-xs uppercase">Terminal</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-muted-foreground h-full px-2 hover:text-foreground cursor-pointer transition-colors">
-                                <span className="text-xs uppercase">Output</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-muted-foreground h-full px-2 hover:text-foreground cursor-pointer transition-colors">
-                                <span className="text-xs uppercase">Debug Console</span>
-                            </div>
-                        </div>
-
-                        {/* Terminal Content */}
-                        <div className="flex-1 p-6 text-foreground overflow-y-auto space-y-6">
-                            {/* Command 1 */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                            >
-                                <div className="flex gap-2 text-primary mb-2">
-                                    <span>➜</span>
-                                    <span className="text-yellow-500 dark:text-yellow-400">~</span>
-                                    <span>cat</span>
-                                    <span className="text-muted-foreground">bio.txt</span>
-                                </div>
-                                <div className="pl-4 border-l-2 border-border text-muted-foreground leading-relaxed max-w-2xl">
-                                    {longBio ? (
-                                        <PortableText value={longBio} />
-                                    ) : (
-                                        <p>Loading editor profile configuration...</p>
-                                    )}
-                                </div>
-                            </motion.div>
-
-                            {/* Blinking Cursor */}
-                            <div className="flex gap-2 text-primary">
-                                <span>➜</span>
-                                <span className="text-yellow-500 dark:text-yellow-400">~</span>
-                                <motion.span
-                                    className="w-2 h-5 bg-muted-foreground"
-                                    animate={{ opacity: [1, 0, 1] }}
-                                    transition={{ duration: 1, repeat: Infinity }}
-                                />
-                            </div>
-                        </div>
-                    </motion.div>
+                    )}
                 </div>
-
-                {/* FAQ Section with Accordion */}
-                {accordionItems.length > 0 && (
-                    <motion.div
-                        className="mt-16"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <div className="text-center mb-8">
-                            <SplitText
-                                text="Frequently Asked Questions"
-                                className="text-2xl md:text-3xl font-bold text-foreground"
-                                delay={50}
-                            />
-                        </div>
-                        <div className="max-w-3xl mx-auto">
-                            <Accordion items={accordionItems} />
-                        </div>
-                    </motion.div>
-                )}
-
-
             </div>
-        </div>
+        </section>
     )
 }

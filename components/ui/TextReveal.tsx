@@ -19,11 +19,6 @@ function AnimatedChar({ char, delay }: { char: string; delay: number }) {
     const clampedBlur = useTransform(blurValue, (v) => Math.max(0, v));
     const filter = useTransform(clampedBlur, (v) => `blur(${v}px)`);
 
-    // Spring animation for blur
-    const springBlur = useSpring(blurValue, {
-        damping: 12,
-        stiffness: 100,
-    });
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -49,7 +44,7 @@ function AnimatedChar({ char, delay }: { char: string; delay: number }) {
     );
 }
 
-export function TextReveal({ text, className, delay = 0, duration = 0.5 }: TextRevealProps) {
+export function TextReveal({ text, className, delay = 0 }: TextRevealProps) {
     const characters = text.split("");
     const staggerDelay = 0.03;
 

@@ -12,12 +12,12 @@ export interface ThemeToggleProps extends React.ButtonHTMLAttributes<HTMLButtonE
 
 export function ThemeToggle({ className, ...props }: ThemeToggleProps) {
     const { theme, setTheme } = useTheme()
-    const [mounted, setMounted] = React.useState(false)
-
-    // Avoid hydration mismatch
-    React.useEffect(() => {
-        setMounted(true)
-    }, [])
+    // Avoid hydration mismatch — true only after client hydration
+    const mounted = React.useSyncExternalStore(
+        () => () => {},
+        () => true,
+        () => false
+    )
 
     if (!mounted) {
         return <div className={cn("w-9 h-9", className)} /> // Placeholder

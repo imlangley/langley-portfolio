@@ -6,33 +6,33 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCursor } from '@/context/CursorContext'
 import { Home, FolderOpen, User, Activity, ShoppingBag } from 'lucide-react'
-import { GlassSurface } from '@/components/reactbits/GlassSurface'
 
 interface DockItemProps {
     href: string
     icon: ReactNode
     label: string
     isActive: boolean
-    mouseY: ReturnType<typeof useMotionValue<number>>
+    mouseX: ReturnType<typeof useMotionValue<number>>
 }
 
-function DockItem({ href, icon, label, isActive, mouseY }: DockItemProps) {
+function DockItem({ href, icon, label, isActive, mouseX }: DockItemProps) {
     const ref = useRef<HTMLAnchorElement>(null)
     const { setCursorVariant } = useCursor()
 
-    // Calculate distance from mouse for magnetic effect
-    const distance = useTransform(mouseY, (val: number) => {
-        const bounds = ref.current?.getBoundingClientRect() ?? { y: 0, height: 0 }
-        return val - bounds.y - bounds.height / 2
+    const distance = useTransform(mouseX, (val: number) => {
+        const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 }
+        return val - bounds.x - bounds.width / 2
     })
 
-    // Scale based on proximity (macOS dock effect)
-    const sizeSync = useTransform(distance, [-120, 0, 120], [44, 60, 44])
+    const sizeSync = useTransform(distance, [-120, 0, 120], [44, 64, 44])
     const size = useSpring(sizeSync, {
-        mass: 0.1,
-        stiffness: 150,
-        damping: 12,
+        mass: 0.12,
+        stiffness: 180,
+        damping: 14,
     })
+
+    const tiltSync = useTransform(distance, [-120, 0, 120], [0, -6, 0])
+    const rotateY = useSpring(tiltSync, { stiffness: 200, damping: 18 })
 
     const [hovered, setHovered] = useState(false)
 
@@ -41,6 +41,8 @@ function DockItem({ href, icon, label, isActive, mouseY }: DockItemProps) {
             ref={ref}
             href={href}
             data-testid={`dock-link-${label.toLowerCase()}`}
+            aria-label={label}
+            aria-current={isActive ? 'page' : undefined}
             onMouseEnter={() => {
                 setHovered(true)
                 setCursorVariant('button')
@@ -52,13 +54,18 @@ function DockItem({ href, icon, label, isActive, mouseY }: DockItemProps) {
             className="relative flex items-center justify-center"
         >
             <motion.div
-                style={{ width: size, height: size }}
+                style={{
+                    width: size,
+                    height: size,
+                    rotateY,
+                    transformStyle: 'preserve-3d',
+                }}
                 className={`
-                    relative flex items-center justify-center rounded-xl
-                    transition-colors duration-200
+                    relative flex items-center justify-center rounded-2xl
+                    transition-all duration-300
                     ${isActive
-                        ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/30'
-                        : 'bg-shell-surface text-shell-text-muted hover:bg-shell-active hover:text-shell-text'
+                        ? 'bg-ae-purple text-[#0b0b14]'
+                        : 'bg-white/[0.04] text-shell-text-muted hover:bg-white/[0.08] hover:text-shell-text hover:shadow-glow-primary-sm'
                     }
                 `}
             >
@@ -66,27 +73,25 @@ function DockItem({ href, icon, label, isActive, mouseY }: DockItemProps) {
                     {icon}
                 </div>
 
-                {/* Active indicator dot - positioned on right for vertical dock */}
                 {isActive && (
                     <motion.div
                         layoutId="sideActiveIndicator"
-                        className="absolute -right-1 w-1.5 h-1.5 bg-primary rounded-full"
-                        transition={{ type: 'spring' as const, stiffness: 300, damping: 30 }}
+                        className="absolute -top-1 h-1 w-6 bg-ae-cyan rounded-full"
+                        transition={{ type: 'spring' as const, stiffness: 320, damping: 28 }}
                     />
                 )}
             </motion.div>
 
-            {/* Tooltip - positioned to the right for vertical dock */}
             <AnimatePresence>
                 {hovered && (
                     <motion.div
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 5 }}
-                        className="absolute left-full ml-3 px-3 py-1.5 bg-shell-bg border border-shell-border rounded-md text-xs font-medium text-shell-text whitespace-nowrap z-50 shadow-xl"
+                        initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 24 }}
+                        className="absolute bottom-full mb-3 z-50 whitespace-nowrap rounded-md border border-shell-border bg-shell-bg px-3 py-1.5 text-xs font-medium text-shell-text pointer-events-none"
                     >
                         {label}
-                        <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-shell-bg border-l border-b border-shell-border rotate-45" />
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -111,37 +116,28 @@ const defaultNavItems: NavItem[] = [
 interface SideDockProps {
     items?: NavItem[]
     className?: string
-    position?: 'left' | 'right'
 }
 
-export function SideDock({ items = defaultNavItems, className = '', position = 'left' }: SideDockProps) {
+export function SideDock({ items = defaultNavItems, className = '' }: SideDockProps) {
     const pathname = usePathname()
-    const mouseY = useMotionValue(Infinity)
+    const mouseX = useMotionValue(Infinity)
 
     return (
         <motion.div
-            initial={{ opacity: 0, x: position === 'left' ? -100 : 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, type: 'spring' as const, stiffness: 100, damping: 20 }}
+            initial={{ opacity: 0, y: 60, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.4, type: 'spring' as const, stiffness: 140, damping: 20 }}
             className={`
-                fixed top-1/2 -translate-y-1/2 z-50
-                ${position === 'left' ? 'left-3' : 'right-3'}
+                fixed bottom-6 left-1/2 z-50 -translate-x-1/2 perspective-1500
                 ${className}
             `}
         >
-            <GlassSurface
-                width="auto"
-                height="auto"
-                borderRadius={16}
-                backgroundOpacity={0.20}
-                blur={12}
-                saturation={1.5}
-            >
+                    <div className="rounded-md border border-shell-border bg-shell-bg p-1.5">
                 <nav
-                    onMouseEnter={(e) => mouseY.set(e.pageY)}
-                    onMouseMove={(e) => mouseY.set(e.pageY)}
-                    onMouseLeave={() => mouseY.set(Infinity)}
-                    className="flex flex-col items-center gap-2 px-2 py-3"
+                    onMouseEnter={(e) => mouseX.set(e.clientX)}
+                    onMouseMove={(e) => mouseX.set(e.clientX)}
+                    onMouseLeave={() => mouseX.set(Infinity)}
+                    className="flex items-center gap-1.5 px-2 py-1"
                     aria-label="Side navigation"
                 >
                     {items.map((item) => (
@@ -155,11 +151,11 @@ export function SideDock({ items = defaultNavItems, className = '', position = '
                                     ? pathname === '/'
                                     : pathname.startsWith(item.href)
                             }
-                            mouseY={mouseY}
+                            mouseX={mouseX}
                         />
                     ))}
                 </nav>
-            </GlassSurface>
+            </div>
         </motion.div>
     )
 }

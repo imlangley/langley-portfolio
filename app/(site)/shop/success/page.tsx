@@ -1,8 +1,7 @@
 
 import Link from 'next/link'
 import * as cheerio from 'cheerio'
-import { CheckCircle2, Download, ArrowLeft, ExternalLink } from 'lucide-react'
-import { TiltedCard, BlurText, ShimmerButton } from '@/components/reactbits'
+import { CheckCircle2, Download, ArrowLeft } from 'lucide-react'
 
 interface PageProps {
     searchParams: Promise<{
@@ -97,95 +96,64 @@ export default async function SuccessPage({ searchParams }: PageProps) {
     const successData = url ? await getSuccessData(url, cookie) : null
 
     return (
-        <div className="min-h-screen pt-32 pb-20 px-6 flex flex-col items-center justify-center">
-
-            <div className="max-w-md w-full text-center space-y-8">
-
-                {/* Status Icon */}
-                <div className="relative mx-auto w-24 h-24">
-                    <div className={`absolute inset-0 blur-xl rounded-full animate-pulse ${isPending ? 'bg-yellow-500/20' : 'bg-green-500/20'}`} />
-                    {isPending ? (
-                        <CheckCircle2 className="relative w-24 h-24 text-yellow-500 mx-auto" />
-                    ) : (
-                        <CheckCircle2 className="relative w-24 h-24 text-green-500 mx-auto" />
-                    )}
-                </div>
-
+        <section className="flex min-h-[calc(100svh-2.75rem)] items-center justify-center border-b border-shell-border bg-shell-bg-alt px-4 py-16">
+            <div className="w-full max-w-md space-y-6 rounded-md border border-shell-border bg-shell-bg p-6 text-center sm:p-8">
+                <CheckCircle2
+                    className={`mx-auto h-14 w-14 ${isPending ? 'text-syn-yellow' : 'text-syn-green'}`}
+                    aria-hidden="true"
+                />
                 <div className="space-y-2">
-                    <div className="text-4xl text-center flex justify-center font-black tracking-tight text-white">
-                        <BlurText
-                            text={isPending ? "Payment Pending" : "Order Successful!"}
-                            delay={0.1}
-                        />
-                    </div>
-                    <p className="text-zinc-400">
+                    <h1 className="text-3xl font-black tracking-tight text-shell-text">
+                        {isPending ? 'Payment pending' : 'Order successful'}
+                    </h1>
+                    <p className="text-sm text-muted-foreground">
                         {isPending
-                            ? "We have received your payment request. Please complete the payment if you haven't already."
-                            : "Thank you for your purchase. Your access is ready."
-                        }
+                            ? "We received your payment request. Complete payment if you haven't already."
+                            : 'Thank you for your purchase. Your access is ready.'}
                     </p>
                 </div>
 
-                <div className="p-8 rounded-3xl bg-zinc-900/50 border border-white/10 backdrop-blur-sm space-y-6">
-                    {isPending ? (
-                        <div className="space-y-4">
-                            <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400 text-sm text-left">
-                                <p className="font-semibold mb-1">Waiting for Confirmation</p>
-                                Once you complete the payment, the system will automatically process your order. You will receive an email confirmation shortly.
-                            </div>
-                            <Link href="/shop" className="block w-full py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors font-medium">
-                                Return to Shop
-                            </Link>
-                        </div>
-                    ) : (
-                        <>
-                            <div className="space-y-4">
-                                <div className="text-sm text-zinc-500 uppercase tracking-widest font-medium">
-                                    What to do next
-                                </div>
-                                <ul className="text-left space-y-3 text-zinc-300 text-sm">
-                                    <li className="flex gap-3">
-                                        <span className="bg-blue-500/20 text-blue-400 w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0">1</span>
-                                        Check your email for the receipt and backup link.
-                                    </li>
-                                    <li className="flex gap-3">
-                                        <span className="bg-blue-500/20 text-blue-400 w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0">2</span>
-                                        Click the button below to access your content now.
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {successData?.accessUrl ? (
-                                <ShimmerButton
-                                    href={successData.accessUrl}
-                                    className="w-full justify-center h-12"
-                                >
-                                    <span className="flex items-center gap-2">
-                                        <Download className="w-4 h-4" />
-                                        {successData.accessText}
-                                    </span>
-                                </ShimmerButton>
-                            ) : (
-                                <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl text-yellow-400 text-sm text-left">
-                                    <p className="font-semibold mb-1">Confirmation Required</p>
-                                    We couldn't auto-fetch the direct access link. Please check your email inbox (and spam folder) for the access link from Sociabuzz.
-                                </div>
-                            )}
-                        </>
-                    )}
-                </div>
-
-                {!isPending && (
-                    <Link
-                        href="/shop"
-                        className="inline-flex items-center gap-2 text-muted-foreground hover:text-white transition-colors"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        Back to Shop
-                    </Link>
+                {isPending ? (
+                    <div className="space-y-4">
+                        <p className="rounded-md border border-shell-border bg-shell-bg-alt p-4 text-left text-sm text-muted-foreground">
+                            Once payment completes, the order is processed automatically. Check email for confirmation.
+                        </p>
+                        <Link
+                            href="/shop"
+                            className="inline-flex h-11 w-full items-center justify-center rounded-md bg-ae-purple text-sm font-semibold text-[#0b0b14] transition-colors hover:bg-ae-cyan"
+                        >
+                            Return to shop
+                        </Link>
+                    </div>
+                ) : (
+                    <div className="space-y-4">
+                        <ol className="space-y-2 text-left text-sm text-muted-foreground">
+                            <li>1. Check email for the receipt and backup link.</li>
+                            <li>2. Use the button below to access your content.</li>
+                        </ol>
+                        {successData?.accessUrl ? (
+                            <a
+                                href={successData.accessUrl}
+                                className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-ae-purple text-sm font-semibold text-[#0b0b14] transition-colors hover:bg-ae-cyan"
+                            >
+                                <Download className="h-4 w-4" aria-hidden="true" />
+                                {successData.accessText}
+                            </a>
+                        ) : (
+                            <p className="rounded-md border border-shell-border bg-shell-bg-alt p-4 text-left text-sm text-muted-foreground">
+                                Could not auto-fetch the access link. Check your inbox (and spam) for Sociabuzz.
+                            </p>
+                        )}
+                        <Link
+                            href="/shop"
+                            className="inline-flex items-center justify-center gap-2 font-mono text-[12px] text-shell-text-muted hover:text-shell-text"
+                        >
+                            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+                            Back to shop
+                        </Link>
+                    </div>
                 )}
-
             </div>
-        </div>
+        </section>
     )
 }

@@ -7,24 +7,23 @@ interface UptimeBarProps {
 }
 
 export function UptimeBar({ percentage }: UptimeBarProps) {
-    // Clamp percentage between 0 and 100
     const clampedPercentage = Math.max(0, Math.min(100, percentage))
-    
-    // Determine color based on uptime percentage
-    const getColor = () => {
-        if (clampedPercentage >= 99) return 'bg-green-500'
-        if (clampedPercentage >= 95) return 'bg-yellow-500'
-        if (clampedPercentage >= 90) return 'bg-orange-500'
-        return 'bg-red-500'
-    }
+    const color =
+        clampedPercentage >= 99
+            ? 'bg-syn-green'
+            : clampedPercentage >= 95
+              ? 'bg-syn-yellow'
+              : clampedPercentage >= 90
+                ? 'bg-syn-orange'
+                : 'bg-ae-pink'
 
     return (
-        <div className="w-full h-2 bg-secondary rounded-full overflow-hidden">
+        <div className="h-1.5 w-full overflow-hidden rounded-sm bg-shell-bg-alt">
             <motion.div
-                className={`h-full ${getColor()} rounded-full`}
+                className={`h-full ${color}`}
                 initial={{ width: 0 }}
                 animate={{ width: `${clampedPercentage}%` }}
-                transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             />
         </div>
     )

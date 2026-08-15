@@ -10,7 +10,7 @@
  * - Provides action filter to prevent deletion/duplication
  */
 
-import { type DocumentActionComponent, type DocumentActionsContext } from 'sanity'
+import { type DocumentActionComponent, type DocumentActionsContext, type NewDocumentOptionsResolver } from 'sanity'
 
 /**
  * List of singleton document type names.
@@ -30,12 +30,8 @@ export function isSingleton(typeName: string): boolean {
  * Filter for the "New document" menu.
  * Removes singleton types from the creation options.
  */
-export function singletonNewDocumentFilter(
-  prev: any[],
-  context: any
-): any[] {
-  return prev.filter(({ schemaType }: any) => !isSingleton(schemaType))
-}
+export const singletonNewDocumentFilter: NewDocumentOptionsResolver = (prev) =>
+  prev.filter((option) => !isSingleton((option as { schemaType?: string }).schemaType ?? ''))
 
 /**
  * Filter for document actions.
