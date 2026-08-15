@@ -41,3 +41,8 @@ build/
 next-env.d.ts
 .vercel
 .env*
+.playwright-mcp/
+.omo/
+qa-*.png
+DESIGN.md
+.tours/
