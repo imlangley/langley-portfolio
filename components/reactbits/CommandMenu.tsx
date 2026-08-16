@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'motion/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Search, ArrowRight,  Home, User, Briefcase, Activity,  X, Command } from 'lucide-react'
+import { Search, ArrowRight,  Home, User, Briefcase, Activity,  X } from 'lucide-react'
 
 interface CommandItem {
     id: string
@@ -153,20 +153,6 @@ export function CommandMenu({ items = defaultItems, onClose }: CommandMenuProps)
 
     return (
         <>
-            {/* Trigger hint - only show on desktop */}
-            <motion.button
-                className="hidden md:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground bg-muted/50 rounded-lg hover:bg-muted transition-colors"
-                onClick={() => setIsOpen(true)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-            >
-                <Command className="w-3 h-3" />
-                <span>Quick Menu</span>
-                <kbd className="ml-2 px-1.5 py-0.5 text-xs bg-background rounded border border-border">
-                    ⌘K
-                </kbd>
-            </motion.button>
-
             <AnimatePresence>
                 {isOpen && (
                     <>

@@ -41,55 +41,59 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
         'Code on one screen, composition on the other.'
 
     return (
-        <section className="py-10 sm:py-14">
-            <div className="flex gap-0 overflow-hidden rounded-lg border border-shell-border bg-shell-bg">
-                {/* Explorer rail — real navigation, workspace identity */}
-                <aside className="hidden w-52 shrink-0 flex-col border-r border-shell-border bg-shell-bg-alt lg:flex" aria-label="Explorer">
-                    <div className="px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-shell-text-muted">
-                        Explorer
-                    </div>
-                    <div className="px-2 py-1">
-                        <div className="flex items-center gap-1.5 px-2 py-1 font-mono text-[11px] text-shell-text-muted">
-                            <ChevronRight className="h-3 w-3" aria-hidden="true" />
-                            <Folder className="h-3 w-3 text-syn-blue" aria-hidden="true" />
-                            langley
-                        </div>
-                        <ul className="mt-0.5 space-y-0.5 pl-3">
-                            {EXPLORER.map((file) => {
-                                const Icon = file.icon
-                                const body = (
-                                    <>
-                                        <Icon className={`h-3 w-3 shrink-0 ${file.tone}`} aria-hidden="true" />
-                                        <span className="truncate">{file.label}</span>
-                                    </>
-                                )
-                                return (
-                                    <li key={file.label}>
-                                        {file.active ? (
-                                            <span className="flex items-center gap-2 rounded border-l-2 border-shell-accent bg-shell-active px-2 py-1 font-mono text-[11px] text-shell-text">
-                                                {body}
-                                            </span>
-                                        ) : (
-                                            <Link
-                                                href={file.href}
-                                                className="flex items-center gap-2 rounded px-2 py-1 font-mono text-[11px] text-shell-text-muted transition-colors hover:bg-shell-active/60 hover:text-shell-text"
-                                            >
-                                                {body}
-                                            </Link>
-                                        )}
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                </aside>
+        <section className="py-6 sm:py-10">
+            <div className="relative overflow-hidden rounded-lg border border-shell-border bg-[#07070c]">
+                {/* 3D scene — full-bleed background for the whole workspace */}
+                <div className="absolute inset-0" aria-hidden="true">
+                    <WorkspaceCanvas className="h-full w-full" />
+                </div>
 
-                {/* Editor + comp viewport */}
-                <div className="flex min-w-0 flex-1 flex-col">
-                    <div className="grid flex-1 lg:grid-cols-[1fr_1.05fr]">
-                        {/* Code column */}
-                        <div className="flex min-w-0 items-center px-6 py-10 sm:px-10 lg:py-14">
-                            <div className="min-w-0">
+                <div className="pointer-events-none relative z-10 flex min-h-[640px] flex-col lg:min-h-[calc(100svh-8rem)]">
+                    <div className="flex flex-1">
+                        {/* Explorer rail — real navigation */}
+                        <aside className="pointer-events-auto hidden w-52 shrink-0 flex-col border-r border-shell-border/60 bg-shell-bg/80 backdrop-blur-sm lg:flex" aria-label="Explorer">
+                            <div className="px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-shell-text-muted">
+                                Explorer
+                            </div>
+                            <div className="px-2 py-1">
+                                <div className="flex items-center gap-1.5 px-2 py-1 font-mono text-[11px] text-shell-text-muted">
+                                    <ChevronRight className="h-3 w-3" aria-hidden="true" />
+                                    <Folder className="h-3 w-3 text-syn-blue" aria-hidden="true" />
+                                    langley
+                                </div>
+                                <ul className="mt-0.5 space-y-0.5 pl-3">
+                                    {EXPLORER.map((file) => {
+                                        const Icon = file.icon
+                                        const body = (
+                                            <>
+                                                <Icon className={`h-3 w-3 shrink-0 ${file.tone}`} aria-hidden="true" />
+                                                <span className="truncate">{file.label}</span>
+                                            </>
+                                        )
+                                        return (
+                                            <li key={file.label}>
+                                                {file.active ? (
+                                                    <span className="flex items-center gap-2 rounded border-l-2 border-shell-accent bg-shell-active px-2 py-1 font-mono text-[11px] text-shell-text">
+                                                        {body}
+                                                    </span>
+                                                ) : (
+                                                    <Link
+                                                        href={file.href}
+                                                        className="flex items-center gap-2 rounded px-2 py-1 font-mono text-[11px] text-shell-text-muted transition-colors hover:bg-shell-active/60 hover:text-shell-text"
+                                                    >
+                                                        {body}
+                                                    </Link>
+                                                )}
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        </aside>
+
+                        {/* Code column — copy floats over the scene */}
+                        <div className="flex min-w-0 flex-1 items-center px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
+                            <div className="pointer-events-auto min-w-0 max-w-xl rounded-lg border border-shell-border/60 bg-shell-bg/70 p-6 backdrop-blur-md sm:p-8">
                                 <p className="font-mono text-[11px] text-syn-green">
                                     {'// developer × editor'}
                                 </p>
@@ -103,7 +107,7 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
                                     </span>
                                 </h1>
 
-                                <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
+                                <p className="mt-5 text-base leading-relaxed text-muted-foreground">
                                     {bio}
                                 </p>
 
@@ -134,7 +138,7 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
                                         href="/shop"
                                         onMouseEnter={() => setCursorVariant('button')}
                                         onMouseLeave={() => setCursorVariant('default')}
-                                        className="inline-flex items-center justify-center gap-2 rounded-md border border-shell-border px-6 py-3 text-sm font-semibold text-shell-text transition-colors hover:border-shell-accent/50"
+                                        className="inline-flex items-center justify-center gap-2 rounded-md border border-shell-border bg-shell-bg/60 px-6 py-3 text-sm font-semibold text-shell-text transition-colors hover:border-shell-accent/50"
                                     >
                                         <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                                         Visit shop
@@ -142,24 +146,13 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Composition viewport — 3D centerpiece */}
-                        <div className="relative min-w-0 border-t border-shell-border bg-[#07070c] lg:border-l lg:border-t-0">
-                            <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between border-b border-shell-border bg-shell-bg/90 px-3 py-1.5 font-mono text-[10px] text-shell-text-muted">
-                                <span className="text-syn-orange">Composition</span>
-                                <span>hero.aep</span>
-                            </div>
-                            <div className="h-[300px] sm:h-[380px] lg:h-full lg:min-h-[420px]">
-                                <WorkspaceCanvas className="h-full w-full" />
-                            </div>
-                        </div>
                     </div>
 
-                    {/* Timeline strip — the AE signature */}
-                    <div className="border-t border-shell-border bg-shell-bg-alt px-4 py-3 sm:px-6">
+                    {/* Timeline strip — glass dock over the scene */}
+                    <div className="pointer-events-auto border-t border-shell-border/60 bg-shell-bg/80 px-4 py-3 backdrop-blur-md sm:px-6">
                         <div className="flex items-center justify-between pb-1.5 font-mono text-[10px] text-shell-text-muted">
                             <span>Timeline</span>
-                            <span className="tabular-nums opacity-70">00:00:00:00</span>
+                            <span className="tabular-nums opacity-70">hero.aep · 24fps</span>
                         </div>
                         <ul className="space-y-1">
                             {TIMELINE.map((row) => (
@@ -167,7 +160,7 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
                                     <span className="w-16 shrink-0 truncate font-mono text-[10px] text-shell-text-muted">
                                         {row.name}
                                     </span>
-                                    <span className="relative h-2 flex-1 rounded-sm bg-shell-bg">
+                                    <span className="relative h-2 flex-1 rounded-sm bg-shell-bg-alt/80">
                                         <span
                                             className="absolute inset-y-0 rounded-sm opacity-80"
                                             style={{ backgroundColor: row.color, left: `${row.start}%`, width: `${row.span}%` }}

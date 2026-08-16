@@ -6,13 +6,16 @@
  */
 
 import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url'
-import { client } from './client'
 
 /**
  * Image URL builder instance.
- * Used to generate URLs with transformations.
+ * Built from explicit env config — reading config off the lazy client proxy
+ * resolved to undefined projectId/dataset and broke every image URL.
  */
-const builder = createImageUrlBuilder(client)
+const builder = createImageUrlBuilder({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? '',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
+})
 
 /**
  * Generate an image URL from a Sanity image reference.
