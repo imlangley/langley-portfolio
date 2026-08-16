@@ -96,7 +96,7 @@ export default async function SuccessPage({ searchParams }: PageProps) {
     const successData = url ? await getSuccessData(url, cookie) : null
 
     return (
-        <section className="flex min-h-[60svh] items-center justify-center border-b border-shell-border bg-shell-bg-alt px-4 py-16">
+        <section className="flex min-h-[60svh] items-center justify-center py-16">
             <div className="w-full max-w-md space-y-6 rounded-md border border-shell-border bg-shell-bg p-6 text-center sm:p-8">
                 <CheckCircle2
                     className={`mx-auto h-14 w-14 ${isPending ? 'text-syn-yellow' : 'text-syn-green'}`}

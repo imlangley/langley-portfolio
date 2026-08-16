@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { AlertTriangle, CheckCircle2, Clock, RefreshCw, TerminalSquare } from 'lucide-react'
+import { AlertTriangle, CheckCircle2, RefreshCw } from 'lucide-react'
 import { StatusCard, type MonitorData } from '@/components/status'
 import { cn } from '@/lib/utils'
 
@@ -50,53 +50,38 @@ export function UptimePageClient() {
     const overallStatus = anyDown ? 'down' : allUp ? 'up' : 'partial'
 
     return (
-        <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[60svh] flex-col">
-                <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                    <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
-                        <TerminalSquare className="h-3 w-3 text-syn-green" aria-hidden="true" />
-                        status.log — render monitor
-                    </span>
-                    {lastUpdated && (
-                        <span className="ml-auto hidden items-center gap-2 px-4 py-2 text-shell-text-muted sm:flex">
-                            <Clock className="h-3 w-3" aria-hidden="true" />
-                            {lastUpdated.toLocaleTimeString()}
-                        </span>
-                    )}
+        <section className="py-12 sm:py-16">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-shell-text-muted">
+                        Status
+                    </p>
+                    <h1 className="mt-2 text-3xl font-black tracking-tight text-shell-text sm:text-4xl">
+                        Server status
+                    </h1>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                        Live telemetry for Langley infrastructure.
+                    </p>
                 </div>
+                <button
+                    type="button"
+                    onClick={() => void fetchStatus(true)}
+                    disabled={refreshing}
+                    className="inline-flex items-center justify-center gap-2 rounded-md border border-shell-border bg-shell-bg px-4 py-2 text-sm text-shell-text transition-colors hover:border-shell-accent/50 disabled:opacity-50"
+                >
+                    <RefreshCw className={cn('h-3.5 w-3.5', refreshing && 'animate-spin')} aria-hidden="true" />
+                    Refresh
+                </button>
+            </div>
 
-                <div className="px-4 py-8 sm:px-6 sm:py-10">
-                    <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                        <div>
-                            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
-                                Render monitor
-                            </p>
-                            <h1 className="mt-1 text-3xl font-black tracking-tight text-shell-text sm:text-4xl">
-                                Server status
-                            </h1>
-                            <p className="mt-2 text-sm text-muted-foreground">
-                                Live telemetry for Langley infrastructure.
-                            </p>
-                        </div>
-                        <button
-                            type="button"
-                            onClick={() => void fetchStatus(true)}
-                            disabled={refreshing}
-                            className="inline-flex items-center justify-center gap-2 rounded-md border border-shell-border bg-shell-bg px-4 py-2 font-mono text-[12px] text-shell-text transition-colors hover:border-shell-accent/50 disabled:opacity-50"
-                        >
-                            <RefreshCw className={cn('h-3.5 w-3.5', refreshing && 'animate-spin')} aria-hidden="true" />
-                            Refresh
-                        </button>
-                    </div>
-
-                    <div
-                        className={cn(
-                            'mb-6 flex items-center gap-3 rounded-md border px-4 py-4',
-                            overallStatus === 'up' && 'border-syn-green/40 bg-shell-bg',
-                            overallStatus === 'down' && 'border-ae-pink/40 bg-shell-bg',
-                            overallStatus === 'partial' && 'border-syn-yellow/40 bg-shell-bg'
-                        )}
-                    >
+            <div
+                className={cn(
+                    'mt-8 flex items-center gap-3 rounded-lg border px-4 py-4',
+                    overallStatus === 'up' && 'border-syn-green/40 bg-shell-bg',
+                    overallStatus === 'down' && 'border-ae-pink/40 bg-shell-bg',
+                    overallStatus === 'partial' && 'border-syn-yellow/40 bg-shell-bg'
+                )}
+            >
                         {overallStatus === 'up' ? (
                             <CheckCircle2 className="h-6 w-6 shrink-0 text-syn-green" aria-hidden="true" />
                         ) : (
@@ -122,8 +107,9 @@ export function UptimePageClient() {
                         </div>
                     </div>
 
-                    {loading ? (
-                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                {loading ? (
+                    <div className="contents">
                             {Array.from({ length: 4 }).map((_, i) => (
                                 <div
                                     key={i}
@@ -132,18 +118,16 @@ export function UptimePageClient() {
                             ))}
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                            {data?.monitors.map((monitor, index) => (
-                                <StatusCard key={monitor.id} monitor={monitor} index={index} />
-                            ))}
-                        </div>
+                        data?.monitors.map((monitor, index) => (
+                            <StatusCard key={monitor.id} monitor={monitor} index={index} />
+                        ))
                     )}
-
-                    <p className="mt-8 text-center font-mono text-[11px] text-shell-text-muted">
-                        Powered by Uptime Kuma. Auto-refreshes every 60 seconds.
-                    </p>
-                </div>
             </div>
+
+            <p className="mt-8 text-center font-mono text-[11px] text-shell-text-muted">
+                Powered by Uptime Kuma · auto-refresh 60s
+                {lastUpdated && <span className="ml-1 opacity-70">({lastUpdated.toLocaleTimeString()})</span>}
+            </p>
         </section>
     )
 }

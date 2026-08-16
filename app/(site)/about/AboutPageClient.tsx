@@ -5,13 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import {
-    Calendar,
     ChevronDown,
-    Clock,
     Download,
-    Folder,
-    Laptop,
-    MapPin,
     TerminalSquare,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -34,7 +29,7 @@ interface AboutPageClientProps {
     shortBio?: string
     longBio?: unknown
     faqItems?: FaqItem[]
-    tools: Tool[]
+    tools?: Tool[]
     projectsCount: number
     yearsExperience: number
 }
@@ -46,7 +41,6 @@ export function AboutPageClient({
     shortBio,
     longBio,
     faqItems,
-    tools,
     projectsCount,
     yearsExperience,
 }: AboutPageClientProps) {
@@ -60,78 +54,11 @@ export function AboutPageClient({
     ]
 
     return (
-        <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[60svh] flex-col lg:flex-row">
-                <aside
-                    className="hidden w-56 shrink-0 flex-col border-r border-shell-border bg-shell-bg lg:flex"
-                    aria-label="Profile inspector"
-                >
-                    <div className="border-b border-shell-border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-shell-text-muted">
-                        Properties
-                    </div>
-                    <div className="space-y-4 px-3 py-3 font-mono text-[11px]">
-                        <div className="flex items-center gap-1.5 text-shell-text-muted">
-                            <Folder className="h-3 w-3 text-syn-blue" aria-hidden="true" />
-                            profile
-                        </div>
-                        <dl className="space-y-2 text-shell-text-muted">
-                            <div className="flex items-center justify-between gap-2">
-                                <dt className="flex items-center gap-1.5">
-                                    <MapPin className="h-3 w-3" aria-hidden="true" />
-                                    Location
-                                </dt>
-                                <dd className="text-shell-text">Indonesia</dd>
-                            </div>
-                            <div className="flex items-center justify-between gap-2">
-                                <dt className="flex items-center gap-1.5">
-                                    <Clock className="h-3 w-3" aria-hidden="true" />
-                                    Timezone
-                                </dt>
-                                <dd className="text-shell-text">GMT+7</dd>
-                            </div>
-                            <div className="flex items-center justify-between gap-2">
-                                <dt className="flex items-center gap-1.5">
-                                    <Calendar className="h-3 w-3" aria-hidden="true" />
-                                    Joined
-                                </dt>
-                                <dd className="text-shell-text">2020</dd>
-                            </div>
-                            <div className="flex items-center justify-between gap-2">
-                                <dt className="flex items-center gap-1.5">
-                                    <Laptop className="h-3 w-3" aria-hidden="true" />
-                                    System
-                                </dt>
-                                <dd className="text-right text-shell-text">AE / VS Code</dd>
-                            </div>
-                        </dl>
-                        <div>
-                            <p className="mb-2 text-[10px] uppercase tracking-wider text-shell-text-muted">
-                                Extensions
-                            </p>
-                            <ul className="flex flex-wrap gap-1.5">
-                                {tools.map((tool) => (
-                                    <li
-                                        key={tool._id}
-                                        title={tool.name}
-                                        className="flex h-8 w-8 items-center justify-center overflow-hidden rounded border border-shell-border bg-shell-bg-alt"
-                                    >
-                                        {tool.iconUrl ? (
-                                            <Image src={tool.iconUrl} alt="" width={16} height={16} />
-                                        ) : (
-                                            <span className="text-[10px] text-shell-text-muted">
-                                                {tool.name[0]}
-                                            </span>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </aside>
-
+        <section className="py-12 sm:py-16">
+            <div>
                 <div className="flex min-w-0 flex-1 flex-col">
-                    <div className="grid flex-1 gap-0 lg:grid-cols-[280px_1fr]">
-                        <div className="border-b border-shell-border bg-shell-bg p-5 lg:border-b-0 lg:border-r">
+                    <div className="grid flex-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-10">
+                        <div>
                             <div className="relative mx-auto aspect-square max-w-[220px] overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt lg:max-w-none">
                                 {avatarUrl ? (
                                     <Image
@@ -185,7 +112,7 @@ export function AboutPageClient({
                             </div>
                         </div>
 
-                        <div className="flex min-h-[420px] flex-col bg-shell-bg-alt">
+                        <div className="flex min-h-[420px] flex-col overflow-hidden rounded-lg border border-shell-border">
                             <div className="flex items-center gap-4 border-b border-shell-border bg-shell-bg px-4 font-mono text-[11px]">
                                 <span className="flex h-9 items-center gap-2 border-b-2 border-shell-accent px-1 text-shell-text">
                                     <TerminalSquare className="h-3.5 w-3.5" aria-hidden="true" />
@@ -216,7 +143,7 @@ export function AboutPageClient({
                     </div>
 
                     {faqItems && faqItems.length > 0 && (
-                        <div className="border-t border-shell-border bg-shell-bg px-4 py-6 sm:px-6">
+                        <div className="mt-10">
                             <h2 className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
                                 FAQ
                             </h2>

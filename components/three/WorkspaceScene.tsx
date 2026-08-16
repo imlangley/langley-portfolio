@@ -321,19 +321,6 @@ function DataBridge() {
     )
 }
 
-function GridFloor() {
-    const grid = useMemo(() => {
-        const size = 14
-        const divisions = 14
-        const gridHelper = new THREE.GridHelper(size, divisions, 0x33334a, 0x22223a)
-        const mat = gridHelper.material as THREE.Material
-        mat.transparent = true
-        mat.opacity = 0.22
-        return gridHelper
-    }, [])
-    return <primitive object={grid} position={[0, -2.6, 0]} />
-}
-
 function CameraRig({ reducedMotion }: { reducedMotion: boolean }) {
     const target = useRef(new THREE.Vector2(0, 0))
 
@@ -362,8 +349,6 @@ export function WorkspaceScene({ reducedMotion = false }: { reducedMotion?: bool
             <directionalLight position={[4, 6, 5]} intensity={1.2} />
             <spotLight position={[-6, 4, 6]} angle={0.5} penumbra={1} intensity={45} color={AE_PURPLE} />
             <spotLight position={[6, -3, 5]} angle={0.5} penumbra={1} intensity={35} color={AE_CYAN} />
-
-            <GridFloor />
 
             <Float
                 speed={reducedMotion ? 0 : 1.1}

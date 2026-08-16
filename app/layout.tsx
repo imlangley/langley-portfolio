@@ -15,7 +15,6 @@ import { ToastProviderWrapper } from '@/providers/ToastProviderWrapper'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import { CursorProvider } from '@/context/CursorContext'
-import { TargetCursor } from '@/components/reactbits'
 
 import type { Metadata } from 'next'
 
@@ -55,11 +54,6 @@ export default async function RootLayout({
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
                     <CursorProvider>
                         <ToastProviderWrapper>
-                            <TargetCursor
-                                targetSelector="a, button, [role='button'], input, textarea, .cursor-target"
-                                spinDuration={4}
-                                hoverDuration={0.3}
-                            />
                             <SmoothScroll>
                                 {isEnabled && <PreviewBanner />}
                                 {/* Children rendered directly - AppLayout is in (site)/layout.tsx */}

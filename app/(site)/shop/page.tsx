@@ -35,22 +35,21 @@ export default async function ShopPage() {
     const items = await getShopItems()
 
     return (
-        <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[60svh] flex-col">
-
-                <div className="px-4 py-8 sm:px-6 sm:py-10">
-                    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                        <div>
-                            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
-                                Digital archive
-                            </p>
-                            <h1 className="mt-1 text-3xl font-black tracking-tight text-shell-text sm:text-4xl">
-                                Creative assets
-                            </h1>
-                            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                                Project files, templates, and presets from the workshop.
-                            </p>
-                        </div>
+        <section className="py-12 sm:py-16">
+            <div>
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-shell-text-muted">
+                            Shop
+                        </p>
+                        <h1 className="mt-2 text-3xl font-black tracking-tight text-shell-text sm:text-4xl">
+                            Creative assets
+                        </h1>
+                        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                            Project files, templates, and presets from the workshop.
+                            {items.length > 0 && <span className="ml-1 opacity-70">({items.length})</span>}
+                        </p>
+                    </div>
                         <a
                             href="https://sociabuzz.com/langlieyy/shop"
                             target="_blank"
@@ -63,7 +62,7 @@ export default async function ShopPage() {
                     </div>
 
                     {items.length > 0 ? (
-                        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                             {items.map((item) => (
                                 <li key={item.id}>
                                     <ShopCard item={item} />
@@ -84,7 +83,6 @@ export default async function ShopPage() {
                             </a>
                         </div>
                     )}
-                </div>
             </div>
         </section>
     )

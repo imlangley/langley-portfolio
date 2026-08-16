@@ -91,10 +91,10 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
     const others = relatedProjects.filter((p) => p._id !== project._id)
 
     return (
-        <article className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[60svh] flex-col">
+        <article className="py-12 sm:py-16">
+            <div>
 
-                <div className="grid flex-1 gap-0 lg:grid-cols-[minmax(0,1fr)_280px]">
+                <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-10">
                     <div className="min-w-0">
                         <div className="relative aspect-[16/9] overflow-hidden border-b border-shell-border bg-shell-bg">
                             {cover ? (
@@ -123,7 +123,7 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
                             </div>
                         </div>
 
-                        <div className="space-y-8 p-5 sm:p-8">
+                        <div className="space-y-8 pt-8">
                             <header>
                                 {project.category && (
                                     <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
@@ -193,7 +193,7 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
                         </div>
                     </div>
 
-                    <aside className="border-t border-shell-border bg-shell-bg p-5 lg:border-l lg:border-t-0">
+                    <aside>
                         <ProjectInspector
                             clientName={project.clientName}
                             date={formattedDate}
@@ -206,10 +206,10 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
                 </div>
 
                 {others.length > 0 && (
-                    <section className="border-t border-shell-border bg-shell-bg px-4 py-8 sm:px-6">
+                    <section className="mt-12">
                         <div className="mb-4 flex items-end justify-between">
-                            <h2 className="font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
-                                More comps
+                            <h2 className="text-lg font-semibold tracking-tight text-shell-text">
+                                More projects
                             </h2>
                             <Link
                                 href="/projects"

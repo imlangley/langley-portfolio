@@ -45,7 +45,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
 
     return (
         <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[60svh] flex-col">
+            <div className="flex flex-col py-12 sm:py-16">
                 <div className="grid flex-1 gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
                     <div className="border-b border-shell-border bg-shell-bg p-4 sm:p-6 lg:border-b-0 lg:border-r">
                         <div className="relative aspect-square overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt">

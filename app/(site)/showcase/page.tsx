@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { ArrowLeft, FileCode2 } from 'lucide-react'
 import {
     SplitText,
@@ -27,7 +26,7 @@ export default function ShowcasePage() {
 
     return (
         <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[60svh] flex-col lg:flex-row">
+            <div className="flex flex-col py-12 sm:py-16">
                 <aside
                     className="hidden w-56 shrink-0 flex-col border-r border-shell-border bg-shell-bg lg:flex"
                     aria-label="Animation files"
