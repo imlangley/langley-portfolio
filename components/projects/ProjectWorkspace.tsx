@@ -62,7 +62,7 @@ export function ProjectWorkspace({ projects, categories }: ProjectWorkspaceProps
 
     return (
         <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col lg:flex-row">
+            <div className="flex min-h-[60svh] flex-col lg:flex-row">
                 {/* Explorer rail — category tree */}
                 <aside
                     className="hidden lg:flex w-56 shrink-0 flex-col border-r border-shell-border bg-shell-bg"
@@ -108,16 +108,6 @@ export function ProjectWorkspace({ projects, categories }: ProjectWorkspaceProps
 
                 {/* Editor pane */}
                 <div className="flex min-w-0 flex-1 flex-col">
-                    <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                        <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
-                            <Folder className="h-3 w-3 text-syn-blue" aria-hidden="true" />
-                            projects
-                            <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                        </span>
-                        <span className="ml-auto hidden items-center px-4 py-2 text-shell-text-muted sm:flex">
-                            {filtered.length} of {projects.length}
-                        </span>
-                    </div>
 
                     {/* Toolbar */}
                     <div className="flex flex-col gap-2.5 border-b border-shell-border bg-shell-bg px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between">

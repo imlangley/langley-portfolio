@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'motion/react'
-import { Github, Twitter, Linkedin, Instagram, Folder, Film, Layers, Monitor, Cpu, ExternalLink, Globe, type LucideIcon } from 'lucide-react'
+import { Github, Twitter, Linkedin, Instagram, Folder, Film, Layers, Monitor, Cpu, ExternalLink, Globe } from 'lucide-react'
 import type { SiteSettings, SocialLink } from '@/sanity/lib/fetch'
 
 // Helper to map platform names to icons

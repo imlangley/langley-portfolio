@@ -36,17 +36,7 @@ export default async function ShopPage() {
 
     return (
         <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col">
-                <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                    <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
-                        <ShoppingBag className="h-3 w-3 text-syn-orange" aria-hidden="true" />
-                        shop.tsx
-                        <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                    </span>
-                    <span className="ml-auto hidden items-center px-4 py-2 text-shell-text-muted sm:flex">
-                        {items.length} assets
-                    </span>
-                </div>
+            <div className="flex min-h-[60svh] flex-col">
 
                 <div className="px-4 py-8 sm:px-6 sm:py-10">
                     <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">

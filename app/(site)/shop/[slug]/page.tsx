@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import Link from 'next/link'
 import * as cheerio from 'cheerio'
-import { ArrowLeft, FileArchive, ShieldCheck, ShoppingBag } from 'lucide-react'
+import { ShieldCheck, ShoppingBag } from 'lucide-react'
 import { BuyButton } from '@/components/shop/BuyButton'
 
 interface PageProps {
@@ -46,22 +45,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
 
     return (
         <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col">
-                <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                    <Link
-                        href="/shop"
-                        className="flex items-center gap-2 border-r border-shell-border px-4 py-2 text-shell-text-muted transition-colors hover:text-shell-text"
-                    >
-                        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
-                        shop
-                    </Link>
-                    <span className="flex items-center gap-2 bg-shell-bg-alt px-4 py-2 text-shell-text">
-                        <FileArchive className="h-3 w-3 text-syn-orange" aria-hidden="true" />
-                        {slug}.zip
-                        <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                    </span>
-                </div>
-
+            <div className="flex min-h-[60svh] flex-col">
                 <div className="grid flex-1 gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
                     <div className="border-b border-shell-border bg-shell-bg p-4 sm:p-6 lg:border-b-0 lg:border-r">
                         <div className="relative aspect-square overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt">

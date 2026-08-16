@@ -36,10 +36,10 @@ const TIMELINE_LAYERS: Array<{ start: number; length: number; color: string }> =
     { start: 0.65, length: 2.1, color: SYN_YELLOW },
 ]
 
-function PanelShell({ children }: { children?: React.ReactNode }) {
+function PanelShell({ children, width = 4.4, height = 3 }: { children?: React.ReactNode; width?: number; height?: number }) {
     return (
         <>
-            <RoundedBox args={[4.4, 3, 0.14]} radius={0.09} smoothness={4}>
+            <RoundedBox args={[width, height, 0.14]} radius={0.09} smoothness={4}>
                 <meshPhysicalMaterial
                     color={PANEL_BODY}
                     roughness={0.3}
@@ -48,8 +48,8 @@ function PanelShell({ children }: { children?: React.ReactNode }) {
                     clearcoatRoughness={0.18}
                 />
             </RoundedBox>
-            <mesh position={[0, 1.31, 0.075]}>
-                <planeGeometry args={[4.4, 0.38]} />
+            <mesh position={[0, height / 2 - 0.19, 0.075]}>
+                <planeGeometry args={[width, 0.38]} />
                 <meshBasicMaterial color={PANEL_BAR} toneMapped={false} />
             </mesh>
             {children}
@@ -57,16 +57,40 @@ function PanelShell({ children }: { children?: React.ReactNode }) {
     )
 }
 
-function TrafficLights() {
+function TrafficLights({ width = 4.4 }: { width?: number }) {
     return (
         <>
             {['#ff5f57', '#febc2e', '#28c840'].map((c, i) => (
-                <mesh key={c} position={[-1.96 + i * 0.23, 1.31, 0.085]}>
+                <mesh key={c} position={[-width / 2 + 0.24 + i * 0.23, 1.31, 0.085]}>
                     <circleGeometry args={[0.055, 24]} />
                     <meshBasicMaterial color={c} toneMapped={false} />
                 </mesh>
             ))}
         </>
+    )
+}
+
+function KeyframeDiamond({
+    position,
+    color = AE_PURPLE,
+    scale = 1,
+}: {
+    position: [number, number, number]
+    color?: string
+    scale?: number
+}) {
+    const ref = useRef<THREE.Mesh>(null)
+    useFrame(({ clock }) => {
+        if (!ref.current) return
+        const s = scale * (0.92 + 0.08 * Math.sin(clock.elapsedTime * 2.4 + position[0] * 3))
+        ref.current.scale.setScalar(s)
+        ref.current.rotation.z = Math.PI / 4
+    })
+    return (
+        <mesh ref={ref} position={position}>
+            <boxGeometry args={[0.09, 0.09, 0.02]} />
+            <meshBasicMaterial color={color} toneMapped={false} />
+        </mesh>
     )
 }
 
@@ -139,6 +163,10 @@ function CompositionPanel(props: ThreeElements['group']) {
                 <ringGeometry args={[0.15, 0.19, 32]} />
                 <meshBasicMaterial color={AE_CYAN} toneMapped={false} />
             </mesh>
+            <mesh position={[0, 0.6, 0.096]}>
+                <ringGeometry args={[0.26, 0.275, 48]} />
+                <meshBasicMaterial color={AE_CYAN} transparent opacity={0.5} toneMapped={false} />
+            </mesh>
 
             {TIMELINE_LAYERS.map((layer, i) => (
                 <group key={i} position={[0, -0.2 - i * 0.19, 0.08]}>
@@ -150,6 +178,16 @@ function CompositionPanel(props: ThreeElements['group']) {
                         <planeGeometry args={[layer.length, 0.1]} />
                         <meshBasicMaterial color={layer.color} transparent opacity={0.8} toneMapped={false} />
                     </mesh>
+                    <KeyframeDiamond
+                        position={[-1.86 + layer.start, 0, 0.02]}
+                        color={layer.color}
+                        scale={0.8}
+                    />
+                    <KeyframeDiamond
+                        position={[-1.86 + layer.start + layer.length, 0, 0.02]}
+                        color={layer.color}
+                        scale={0.8}
+                    />
                 </group>
             ))}
 
@@ -169,6 +207,42 @@ function CompositionPanel(props: ThreeElements['group']) {
     )
 }
 
+/** Effect Controls / Inspector strip — third floating panel. */
+function InspectorPanel(props: ThreeElements['group']) {
+    const ROWS: Array<{ label: number; value: number; color: string }> = [
+        { label: 1.2, value: 2.1, color: AE_CYAN },
+        { label: 0.9, value: 1.6, color: SYN_YELLOW },
+        { label: 1.4, value: 0.8, color: SYN_MAGENTA },
+        { label: 0.7, value: 1.9, color: SYN_TEAL },
+    ]
+
+    return (
+        <group {...props}>
+            <PanelShell width={2.6} height={1.9}>
+                <mesh position={[-1.18, 0.72, 0.08]}>
+                    <circleGeometry args={[0.045, 16]} />
+                    <meshBasicMaterial color="#ff5f57" toneMapped={false} />
+                </mesh>
+            </PanelShell>
+
+            {ROWS.map((row, i) => (
+                <group key={i} position={[0, 0.45 - i * 0.3, 0.08]}>
+                    <mesh position={[-0.85 + row.label / 2, 0, 0]}>
+                        <planeGeometry args={[row.label, 0.05]} />
+                        <meshBasicMaterial color={GUTTER} toneMapped={false} />
+                    </mesh>
+                    <mesh position={[-0.85 + row.value / 2, -0.14, 0]}>
+                        <planeGeometry args={[row.value, 0.07]} />
+                        <meshBasicMaterial color={row.color} toneMapped={false} />
+                    </mesh>
+                </group>
+            ))}
+
+            <pointLight position={[0, 0, 1.2]} color={SYN_TEAL} intensity={1.6} distance={5} />
+        </group>
+    )
+}
+
 function cubicBezierPoint(
     t: number,
     p0: THREE.Vector3,
@@ -184,16 +258,18 @@ function cubicBezierPoint(
         .addScaledVector(p3, t * t * t)
 }
 
+const BRIDGE_P0 = new THREE.Vector3(-0.85, -0.5, 0.3)
+const BRIDGE_P1 = new THREE.Vector3(-0.3, -1.05, 0.7)
+const BRIDGE_P2 = new THREE.Vector3(0.3, -1.05, 0.7)
+const BRIDGE_P3 = new THREE.Vector3(0.85, -0.5, 0.3)
+
 function DataBridge() {
     const dot = useRef<THREE.Mesh>(null)
 
-    const points = useMemo(() => {
-        const p0 = new THREE.Vector3(-0.85, -0.5, 0.3)
-        const p1 = new THREE.Vector3(-0.3, -1.05, 0.7)
-        const p2 = new THREE.Vector3(0.3, -1.05, 0.7)
-        const p3 = new THREE.Vector3(0.85, -0.5, 0.3)
-        return Array.from({ length: 81 }, (_, i) => cubicBezierPoint(i / 80, p0, p1, p2, p3))
-    }, [])
+    const points = useMemo(
+        () => Array.from({ length: 81 }, (_, i) => cubicBezierPoint(i / 80, BRIDGE_P0, BRIDGE_P1, BRIDGE_P2, BRIDGE_P3)),
+        []
+    )
 
     const line = useMemo(() => {
         const geometry = new THREE.BufferGeometry().setFromPoints(points)
@@ -205,6 +281,15 @@ function DataBridge() {
         return new THREE.Line(geometry, material)
     }, [points])
 
+    const handleLines = useMemo(() => {
+        const make = (a: THREE.Vector3, b: THREE.Vector3) => {
+            const geometry = new THREE.BufferGeometry().setFromPoints([a, b])
+            const material = new THREE.LineBasicMaterial({ color: AE_PURPLE, transparent: true, opacity: 0.35 })
+            return new THREE.Line(geometry, material)
+        }
+        return [make(BRIDGE_P0, BRIDGE_P1), make(BRIDGE_P3, BRIDGE_P2)]
+    }, [])
+
     useFrame(({ clock }) => {
         if (!dot.current) return
         const t = (clock.elapsedTime * 0.22) % 1
@@ -214,6 +299,20 @@ function DataBridge() {
     return (
         <group>
             <primitive object={line} />
+            {handleLines.map((handle, i) => (
+                <primitive key={i} object={handle} />
+            ))}
+            {[BRIDGE_P0, BRIDGE_P1, BRIDGE_P2, BRIDGE_P3].map((p, i) => (
+                <mesh key={i} position={p}>
+                    <sphereGeometry args={[0.035, 12, 12]} />
+                    <meshBasicMaterial color={AE_PURPLE} toneMapped={false} />
+                </mesh>
+            ))}
+            {/* Keyframes along the motion path */}
+            {[0.12, 0.3, 0.5, 0.7, 0.88].map((t) => {
+                const p = cubicBezierPoint(t, BRIDGE_P0, BRIDGE_P1, BRIDGE_P2, BRIDGE_P3)
+                return <KeyframeDiamond key={t} position={[p.x, p.y, p.z + 0.02]} color={AE_CYAN} scale={0.9} />
+            })}
             <mesh ref={dot}>
                 <sphereGeometry args={[0.05, 16, 16]} />
                 <meshBasicMaterial color={AE_CYAN} toneMapped={false} />
@@ -222,13 +321,27 @@ function DataBridge() {
     )
 }
 
+function GridFloor() {
+    const grid = useMemo(() => {
+        const size = 14
+        const divisions = 14
+        const gridHelper = new THREE.GridHelper(size, divisions, 0x33334a, 0x22223a)
+        const mat = gridHelper.material as THREE.Material
+        mat.transparent = true
+        mat.opacity = 0.22
+        return gridHelper
+    }, [])
+    return <primitive object={grid} position={[0, -2.6, 0]} />
+}
+
 function CameraRig({ reducedMotion }: { reducedMotion: boolean }) {
     const target = useRef(new THREE.Vector2(0, 0))
 
-    useFrame(({ camera, pointer }) => {
+    useFrame(({ camera, pointer, clock }) => {
         if (reducedMotion) return
         target.current.lerp(pointer, 0.04)
-        camera.position.x = target.current.x * 1.15
+        const dolly = Math.sin(clock.elapsedTime * 0.12) * 0.35
+        camera.position.x = target.current.x * 1.15 + dolly
         camera.position.y = 0.28 + target.current.y * 0.5
         camera.lookAt(0, 0, 0)
     })
@@ -250,12 +363,14 @@ export function WorkspaceScene({ reducedMotion = false }: { reducedMotion?: bool
             <spotLight position={[-6, 4, 6]} angle={0.5} penumbra={1} intensity={45} color={AE_PURPLE} />
             <spotLight position={[6, -3, 5]} angle={0.5} penumbra={1} intensity={35} color={AE_CYAN} />
 
+            <GridFloor />
+
             <Float
                 speed={reducedMotion ? 0 : 1.1}
                 rotationIntensity={reducedMotion ? 0 : 0.16}
                 floatIntensity={reducedMotion ? 0 : 0.35}
             >
-                <CodePanel position={[-1.42, 0.4, 0]} rotation={[0.05, 0.44, -0.04]} scale={0.5} />
+                <CodePanel position={[-1.62, 0.5, 0]} rotation={[0.05, 0.46, -0.04]} scale={0.58} />
             </Float>
 
             <Float
@@ -263,7 +378,15 @@ export function WorkspaceScene({ reducedMotion = false }: { reducedMotion?: bool
                 rotationIntensity={reducedMotion ? 0 : 0.16}
                 floatIntensity={reducedMotion ? 0 : 0.4}
             >
-                <CompositionPanel position={[1.42, -0.4, 0]} rotation={[0.05, -0.44, 0.04]} scale={0.5} />
+                <CompositionPanel position={[1.62, -0.45, 0]} rotation={[0.05, -0.46, 0.04]} scale={0.58} />
+            </Float>
+
+            <Float
+                speed={reducedMotion ? 0 : 0.7}
+                rotationIntensity={reducedMotion ? 0 : 0.1}
+                floatIntensity={reducedMotion ? 0 : 0.25}
+            >
+                <InspectorPanel position={[0.1, 1.35, -0.9]} rotation={[0.12, 0.02, 0]} scale={0.44} />
             </Float>
 
             <DataBridge />

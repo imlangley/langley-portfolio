@@ -55,9 +55,11 @@ function getPreviewClientInstance(): ReturnType<typeof createClient> {
  * Lazily initialized to avoid build-time failures.
  */
 export const client = new Proxy({} as ReturnType<typeof createClient>, {
-  get(target, prop, receiver) {
+  get(_target, prop) {
     const instance = getClientInstance()
-    return Reflect.get(instance, prop, receiver)
+    const value = Reflect.get(instance, prop, instance)
+    // Bind methods to the real instance so private class fields resolve correctly.
+    return typeof value === 'function' ? value.bind(instance) : value
   },
 })
 
@@ -68,9 +70,10 @@ export const client = new Proxy({} as ReturnType<typeof createClient>, {
  * Lazily initialized.
  */
 export const previewClient = new Proxy({} as ReturnType<typeof createClient>, {
-  get(target, prop, receiver) {
+  get(_target, prop) {
     const instance = getPreviewClientInstance()
-    return Reflect.get(instance, prop, receiver)
+    const value = Reflect.get(instance, prop, instance)
+    return typeof value === 'function' ? value.bind(instance) : value
   },
 })
 

@@ -9,11 +9,9 @@ import {
     ChevronDown,
     Clock,
     Download,
-    FileText,
     Folder,
     Laptop,
     MapPin,
-    Settings2,
     TerminalSquare,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -63,7 +61,7 @@ export function AboutPageClient({
 
     return (
         <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col lg:flex-row">
+            <div className="flex min-h-[60svh] flex-col lg:flex-row">
                 <aside
                     className="hidden w-56 shrink-0 flex-col border-r border-shell-border bg-shell-bg lg:flex"
                     aria-label="Profile inspector"
@@ -132,18 +130,6 @@ export function AboutPageClient({
                 </aside>
 
                 <div className="flex min-w-0 flex-1 flex-col">
-                    <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                        <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
-                            <FileText className="h-3 w-3 text-syn-blue" aria-hidden="true" />
-                            about.md
-                            <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                        </span>
-                        <span className="hidden items-center gap-2 px-4 py-2 text-shell-text-muted sm:flex">
-                            <Settings2 className="h-3 w-3" aria-hidden="true" />
-                            properties
-                        </span>
-                    </div>
-
                     <div className="grid flex-1 gap-0 lg:grid-cols-[280px_1fr]">
                         <div className="border-b border-shell-border bg-shell-bg p-5 lg:border-b-0 lg:border-r">
                             <div className="relative mx-auto aspect-square max-w-[220px] overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt lg:max-w-none">

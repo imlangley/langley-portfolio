@@ -17,17 +17,6 @@ export function ToolsSection({ tools }: ToolsSectionProps) {
 
     return (
         <section className="border-b border-shell-border bg-shell-bg">
-            <div className="flex items-stretch border-b border-shell-border font-mono text-[11px]">
-                <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
-                    <Puzzle className="h-3 w-3 text-syn-teal" aria-hidden="true" />
-                    extensions.json
-                    <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                </span>
-                <span className="ml-auto hidden items-center px-4 py-2 text-shell-text-muted sm:flex">
-                    {tools.length} loaded
-                </span>
-            </div>
-
             <div className="px-4 py-8 sm:px-6 sm:py-10">
                 <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
                     Layer 03 · Toolchain

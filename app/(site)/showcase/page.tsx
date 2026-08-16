@@ -27,7 +27,7 @@ export default function ShowcasePage() {
 
     return (
         <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col lg:flex-row">
+            <div className="flex min-h-[60svh] flex-col lg:flex-row">
                 <aside
                     className="hidden w-56 shrink-0 flex-col border-r border-shell-border bg-shell-bg lg:flex"
                     aria-label="Animation files"
@@ -58,21 +58,6 @@ export default function ShowcasePage() {
                 </aside>
 
                 <div className="flex min-w-0 flex-1 flex-col">
-                    <div className="flex items-stretch overflow-x-auto border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                        <Link
-                            href="/"
-                            className="flex shrink-0 items-center gap-2 border-r border-shell-border px-4 py-2 text-shell-text-muted hover:text-shell-text"
-                        >
-                            <ArrowLeft className="h-3 w-3" aria-hidden="true" />
-                            home
-                        </Link>
-                        <span className="flex shrink-0 items-center gap-2 bg-shell-bg-alt px-4 py-2 text-shell-text">
-                            <FileCode2 className="h-3 w-3 text-syn-yellow" aria-hidden="true" />
-                            showcase.tsx
-                            <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                        </span>
-                    </div>
-
                     <div
                         className="flex gap-1 overflow-x-auto border-b border-shell-border bg-shell-bg px-3 py-2 scrollbar-hide lg:hidden"
                         role="group"

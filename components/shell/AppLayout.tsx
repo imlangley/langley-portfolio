@@ -1,8 +1,10 @@
 'use client'
 
 import { ReactNode } from 'react'
+import Link from 'next/link'
 import { MenuBar } from './MenuBar'
 import { StatusBar } from './StatusBar'
+import { EditorTabs } from './EditorTabs'
 import { ThemeToggle } from '@/components/global/ThemeToggle'
 import { SideDock } from '@/components/navigation/SideDock'
 import { ScrollProgress } from '@/components/reactbits/ScrollProgress'
@@ -26,8 +28,9 @@ export function AppLayout({ children }: AppLayoutProps) {
             <ScrollProgress />
 
             {/* Desktop Shell Elements */}
-            <div className="hidden md:block shrink-0 h-11">
+            <div className="hidden md:block shrink-0">
                 <MenuBar />
+                <EditorTabs />
             </div>
 
             {/* Mobile Header — liquid glass */}
@@ -39,19 +42,22 @@ export function AppLayout({ children }: AppLayoutProps) {
                     borderBottom: '1px solid hsl(228 30% 96% / 0.06)',
                 }}
             >
-                <div className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2" aria-label="Langley home">
                     <div className="w-5 h-5 rounded bg-ae-purple flex items-center justify-center text-[10px] font-black text-white">
                         Ae
                     </div>
                     <span className="font-bold text-shell-text text-sm">
                         Langley<span className="text-shell-accent">.aep</span>
                     </span>
-                </div>
+                </Link>
                 <ThemeToggle
                     className="text-shell-text-muted hover:text-shell-text"
                     data-testid="theme-toggle-mobile"
                 />
             </header>
+            <div className="md:hidden sticky top-14 z-40 shrink-0">
+                <EditorTabs />
+            </div>
 
             {/* Main Content Viewport - Full width for immersive experience */}
             <main

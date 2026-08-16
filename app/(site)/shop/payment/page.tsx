@@ -207,7 +207,7 @@ export default async function PaymentPage({ searchParams }: PageProps) {
     }
 
     return (
-        <div className="min-h-screen pt-24 pb-20 px-4">
+        <div className="min-h-[60svh] px-4 py-10">
             <PaymentInterface
                 config={{
                     ...config,

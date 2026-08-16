@@ -51,12 +51,11 @@ export function UptimePageClient() {
 
     return (
         <section className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col">
+            <div className="flex min-h-[60svh] flex-col">
                 <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
                     <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
                         <TerminalSquare className="h-3 w-3 text-syn-green" aria-hidden="true" />
-                        status.log
-                        <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
+                        status.log — render monitor
                     </span>
                     {lastUpdated && (
                         <span className="ml-auto hidden items-center gap-2 px-4 py-2 text-shell-text-muted sm:flex">

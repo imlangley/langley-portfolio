@@ -30,17 +30,6 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
 
     return (
         <section id="projects" className="border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
-                    <Film className="h-3 w-3 text-syn-magenta" aria-hidden="true" />
-                    featured.aep
-                    <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                </span>
-                <span className="ml-auto hidden items-center px-4 py-2 text-shell-text-muted sm:flex">
-                    {featured.length} comps
-                </span>
-            </div>
-
             <div className="px-4 py-8 sm:px-6 sm:py-10">
                 <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                     <div>

@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { PortableText, type PortableTextComponents } from '@portabletext/react'
 import {
-    ArrowLeft,
     Calendar,
     Check,
     Copy,
@@ -93,22 +92,7 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
 
     return (
         <article className="w-full border-b border-shell-border bg-shell-bg-alt">
-            <div className="flex min-h-[calc(100svh-2.75rem)] flex-col">
-                <div className="flex items-stretch overflow-x-auto border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                    <Link
-                        href="/projects"
-                        className="flex shrink-0 items-center gap-2 border-r border-shell-border px-4 py-2 text-shell-text-muted transition-colors hover:text-shell-text"
-                    >
-                        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
-                        projects
-                    </Link>
-                    <span className="flex shrink-0 items-center gap-2 bg-shell-bg-alt px-4 py-2 text-shell-text">
-                        <Icon className={cn('h-3 w-3', meta.tone)} aria-hidden="true" />
-                        {project.slug}
-                        {meta.ext}
-                        <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                    </span>
-                </div>
+            <div className="flex min-h-[60svh] flex-col">
 
                 <div className="grid flex-1 gap-0 lg:grid-cols-[minmax(0,1fr)_280px]">
                     <div className="min-w-0">

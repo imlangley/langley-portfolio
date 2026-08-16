@@ -49,14 +49,6 @@ export function AboutSection({ profile, tools }: AboutSectionProps) {
                 </aside>
 
                 <div className="min-w-0 flex-1">
-                    <div className="flex items-stretch border-b border-shell-border bg-shell-bg font-mono text-[11px]">
-                        <span className="flex items-center gap-2 border-r border-shell-border bg-shell-bg-alt px-4 py-2 text-shell-text">
-                            <FileText className="h-3 w-3 text-syn-blue" aria-hidden="true" />
-                            about.md
-                            <span className="ml-1 h-1.5 w-1.5 rounded-full bg-shell-accent" aria-hidden="true" />
-                        </span>
-                    </div>
-
                     <div className="grid gap-0 md:grid-cols-[220px_1fr] lg:grid-cols-[260px_1fr]">
                         <div className="border-b border-shell-border bg-shell-bg p-4 md:border-b-0 md:border-r">
                             <div className="relative aspect-square overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt">

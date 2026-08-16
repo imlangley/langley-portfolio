@@ -10,7 +10,7 @@
  */
 
 // Client exports
-export { client, previewClient, getClient, sanityConfig, projectId, dataset, apiVersion } from './client'
+export { client, previewClient, getClient, projectId, dataset, apiVersion } from './client'
 
 // Image utilities
 export { urlFor, getImageUrl, getImageSrcSet, getImageLqip, type SanityImage } from './image'
