@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, CreditCard, Wallet, Smartphone, ShieldCheck, Loader2 } from 'lucide-react';
 
@@ -75,6 +76,7 @@ interface PaymentResult {
 }
 
 export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfaceProps) {
+    const router = useRouter();
     const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(null);
     const [selectedCategoryType, setSelectedCategoryType] = useState<string>('');
     const [email, setEmail] = useState('');
@@ -102,9 +104,8 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                     const data = await res.json();
 
                     if (data.status === 'paid') {
-                        // Redirect to success page
                         const successUrl = `/shop/success?url=${encodeURIComponent(checkUrl)}&cookie=${encodeURIComponent(cookie)}`;
-                        window.location.href = successUrl;
+                        router.push(successUrl);
                     }
                 } catch (err) {
                     console.error('Polling error:', err);
@@ -121,7 +122,7 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
         return () => {
             if (interval) clearInterval(interval);
         };
-    }, [paymentResult, config, cookie]);
+    }, [paymentResult, config, cookie, router]);
 
     // Filter categories that have available methods
     const activeCategories = paymentData.payment_channel.filter(
@@ -218,16 +219,16 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
         <div className="w-full max-w-2xl mx-auto space-y-8 relative">
             {/* Payment Result Modal */}
             {paymentResult && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-                    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-6">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+                    <div className="rounded-md border border-shell-border bg-shell-bg p-6 max-w-md w-full space-y-6">
                         <div className="text-center">
-                            <h3 className="text-xl font-bold text-white mb-2">Payment Created!</h3>
-                            <p className="text-zinc-400 text-sm">Please complete your payment.</p>
+                            <h3 className="text-xl font-bold text-shell-text mb-2">Payment Created!</h3>
+                            <p className="text-muted-foreground text-sm">Please complete your payment.</p>
                         </div>
 
                         {/* QRIS Display - QRCodeSVG package missing, commented out */}
                         {paymentResult.payment_method === 'qris' && paymentResult.data?.qr_string && (
-                            <div className="flex flex-col items-center space-y-4 bg-white p-4 rounded-xl">
+                            <div className="flex flex-col items-center space-y-4 bg-white p-4 rounded-md">
                                 {/* <QRCodeSVG value={paymentResult.data.qr_string} size={200} /> */}
                                 <div className="w-[200px] h-[200px] bg-gray-200 flex items-center justify-center text-black text-xs text-center p-2">
                                     QR Code Placeholder (Package Missing)
@@ -238,29 +239,29 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
 
                         {/* Retail / VA Code Display */}
                         {(paymentResult.type_payment === 'retail_outlet' || paymentResult.type_payment === 'bank_transfer') && (
-                            <div className="bg-zinc-800 p-4 rounded-xl space-y-2 text-center">
-                                <p className="text-zinc-400 text-xs uppercase tracking-wider">Payment Code / VA Number</p>
+                            <div className="rounded-md border border-shell-border bg-shell-bg-alt p-4 space-y-2 text-center">
+                                <p className="text-shell-text-muted text-xs uppercase tracking-wider">Payment Code / VA Number</p>
                                 <div className="flex items-center justify-center gap-3">
-                                    <div className="text-2xl font-mono font-bold text-white tracking-widest">
+                                    <div className="text-2xl font-mono font-bold text-shell-text tracking-widest">
                                         {paymentResult.data?.account_number || paymentResult.data?.pay_code || 'ERROR'}
                                     </div>
                                     <button
                                         onClick={() => navigator.clipboard.writeText(paymentResult.data?.account_number || paymentResult.data?.pay_code || '')}
-                                        className="p-2 hover:bg-white/10 rounded-lg transition-colors text-zinc-400 hover:text-white"
+                                        className="p-2 hover:bg-shell-active rounded-md transition-colors text-shell-text-muted hover:text-shell-text"
                                         title="Copy Code"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
                                     </button>
                                 </div>
                                 {paymentResult.data?.retail_outlet_name && (
-                                    <p className="text-blue-400 text-sm font-bold">{paymentResult.data.retail_outlet_name}</p>
+                                    <p className="text-ae-cyan text-sm font-bold">{paymentResult.data.retail_outlet_name}</p>
                                 )}
                             </div>
                         )}
 
                         {/* Expiration */}
                         {paymentResult.data?.expiration_date && (
-                            <p className="text-center text-xs text-zinc-500">
+                            <p className="text-center text-xs text-shell-text-muted">
                                 Expires: {paymentResult.data.expiration_date}
                             </p>
                         )}
@@ -268,7 +269,7 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                         <div className="flex gap-3">
                             <button
                                 onClick={() => setPaymentResult(null)}
-                                className="flex-1 py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors font-medium"
+                                className="flex-1 py-3 rounded-md border border-shell-border bg-shell-bg-alt text-sm font-medium text-shell-text transition-colors hover:bg-shell-active"
                             >
                                 Close
                             </button>
@@ -277,7 +278,7 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                                     href={paymentResult.data.payment_link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white text-center rounded-lg font-bold transition-colors"
+                                    className="flex-1 py-3 rounded-md bg-ae-purple text-sm font-semibold text-[#0b0b14] text-center transition-colors hover:bg-ae-cyan"
                                 >
                                     Pay Now
                                 </a>
@@ -292,44 +293,46 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                 <h1 className="text-3xl font-bold tracking-tight text-shell-text">
                     Select Payment Method
                 </h1>
-                <p className="text-zinc-500">Secure payment powered by Sociabuzz</p>
+                <p className="text-shell-text-muted">Secure payment powered by Sociabuzz</p>
             </div>
 
             {/* Email Input (Conditional or Always?) - Let's add it always for receipt */}
             <div className="space-y-2">
-                <label className="text-sm font-medium text-zinc-400">Email for Receipt</label>
+                <label htmlFor="payment-email" className="text-sm font-medium text-muted-foreground">Email for Receipt</label>
                 <input
+                    id="payment-email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                    className="w-full rounded-md border border-shell-border bg-shell-bg p-3 text-sm text-shell-text outline-none transition-colors placeholder:text-shell-text-muted/60 focus:border-shell-accent/60"
                 />
             </div>
 
             {/* Error Message */}
             {error && (
-                <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm text-center">
+                <div className="rounded-md border border-ae-pink/40 bg-shell-bg p-4 text-sm text-ae-pink text-center">
                     {error}
                 </div>
             )}
 
             {/* Payment Methods Accordion */}
-            <div className="space-y-4">
+            <div className="space-y-3">
                 {activeCategories.map((category) => (
-                    <div key={category.name} className="border border-white/5 rounded-xl bg-zinc-900/50 overflow-hidden">
+                    <div key={category.name} className="overflow-hidden rounded-md border border-shell-border bg-shell-bg">
                         <button
                             onClick={() => setOpenCategory(openCategory === category.name ? null : category.name)}
-                            className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+                            aria-expanded={openCategory === category.name}
+                            className="flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-shell-active/60"
                         >
                             <div className="flex items-center gap-3">
                                 {getCategoryIcon(category.name)}
-                                <span className="font-medium text-zinc-200">
+                                <span className="text-sm font-medium text-shell-text">
                                     {category.alias || formatCategoryName(category.name)}
                                 </span>
                             </div>
                             <ChevronDown
-                                className={`w-5 h-5 text-zinc-500 transition-transform ${openCategory === category.name ? 'rotate-180' : ''
+                                className={`h-4 w-4 shrink-0 text-shell-text-muted transition-transform ${openCategory === category.name ? 'rotate-180' : ''
                                     }`}
                             />
                         </button>
@@ -342,44 +345,44 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                                     exit={{ height: 0 }}
                                     className="overflow-hidden"
                                 >
-                                    <div className="p-4 pt-0 grid gap-3">
+                                    <div className="grid gap-2 p-4 pt-0">
                                         {category.available.map((method) => (
                                             <button
                                                 key={method.name}
                                                 onClick={() => handleSelectMethod(method, category.name)} // Update handler
-                                                className={`relative flex items-center justify-between p-4 rounded-lg border transition-all ${selectedMethod?.name === method.name
-                                                    ? 'bg-blue-500/10 border-blue-500/50 ring-1 ring-blue-500/50'
-                                                    : 'bg-black/20 border-white/5 hover:border-white/10 hover:bg-white/5'
+                                                aria-pressed={selectedMethod?.name === method.name}
+                                                className={`relative flex items-center justify-between rounded-md border p-4 transition-colors ${selectedMethod?.name === method.name
+                                                    ? 'border-shell-accent/60 bg-shell-active'
+                                                    : 'border-shell-border bg-shell-bg-alt hover:border-shell-accent/40 hover:bg-shell-active/60'
                                                     }`}
                                             >
-                                                <div className="flex items-center gap-4 flex-1 min-w-0">
-                                                    <div className="w-12 h-8 relative bg-white rounded flex-shrink-0 flex items-center justify-center p-1">
-                                                        {/* Use the scraped icon URL */}
+                                                <div className="flex min-w-0 flex-1 items-center gap-4">
+                                                    <div className="relative flex h-8 w-12 flex-shrink-0 items-center justify-center rounded border border-shell-border bg-white p-1">
+                                                        {/* Use the scraped icon URL — white bg required for logo legibility */}
                                                         {method.icon || method.logo ? (
+                                                            // eslint-disable-next-line @next/next/no-img-element
                                                             <img
                                                                 src={method.icon || `https://storage.sociabuzz.com/storage/payment/logo/${method.logo}`}
                                                                 alt={method.alias || method.name}
-                                                                className="max-w-full max-h-full object-contain"
+                                                                className="max-h-full max-w-full object-contain"
                                                             />
                                                         ) : (
-                                                            <div className="w-full h-full bg-zinc-200 rounded" />
+                                                            <div className="h-full w-full rounded bg-gray-200" />
                                                         )}
                                                     </div>
-                                                    <div className="text-left min-w-0">
-                                                        <div className="text-sm font-medium text-white truncate">
+                                                    <div className="min-w-0 text-left">
+                                                        <div className="truncate text-sm font-medium text-shell-text">
                                                             {method.alias || method.name}
                                                         </div>
                                                         {method.total_fee && parseFloat(method.total_fee) > 0 && (
-                                                            <div className="text-xs text-zinc-500 truncate">
+                                                            <div className="truncate font-mono text-[11px] text-shell-text-muted">
                                                                 Fee: {config.currency_def} {method.total_fee}
                                                             </div>
                                                         )}
                                                     </div>
                                                 </div>
-                                                <div className="text-right flex-shrink-0 ml-2">
-                                                    <div className="text-sm font-bold text-white">
-                                                        {paymentData.currency_convert} {method.total_pay}
-                                                    </div>
+                                                <div className="ml-2 flex-shrink-0 text-right font-mono text-sm font-bold text-shell-text">
+                                                    {paymentData.currency_convert} {method.total_pay}
                                                 </div>
                                             </button>
                                         ))}
@@ -409,8 +412,8 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
                     )}
                 </button>
 
-                <div className="flex items-center justify-center gap-2 text-xs text-zinc-500">
-                    <ShieldCheck className="w-4 h-4" />
+                <div className="flex items-center justify-center gap-2 font-mono text-[11px] text-shell-text-muted">
+                    <ShieldCheck className="h-3 w-3" aria-hidden="true" />
                     <span>Securely processed by Sociabuzz</span>
                 </div>
             </div>
@@ -419,11 +422,11 @@ export function PaymentInterface({ config, paymentData, cookie }: PaymentInterfa
 }
 
 function getCategoryIcon(name: string) {
-    if (name.includes('wallet') || name.includes('qris')) return <Smartphone className="w-5 h-5 text-blue-400" />;
-    if (name.includes('bank')) return <Wallet className="w-5 h-5 text-purple-400" />;
-    if (name.includes('card')) return <CreditCard className="w-5 h-5 text-emerald-400" />;
-    if (name.includes('crypto')) return <ShieldCheck className="w-5 h-5 text-orange-400" />;
-    return <Wallet className="w-5 h-5 text-zinc-400" />;
+    if (name.includes('wallet') || name.includes('qris')) return <Smartphone className="h-4 w-4 text-syn-blue" />;
+    if (name.includes('bank')) return <Wallet className="h-4 w-4 text-syn-magenta" />;
+    if (name.includes('card')) return <CreditCard className="h-4 w-4 text-syn-teal" />;
+    if (name.includes('crypto')) return <ShieldCheck className="h-4 w-4 text-syn-orange" />;
+    return <Wallet className="h-4 w-4 text-shell-text-muted" />;
 }
 
 function formatCategoryName(name: string) {

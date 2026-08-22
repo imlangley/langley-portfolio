@@ -60,6 +60,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         if (hideDefaultCursor) {
             document.body.style.cursor = 'none';
         }
+        const strengthState = activeStrengthRef.current;
 
         const cursor = cursorRef.current;
         cornersRef.current = cursor.querySelectorAll<HTMLDivElement>('.target-cursor-corner');
@@ -272,7 +273,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             document.body.style.cursor = originalCursor;
             isActiveRef.current = false;
             targetCornerPositionsRef.current = null;
-            activeStrengthRef.current.current = 0;
+            strengthState.current = 0;
         };
     }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobile, hoverDuration, parallaxOn]);
 

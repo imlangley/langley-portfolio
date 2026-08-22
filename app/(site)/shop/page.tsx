@@ -62,7 +62,7 @@ export default async function ShopPage() {
                     </div>
 
                     {items.length > 0 ? (
-                        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                        <ul className="perspective-1200 mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                             {items.map((item) => (
                                 <li key={item.id}>
                                     <ShopCard item={item} />

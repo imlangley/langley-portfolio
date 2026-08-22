@@ -25,7 +25,7 @@ export function ShopCard({ item }: ShopCardProps) {
     return (
         <Link
             href={href}
-            className="group flex h-full flex-col overflow-hidden rounded-md border border-shell-border bg-shell-bg transition-colors hover:border-shell-accent/50"
+            className="group flex h-full flex-col overflow-hidden rounded-md border border-shell-border bg-shell-bg transition-[transform,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform hover:border-shell-accent/50 hover:[transform:translateZ(14px)]"
             onMouseEnter={() => setCursorVariant('button')}
             onMouseLeave={() => setCursorVariant('default')}
         >

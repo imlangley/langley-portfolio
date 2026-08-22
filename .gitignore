@@ -46,3 +46,4 @@ next-env.d.ts
 qa-*.png
 DESIGN.md
 .tours/
+tsconfig.tsbuildinfo

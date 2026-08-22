@@ -186,7 +186,7 @@ export function ProjectWorkspace({ projects, categories }: ProjectWorkspaceProps
                         No matching projects.
                     </p>
                 ) : (
-                    <motion.ul layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    <motion.ul layout className="perspective-1200 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                         <AnimatePresence mode="popLayout">
                             {filtered.map((project) => (
                                 <motion.li

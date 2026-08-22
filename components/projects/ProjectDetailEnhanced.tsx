@@ -83,7 +83,6 @@ interface ProjectDetailEnhancedProps {
 
 export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetailEnhancedProps) {
     const meta = typeMeta(project.projectType)
-    const Icon = meta.icon
     const cover = project.coverImage ? urlFor(project.coverImage).width(1600).height(900).url() : ''
     const formattedDate = project.date
         ? new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })

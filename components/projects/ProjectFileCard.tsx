@@ -33,7 +33,7 @@ export function ProjectFileCard({ project, sizes }: ProjectFileCardProps) {
             href={`/projects/${project.slug}`}
             onMouseEnter={() => setCursorVariant('button')}
             onMouseLeave={() => setCursorVariant('default')}
-            className="group flex h-full flex-col overflow-hidden rounded-md border border-shell-border bg-shell-bg transition-colors hover:border-shell-accent/60"
+            className="group flex h-full flex-col overflow-hidden rounded-md border border-shell-border bg-shell-bg transition-[transform,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform hover:border-shell-accent/60 hover:[transform:translateZ(14px)]"
         >
             {/* File header row */}
             <div className="flex items-center gap-1.5 border-b border-shell-border px-3 py-1.5 font-mono text-[10px] text-shell-text-muted">

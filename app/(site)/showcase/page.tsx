@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowLeft, FileCode2 } from 'lucide-react'
+import { FileCode2 } from 'lucide-react'
 import {
     SplitText,
     DecryptedText,

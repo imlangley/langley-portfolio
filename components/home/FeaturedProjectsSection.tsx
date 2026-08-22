@@ -42,7 +42,7 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
                 </Link>
             </div>
 
-            <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="perspective-1200 mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {featured.map((project) => (
                     <li key={project._id}>
                         <ProjectFileCard project={project} />

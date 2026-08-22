@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'motion/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 import { Search, ArrowRight,  Home, User, Briefcase, Activity,  X } from 'lucide-react'
 
 interface CommandItem {
@@ -19,14 +20,15 @@ interface CommandMenuProps {
     onClose?: () => void
 }
 
-const defaultItems: CommandItem[] = [
+function buildDefaultItems(router: ReturnType<typeof useRouter>): CommandItem[] {
+    return [
     {
         id: 'home',
         title: 'Go to Home',
         description: 'Navigate to homepage',
         icon: <Home className="w-4 h-4" />,
         shortcut: ['G', 'H'],
-        action: () => window.location.href = '/',
+        action: () => router.push('/'),
         category: 'Navigation',
     },
     {
@@ -35,7 +37,7 @@ const defaultItems: CommandItem[] = [
         description: 'Learn more about me',
         icon: <User className="w-4 h-4" />,
         shortcut: ['G', 'A'],
-        action: () => window.location.href = '/about',
+        action: () => router.push('/about'),
         category: 'Navigation',
     },
     {
@@ -44,7 +46,7 @@ const defaultItems: CommandItem[] = [
         description: 'View all projects',
         icon: <Briefcase className="w-4 h-4" />,
         shortcut: ['G', 'P'],
-        action: () => window.location.href = '/projects',
+        action: () => router.push('/projects'),
         category: 'Navigation',
     },
     {
@@ -53,12 +55,15 @@ const defaultItems: CommandItem[] = [
         description: 'Server uptime monitoring',
         icon: <Activity className="w-4 h-4" />,
         shortcut: ['G', 'U'],
-        action: () => window.location.href = '/uptime',
+        action: () => router.push('/uptime'),
         category: 'Navigation',
     },
-]
+    ]
+}
 
-export function CommandMenu({ items = defaultItems, onClose }: CommandMenuProps) {
+export function CommandMenu({ items, onClose }: CommandMenuProps) {
+    const router = useRouter()
+    const resolvedItems: CommandItem[] = items ?? buildDefaultItems(router)
     const [isOpen, setIsOpen] = useState(false)
     const [search, setSearch] = useState('')
     const [selectedIndex, setSelectedIndex] = useState(0)
@@ -69,7 +74,7 @@ export function CommandMenu({ items = defaultItems, onClose }: CommandMenuProps)
     }
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const filteredItems = items.filter(item =>
+    const filteredItems = resolvedItems.filter(item =>
         item.title.toLowerCase().includes(search.toLowerCase()) ||
         item.description?.toLowerCase().includes(search.toLowerCase())
     )

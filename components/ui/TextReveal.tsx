@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useTransform, useSpring } from 'motion/react';
+import { motion, useMotionValue, useTransform } from 'motion/react';
 import { useEffect } from 'react';
 
 export interface TextRevealProps {
