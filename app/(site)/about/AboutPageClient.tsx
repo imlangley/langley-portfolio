@@ -12,6 +12,7 @@ import {
 import { cn } from '@/lib/utils'
 import { motion } from 'motion/react'
 import { Reveal } from '@/components/motion/Reveal'
+import { RouteCanvas } from '@/components/three/RouteCanvas'
 
 interface Tool {
     _id: string
@@ -153,7 +154,14 @@ export function AboutPageClient({
                         </motion.div>
                     </div>
 
-                    {faqItems && faqItems.length > 0 && (
+                    <div className="relative mt-10 overflow-hidden rounded-lg border border-shell-border bg-[#07070c]">
+                            <RouteCanvas variant="distort" className="h-[190px] w-full sm:h-[230px]" accent="#00c8ff" />
+                            <span className="pointer-events-none absolute left-3 top-2 font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted/70">
+                                viewport · profile.blend
+                            </span>
+                        </div>
+
+                        {faqItems && faqItems.length > 0 && (
                         <div className="mt-10">
                             <h2 className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted">
                                 FAQ

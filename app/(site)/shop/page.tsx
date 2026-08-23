@@ -1,5 +1,6 @@
 import { ShopCard, type ShopItem } from '@/components/shop/ShopCard'
 import { Reveal } from '@/components/motion/Reveal'
+import { RouteCanvas } from '@/components/three/RouteCanvas'
 import { ExternalLink, ShoppingBag } from 'lucide-react'
 
 export const revalidate = 3600
@@ -63,6 +64,14 @@ export default async function ShopPage() {
                     </div>
 
                     {items.length > 0 ? (
+                        <>
+                        <div className="relative mb-8 overflow-hidden rounded-lg border border-shell-border bg-[#07070c]">
+                            <RouteCanvas variant="cubes" className="h-[140px] w-full sm:h-[170px]" accent="#00c8ff" />
+                            <span className="pointer-events-none absolute left-3 top-2 font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted/70">
+                                viewport · crates.glb
+                            </span>
+                        </div>
+
                         <ul className="perspective-1200 mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                             {items.map((item, i) => (
                                 <li key={item.id}>
@@ -72,6 +81,7 @@ export default async function ShopPage() {
                                 </li>
                             ))}
                         </ul>
+                        </>
                     ) : (
                         <div className="flex min-h-64 flex-col items-center justify-center rounded-md border border-dashed border-shell-border bg-shell-bg px-6 py-12 text-center">
                             <ShoppingBag className="mb-3 h-8 w-8 text-shell-text-muted/50" aria-hidden="true" />
