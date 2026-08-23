@@ -624,7 +624,7 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
             <directionalLight position={[4, 6, 5]} intensity={1.1} />
             <spotLight position={[-6, 4, 6]} angle={0.5} penumbra={1} intensity={45} color={AE_PURPLE} />
             <spotLight position={[6, -3, 5]} angle={0.5} penumbra={1} intensity={35} color={AE_CYAN} />
-            <pointLight position={[2.15, 0.9, -0.4]} intensity={26} distance={7} color={AE_CYAN} />
+            <pointLight position={[2.4, 1.8, 2.2]} intensity={20} distance={7} color={AE_CYAN} />
             <StudioLighting tier={tier} />
 
             <MoteField reducedMotion={reducedMotion} />
@@ -637,7 +637,7 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
             <FileCardPlane position={[3.9, 2.1, -3.2]} rotation={[0.14, -0.42, 0.1]} color={AE_PURPLE} offset={0.8} />
             <FileCardPlane position={[-4.2, -2.0, -3.0]} rotation={[0.06, 0.46, -0.08]} color={SYN_MAGENTA} offset={1.1} />
 
-            <group position={[2.15, 0.42, -2.4]} scale={1.25}>
+            <group position={[2.0, 1.35, 3.2]} scale={tier === 'full' ? 1.15 : 0.75}>
                 <GlassKnot tier={tier} reducedMotion={reducedMotion} />
             </group>
 
