@@ -2,8 +2,18 @@
 
 import { useMemo, useRef } from 'react'
 import { Canvas, useFrame, type ThreeElements } from '@react-three/fiber'
-import { RoundedBox, Float, AdaptiveDpr } from '@react-three/drei'
+import {
+    RoundedBox,
+    Float,
+    AdaptiveDpr,
+    Environment,
+    Lightformer,
+    Sparkles,
+    MeshTransmissionMaterial,
+} from '@react-three/drei'
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
+import type { SceneTier } from './WorkspaceCanvas'
 
 const AE_PURPLE = '#9999ff'
 const AE_CYAN = '#00c8ff'
@@ -35,10 +45,11 @@ function PanelShell({
             <RoundedBox args={[width, height, 0.14]} radius={0.09} smoothness={4}>
                 <meshPhysicalMaterial
                     color={PANEL_BODY}
-                    roughness={0.3}
-                    metalness={0.45}
+                    roughness={0.22}
+                    metalness={0.78}
                     clearcoat={1}
-                    clearcoatRoughness={0.18}
+                    clearcoatRoughness={0.14}
+                    envMapIntensity={1.15}
                 />
             </RoundedBox>
             {bar && (
@@ -485,34 +496,144 @@ function CameraRig({ reducedMotion }: { reducedMotion: boolean }) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Procedural studio lighting — Lightformer children avoid external HDR assets */
+/* ------------------------------------------------------------------ */
+
+function StudioLighting({ tier }: { tier: SceneTier }) {
+    return (
+        <Environment resolution={tier === 'full' ? 256 : 128} frames={1}>
+            <color attach="background" args={['#0a0a12']} />
+            <Lightformer form="rect" intensity={5} color="#ffffff" position={[0, 4, -6]} scale={[6, 2, 1]} />
+            <Lightformer form="rect" intensity={3.2} color={AE_PURPLE} position={[-5, 1, 2]} rotation-y={Math.PI / 2} scale={[5, 1.2, 1]} />
+            <Lightformer form="rect" intensity={3.2} color={AE_CYAN} position={[5, -1, 2]} rotation-y={-Math.PI / 2} scale={[5, 1.2, 1]} />
+            <Lightformer form="circle" intensity={2.4} color="#ffffff" position={[0, 0, 6]} scale={2.4} />
+            <Lightformer form="rect" intensity={1.6} color={SYN_MAGENTA} position={[0, -4, 3]} rotation-x={Math.PI / 2} scale={[4, 0.8, 1]} />
+        </Environment>
+    )
+}
+
+/* ------------------------------------------------------------------ */
+/* Material branches by tier: transmission costs a render pass, lite tier fakes it with iridescent physical */
+/* ------------------------------------------------------------------ */
+
+function GlassKnot({ tier, reducedMotion }: { tier: SceneTier; reducedMotion: boolean }) {
+    const mesh = useRef<THREE.Mesh>(null)
+    const full = tier === 'full'
+    const segments: [number, number] = full ? [140, 24] : [72, 14]
+
+    useFrame((_, delta) => {
+        if (!mesh.current || reducedMotion) return
+        mesh.current.rotation.x += delta * 0.16
+        mesh.current.rotation.y += delta * 0.22
+    })
+
+    return (
+        <Float speed={reducedMotion ? 0 : 1.2} rotationIntensity={reducedMotion ? 0 : 0.25} floatIntensity={reducedMotion ? 0 : 0.55}>
+            <mesh ref={mesh}>
+                <torusKnotGeometry args={[0.52, 0.17, segments[0], segments[1]]} />
+                {full ? (
+                    <MeshTransmissionMaterial
+                        samples={4}
+                        resolution={256}
+                        thickness={0.9}
+                        roughness={0.08}
+                        anisotropicBlur={0.35}
+                        chromaticAberration={0.05}
+                        ior={1.45}
+                        transmissionSampler={false}
+                        backside
+                        color="#e8ecff"
+                        attenuationColor={AE_CYAN}
+                        attenuationDistance={1.6}
+                    />
+                ) : (
+                    <meshPhysicalMaterial
+                        transparent
+                        opacity={0.55}
+                        roughness={0.06}
+                        metalness={0.1}
+                        iridescence={1}
+                        iridescenceIOR={1.35}
+                        iridescenceThicknessRange={[120, 480]}
+                        clearcoat={1}
+                        envMapIntensity={1.4}
+                    />
+                )}
+            </mesh>
+
+            {[AE_CYAN, AE_PURPLE, SYN_TEAL].map((color, i) => (
+                <OrbitDot key={color} radius={1.15 + i * 0.28} speed={0.55 + i * 0.18} incline={i * 1.1} color={color} reducedMotion={reducedMotion} />
+            ))}
+        </Float>
+    )
+}
+
+function OrbitDot({
+    radius,
+    speed,
+    incline,
+    color,
+    reducedMotion,
+}: {
+    radius: number
+    speed: number
+    incline: number
+    color: string
+    reducedMotion: boolean
+}) {
+    const ref = useRef<THREE.Mesh>(null)
+
+    useFrame(({ clock }) => {
+        if (!ref.current || reducedMotion) return
+        const t = clock.elapsedTime * speed + incline
+        ref.current.position.set(Math.cos(t) * radius, Math.sin(t * 0.8) * 0.42, Math.sin(t) * radius)
+    })
+
+    return (
+        <mesh ref={ref}>
+            <sphereGeometry args={[0.055, 16, 16]} />
+            <meshBasicMaterial color={color} toneMapped={false} />
+        </mesh>
+    )
+}
+
+/* ------------------------------------------------------------------ */
 /* Scene                                                               */
 /* ------------------------------------------------------------------ */
 
-export function WorkspaceScene({ reducedMotion = false }: { reducedMotion?: boolean }) {
+export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reducedMotion?: boolean; tier?: SceneTier }) {
+    const full = tier === 'full'
     const floatCfg = reducedMotion
         ? { speed: 0, rotationIntensity: 0, floatIntensity: 0 }
         : { speed: 1.1, rotationIntensity: 0.18, floatIntensity: 0.4 }
 
     return (
         <Canvas
-            dpr={[1, 1.75]}
+            dpr={full ? [1, 1.75] : [1, 1.4]}
             camera={{ position: [0, 0.3, 9], fov: 42 }}
             gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         >
             <fog attach="fog" args={['#07070c', 10, 22]} />
 
-            <ambientLight intensity={0.55} />
-            <directionalLight position={[4, 6, 5]} intensity={1.2} />
+            <ambientLight intensity={0.4} />
+            <directionalLight position={[4, 6, 5]} intensity={1.1} />
             <spotLight position={[-6, 4, 6]} angle={0.5} penumbra={1} intensity={45} color={AE_PURPLE} />
             <spotLight position={[6, -3, 5]} angle={0.5} penumbra={1} intensity={35} color={AE_CYAN} />
+            <StudioLighting tier={tier} />
 
             <MoteField reducedMotion={reducedMotion} />
+
+            <Sparkles count={full ? 70 : 28} scale={[13, 7, 8]} size={full ? 2.4 : 2} speed={reducedMotion ? 0 : 0.32} opacity={0.55} color={AE_CYAN} />
 
             {/* Background file cards */}
             <FileCardPlane position={[-4.6, 1.6, -2.4]} rotation={[0.1, 0.5, 0.06]} color={SYN_YELLOW} offset={0.2} />
             <FileCardPlane position={[4.7, -1.3, -2.1]} rotation={[0.08, -0.5, -0.05]} color={SYN_TEAL} offset={0.5} />
             <FileCardPlane position={[3.9, 2.1, -3.2]} rotation={[0.14, -0.42, 0.1]} color={AE_PURPLE} offset={0.8} />
             <FileCardPlane position={[-4.2, -2.0, -3.0]} rotation={[0.06, 0.46, -0.08]} color={SYN_MAGENTA} offset={1.1} />
+
+            <group position={[0, 0.12, -0.9]}>
+                <GlassKnot tier={tier} reducedMotion={reducedMotion} />
+            </group>
 
             {/* Main panels */}
             <Float {...floatCfg}>
@@ -528,6 +649,13 @@ export function WorkspaceScene({ reducedMotion = false }: { reducedMotion?: bool
             <DataBridge reducedMotion={reducedMotion} />
             <CameraRig reducedMotion={reducedMotion} />
             <AdaptiveDpr pixelated />
+
+            {full && (
+                <EffectComposer multisampling={0}>
+                    <Bloom mipmapBlur intensity={0.62} luminanceThreshold={0.22} luminanceSmoothing={0.3} />
+                    <Vignette offset={0.22} darkness={0.62} eskil={false} />
+                </EffectComposer>
+            )}
         </Canvas>
     )
 }
