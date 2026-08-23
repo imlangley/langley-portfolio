@@ -562,7 +562,7 @@ function GlassKnot({ tier, reducedMotion }: { tier: SceneTier; reducedMotion: bo
             </mesh>
 
             <mesh>
-                <icosahedronGeometry args={[0.24, 1]} />
+                <icosahedronGeometry args={[0.15, 1]} />
                 <meshBasicMaterial color="#eaf6ff" toneMapped={false} />
             </mesh>
 
@@ -637,7 +637,7 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
             <FileCardPlane position={[3.9, 2.1, -3.2]} rotation={[0.14, -0.42, 0.1]} color={AE_PURPLE} offset={0.8} />
             <FileCardPlane position={[-4.2, -2.0, -3.0]} rotation={[0.06, 0.46, -0.08]} color={SYN_MAGENTA} offset={1.1} />
 
-            <group position={[2.15, 0.42, -2.4]} scale={1.55}>
+            <group position={[2.15, 0.42, -2.4]} scale={1.25}>
                 <GlassKnot tier={tier} reducedMotion={reducedMotion} />
             </group>
 
@@ -658,7 +658,7 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
 
             {full && (
                 <EffectComposer multisampling={0}>
-                    <Bloom mipmapBlur intensity={0.95} luminanceThreshold={0.16} luminanceSmoothing={0.32} />
+                    <Bloom mipmapBlur intensity={0.65} luminanceThreshold={0.2} luminanceSmoothing={0.28} />
                     <Vignette offset={0.22} darkness={0.62} eskil={false} />
                 </EffectComposer>
             )}
