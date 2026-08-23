@@ -10,6 +10,8 @@ import {
     TerminalSquare,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { motion } from 'motion/react'
+import { Reveal } from '@/components/motion/Reveal'
 
 interface Tool {
     _id: string
@@ -58,7 +60,11 @@ export function AboutPageClient({
             <div>
                 <div className="flex min-w-0 flex-1 flex-col">
                     <div className="grid flex-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-10">
-                        <div>
+                        <motion.div
+                            initial={{ opacity: 0, x: -32 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                        >
                             <div className="relative mx-auto aspect-square max-w-[220px] overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt lg:max-w-none">
                                 {avatarUrl ? (
                                     <Image
@@ -110,9 +116,14 @@ export function AboutPageClient({
                                     Download CV
                                 </a>
                             </div>
-                        </div>
+                        </motion.div>
 
-                        <div className="flex min-h-[420px] flex-col overflow-hidden rounded-lg border border-shell-border">
+                        <motion.div
+                            initial={{ opacity: 0, x: 32 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                            className="flex min-h-[420px] flex-col overflow-hidden rounded-lg border border-shell-border"
+                        >
                             <div className="flex items-center gap-4 border-b border-shell-border bg-shell-bg px-4 font-mono text-[11px]">
                                 <span className="flex h-9 items-center gap-2 border-b-2 border-shell-accent px-1 text-shell-text">
                                     <TerminalSquare className="h-3.5 w-3.5" aria-hidden="true" />
@@ -139,7 +150,7 @@ export function AboutPageClient({
                                     <span className="inline-block h-4 w-2 bg-shell-text blink align-middle" />
                                 </p>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
 
                     {faqItems && faqItems.length > 0 && (
@@ -152,7 +163,8 @@ export function AboutPageClient({
                                     const id = `faq-${index}`
                                     const open = openFaq === id
                                     return (
-                                        <li key={id} className="rounded-md border border-shell-border bg-shell-bg-alt">
+                                        <Reveal key={id} delay={index * 0.06} y={14}>
+                                        <li className="rounded-md border border-shell-border bg-shell-bg-alt">
                                             <button
                                                 type="button"
                                                 aria-expanded={open}
@@ -174,6 +186,7 @@ export function AboutPageClient({
                                                 </div>
                                             )}
                                         </li>
+                                        </Reveal>
                                     )
                                 })}
                             </ul>

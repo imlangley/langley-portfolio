@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react'
 import { ArrowRight, ShoppingBag, ChevronRight, Folder, FileCode2, Film, FileText, Activity } from 'lucide-react'
 import { useCursor } from '@/context/CursorContext'
 import { WorkspaceCanvas } from '@/components/three/WorkspaceCanvas'
@@ -30,6 +32,12 @@ const TIMELINE = [
 
 export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
     const { setCursorVariant } = useCursor()
+    const sectionRef = useRef<HTMLElement>(null)
+    const reduce = useReducedMotion()
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
+    const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90])
+    const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, reduce ? 1 : 0.1])
+    const sceneScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.06])
 
     const roles: string[] = profile?.role
         ? profile.role.split('&').map((r: string) => r.trim()).filter(Boolean)
@@ -41,14 +49,17 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
         'Code on one screen, composition on the other.'
 
     return (
-        <section className="py-6 sm:py-10">
+        <section ref={sectionRef} className="py-6 sm:py-10">
             <div className="relative overflow-hidden rounded-lg border border-shell-border bg-[#07070c]">
                 {/* 3D scene — full-bleed background for the whole workspace */}
-                <div className="absolute inset-0" aria-hidden="true">
+                <motion.div className="absolute inset-0" style={{ scale: sceneScale }} aria-hidden="true">
                     <WorkspaceCanvas className="h-full w-full" />
-                </div>
+                </motion.div>
 
-                <div className="pointer-events-none relative z-10 flex min-h-[640px] flex-col lg:min-h-[calc(100svh-8rem)]">
+                <motion.div
+                    className="pointer-events-none relative z-10 flex min-h-[640px] flex-col lg:min-h-[calc(100svh-8rem)]"
+                    style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
+                >
                     <div className="flex flex-1">
                         {/* Explorer rail — real navigation */}
                         <aside className="pointer-events-auto hidden w-52 shrink-0 flex-col border-r border-shell-border/60 bg-shell-bg/80 backdrop-blur-sm lg:flex" aria-label="Explorer">
@@ -170,7 +181,7 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
                             ))}
                         </ul>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     )

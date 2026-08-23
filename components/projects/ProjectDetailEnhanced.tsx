@@ -18,6 +18,8 @@ import {
 import { urlFor } from '@/sanity/lib'
 import type { GalleryItem, Project, RelatedProject, Tag, Tool } from '@/sanity/lib/fetch'
 import { cn } from '@/lib/utils'
+import { motion } from 'motion/react'
+import { Reveal } from '@/components/motion/Reveal'
 
 const ptComponents: PortableTextComponents = {
     block: {
@@ -95,7 +97,8 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
 
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-10">
                     <div className="min-w-0">
-                        <div className="relative aspect-[16/9] overflow-hidden border-b border-shell-border bg-shell-bg">
+                        <CoverFrame>
+<div className="relative aspect-[16/9] overflow-hidden border-b border-shell-border bg-shell-bg">
                             {cover ? (
                                 <Image
                                     src={cover}
@@ -190,9 +193,15 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
                                 </section>
                             )}
                         </div>
+                        </CoverFrame>
                     </div>
 
-                    <aside>
+                    <motion.aside
+                        initial={{ opacity: 0, x: 28 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: '-40px' }}
+                        transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+                    >
                         <ProjectInspector
                             clientName={project.clientName}
                             date={formattedDate}
@@ -201,7 +210,7 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
                             liveUrl={project.liveUrl}
                             repoUrl={project.repoUrl}
                         />
-                    </aside>
+                    </motion.aside>
                 </div>
 
                 {others.length > 0 && (
@@ -218,11 +227,12 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
                             </Link>
                         </div>
                         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                            {others.slice(0, 6).map((related) => {
+                            {others.slice(0, 6).map((related, i) => {
                                 const relatedMeta = typeMeta(related.projectType)
                                 const RelatedIcon = relatedMeta.icon
                                 return (
                                     <li key={related._id}>
+                                        <Reveal delay={(i % 3) * 0.07}>
                                         <Link
                                             href={`/projects/${related.slug}`}
                                             className="group flex h-full flex-col overflow-hidden rounded-md border border-shell-border bg-shell-bg-alt transition-colors hover:border-shell-accent/50"
@@ -263,6 +273,7 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
                                                 )}
                                             </div>
                                         </Link>
+                                        </Reveal>
                                     </li>
                                 )
                             })}
@@ -271,6 +282,19 @@ export function ProjectDetailEnhanced({ project, relatedProjects }: ProjectDetai
                 )}
             </div>
         </article>
+    )
+}
+
+function CoverFrame({ children }: { children: React.ReactNode }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 1.045 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        >
+            {children}
+        </motion.div>
     )
 }
 

@@ -13,6 +13,7 @@ import {
 } from '@react-three/drei'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
+import type { MutableRefObject } from 'react'
 import type { SceneTier } from './WorkspaceCanvas'
 
 const AE_PURPLE = '#9999ff'
@@ -474,22 +475,29 @@ function MoteField({ reducedMotion }: { reducedMotion: boolean }) {
 /* Camera                                                              */
 /* ------------------------------------------------------------------ */
 
-function CameraRig({ reducedMotion }: { reducedMotion: boolean }) {
+function CameraRig({
+    reducedMotion,
+    scrollRef,
+}: {
+    reducedMotion: boolean
+    scrollRef?: MutableRefObject<number>
+}) {
     const target = useRef(new THREE.Vector2(0, 0))
 
     useFrame(({ camera, pointer, clock }) => {
+        const p = scrollRef?.current ?? 0
         if (reducedMotion) {
-            camera.position.set(0, 0.3, 9.2)
-            camera.lookAt(0, 0, 0)
+            camera.position.set(0, 0.3 + p * 1.6, 9.2 + p * 3)
+            camera.lookAt(0, 0.2, 0)
             return
         }
         target.current.lerp(pointer, 0.04)
         const orbit = clock.elapsedTime * 0.08
         const breathe = Math.sin(clock.elapsedTime * 0.35) * 0.3
         camera.position.x = target.current.x * 1.3 + Math.sin(orbit) * 0.8
-        camera.position.y = 0.35 + target.current.y * 0.6 + Math.cos(orbit) * 0.35
-        camera.position.z = 9.0 + breathe
-        camera.lookAt(0, 0, 0)
+        camera.position.y = 0.35 + target.current.y * 0.6 + Math.cos(orbit) * 0.35 + p * 1.4
+        camera.position.z = 9.0 + breathe + p * 3.2
+        camera.lookAt(0, 0.15 + p * 0.5, 0)
     })
 
     return null
@@ -602,11 +610,38 @@ function OrbitDot({
     )
 }
 
+function ScrollDrift({
+    children,
+    reducedMotion,
+    scrollRef,
+}: {
+    children: React.ReactNode
+    reducedMotion: boolean
+    scrollRef?: MutableRefObject<number>
+}) {
+    const ref = useRef<THREE.Group>(null)
+    useFrame((_, delta) => {
+        if (!ref.current || reducedMotion) return
+        const p = scrollRef?.current ?? 0
+        ref.current.rotation.y += delta * (0.1 + p * 0.9)
+        ref.current.position.y += (p * 2.4 - ref.current.position.y) * Math.min(1, delta * 3)
+    })
+    return <group ref={ref}>{children}</group>
+}
+
 /* ------------------------------------------------------------------ */
 /* Scene                                                               */
 /* ------------------------------------------------------------------ */
 
-export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reducedMotion?: boolean; tier?: SceneTier }) {
+export function WorkspaceScene({
+    reducedMotion = false,
+    tier = 'full',
+    scrollRef,
+}: {
+    reducedMotion?: boolean
+    tier?: SceneTier
+    scrollRef?: MutableRefObject<number>
+}) {
     const full = tier === 'full'
     const floatCfg = reducedMotion
         ? { speed: 0, rotationIntensity: 0, floatIntensity: 0 }
@@ -637,9 +672,11 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
             <FileCardPlane position={[3.9, 2.1, -3.2]} rotation={[0.14, -0.42, 0.1]} color={AE_PURPLE} offset={0.8} />
             <FileCardPlane position={[-4.2, -2.0, -3.0]} rotation={[0.06, 0.46, -0.08]} color={SYN_MAGENTA} offset={1.1} />
 
-            <group position={[2.0, 1.35, 3.2]} scale={tier === 'full' ? 1.15 : 0.75}>
-                <GlassKnot tier={tier} reducedMotion={reducedMotion} />
-            </group>
+            <ScrollDrift reducedMotion={reducedMotion} scrollRef={scrollRef}>
+                <group position={[2.0, 1.35, 3.2]} scale={tier === 'full' ? 1.15 : 0.75}>
+                    <GlassKnot tier={tier} reducedMotion={reducedMotion} />
+                </group>
+            </ScrollDrift>
 
             {/* Main panels */}
             <Float {...floatCfg}>
@@ -653,7 +690,7 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
             </Float>
 
             <DataBridge reducedMotion={reducedMotion} />
-            <CameraRig reducedMotion={reducedMotion} />
+            <CameraRig reducedMotion={reducedMotion} scrollRef={scrollRef} />
             <AdaptiveDpr pixelated />
 
             {full && (

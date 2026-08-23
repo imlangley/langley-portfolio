@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useSyncExternalStore } from 'react'
+import { useSyncExternalStore, useRef, useEffect, type MutableRefObject } from 'react'
 
 const WorkspaceScene = dynamic(
     () => import('./WorkspaceScene').then((m) => m.WorkspaceScene),
@@ -54,11 +54,28 @@ export function WorkspaceCanvas({ className = '' }: { className?: string }) {
     const webglSupported = useWebGLSupported()
     const tier: SceneTier = webglSupported ? detectTier() : 'lite'
 
+    // Scroll progress via ref: read in useFrame — re-render-free updates.
+    const scrollRef = useRef(0)
+
+    useEffect(() => {
+        let raf = 0
+        const el = document.querySelector('[data-hero-canvas-root]')
+        const update = () => {
+            if (!el) return
+            const rect = el.getBoundingClientRect()
+            const p = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)))
+            scrollRef.current = p
+            raf = requestAnimationFrame(update)
+        }
+        raf = requestAnimationFrame(update)
+        return () => cancelAnimationFrame(raf)
+    }, [])
+
     if (!webglSupported) return null
 
     return (
         <div className={className} aria-hidden="true">
-            <WorkspaceScene reducedMotion={reducedMotion} tier={tier} />
+            <WorkspaceScene reducedMotion={reducedMotion} tier={tier} scrollRef={scrollRef as MutableRefObject<number>} />
         </div>
     )
 }

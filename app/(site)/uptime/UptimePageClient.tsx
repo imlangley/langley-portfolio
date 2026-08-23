@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { AlertTriangle, CheckCircle2, RefreshCw } from 'lucide-react'
 import { StatusCard, type MonitorData } from '@/components/status'
+import { Reveal } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
 
 interface StatusResponse {
@@ -119,7 +120,9 @@ export function UptimePageClient() {
                         </div>
                     ) : (
                         data?.monitors.map((monitor, index) => (
-                            <StatusCard key={monitor.id} monitor={monitor} index={index} />
+                            <Reveal key={monitor.id} delay={(index % 2) * 0.08}>
+                                <StatusCard monitor={monitor} index={index} />
+                            </Reveal>
                         ))
                     )}
             </div>

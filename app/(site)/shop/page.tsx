@@ -1,4 +1,5 @@
 import { ShopCard, type ShopItem } from '@/components/shop/ShopCard'
+import { Reveal } from '@/components/motion/Reveal'
 import { ExternalLink, ShoppingBag } from 'lucide-react'
 
 export const revalidate = 3600
@@ -63,9 +64,11 @@ export default async function ShopPage() {
 
                     {items.length > 0 ? (
                         <ul className="perspective-1200 mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                            {items.map((item) => (
+                            {items.map((item, i) => (
                                 <li key={item.id}>
-                                    <ShopCard item={item} />
+                                    <Reveal delay={(i % 3) * 0.08}>
+                                        <ShopCard item={item} />
+                                    </Reveal>
                                 </li>
                             ))}
                         </ul>

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import type { ProjectCard } from '@/sanity/lib/fetch'
 import { useCursor } from '@/context/CursorContext'
+import { Reveal } from '@/components/motion/Reveal'
 import { ProjectFileCard } from '@/components/projects/ProjectFileCard'
 
 interface FeaturedProjectsSectionProps {
@@ -43,9 +44,11 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
             </div>
 
             <ul className="perspective-1200 mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {featured.map((project) => (
+                {featured.map((project, i) => (
                     <li key={project._id}>
-                        <ProjectFileCard project={project} />
+                        <Reveal delay={(i % 3) * 0.07}>
+                            <ProjectFileCard project={project} />
+                        </Reveal>
                     </li>
                 ))}
             </ul>
