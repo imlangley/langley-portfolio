@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react'
 import { ArrowRight, ShoppingBag, ChevronRight, Folder, FileCode2, Film, FileText, Activity } from 'lucide-react'
 import { useCursor } from '@/context/CursorContext'
 import { WorkspaceCanvas } from '@/components/three/WorkspaceCanvas'
+import { CanvasErrorBoundary } from '@/components/three/CanvasErrorBoundary'
 import { RoleRotator } from './RoleRotator'
 import type { Profile, SiteSettings, Tool } from '@/sanity/lib/fetch'
 
@@ -53,7 +54,9 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
             <div className="relative overflow-hidden rounded-lg border border-shell-border bg-[#07070c]">
                 {/* 3D scene — full-bleed background for the whole workspace */}
                 <motion.div className="absolute inset-0" style={{ scale: sceneScale }} aria-hidden="true">
-                    <WorkspaceCanvas className="h-full w-full" />
+                    <CanvasErrorBoundary>
+                        <WorkspaceCanvas className="h-full w-full" />
+                    </CanvasErrorBoundary>
                 </motion.div>
 
                 <motion.div
