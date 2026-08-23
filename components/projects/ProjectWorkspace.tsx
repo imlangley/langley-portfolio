@@ -6,6 +6,7 @@ import { Folder, ChevronDown, Search, X } from 'lucide-react'
 import type { ProjectCard, ProjectCategory } from '@/sanity/lib/fetch'
 import { cn } from '@/lib/utils'
 import { RouteCanvas } from '@/components/three/RouteCanvas'
+import { CanvasErrorBoundary } from '@/components/three/CanvasErrorBoundary'
 import { ProjectFileCard } from './ProjectFileCard'
 
 interface ProjectWorkspaceProps {
@@ -106,7 +107,9 @@ export function ProjectWorkspace({ projects, categories }: ProjectWorkspaceProps
             </h1>
 
             <div className="relative mt-6 overflow-hidden rounded-lg border border-shell-border bg-[#07070c]">
-                <RouteCanvas variant="cubes" className="h-[150px] w-full sm:h-[180px]" accent="#9999ff" />
+                <CanvasErrorBoundary>
+                            <RouteCanvas variant="cubes" className="h-[150px] w-full sm:h-[180px]" accent="#9999ff" />
+                        </CanvasErrorBoundary>
                 <span className="pointer-events-none absolute left-3 top-2 font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted/70">
                     viewport · assets.glb
                 </span>

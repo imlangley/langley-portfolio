@@ -1,6 +1,7 @@
 import { ShopCard, type ShopItem } from '@/components/shop/ShopCard'
 import { Reveal } from '@/components/motion/Reveal'
 import { RouteCanvas } from '@/components/three/RouteCanvas'
+import { CanvasErrorBoundary } from '@/components/three/CanvasErrorBoundary'
 import { ExternalLink, ShoppingBag } from 'lucide-react'
 
 export const revalidate = 3600
@@ -66,7 +67,9 @@ export default async function ShopPage() {
                     {items.length > 0 ? (
                         <>
                         <div className="relative mb-8 overflow-hidden rounded-lg border border-shell-border bg-[#07070c]">
+                            <CanvasErrorBoundary>
                             <RouteCanvas variant="cubes" className="h-[140px] w-full sm:h-[170px]" accent="#00c8ff" />
+                        </CanvasErrorBoundary>
                             <span className="pointer-events-none absolute left-3 top-2 font-mono text-[10px] uppercase tracking-[0.16em] text-shell-text-muted/70">
                                 viewport · crates.glb
                             </span>
