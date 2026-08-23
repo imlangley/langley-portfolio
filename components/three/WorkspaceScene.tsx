@@ -503,9 +503,9 @@ function StudioLighting({ tier }: { tier: SceneTier }) {
     return (
         <Environment resolution={tier === 'full' ? 256 : 128} frames={1}>
             <color attach="background" args={['#0a0a12']} />
-            <Lightformer form="rect" intensity={5} color="#ffffff" position={[0, 4, -6]} scale={[6, 2, 1]} />
-            <Lightformer form="rect" intensity={3.2} color={AE_PURPLE} position={[-5, 1, 2]} rotation-y={Math.PI / 2} scale={[5, 1.2, 1]} />
-            <Lightformer form="rect" intensity={3.2} color={AE_CYAN} position={[5, -1, 2]} rotation-y={-Math.PI / 2} scale={[5, 1.2, 1]} />
+            <Lightformer form="rect" intensity={7} color="#ffffff" position={[0, 4, -6]} scale={[6, 2, 1]} />
+            <Lightformer form="rect" intensity={4.6} color={AE_PURPLE} position={[-5, 1, 2]} rotation-y={Math.PI / 2} scale={[5, 1.2, 1]} />
+            <Lightformer form="rect" intensity={4.6} color={AE_CYAN} position={[5, -1, 2]} rotation-y={-Math.PI / 2} scale={[5, 1.2, 1]} />
             <Lightformer form="circle" intensity={2.4} color="#ffffff" position={[0, 0, 6]} scale={2.4} />
             <Lightformer form="rect" intensity={1.6} color={SYN_MAGENTA} position={[0, -4, 3]} rotation-x={Math.PI / 2} scale={[4, 0.8, 1]} />
         </Environment>
@@ -544,7 +544,7 @@ function GlassKnot({ tier, reducedMotion }: { tier: SceneTier; reducedMotion: bo
                         backside
                         color="#e8ecff"
                         attenuationColor={AE_CYAN}
-                        attenuationDistance={1.6}
+                        attenuationDistance={0.9}
                     />
                 ) : (
                     <meshPhysicalMaterial
@@ -559,6 +559,11 @@ function GlassKnot({ tier, reducedMotion }: { tier: SceneTier; reducedMotion: bo
                         envMapIntensity={1.4}
                     />
                 )}
+            </mesh>
+
+            <mesh>
+                <icosahedronGeometry args={[0.24, 1]} />
+                <meshBasicMaterial color="#eaf6ff" toneMapped={false} />
             </mesh>
 
             {[AE_CYAN, AE_PURPLE, SYN_TEAL].map((color, i) => (
@@ -619,6 +624,7 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
             <directionalLight position={[4, 6, 5]} intensity={1.1} />
             <spotLight position={[-6, 4, 6]} angle={0.5} penumbra={1} intensity={45} color={AE_PURPLE} />
             <spotLight position={[6, -3, 5]} angle={0.5} penumbra={1} intensity={35} color={AE_CYAN} />
+            <pointLight position={[2.15, 0.9, -0.4]} intensity={26} distance={7} color={AE_CYAN} />
             <StudioLighting tier={tier} />
 
             <MoteField reducedMotion={reducedMotion} />
