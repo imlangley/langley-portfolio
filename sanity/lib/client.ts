@@ -17,15 +17,15 @@ let _client: ReturnType<typeof createClient> | null = null
 let _previewClient: ReturnType<typeof createClient> | null = null
 
 function getSanityConfig(): ClientConfig {
-  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '579t8o66'
   if (!projectId) {
-    throw new Error('NEXT_PUBLIC_SANITY_PROJECT_ID is not set')
+    throw new Error('No Sanity project ID available')
   }
   return {
     projectId,
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
     apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-01-01',
-    useCdn: process.env.NODE_ENV === 'production',
+    useCdn: true,
   }
 }
 
