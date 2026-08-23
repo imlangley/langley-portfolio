@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 export type RouteVariant = 'cubes' | 'distort'
 
@@ -10,17 +10,19 @@ const RouteScenes = {
     distort: dynamic(() => import('./RouteScenes').then((m) => m.DistortScene), { ssr: false }),
 }
 
+const subscribeNoop = () => () => {}
+
 function useTier() {
-    // Lazy init on first client render; component is below a ssr:false
-    // dynamic boundary so navigator access never runs on the server.
-    const [tier] = useState<'full' | 'lite'>(() =>
-        typeof navigator === 'undefined'
-            ? 'lite'
-            : !(window.matchMedia('(pointer: coarse)').matches) && (navigator.hardwareConcurrency ?? 4) > 4
-              ? 'full'
-              : 'lite'
+    // Server snapshot stays 'lite'; real tier resolves on hydration.
+    return useSyncExternalStore(
+        subscribeNoop,
+        () =>
+            !window.matchMedia('(pointer: coarse)').matches &&
+            (navigator.hardwareConcurrency ?? 4) > 4
+                ? ('full' as const)
+                : ('lite' as const),
+        () => ('lite' as const)
     )
-    return tier
 }
 
 /**
