@@ -631,7 +631,7 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
             <FileCardPlane position={[3.9, 2.1, -3.2]} rotation={[0.14, -0.42, 0.1]} color={AE_PURPLE} offset={0.8} />
             <FileCardPlane position={[-4.2, -2.0, -3.0]} rotation={[0.06, 0.46, -0.08]} color={SYN_MAGENTA} offset={1.1} />
 
-            <group position={[0, 0.12, -0.9]}>
+            <group position={[2.15, 0.42, -2.4]} scale={1.55}>
                 <GlassKnot tier={tier} reducedMotion={reducedMotion} />
             </group>
 
@@ -652,7 +652,7 @@ export function WorkspaceScene({ reducedMotion = false, tier = 'full' }: { reduc
 
             {full && (
                 <EffectComposer multisampling={0}>
-                    <Bloom mipmapBlur intensity={0.62} luminanceThreshold={0.22} luminanceSmoothing={0.3} />
+                    <Bloom mipmapBlur intensity={0.95} luminanceThreshold={0.16} luminanceSmoothing={0.32} />
                     <Vignette offset={0.22} darkness={0.62} eskil={false} />
                 </EffectComposer>
             )}
