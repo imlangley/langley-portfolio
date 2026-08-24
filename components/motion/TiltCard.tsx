@@ -9,12 +9,13 @@ interface TiltCardProps {
     scale?: number
 }
 
-export function TiltCard({ children, className = '', maxTilt = 14, scale = 1.04 }: TiltCardProps) {
+export function TiltCard({ children, className = '', maxTilt = 12, scale = 1.04 }: TiltCardProps) {
     const ref = useRef<HTMLDivElement>(null)
-    const [transform, setTransform] = useState(
-        'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)'
-    )
-    const [glare, setGlare] = useState<React.CSSProperties>({ opacity: 0 })
+    const [outer, setOuter] = useState<React.CSSProperties>({
+        transform: 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)',
+    })
+    const [inner, setInner] = useState<React.CSSProperties>({ transform: 'translateZ(0px)' })
+    const [shine, setShine] = useState<React.CSSProperties>({ opacity: 0 })
     const raf = useRef(0)
 
     const onMove = useCallback(
@@ -28,14 +29,17 @@ export function TiltCard({ children, className = '', maxTilt = 14, scale = 1.04 
                 const py = (e.clientY - rect.top) / rect.height
                 const rx = ((py - 0.5) * -maxTilt).toFixed(2)
                 const ry = ((px - 0.5) * maxTilt).toFixed(2)
-                setTransform(`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`)
-                if (ref.current) {
-                    ref.current.style.boxShadow = '0 20px 60px -12px rgba(153,153,255,0.25), 0 8px 24px -8px rgba(0,200,255,0.15)'
-                    ref.current.style.borderColor = 'rgba(153,153,255,0.35)'
-                }
-                setGlare({
-                    background: `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(153,153,255,0.1) 0%, transparent 55%)`,
-                    opacity: '1',
+                setOuter({
+                    transform: `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`,
+                    transition: 'transform 0.08s ease-out',
+                })
+                setInner({
+                    transform: 'translateZ(28px)',
+                    transition: 'transform 0.15s ease-out',
+                })
+                setShine({
+                    opacity: 1,
+                    background: `radial-gradient(600px circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,0.09) 0%, transparent 50%)`,
                 })
             })
         },
@@ -44,12 +48,15 @@ export function TiltCard({ children, className = '', maxTilt = 14, scale = 1.04 
 
     const onLeave = useCallback(() => {
         cancelAnimationFrame(raf.current)
-        setTransform('perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)')
-        setGlare({ opacity: 0 })
-        if (ref.current) {
-            ref.current.style.boxShadow = ''
-            ref.current.style.borderColor = ''
-        }
+        setOuter({
+            transform: 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)',
+            transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+        })
+        setInner({
+            transform: 'translateZ(0px)',
+            transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+        })
+        setShine({ opacity: 0 })
     }, [])
 
     return (
@@ -57,8 +64,7 @@ export function TiltCard({ children, className = '', maxTilt = 14, scale = 1.04 
             ref={ref}
             className={className}
             style={{
-                transform,
-                transition: 'transform 0.15s ease-out',
+                ...outer,
                 transformStyle: 'preserve-3d',
                 willChange: 'transform',
                 position: 'relative',
@@ -66,10 +72,12 @@ export function TiltCard({ children, className = '', maxTilt = 14, scale = 1.04 
             onPointerMove={onMove}
             onPointerLeave={onLeave}
         >
-            {children}
+            <div style={{ ...inner, transformStyle: 'preserve-3d', willChange: 'transform' }}>
+                {children}
+            </div>
             <div
                 className="pointer-events-none absolute inset-0 z-10 rounded-[inherit]"
-                style={{ ...glare, transition: 'opacity 0.3s ease-out' }}
+                style={{ ...shine, transition: 'opacity 0.4s ease-out' }}
             />
         </div>
     )
