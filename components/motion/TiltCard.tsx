@@ -9,7 +9,7 @@ interface TiltCardProps {
     scale?: number
 }
 
-export function TiltCard({ children, className = '', maxTilt = 10, scale = 1.03 }: TiltCardProps) {
+export function TiltCard({ children, className = '', maxTilt = 14, scale = 1.04 }: TiltCardProps) {
     const ref = useRef<HTMLDivElement>(null)
     const [transform, setTransform] = useState(
         'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)'
@@ -29,6 +29,10 @@ export function TiltCard({ children, className = '', maxTilt = 10, scale = 1.03 
                 const rx = ((py - 0.5) * -maxTilt).toFixed(2)
                 const ry = ((px - 0.5) * maxTilt).toFixed(2)
                 setTransform(`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`)
+                if (ref.current) {
+                    ref.current.style.boxShadow = '0 20px 60px -12px rgba(153,153,255,0.25), 0 8px 24px -8px rgba(0,200,255,0.15)'
+                    ref.current.style.borderColor = 'rgba(153,153,255,0.35)'
+                }
                 setGlare({
                     background: `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(153,153,255,0.1) 0%, transparent 55%)`,
                     opacity: '1',
@@ -42,6 +46,10 @@ export function TiltCard({ children, className = '', maxTilt = 10, scale = 1.03 
         cancelAnimationFrame(raf.current)
         setTransform('perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)')
         setGlare({ opacity: 0 })
+        if (ref.current) {
+            ref.current.style.boxShadow = ''
+            ref.current.style.borderColor = ''
+        }
     }, [])
 
     return (
