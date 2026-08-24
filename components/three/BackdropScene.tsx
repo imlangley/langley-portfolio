@@ -6,8 +6,6 @@ import { Environment, Lightformer, Float, Sparkles } from '@react-three/drei'
 import * as THREE from 'three'
 import type { MutableRefObject } from 'react'
 
-type Variant = 'particles' | 'grid' | 'orbs' | 'waves'
-
 const ACCENTS = ['#9999ff', '#00c8ff', '#c586c0', '#4ec9b0', '#dcdcaa']
 
 /* ------------------------------------------------------------------ */
@@ -220,11 +218,11 @@ function DistortBlob({ reducedMotion }: { reducedMotion: boolean }) {
 /* ------------------------------------------------------------------ */
 
 function WavesGrid({ accent }: { accent: string }) {
-    const mesh = useRef<THREE.Mesh>(null)
-    const geo = useMemo(() => new THREE.PlaneGeometry(20, 12, 24, 14), [])
+    const geoRef = useRef<THREE.PlaneGeometry>(null)
 
     useFrame(({ clock }) => {
-        if (!mesh.current) return
+        const geo = geoRef.current
+        if (!geo) return
         const pos = geo.attributes.position as THREE.BufferAttribute
         for (let i = 0; i < pos.count; i++) {
             const x = pos.getX(i)
@@ -235,7 +233,8 @@ function WavesGrid({ accent }: { accent: string }) {
     })
 
     return (
-        <mesh ref={mesh} geometry={geo} rotation={[-Math.PI / 2.5, 0, 0]} position={[0, -2.5, 0]}>
+        <mesh rotation={[-Math.PI / 2.5, 0, 0]} position={[0, -2.5, 0]}>
+            <planeGeometry ref={geoRef} args={[20, 12, 24, 14]} />
             <meshBasicMaterial color={accent} wireframe transparent opacity={0.06} toneMapped={false} />
         </mesh>
     )

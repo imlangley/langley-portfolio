@@ -7,6 +7,7 @@ import { ArrowRight, ShoppingBag, ChevronRight, Folder, FileCode2, Film, FileTex
 import { useCursor } from '@/context/CursorContext'
 import { WorkspaceCanvas } from '@/components/three/WorkspaceCanvas'
 import { CanvasErrorBoundary } from '@/components/three/CanvasErrorBoundary'
+import { Magnetic } from '@/components/motion/Magnetic'
 import { RoleRotator } from './RoleRotator'
 import type { Profile, SiteSettings, Tool } from '@/sanity/lib/fetch'
 
@@ -139,6 +140,7 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
                                 )}
 
                                 <div className="mt-8 flex flex-col gap-2.5 sm:flex-row">
+                                    <Magnetic>
                                     <Link
                                         href="/projects"
                                         onMouseEnter={() => setCursorVariant('button')}
@@ -148,6 +150,8 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
                                         View my work
                                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                                     </Link>
+                                    </Magnetic>
+                                    <Magnetic>
                                     <Link
                                         href="/shop"
                                         onMouseEnter={() => setCursorVariant('button')}
@@ -157,6 +161,7 @@ export function Hero({ siteSettings, profile, tools = [] }: HeroProps) {
                                         <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                                         Visit shop
                                     </Link>
+                                    </Magnetic>
                                 </div>
                             </div>
                         </div>

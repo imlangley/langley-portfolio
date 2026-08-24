@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FileArchive, ShoppingBag } from 'lucide-react'
 import { useCursor } from '@/context/CursorContext'
+import { TiltCard } from '@/components/motion/TiltCard'
 
 export interface ShopItem {
     id: string
@@ -23,6 +24,7 @@ export function ShopCard({ item }: ShopCardProps) {
     const href = `/shop/${slug}`
 
     return (
+        <TiltCard maxTilt={6}>
         <Link
             href={href}
             className="group flex h-full flex-col overflow-hidden rounded-md border border-shell-border bg-shell-bg transition-[transform,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform hover:border-shell-accent/50 hover:[transform:translateZ(14px)]"
@@ -60,5 +62,6 @@ export function ShopCard({ item }: ShopCardProps) {
                 </div>
             </div>
         </Link>
+        </TiltCard>
     )
 }

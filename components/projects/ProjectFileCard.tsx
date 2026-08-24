@@ -7,6 +7,7 @@ import type { ProjectCard as ProjectCardData } from '@/sanity/lib/fetch'
 import { urlFor } from '@/sanity/lib/image'
 import { useCursor } from '@/context/CursorContext'
 import { cn } from '@/lib/utils'
+import { TiltCard } from '@/components/motion/TiltCard'
 
 function typeMeta(type: ProjectCardData['projectType']) {
     if (type === 'video') return { icon: Film, tone: 'text-syn-magenta', ext: 'aep' }
@@ -29,6 +30,7 @@ export function ProjectFileCard({ project, sizes }: ProjectFileCardProps) {
     const Icon = meta.icon
 
     return (
+        <TiltCard maxTilt={6}>
         <Link
             href={`/projects/${project.slug}`}
             onMouseEnter={() => setCursorVariant('button')}
@@ -100,5 +102,6 @@ export function ProjectFileCard({ project, sizes }: ProjectFileCardProps) {
                 )}
             </div>
         </Link>
+        </TiltCard>
     )
 }

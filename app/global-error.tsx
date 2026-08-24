@@ -52,7 +52,7 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
                             >
                                 Retry
                             </button>
-                            <a
+                            <Link
                                 href="/"
                                 style={{
                                     flex: 1,
@@ -70,7 +70,7 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
                                 }}
                             >
                                 Home
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </section>
